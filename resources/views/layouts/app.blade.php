@@ -450,62 +450,39 @@
     @yield('styles')
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <i class="fas fa-utensils"></i> JOSS GANDOS
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang Kami</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('menu') ? 'active' : '' }}" href="/menu">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="/gallery">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('reservation') ? 'active' : '' }}" href="/reservation">Reservasi</a>
-                    </li>
-                    @auth
-                        @if(Auth::user()->role === 'admin')
-                            <li class="nav-item">
-                                <a class="nav-link text-primary {{ request()->is('admin*') ? 'active' : '' }}" href="/admin">
-                                    <i class="fas fa-cog"></i> Admin
-                                </a>
-                            </li>
-                        @endif
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="nav-link btn btn-link p-0" style="color: var(--primary-color);">
-                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                </button>
-                            </form>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="/login">
-                                <i class="fas fa-lock"></i> Login Admin
-                            </a>
-                        </li>
-                    @endauth
-                </ul>
-            </div>
+ <!-- Navigation -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-utensils"></i> JOSS GANDOS
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang Kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('menu') ? 'active' : '' }}" href="/menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="/gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('reservation') ? 'active' : '' }}" href="/reservation">Reservasi</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Main Content -->
     <main>

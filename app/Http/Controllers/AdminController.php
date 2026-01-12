@@ -27,7 +27,8 @@ class AdminController extends Controller
             
             // Check if user is admin
             if (Auth::user()->role === 'admin') {
-                return redirect()->intended('/admin');
+                // Redirect ke dashboard admin
+                return redirect()->intended('/admin/dashboard');
             } else {
                 Auth::logout();
                 return back()->withErrors([
@@ -46,7 +47,7 @@ class AdminController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('admin.login');
     }
 
     // DASHBOARD METHOD - THIS WAS MISSING
