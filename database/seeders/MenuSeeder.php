@@ -3,92 +3,74 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\MenuCategory;
-use App\Models\MenuItem;
 use Illuminate\Support\Facades\DB;
 
 class MenuSeeder extends Seeder
 {
-    public function run(): void
+    public function run()
     {
-        // Menu Categories
         $categories = [
-            ['name' => 'Makanan Utama', 'description' => 'Hidangan utama khas Indonesia', 'sort_order' => 1],
-            ['name' => 'Minuman', 'description' => 'Minuman segar dan sehat', 'sort_order' => 2],
-            ['name' => 'Snack & Appetizer', 'description' => 'Cemilan dan pembuka selera', 'sort_order' => 3],
-            ['name' => 'Dessert', 'description' => 'Hidangan penutup manis', 'sort_order' => 4],
+            ['name' => 'Appetizers', 'description' => 'Start your meal right'],
+            ['name' => 'Main Course', 'description' => 'Hearty main dishes'],
+            ['name' => 'Desserts', 'description' => 'Sweet endings'],
+            ['name' => 'Beverages', 'description' => 'Refreshing drinks'],
         ];
 
         foreach ($categories as $category) {
-            MenuCategory::create($category);
+            $categoryId = DB::table('categories')->insertGetId($category);
+            
+            // Add menu items for each category
+            $items = $this->getMenuItemsByCategory($category['name']);
+            
+            foreach ($items as $item) {
+                DB::table('menu_items')->insert([
+                    'category_id' => $categoryId,
+                    'name' => $item['name'],
+                    'description' => $item['description'],
+                    'price' => $item['price'],
+                    'image' => $item['image'],
+                    'is_available' => true,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
+    }
 
-        // Menu Items
-        $menuItems = [
-            [
-                'category_id' => 1,
-                'name' => 'Nasi Goreng Spesial',
-                'description' => 'Nasi goreng dengan campuran daging ayam, udang, telur, dan sayuran segar',
-                'price' => 25000,
-                'image' => 'nasi-goreng.jpg',
-                'is_featured' => true,
-                'is_available' => true,
-                'sort_order' => 1,
+    private function getMenuItemsByCategory($category)
+    {
+        $menu = [
+            'Appetizers' => [
+                [
+                    'name' => 'Bruschetta',
+                    'description' => 'Toasted bread with tomatoes and basil',
+                    'price' => 8.99,
+                    'image' => 'appetizer1.jpg'
+                ],
+                [
+                    'name' => 'Spring Rolls',
+                    'description' => 'Vegetable spring rolls with sweet chili',
+                    'price' => 9.99,
+                    'image' => 'appetizer2.jpg'
+                ],
             ],
-            [
-                'category_id' => 1,
-                'name' => 'Ayam Penyet',
-                'description' => 'Ayam goreng krispi dengan sambal pedas khas dan lalapan segar',
-                'price' => 25000,
-                'image' => 'ayam-penyet.jpg',
-                'is_featured' => true,
-                'is_available' => true,
-                'sort_order' => 2,
+            'Main Course' => [
+                [
+                    'name' => 'Grilled Salmon',
+                    'description' => 'Atlantic salmon with lemon butter',
+                    'price' => 24.99,
+                    'image' => 'main1.jpg'
+                ],
+                [
+                    'name' => 'Beef Steak',
+                    'description' => 'Ribeye steak with red wine sauce',
+                    'price' => 32.99,
+                    'image' => 'main2.jpg'
+                ],
             ],
-            [
-                'category_id' => 1,
-                'name' => 'Sate Ayam',
-                'description' => 'Sate ayam dengan bumbu kacang khas dan lontong',
-                'price' => 25000,
-                'image' => 'sate-ayam.jpg',
-                'is_featured' => true,
-                'is_available' => true,
-                'sort_order' => 3,
-            ],
-            [
-                'category_id' => 1,
-                'name' => 'Mie Goreng',
-                'description' => 'Mie goreng dengan tambahan seafood dan sayuran',
-                'price' => 25000,
-                'image' => 'mie-goreng.jpg',
-                'is_featured' => true,
-                'is_available' => true,
-                'sort_order' => 4,
-            ],
-            [
-                'category_id' => 2,
-                'name' => 'Es Teh Manis',
-                'description' => 'Es teh dengan gula pasir khas Indonesia',
-                'price' => 5000,
-                'image' => 'es-teh.jpg',
-                'is_featured' => false,
-                'is_available' => true,
-                'sort_order' => 1,
-            ],
-            [
-                'category_id' => 2,
-                'name' => 'Es Jeruk',
-                'description' => 'Jeruk segar dengan es batu',
-                'price' => 8000,
-                'image' => 'es-jeruk.jpg',
-                'is_featured' => false,
-                'is_available' => true,
-                'sort_order' => 2,
-            ],
+            // Add more categories as needed
         ];
 
-        foreach ($menuItems as $item) {
-            MenuItem::create($item);
-        }
+        return $menu[$category] ?? [];
     }
 }

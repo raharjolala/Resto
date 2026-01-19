@@ -19,14 +19,6 @@ class AdminUserSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        // Create Test Customer
-        User::create([
-            'name' => 'Test Customer',
-            'email' => 'customer@example.com',
-            'role' => 'user',
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
 
         // Create additional demo users
         for ($i = 1; $i <= 5; $i++) {
