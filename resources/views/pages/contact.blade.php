@@ -4,23 +4,24 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="resto-hero-section" style="height: 70vh; margin-top: 76px; background: linear-gradient(rgba(42, 42, 42, 0.85), rgba(42, 42, 42, 0.9)), url('https://images.unsplash.com/photo-1560185007-cde436f6a4d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
-        <div class="container h-100">
-            <div class="row align-items-center h-100">
+    <section class="hero-section" style="background: linear-gradient(rgba(44, 44, 44, 0.85), rgba(44, 44, 44, 0.9)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="container">
+            <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <div class="hero-content text-white">
-                        <h1 class="display-3 fw-bold mb-3" style="font-family: 'Playfair Display', serif;">
-                            Hubungi<br>
-                            <span class="text-warning">JOSS GANDOS</span>
+                    <div class="hero-content animate-fade-in">
+                        <h1 class="hero-title">
+                            Hubungi Kami<br>
+                            <span>JOSS GANDOS</span>
                         </h1>
-                        <p class="lead mb-4" style="font-size: 1.3rem; opacity: 0.9;">
-                            Kami siap melayani Anda dengan sepenuh hati dan memberikan pengalaman terbaik.
+                        <p class="hero-subtitle">
+                            Kami siap mendengarkan dan memberikan yang terbaik untuk pengalaman kuliner Anda.
+                            Jangan ragu untuk menghubungi kami untuk informasi, reservasi, atau masukan.
                         </p>
-                        <div class="d-flex align-items-center gap-3">
-                            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">
+                        <div class="d-flex align-items-center gap-3 mt-4">
+                            <span class="badge px-3 py-2" style="background: rgba(212, 161, 23, 0.2); color: var(--accent-gold); border-radius: 20px;">
                                 <i class="fas fa-headset me-1"></i> 24/7 Support
                             </span>
-                            <span class="badge bg-light text-dark px-3 py-2 rounded-pill">
+                            <span class="badge px-3 py-2" style="background: rgba(255, 255, 255, 0.2); color: white; border-radius: 20px;">
                                 <i class="fas fa-clock me-1"></i> Respons Cepat
                             </span>
                         </div>
@@ -31,78 +32,88 @@
     </section>
 
     <!-- Contact Content -->
-    <section class="resto-section-padding" style="padding: 5rem 0;">
+    <section class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                        <div class="card-body p-5">
+                    <div class="modern-card animate-fade-in">
+                        <div class="p-5">
                             <div class="d-flex align-items-center mb-4">
-                                <div class="me-3" style="color: #d4a574; font-size: 2rem;">
+                                <div class="me-3" style="color: var(--primary-red); font-size: 2rem;">
                                     <i class="fas fa-comment-dots"></i>
                                 </div>
-                                <h3 class="mb-0 fw-bold" style="color: #2a2a2a;">Kirim Pesan</h3>
+                                <div>
+                                    <h3 class="mb-0 fw-bold" style="color: var(--dark-charcoal);">Kirim Pesan</h3>
+                                    <p class="text-muted mb-0">Kami akan membalas dalam 1x24 jam</p>
+                                </div>
                             </div>
-                            <form action="{{ route('contact.store') }}" method="POST" id="contactForm">
+                            
+                            <form action="#" method="POST" id="contactForm">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
-                                        <label for="name" class="form-label fw-semibold" style="color: #555;">Nama Lengkap *</label>
+                                        <label for="name" class="form-label fw-semibold" style="color: var(--dark-charcoal);">
+                                            Nama Lengkap *
+                                        </label>
                                         <div class="input-group">
-                                            <span class="input-group-text" style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(212, 165, 116, 0.05)); border-color: #e0e0e0;">
-                                                <i class="fas fa-user" style="color: #d4a574;"></i>
+                                            <span class="input-group-text" style="background: rgba(180, 34, 34, 0.05); border-color: #e0e0e0;">
+                                                <i class="fas fa-user" style="color: var(--primary-red);"></i>
                                             </span>
                                             <input type="text" class="form-control" id="name" name="name" required 
-                                                   style="border-color: #e0e0e0; padding: 12px; border-radius: 0 8px 8px 0;"
                                                    placeholder="Masukkan nama lengkap Anda">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="email" class="form-label fw-semibold" style="color: #555;">Email *</label>
+                                        <label for="email" class="form-label fw-semibold" style="color: var(--dark-charcoal);">
+                                            Email *
+                                        </label>
                                         <div class="input-group">
-                                            <span class="input-group-text" style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(212, 165, 116, 0.05)); border-color: #e0e0e0;">
-                                                <i class="fas fa-envelope" style="color: #d4a574;"></i>
+                                            <span class="input-group-text" style="background: rgba(180, 34, 34, 0.05); border-color: #e0e0e0;">
+                                                <i class="fas fa-envelope" style="color: var(--primary-red);"></i>
                                             </span>
                                             <input type="email" class="form-control" id="email" name="email" required 
-                                                   style="border-color: #e0e0e0; padding: 12px; border-radius: 0 8px 8px 0;"
                                                    placeholder="contoh@email.com">
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <label for="subject" class="form-label fw-semibold" style="color: #555;">Subjek *</label>
+                                    <label for="subject" class="form-label fw-semibold" style="color: var(--dark-charcoal);">
+                                        Subjek *
+                                    </label>
                                     <div class="input-group">
-                                        <span class="input-group-text" style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(212, 165, 116, 0.05)); border-color: #e0e0e0;">
-                                            <i class="fas fa-tag" style="color: #d4a574;"></i>
+                                        <span class="input-group-text" style="background: rgba(180, 34, 34, 0.05); border-color: #e0e0e0;">
+                                            <i class="fas fa-tag" style="color: var(--primary-red);"></i>
                                         </span>
                                         <input type="text" class="form-control" id="subject" name="subject" required 
-                                               style="border-color: #e0e0e0; padding: 12px; border-radius: 0 8px 8px 0;"
                                                placeholder="Tentang apa pesan Anda?">
                                     </div>
                                 </div>
                                 
                                 <div class="mb-4">
-                                    <label for="message" class="form-label fw-semibold" style="color: #555;">Pesan *</label>
+                                    <label for="message" class="form-label fw-semibold" style="color: var(--dark-charcoal);">
+                                        Pesan *
+                                    </label>
                                     <div class="input-group">
-                                        <span class="input-group-text align-items-start" style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(212, 165, 116, 0.05)); border-color: #e0e0e0; padding-top: 14px;">
-                                            <i class="fas fa-edit" style="color: #d4a574;"></i>
+                                        <span class="input-group-text align-items-start" style="background: rgba(180, 34, 34, 0.05); border-color: #e0e0e0;">
+                                            <i class="fas fa-edit" style="color: var(--primary-red);"></i>
                                         </span>
                                         <textarea class="form-control" id="message" name="message" rows="5" required 
-                                                  style="border-color: #e0e0e0; padding: 12px; border-radius: 0 8px 8px 0; resize: none;"
                                                   placeholder="Tulis pesan Anda di sini..."></textarea>
+                                    </div>
+                                    <div class="text-end mt-2">
+                                        <small class="text-muted" id="charCount">0/500 karakter</small>
                                     </div>
                                 </div>
                                 
-                                <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center justify-content-between mt-5">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="newsletter" checked>
-                                        <label class="form-check-label" for="newsletter" style="color: #666; font-size: 0.9rem;">
+                                        <label class="form-check-label" for="newsletter" style="color: var(--warm-brown);">
                                             Berlangganan newsletter kami
                                         </label>
                                     </div>
-                                    <button type="submit" class="btn px-4 py-3" 
-                                            style="background: linear-gradient(135deg, #d4a574, #b38b5d); color: white; border: none; border-radius: 12px; font-weight: 500; transition: all 0.3s ease;">
+                                    <button type="submit" class="btn btn-primary px-5 py-3">
                                         <i class="fas fa-paper-plane me-2"></i> Kirim Pesan
                                     </button>
                                 </div>
@@ -111,90 +122,90 @@
                     </div>
                 </div>
                 
+                <!-- Contact Info Sidebar -->
                 <div class="col-lg-4">
-                    <!-- Contact Info Cards -->
-                    <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, #2a2a2a, #1a1a1a);">
-                        <div class="card-body p-4">
+                    <div class="modern-card mb-4 animate-fade-in" style="animation-delay: 0.1s;">
+                        <div class="p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="me-3" style="color: #d4a574; font-size: 1.5rem;">
+                                <div class="me-3" style="color: var(--primary-red); font-size: 1.5rem;">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
-                                <h4 class="mb-0" style="color: white;">Alamat</h4>
+                                <h4 class="mb-0" style="color: var(--dark-charcoal);">Alamat</h4>
                             </div>
-                            <p class="mb-0" style="color: rgba(255,255,255,0.8); line-height: 1.6;">
+                            <p class="mb-0" style="color: var(--warm-brown); line-height: 1.6;">
                                 JL Baye Kuliner No. 123<br>
                                 Jakarta, Indonesia 10110
                             </p>
                         </div>
                     </div>
                     
-                    <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px; overflow: hidden;">
-                        <div class="card-body p-4">
+                    <div class="modern-card mb-4 animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="me-3" style="color: #d4a574; font-size: 1.5rem;">
+                                <div class="me-3" style="color: var(--primary-red); font-size: 1.5rem;">
                                     <i class="fas fa-phone"></i>
                                 </div>
-                                <h4 class="mb-0" style="color: #2a2a2a;">Telepon</h4>
+                                <h4 class="mb-0" style="color: var(--dark-charcoal);">Telepon</h4>
                             </div>
-                            <p class="mb-0" style="color: #555; font-size: 1.1rem; font-weight: 500;">
+                            <p class="mb-2" style="color: var(--dark-charcoal); font-size: 1.1rem; font-weight: 500;">
                                 (021) 1234-5678
                             </p>
-                            <small style="color: #888;">Customer Service</small>
+                            <small style="color: var(--warm-brown);">Customer Service</small>
                         </div>
                     </div>
                     
-                    <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px; overflow: hidden;">
-                        <div class="card-body p-4">
+                    <div class="modern-card mb-4 animate-fade-in" style="animation-delay: 0.3s;">
+                        <div class="p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="me-3" style="color: #d4a574; font-size: 1.5rem;">
+                                <div class="me-3" style="color: var(--primary-red); font-size: 1.5rem;">
                                     <i class="fas fa-envelope"></i>
                                 </div>
-                                <h4 class="mb-0" style="color: #2a2a2a;">Email</h4>
+                                <h4 class="mb-0" style="color: var(--dark-charcoal);">Email</h4>
                             </div>
-                            <p class="mb-0" style="color: #555; font-size: 1.1rem; font-weight: 500;">
+                            <p class="mb-2" style="color: var(--dark-charcoal); font-size: 1.1rem; font-weight: 500;">
                                 info@jossgandos.com
                             </p>
-                            <small style="color: #888;">Respon dalam 24 jam</small>
+                            <small style="color: var(--warm-brown);">Respon dalam 24 jam</small>
                         </div>
                     </div>
                     
-                    <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                        <div class="card-body p-4">
+                    <div class="modern-card animate-fade-in" style="animation-delay: 0.4s;">
+                        <div class="p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="me-3" style="color: #d4a574; font-size: 1.5rem;">
+                                <div class="me-3" style="color: var(--primary-red); font-size: 1.5rem;">
                                     <i class="fas fa-clock"></i>
                                 </div>
-                                <h4 class="mb-0" style="color: #2a2a2a;">Jam Operasional</h4>
+                                <h4 class="mb-0" style="color: var(--dark-charcoal);">Jam Operasional</h4>
                             </div>
-                            <div class="mb-2">
-                                <p class="mb-1 fw-semibold" style="color: #2a2a2a;">Setiap Hari</p>
-                                <p class="mb-0" style="color: #555;">10:00 - 22:00 WIB</p>
+                            <div class="mb-3">
+                                <p class="mb-1 fw-semibold" style="color: var(--dark-charcoal);">Setiap Hari</p>
+                                <p class="mb-0" style="color: var(--warm-brown);">10:00 - 22:00 WIB</p>
                             </div>
-                            <div class="mt-3 pt-3 border-top">
-                                <p class="mb-1 fw-semibold" style="color: #2a2a2a;">Layanan Catering</p>
-                                <p class="mb-0" style="color: #555;">08:00 - 20:00 WIB</p>
+                            <div class="pt-3 border-top">
+                                <p class="mb-1 fw-semibold" style="color: var(--dark-charcoal);">Layanan Catering</p>
+                                <p class="mb-0" style="color: var(--warm-brown);">08:00 - 20:00 WIB</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Social Media -->
-                    <div class="mt-4">
-                        <h5 class="fw-bold mb-3" style="color: #2a2a2a;">Ikuti Kami</h5>
+                    <div class="mt-4 animate-fade-in" style="animation-delay: 0.5s;">
+                        <h5 class="fw-bold mb-3" style="color: var(--dark-charcoal);">Ikuti Kami</h5>
                         <div class="d-flex gap-3">
-                            <a href="#" class="btn px-3 py-2" 
-                               style="background: linear-gradient(135deg, #1877f2, #0d5cb6); color: white; border-radius: 10px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            <a href="#" class="social-btn d-flex align-items-center justify-content-center" 
+                               style="width: 45px; height: 45px; background: #1877f2; color: white; border-radius: 10px;">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="btn px-3 py-2" 
-                               style="background: linear-gradient(135deg, #1da1f2, #0c85d0); color: white; border-radius: 10px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            <a href="#" class="social-btn d-flex align-items-center justify-content-center" 
+                               style="width: 45px; height: 45px; background: #1da1f2; color: white; border-radius: 10px;">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="btn px-3 py-2" 
-                               style="background: linear-gradient(135deg, #e1306c, #c13584); color: white; border-radius: 10px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            <a href="#" class="social-btn d-flex align-items-center justify-content-center" 
+                               style="width: 45px; height: 45px; background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); color: white; border-radius: 10px;">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="btn px-3 py-2" 
-                               style="background: linear-gradient(135deg, #ff0000, #cc0000); color: white; border-radius: 10px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            <a href="#" class="social-btn d-flex align-items-center justify-content-center" 
+                               style="width: 45px; height: 45px; background: #ff0000; color: white; border-radius: 10px;">
                                 <i class="fab fa-youtube"></i>
                             </a>
                         </div>
@@ -205,13 +216,15 @@
             <!-- Map Section -->
             <div class="row mt-5">
                 <div class="col-12">
-                    <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden;">
-                        <div class="card-body p-0">
-                            <div class="d-flex align-items-center p-4" style="background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(212, 165, 116, 0.05)); border-bottom: 1px solid #eee;">
-                                <div class="me-3" style="color: #d4a574; font-size: 1.5rem;">
-                                    <i class="fas fa-map-marked-alt"></i>
+                    <div class="modern-card animate-fade-in" style="animation-delay: 0.3s;">
+                        <div class="p-0" style="overflow: hidden; border-radius: 20px;">
+                            <div class="p-4" style="background: rgba(180, 34, 34, 0.05); border-bottom: 1px solid rgba(0,0,0,0.05);">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3" style="color: var(--primary-red); font-size: 1.5rem;">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </div>
+                                    <h4 class="mb-0 fw-bold" style="color: var(--dark-charcoal);">Lokasi Kami</h4>
                                 </div>
-                                <h4 class="mb-0 fw-bold" style="color: #2a2a2a;">Lokasi Kami</h4>
                             </div>
                             <div class="ratio ratio-16x9">
                                 <iframe 
@@ -221,13 +234,13 @@
                                     loading="lazy">
                                 </iframe>
                             </div>
-                            <div class="p-4 border-top">
-                                <p class="mb-0 text-center" style="color: #666;">
-                                    <i class="fas fa-car me-1" style="color: #d4a574;"></i>
+                            <div class="p-4 text-center" style="background: rgba(180, 34, 34, 0.05);">
+                                <p class="mb-0" style="color: var(--warm-brown);">
+                                    <i class="fas fa-car me-1" style="color: var(--primary-red);"></i>
                                     Tersedia parkir luas • 
-                                    <i class="fas fa-wheelchair me-1 ms-3" style="color: #d4a574;"></i>
+                                    <i class="fas fa-wheelchair me-1 ms-3" style="color: var(--primary-red);"></i>
                                     Akses disabilitas • 
-                                    <i class="fas fa-wifi me-1 ms-3" style="color: #d4a574;"></i>
+                                    <i class="fas fa-wifi me-1 ms-3" style="color: var(--primary-red);"></i>
                                     Free WiFi
                                 </p>
                             </div>
@@ -241,28 +254,9 @@
 
 @section('styles')
 <style>
-    .resto-hero-section::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100px;
-        background: linear-gradient(to bottom, transparent, #f8f5f2);
-        z-index: 1;
-    }
-    
     .form-control:focus {
-        border-color: #d4a574 !important;
-        box-shadow: 0 0 0 0.25rem rgba(212, 165, 116, 0.25) !important;
-    }
-    
-    .card {
-        transition: transform 0.3s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-5px);
+        border-color: var(--primary-red) !important;
+        box-shadow: 0 0 0 0.25rem rgba(180, 34, 34, 0.25) !important;
     }
     
     .input-group-text {
@@ -270,107 +264,151 @@
     }
     
     .form-control:focus + .input-group-text {
-        background: linear-gradient(135deg, rgba(212, 165, 116, 0.2), rgba(212, 165, 116, 0.1)) !important;
-    }
-    
-    .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(212, 165, 116, 0.3);
+        background: rgba(180, 34, 34, 0.1) !important;
     }
     
     .social-btn {
         transition: all 0.3s ease;
+        text-decoration: none;
     }
     
     .social-btn:hover {
         transform: translateY(-3px) scale(1.1);
-    }
-    
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-    
-    .btn-submit:hover {
-        animation: pulse 0.5s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 </style>
 @endsection
 
 @section('scripts')
 <script>
-    // Form submission animation
+    // Form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         
-        // Add loading animation
+        // Validation
+        let isValid = true;
+        this.querySelectorAll('[required]').forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = '#e63946';
+                isValid = false;
+            } else {
+                field.style.borderColor = '#2a9d8f';
+            }
+        });
+        
+        if (!isValid) {
+            createNotification('error', 'Harap lengkapi semua field yang wajib diisi.');
+            return;
+        }
+        
+        // Show loading state
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Mengirim...';
         submitBtn.disabled = true;
         
-        // Simulate submission (remove in production)
+        // Simulate API call
         setTimeout(() => {
+            // Success
             submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Terkirim!';
-            submitBtn.style.background = 'linear-gradient(135deg, #2a9d8f, #21867a)';
+            submitBtn.style.background = '#2a9d8f';
             
             // Show success message
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'alert alert-success mt-3';
-            alertDiv.innerHTML = `
-                <i class="fas fa-check-circle me-2"></i>
-                Pesan Anda berhasil dikirim! Kami akan membalas dalam 1x24 jam.
-            `;
-            this.parentNode.insertBefore(alertDiv, this.nextSibling);
+            createNotification('success', 'Pesan Anda berhasil dikirim! Kami akan membalas dalam 1x24 jam.');
             
             // Reset form after 3 seconds
             setTimeout(() => {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                submitBtn.style.background = 'linear-gradient(135deg, #d4a574, #b38b5d)';
+                submitBtn.style.background = '';
                 this.reset();
-                alertDiv.remove();
+                document.getElementById('charCount').textContent = '0/500 karakter';
             }, 3000);
         }, 2000);
     });
     
     // Character counter for message
     const messageTextarea = document.getElementById('message');
-    const counter = document.createElement('div');
-    counter.className = 'text-end mt-1';
-    counter.style.fontSize = '0.85rem';
-    counter.style.color = '#888';
-    messageTextarea.parentNode.appendChild(counter);
+    const charCount = document.getElementById('charCount');
     
-    function updateCounter() {
-        const length = messageTextarea.value.length;
-        counter.textContent = `${length}/500 karakter`;
+    messageTextarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCount.textContent = `${length}/500 karakter`;
         
-        if (length > 450) {
-            counter.style.color = '#e63946';
+        if (length > 500) {
+            this.value = this.value.substring(0, 500);
+            charCount.textContent = '500/500 karakter';
+            charCount.style.color = '#e63946';
+        } else if (length > 450) {
+            charCount.style.color = '#e63946';
         } else if (length > 400) {
-            counter.style.color = '#f8961e';
+            charCount.style.color = '#f8961e';
         } else {
-            counter.style.color = '#888';
+            charCount.style.color = 'var(--warm-brown)';
         }
-    }
+    });
     
-    messageTextarea.addEventListener('input', updateCounter);
-    updateCounter();
-    
-    // Form validation
-    document.querySelectorAll('.form-control').forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.value.trim() === '' && this.hasAttribute('required')) {
+    // Real-time validation
+    document.querySelectorAll('[required]').forEach(field => {
+        field.addEventListener('blur', function() {
+            if (this.value.trim() === '') {
                 this.style.borderColor = '#e63946';
             } else {
-                this.style.borderColor = '#e0e0e0';
+                this.style.borderColor = '#2a9d8f';
             }
         });
         
-        input.addEventListener('focus', function() {
-            this.style.borderColor = '#d4a574';
+        field.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--primary-red)';
         });
     });
+    
+    // Notification function
+    function createNotification(type, message) {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} position-fixed top-0 end-0 m-4 shadow`;
+        notification.style.zIndex = '9999';
+        notification.style.borderRadius = '10px';
+        notification.style.border = type === 'success' ? '2px solid #2a9d8f' : '2px solid #e63946';
+        notification.style.background = 'white';
+        notification.style.animation = 'slideInRight 0.3s ease-out';
+        notification.innerHTML = `
+            <div class="d-flex align-items-center">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-3" 
+                   style="color: ${type === 'success' ? '#2a9d8f' : '#e63946'}; font-size: 1.2rem;"></i>
+                <div>
+                    <strong class="d-block" style="color: var(--dark-charcoal);">${message}</strong>
+                </div>
+                <button type="button" class="btn-close ms-3" onclick="this.parentElement.parentElement.remove()"></button>
+            </div>
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                notification.style.transition = 'all 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
+    }
+    
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 </script>
 @endsection
