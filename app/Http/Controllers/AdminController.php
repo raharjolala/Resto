@@ -257,6 +257,7 @@ class AdminController extends Controller
         }
     }
     
+    // =============== PERBAIKAN DI SINI ===============
     public function galleryIndex()
     {
         if (Auth::user()->role !== 'admin') {
@@ -264,12 +265,12 @@ class AdminController extends Controller
         }
         
         try {
-            $galleries = Gallery::latest()->get();
+            $galleryItems = Gallery::latest()->get(); // UBAH: $galleries menjadi $galleryItems
         } catch (\Exception $e) {
-            $galleries = collect([]);
+            $galleryItems = collect([]);
         }
         
-        return view('admin.gallery.index', compact('galleries'));
+        return view('admin.gallery.index', compact('galleryItems')); // UBAH: $galleries menjadi $galleryItems
     }
     
     public function galleryStore(Request $request)
@@ -279,15 +280,32 @@ class AdminController extends Controller
         }
         
         $request->validate([
-            'caption' => 'nullable|string|max:255',
-            'category' => 'required|in:food,facility,event,interior',
+            'title' => 'required|string|max:255', // TAMBAHKAN
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // UBAH
+            'description' => 'nullable|string', // TAMBAHKAN
+            'category' => 'nullable|string', // UBAH
         ]);
         
         try {
-            // For now, just show success message
-            return redirect()->route('admin.gallery.index')->with('success', 'Gambar berhasil ditambahkan (demo mode)');
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                $imageName = time() . '.' . $request->image->extension();
+                $request->image->storeAs('public/gallery', $imageName);
+                
+                Gallery::create([
+                    'title' => $request->title,
+                    'image' => $imageName,
+                    'description' => $request->description,
+                    'category' => $request->category,
+                    'is_active' => true,
+                ]);
+                
+                return redirect()->route('admin.gallery.index')->with('success', 'Gambar berhasil ditambahkan');
+            }
+            
+            return redirect()->back()->with('error', 'Gagal mengunggah gambar');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal menambahkan gambar');
+            return redirect()->back()->with('error', 'Gagal menambahkan gambar: ' . $e->getMessage());
         }
     }
     
@@ -305,6 +323,7 @@ class AdminController extends Controller
             return redirect()->route('admin.gallery.index')->with('error', 'Gagal menghapus gambar');
         }
     }
+    // =============== END PERBAIKAN ===============
     
     public function branchesIndex()
     {
