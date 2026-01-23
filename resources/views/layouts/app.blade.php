@@ -14,9 +14,11 @@
     <!-- Google Fonts - More modern selection -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    @stack('styles')
+    
     <style>
         :root {
-            --primary-red: #B22222; /* Slightly softer red */
+            --primary-red: #B22222;
             --primary-dark: #8B0000;
             --secondary-gold: #D4A017;
             --accent-gold: #FFC145;
@@ -86,7 +88,7 @@
             color: white;
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            content: '\F2E7'; /* Utensils icon */
+            content: '\F2E7';
             font-size: 1.2rem;
         }
         
@@ -472,7 +474,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 JOSS GANDOS
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -481,22 +483,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('menu') ? 'active' : '' }}" href="/menu">Menu</a>
+                        <a class="nav-link {{ request()->routeIs('menu') ? 'active' : '' }}" href="{{ route('menu') }}">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang</a>
+                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="/gallery">Gallery</a>
+                        <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak</a>
+                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kontak</a>
                     </li>
                     <li class="nav-item ms-2">
-                        <a href="/reservation" class="btn btn-primary">
+                        <a href="{{ route('reservation.create') }}" class="btn btn-primary">
                             <i class="fas fa-calendar-alt me-2"></i> Pesan Meja
                         </a>
                     </li>
@@ -515,7 +517,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-5">
-                    <a href="/" class="footer-logo">
+                    <a href="{{ route('home') }}" class="footer-logo">
                         <div class="d-flex align-items-center">
                             <div class="d-flex flex-column">
                                 <span class="fw-bold">JOSS GANDOS</span>
@@ -537,12 +539,12 @@
                 <div class="col-lg-2 col-md-6 mb-5">
                     <h4 class="footer-title">Navigasi</h4>
                     <ul class="footer-links">
-                        <li><a href="/">Beranda</a></li>
-                        <li><a href="/menu">Menu Lengkap</a></li>
-                        <li><a href="/about">Tentang Kami</a></li>
-                        <li><a href="/gallery">Galeri</a></li>
-                        <li><a href="/reservation">Reservasi</a></li>
-                        <li><a href="/contact">Kontak</a></li>
+                        <li><a href="{{ route('home') }}">Beranda</a></li>
+                        <li><a href="{{ route('menu') }}">Menu Lengkap</a></li>
+                        <li><a href="{{ route('about') }}">Tentang Kami</a></li>
+                        <li><a href="{{ route('gallery') }}">Galeri</a></li>
+                        <li><a href="{{ route('reservation.create') }}">Reservasi</a></li>
+                        <li><a href="{{ route('contact') }}">Kontak</a></li>
                     </ul>
                 </div>
                 
