@@ -20,7 +20,7 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
-    <!-- HAPUS CKEDITOR DI SINI -->
+    @stack('styles')
     
     <style>
         :root {
@@ -28,9 +28,9 @@
             --primary-dark: #8E0000;
             --primary-light: #ff5f52;
             --primary-super-light: #ffebee;
-            --secondary-color: #C62828; /* Tetap merah */
+            --secondary-color: #C62828;
             --secondary-dark: #8E0000;
-            --accent-color: #C62828; /* Tetap merah */
+            --accent-color: #C62828;
             --dark-color: #1a1a2e;
             --dark-light: #2d2d44;
             --light-color: #f8f9fa;
@@ -719,11 +719,6 @@
                     }
                 });
             }
-            
-            // HAPUS INISIALISASI CKEDITOR
-            // if (typeof CKEDITOR !== 'undefined') {
-            //     CKEDITOR.replaceAll('editor');
-            // }
             
             // Initialize tooltips
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));

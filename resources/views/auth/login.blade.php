@@ -628,9 +628,9 @@
             <div class="hero-content">
                 <div class="logo-container">
                     <div class="logo-image">
-                        <img src="https://www.restojossgandos.com/public/img/logojossgandos.png" 
+                        <img src="{{ asset('img/logojossgandos.png') }}" 
                              alt="JOSS GANDOS Logo" 
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/180x180/C62828/FFFFFF?text=JOSS+GANDOS';">
+                             onerror="this.onerror=null; this.src='https://www.restojossgandos.com/public/img/logojossgandos.png';">
                     </div>
                     <h1 class="brand-name">JOSS GANDOS</h1>
                     <p class="brand-tagline">Restaurant & Café</p>
@@ -638,7 +638,7 @@
                 
                 <h2 class="hero-title">WELCOME BACK</h2>
                 <p class="hero-description">
-                    Log in to your account and discover the finest culinary experience at JOSS GANDOS.
+                    Login to your account and discover the finest culinary experience at JOSS GANDOS.
                 </p>
                 
                 <ul class="hero-features">
