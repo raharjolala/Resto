@@ -99,63 +99,54 @@
             box-shadow: 0 8px 30px rgba(139, 0, 0, 0.1);
         }
         
+        /* PERUBAHAN: Brand dengan Logo Image dan Teks */
         .navbar-brand {
-            font-family: 'Dancing Script', cursive;
-            font-weight: 700;
-            font-size: 2.4rem;
-            color: var(--primary-red) !important;
-            position: relative;
             display: flex;
             align-items: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            gap: 15px;
         }
         
-        .brand-wrapper {
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .brand-logo {
+            height: 50px;
+            width: auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled .brand-logo {
+            height: 40px;
+        }
+        
+        .brand-text {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            position: relative;
-        }
-        
-        .brand-wrapper::before {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 60%;
-            background: linear-gradient(to bottom, var(--primary-red), var(--secondary-gold));
-            border-radius: 2px;
+            justify-content: center;
         }
         
         .brand-name {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.4rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary-red);
-            line-height: 1;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .brand-name::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--secondary-gold), transparent);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .brand-subtitle {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
             color: var(--secondary-gold);
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 3px;
         }
         
         .nav-link {
@@ -465,22 +456,55 @@
             opacity: 0.3;
         }
         
-        .footer-logo {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            color: white;
-            margin-bottom: 1rem;
-            display: inline-block;
-            position: relative;
+        /* PERUBAHAN: Footer Logo dengan Image dan Teks */
+        .footer-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         
-        .footer-logo::after {
-            content: '';
+        .footer-logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo {
+            height: 60px;
+            width: auto;
             display: block;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-red), var(--accent-gold));
-            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .footer-brand-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-brand-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-top: 3px;
         }
         
         .footer-title {
@@ -620,6 +644,14 @@
             .section-title h2 {
                 font-size: 2.2rem;
             }
+            
+            .brand-name {
+                font-size: 1.3rem;
+            }
+            
+            .footer-brand-name {
+                font-size: 1.5rem;
+            }
         }
         
         @media (max-width: 992px) {
@@ -631,13 +663,33 @@
                 padding: 4rem 0;
             }
             
-            .navbar-brand .brand-name {
-                font-size: 2rem;
+            .brand-logo {
+                height: 40px;
+            }
+            
+            .brand-name {
+                font-size: 1.2rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.7rem;
             }
             
             .nav-link {
                 padding: 0.5rem 1rem !important;
                 text-align: center;
+            }
+            
+            .footer-logo {
+                height: 50px;
+            }
+            
+            .footer-brand-name {
+                font-size: 1.3rem;
+            }
+            
+            .footer-brand-subtitle {
+                font-size: 0.7rem;
             }
         }
         
@@ -663,6 +715,32 @@
                 width: 100px;
                 height: 100px;
             }
+            
+            .brand-logo {
+                height: 35px;
+            }
+            
+            .brand-name {
+                font-size: 1.1rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+            
+            .footer-logo {
+                height: 45px;
+            }
+            
+            .footer-brand-name {
+                font-size: 1.1rem;
+            }
+            
+            .footer-brand-subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -674,8 +752,70 @@
                 font-size: 1.6rem;
             }
             
+            .navbar-brand {
+                gap: 10px;
+            }
+            
+            .brand-logo {
+                height: 30px;
+            }
+            
             .brand-name {
-                font-size: 1.8rem;
+                font-size: 1rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.6rem;
+                letter-spacing: 0.5px;
+            }
+            
+            .footer-logo-wrapper {
+                gap: 10px;
+            }
+            
+            .footer-logo {
+                height: 40px;
+            }
+            
+            .footer-brand-name {
+                font-size: 1rem;
+            }
+            
+            .footer-brand-subtitle {
+                font-size: 0.6rem;
+                letter-spacing: 0.5px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .navbar-brand {
+                gap: 8px;
+            }
+            
+            .brand-logo {
+                height: 25px;
+            }
+            
+            .brand-name {
+                font-size: 0.9rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.55rem;
+            }
+            
+            .footer-logo-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .footer-logo {
+                height: 35px;
+            }
+            
+            .footer-brand-name {
+                font-size: 0.9rem;
             }
         }
         
@@ -839,10 +979,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
+            <!-- PERUBAHAN: Logo dan Teks di Header -->
             <a class="navbar-brand" href="{{ route('home') }}">
-                <div class="brand-wrapper">
-                    <span class="brand-name">JOSS GANDOS</span>
-                    <span class="brand-subtitle">RESTORAN INDONESIA</span>
+                <img src="https://restojossgandos.com/public/img/logojossgandos.png" 
+                     alt="JOSS GANDOS - Restoran Indonesia" 
+                     class="brand-logo">
+                <div class="brand-text">
+                    <div class="brand-name">JOSS GANDOS</div>
+                    <div class="brand-subtitle">RESTORAN INDONESIA</div>
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -894,29 +1038,37 @@
     <footer>
         <div class="container">
             <div class="row">
-                <!-- Logo and Description -->
+                <!-- PERUBAHAN: Logo dan Teks di Footer -->
                 <div class="col-lg-4 col-md-6 mb-5">
-                    <a href="{{ route('home') }}" class="footer-logo">
-                        JOSS GANDOS
-                    </a>
-                    <p class="text-white-50 mt-3 mb-4" style="font-size: 0.95rem; line-height: 1.7;">
-                        Menjaga keaslian cita rasa Indonesia dengan sentuhan modern. 
-                        Setiap hidangan adalah cerita tentang warisan kuliner Nusantara 
-                        yang kami jaga dengan penuh kebanggaan.
-                    </p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
+                    <div class="footer-logo-container">
+                        <div class="footer-logo-wrapper">
+                            <img src="https://restojossgandos.com/public/img/logojossgandos.png" 
+                                 alt="JOSS GANDOS - Restoran Indonesia" 
+                                 class="footer-logo">
+                            <div class="footer-brand-text">
+                                <div class="footer-brand-name">JOSS GANDOS</div>
+                                <div class="footer-brand-subtitle">RESTORAN INDONESIA</div>
+                            </div>
+                        </div>
+                        <p class="text-white-50 mt-3 mb-4" style="font-size: 0.95rem; line-height: 1.7;">
+                            Menjaga keaslian cita rasa Indonesia dengan sentuhan modern. 
+                            Setiap hidangan adalah cerita tentang warisan kuliner Nusantara 
+                            yang kami jaga dengan penuh kebanggaan.
+                        </p>
+                        <div class="social-icons">
+                            <a href="https://instagram.com/jossgandos" class="social-icon" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://facebook.com/jossgandos" class="social-icon" target="_blank" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://wa.me/6281234567890" class="social-icon" target="_blank" aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="https://tiktok.com/@jossgandos" class="social-icon" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -963,7 +1115,7 @@
                             <i class="fas fa-map-marker-alt me-3 mt-1" style="color: var(--accent-gold); width: 20px;"></i>
                             <div>
                                 <p class="mb-1 fw-semibold" style="color: white;">Alamat</p>
-                                <p class="mb-0 text-white-50 small">Jl. Baye Kuliner No. 123<br>Jakarta, Indonesia 10110</p>
+                                <p class="mb-0 text-white-50 small">Jl. Raya Jemursari No.15<br>Surabaya, Indonesia 60237</p>
                             </div>
                         </div>
                     </div>
@@ -972,7 +1124,7 @@
                             <i class="fas fa-phone me-3" style="color: var(--accent-gold); width: 20px;"></i>
                             <div>
                                 <p class="mb-1 fw-semibold" style="color: white;">Telepon</p>
-                                <p class="mb-0 text-white-50 small">(021) 1234-5678</p>
+                                <p class="mb-0 text-white-50 small">+62 896-9907-1599</p>
                             </div>
                         </div>
                     </div>
@@ -981,7 +1133,7 @@
                             <i class="fas fa-envelope me-3" style="color: var(--accent-gold); width: 20px;"></i>
                             <div>
                                 <p class="mb-1 fw-semibold" style="color: white;">Email</p>
-                                <p class="mb-0 text-white-50 small">info@jossgandos.com</p>
+                                <p class="mb-0 text-white-50 small">bebekjossgandossby@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -1005,6 +1157,7 @@
         // Navbar scroll effect
         document.addEventListener('DOMContentLoaded', function() {
             const navbar = document.querySelector('.navbar');
+            const brandLogo = document.querySelector('.brand-logo');
             
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 50) {
@@ -1024,6 +1177,57 @@
                     }
                 });
             });
+            
+            // Logo hover effect
+            if (brandLogo) {
+                brandLogo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05) rotate(2deg)';
+                });
+                
+                brandLogo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0)';
+                });
+            }
+            
+            // Footer logo hover effect
+            const footerLogo = document.querySelector('.footer-logo');
+            if (footerLogo) {
+                footerLogo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                footerLogo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
+            
+            // Brand text hover effect
+            const brandText = document.querySelector('.brand-text');
+            if (brandText) {
+                brandText.addEventListener('mouseenter', function() {
+                    this.querySelector('.brand-name').style.color = 'var(--primary-dark)';
+                    this.querySelector('.brand-subtitle').style.color = 'var(--accent-gold)';
+                });
+                
+                brandText.addEventListener('mouseleave', function() {
+                    this.querySelector('.brand-name').style.color = 'var(--primary-red)';
+                    this.querySelector('.brand-subtitle').style.color = 'var(--secondary-gold)';
+                });
+            }
+            
+            // Footer brand text hover effect
+            const footerBrandText = document.querySelector('.footer-brand-text');
+            if (footerBrandText) {
+                footerBrandText.addEventListener('mouseenter', function() {
+                    this.querySelector('.footer-brand-name').style.color = 'var(--accent-gold)';
+                    this.querySelector('.footer-brand-subtitle').style.color = 'white';
+                });
+                
+                footerBrandText.addEventListener('mouseleave', function() {
+                    this.querySelector('.footer-brand-name').style.color = 'white';
+                    this.querySelector('.footer-brand-subtitle').style.color = 'var(--accent-gold)';
+                });
+            }
             
             // Indonesian greeting in console
             console.log('%c✨ Selamat Datang di JOSS GANDOS ✨', 
@@ -1104,6 +1308,36 @@
                 }
             `;
             document.head.appendChild(rippleStyle);
+            
+            // Image preloading for better performance
+            const logoUrl = 'https://restojossgandos.com/public/img/logojossgandos.png';
+            const logoImage = new Image();
+            logoImage.src = logoUrl;
+            logoImage.onload = function() {
+                console.log('Logo JOSS GANDOS berhasil dimuat');
+            };
+            logoImage.onerror = function() {
+                console.warn('Logo gagal dimuat, menggunakan fallback');
+                // Fallback untuk logo yang gagal dimuat
+                document.querySelectorAll('.brand-logo, .footer-logo').forEach(logo => {
+                    logo.alt = 'JOSS GANDOS - Restoran Indonesia';
+                    logo.style.backgroundColor = '#B22222';
+                    logo.style.padding = '10px';
+                    logo.style.borderRadius = '5px';
+                    logo.style.color = 'white';
+                    logo.style.fontFamily = "'Poppins', sans-serif";
+                    logo.style.fontSize = '1.2rem';
+                    logo.style.fontWeight = '700';
+                    logo.style.display = 'flex';
+                    logo.style.alignItems = 'center';
+                    logo.style.justifyContent = 'center';
+                    logo.innerHTML = 'JOSS<br>GANDOS';
+                    logo.style.lineHeight = '1.2';
+                    logo.style.textAlign = 'center';
+                    logo.style.width = '50px';
+                    logo.style.height = '50px';
+                });
+            };
         });
         
         // Notification function
