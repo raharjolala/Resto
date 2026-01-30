@@ -47,10 +47,6 @@
                             </a>
                         </div>
                         
-                        <!-- Bottom Text -->
-                        <div class="hero-bottom-text animate-fade-in" style="animation-delay: 0.5s;">
-                            <p>Kela ala-gih belure ngerah sejajar!</p>
-                        </div>
                     </div>
                 </div>
             </div>

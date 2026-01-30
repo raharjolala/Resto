@@ -167,86 +167,46 @@
                     </div>
                 </div>
                 
-                <!-- Contact Information -->
+                <!-- Quick Contact & Social Media -->
                 <div class="col-lg-4">
-                    <!-- Contact Info Card -->
+                    <!-- Quick Contact Card -->
                     <div class="contact-info-card mb-4 animate-fade-in" style="animation-delay: 0.1s;">
                         <div class="p-4">
-                            <div class="d-flex align-items-start mb-3">
-                                <div class="contact-icon me-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h4 class="fw-bold mb-2" style="color: #333;">Alamat</h4>
-                                    <p class="mb-2 text-muted" style="line-height: 1.6;">
-                                        Jl. Jemursari No. 123<br>
-                                        Surabaya, Jawa Timur 60237
-                                    </p>
-                                    <a href="#map" class="contact-link">
-                                        <i class="fas fa-directions me-1"></i> Lihat Peta
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info-card mb-4 animate-fade-in" style="animation-delay: 0.2s;">
-                        <div class="p-4">
-                            <div class="d-flex align-items-start mb-3">
-                                <div class="contact-icon me-3">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div>
-                                    <h4 class="fw-bold mb-2" style="color: #333;">Telepon & WhatsApp</h4>
-                                    <div class="mb-3">
-                                        <p class="mb-1 fw-semibold" style="color: #333;">Customer Service</p>
-                                        <p class="mb-0 text-muted">(031) 1234-5678</p>
+                            <h4 class="fw-bold mb-4 text-center" style="color: #b42222;">
+                                <i class="fas fa-info-circle me-2"></i>Info Kontak
+                            </h4>
+                            <div class="quick-contact-list">
+                                <div class="quick-contact-item d-flex align-items-center mb-3">
+                                    <div class="contact-icon me-3">
+                                        <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div>
-                                        <p class="mb-1 fw-semibold" style="color: #333;">WhatsApp</p>
-                                        <p class="mb-0 text-muted">0812-3456-7890</p>
+                                        <h6 class="fw-bold mb-1" style="color: #333;">Lokasi Restoran</h6>
+                                        <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                            Jl. Jemursari No. 123, Surabaya
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info-card mb-4 animate-fade-in" style="animation-delay: 0.3s;">
-                        <div class="p-4">
-                            <div class="d-flex align-items-start mb-3">
-                                <div class="contact-icon me-3">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4 class="fw-bold mb-2" style="color: #333;">Email</h4>
-                                    <div class="mb-3">
-                                        <p class="mb-1 fw-semibold" style="color: #333;">Informasi Umum</p>
-                                        <p class="mb-0 text-muted">info@jossgandos.com</p>
+                                <div class="quick-contact-item d-flex align-items-center mb-3">
+                                    <div class="contact-icon me-3">
+                                        <i class="fas fa-clock"></i>
                                     </div>
                                     <div>
-                                        <p class="mb-1 fw-semibold" style="color: #333;">Reservasi</p>
-                                        <p class="mb-0 text-muted">reservation@jossgandos.com</p>
+                                        <h6 class="fw-bold mb-1" style="color: #333;">Jam Operasional</h6>
+                                        <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                            10:00 - 22:00 WIB (Setiap Hari)
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info-card animate-fade-in" style="animation-delay: 0.4s;">
-                        <div class="p-4">
-                            <div class="d-flex align-items-start mb-3">
-                                <div class="contact-icon me-3">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <h4 class="fw-bold mb-2" style="color: #333;">Jam Operasional</h4>
-                                    <div class="mb-3">
-                                        <p class="mb-1 fw-semibold" style="color: #333;">Restoran</p>
-                                        <p class="mb-0 text-muted">10:00 - 22:00 WIB (Setiap Hari)</p>
+                                <div class="quick-contact-item d-flex align-items-center">
+                                    <div class="contact-icon me-3">
+                                        <i class="fas fa-envelope"></i>
                                     </div>
                                     <div>
-                                        <p class="mb-1 fw-semibold" style="color: #333;">Catering</p>
-                                        <p class="mb-0 text-muted">08:00 - 20:00 WIB</p>
+                                        <h6 class="fw-bold mb-1" style="color: #333;">Email</h6>
+                                        <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                            info@jossgandos.com
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -254,10 +214,12 @@
                     </div>
                     
                     <!-- Social Media -->
-                    <div class="social-media-card mt-4 animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="social-media-card animate-fade-in" style="animation-delay: 0.2s;">
                         <div class="p-4 text-center">
-                            <h4 class="fw-bold mb-3" style="color: #333;">Ikuti Kami</h4>
-                            <div class="d-flex justify-content-center gap-3">
+                            <h4 class="fw-bold mb-4" style="color: #333;">
+                                <i class="fas fa-share-alt me-2"></i>Ikuti Kami
+                            </h4>
+                            <div class="d-flex justify-content-center gap-3 mb-4">
                                 <a href="#" class="social-icon" style="background: #1877f2;">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
@@ -270,8 +232,10 @@
                                 <a href="#" class="social-icon" style="background: #0a66c2;">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="#" class="social-icon" style="background: #25d366;">
-                                    <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="map-cta">
+                                <a href="#map" class="contact-link">
+                                    <i class="fas fa-map-marked-alt me-1"></i> Lihat Peta Lokasi
                                 </a>
                             </div>
                         </div>
@@ -366,52 +330,196 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="section-padding">
+    <!-- Delivery Services Section -->
+    <section class="section-padding bg-white">
         <div class="container">
-            <div class="section-header text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3" style="color: #b42222;">Pertanyaan Umum</h2>
-                <p class="lead text-muted">Cari jawaban untuk pertanyaan yang sering diajukan</p>
-                <div class="divider mx-auto"></div>
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3" style="color: #b42222;">
+                        Pesan <span class="text-warning">Delivery</span>
+                    </h2>
+                    <p class="lead text-muted mb-4">
+                        Nikmati menu favorit JOSS GANDOS langsung di rumah Anda melalui layanan delivery kami
+                    </p>
+                    <div class="divider"></div>
+                </div>
             </div>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="faq-accordion animate-fade-in">
-                        @php
-                            $faqs = [
-                                ['question' => 'Berapa lama waktu respon untuk email?', 'answer' => 'Kami membalas semua email dalam waktu 1x24 jam pada hari kerja. Untuk reservasi mendesak, harap hubungi via telepon atau WhatsApp.'],
-                                ['question' => 'Apakah tersedia layanan catering untuk acara?', 'answer' => 'Ya, kami menyediakan layanan catering untuk berbagai acara seperti ulang tahun, rapat perusahaan, dan pernikahan. Minimum order 50 porsi. Hubungi tim catering kami untuk konsultasi lebih lanjut.'],
-                                ['question' => 'Bagaimana cara reservasi meja?', 'answer' => 'Anda dapat reservasi melalui: 1) Website kami 2) Telepon 3) WhatsApp 4) Datang langsung ke restoran. Untuk acara besar, disarankan reservasi minimal 3 hari sebelumnya.'],
-                                ['question' => 'Apakah tersedia parkir yang luas?', 'answer' => 'Ya, kami menyediakan area parkir yang luas dan aman untuk kendaraan roda dua dan empat dengan pengawasan 24 jam.'],
-                                ['question' => 'Apakah restoran ramah untuk difabel?', 'answer' => 'Ya, kami memiliki fasilitas aksesibilitas lengkap termasuk ramp, lift, dan toilet khusus difabel untuk kenyamanan semua pengunjung.'],
-                            ];
-                        @endphp
-                        
-                        <div class="accordion" id="faqAccordion">
-                            @foreach($faqs as $index => $faq)
-                                <div class="accordion-item mb-3 border-0 shadow-sm" style="border-radius: 15px !important;">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed rounded" type="button" 
-                                                data-bs-toggle="collapse" data-bs-target="#faq{{ $index }}"
-                                                style="background: rgba(180, 34, 34, 0.05); border: none; padding: 20px;">
-                                            <i class="fas fa-question-circle me-3" style="color: #b42222;"></i>
-                                            <span class="fw-semibold" style="color: #333;">{{ $faq['question'] }}</span>
-                                        </button>
-                                    </h2>
-                                    <div id="faq{{ $index }}" class="accordion-collapse collapse" 
-                                         data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body bg-light" style="border-radius: 0 0 15px 15px;">
-                                            <div class="d-flex">
-                                                <i class="fas fa-info-circle me-3 mt-1" style="color: #b42222;"></i>
-                                                <div>
-                                                    {{ $faq['answer'] }}
-                                                </div>
-                                            </div>
+
+            <!-- Delivery Apps -->
+            <div class="row g-4 mb-5">
+                <!-- GoFood -->
+                <div class="col-md-4">
+                    <div class="delivery-app-card text-center animate-fade-in">
+                        <div class="delivery-app-logo mb-4">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnA6euTxY_3bBbvCPE1E_j98O3fWg1WF2IbWmr4cNbt9VsFiY_Fwq7j9TnutdF8KDblPyno9HNOidxExb_pwbQtuMOT8Cdyc7KD01WhRtDlA82X4JybUimnGfUFdoBV9jsTN_eZEzbj37RlpPfXW2InMsaNsEf8bwd4ePUCRclJX9pRf11C-tHNTiZ/w380/GKL20_GoFood%20-%20Koleksilogo.com.jpg" 
+                                 alt="GoFood" 
+                                 class="img-fluid" 
+                                 style="max-height: 50px;">
+                        </div>
+                        <div class="delivery-app-content">
+                            <h4 class="fw-bold mb-3" style="color: #333;">GoFood</h4>
+                            <p class="text-muted mb-4">
+                                Pesan melalui aplikasi GoFood untuk pengiriman cepat dan mudah
+                            </p>
+                            <a href="https://gofood.co.id/surabaya/restaurant/bebek-joss-gandos-jemursari-8571aff2-33b6-4f54-9fd9-a132a900eb17" 
+                               target="_blank"
+                               class="btn w-100 py-3 fw-bold delivery-btn"
+                               style="background: linear-gradient(135deg, #b42222, #e63946);">
+                                <i class="fas fa-external-link-alt me-2"></i> Buka di GoFood
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GrabFood -->
+                <div class="col-md-4">
+                    <div class="delivery-app-card text-center animate-fade-in">
+                        <div class="delivery-app-logo mb-4">
+                            <img src="https://seduhteh.wordpress.com/wp-content/uploads/2019/11/grabfood-vector-logo.png" 
+                                 alt="GrabFood" 
+                                 class="img-fluid" 
+                                 style="max-height: 50px;">
+                        </div>
+                        <div class="delivery-app-content">
+                            <h4 class="fw-bold mb-3" style="color: #333;">GrabFood</h4>
+                            <p class="text-muted mb-4">
+                                Pesan melalui aplikasi GrabFood dengan berbagai pilihan menu lengkap
+                            </p>
+                            <a href="https://food.grab.com/id/en/restaurant/online-delivery/IDGFSTI00002n8d?sourceID=20251119_121557_7BFCA7D892634AB597F132E1189364C5_MEXMPS" 
+                               target="_blank"
+                               class="btn w-100 py-3 fw-bold delivery-btn"
+                               style="background: linear-gradient(135deg, #b42222, #e63946);">
+                                <i class="fas fa-external-link-alt me-2"></i> Buka di GrabFood
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Order dengan Admin -->
+                <div class="col-md-4">
+                    <div class="delivery-app-card text-center animate-fade-in" style="height: auto;">
+                        <div class="delivery-app-logo mb-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2048px-WhatsApp.svg.png" 
+                                 alt="WhatsApp" 
+                                 class="img-fluid" 
+                                 style="max-height: 50px;">
+                        </div>
+                        <div class="delivery-app-content">
+                            <h4 class="fw-bold mb-3" style="color: #333;">WhatsApp Order</h4>
+                            <p class="text-muted mb-4">
+                                Pesan langsung via WhatsApp untuk konsultasi menu khusus
+                            </p>
+                            
+                            <!-- WhatsApp Admin Contacts -->
+                            <div class="whatsapp-admin-list mb-4">
+                                <div class="whatsapp-admin-item d-flex align-items-center mb-3 p-3" style="background: #f8f9fa; border-radius: 10px;">
+                                    <div class="admin-avatar me-3">
+                                        <div class="avatar-circle" style="width: 40px; height: 40px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                            <i class="fas fa-user"></i>
                                         </div>
                                     </div>
+                                    <div class="admin-info flex-grow-1">
+                                        <h6 class="fw-bold mb-1" style="color: #333;">Admin 1</h6>
+                                        <p class="mb-0 text-muted" style="font-size: 0.9rem;">0896-9907-1599</p>
+                                    </div>
+                                    <div class="admin-action">
+                                        <a href="https://wa.me/6289699071599?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                                           target="_blank"
+                                           class="btn btn-sm whatsapp-btn"
+                                           style="background: #25D366; color: white; border-radius: 8px; padding: 5px 12px;">
+                                            <i class="fab fa-whatsapp me-1"></i> Chat
+                                        </a>
+                                    </div>
                                 </div>
-                            @endforeach
+                                
+                                <div class="whatsapp-admin-item d-flex align-items-center p-3" style="background: #f8f9fa; border-radius: 10px;">
+                                    <div class="admin-avatar me-3">
+                                        <div class="avatar-circle" style="width: 40px; height: 40px; background: #128C7E; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="admin-info flex-grow-1">
+                                        <h6 class="fw-bold mb-1" style="color: #333;">Admin 2</h6>
+                                        <p class="mb-0 text-muted" style="font-size: 0.9rem;">0895-3268-2495</p>
+                                    </div>
+                                    <div class="admin-action">
+                                        <a href="https://wa.me/6289532682495?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                                           target="_blank"
+                                           class="btn btn-sm whatsapp-btn"
+                                           style="background: #25D366; color: white; border-radius: 8px; padding: 5px 12px;">
+                                            <i class="fab fa-whatsapp me-1"></i> Chat
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="whatsapp-tips mb-4 p-3" style="background: #f0fff4; border-radius: 10px; border-left: 4px solid #25D366;">
+                                <p class="mb-0 text-muted" style="font-size: 0.85rem;">
+                                    <i class="fas fa-lightbulb me-1" style="color: #25D366;"></i>
+                                    <strong>Tips:</strong> Sertakan alamat lengkap dan nomor telepon saat pesan
+                                </p>
+                            </div>
+                            
+                            <a href="https://wa.me/6289699071599?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                               target="_blank"
+                               class="btn w-100 py-3 fw-bold delivery-btn"
+                               style="background: linear-gradient(135deg, #b42222, #e63946);">
+                                <i class="fab fa-whatsapp me-2"></i> Pesan via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="delivery-info-grid animate-fade-in">
+                        <div class="row g-4">
+                            <div class="col-md-3 col-6">
+                                <div class="delivery-info-item text-center p-3">
+                                    <div class="info-icon mb-3">
+                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                    </div>
+                                    <h6 class="fw-bold mb-2">Waktu Pengiriman</h6>
+                                    <p class="mb-0 text-muted">45-60 menit</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="delivery-info-item text-center p-3">
+                                    <div class="info-icon mb-3">
+                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                    </div>
+                                    <h6 class="fw-bold mb-2">Area Pengiriman</h6>
+                                    <p class="mb-0 text-muted">Seluruh Surabaya</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="delivery-info-item text-center p-3">
+                                    <div class="info-icon mb-3">
+                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </div>
+                                    </div>
+                                    <h6 class="fw-bold mb-2">Min. Pembelian</h6>
+                                    <p class="mb-0 text-muted">Rp 25.000</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="delivery-info-item text-center p-3">
+                                    <div class="info-icon mb-3">
+                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
+                                            <i class="fas fa-truck"></i>
+                                        </div>
+                                    </div>
+                                    <h6 class="fw-bold mb-2">Ongkir</h6>
+                                    <p class="mb-0 text-muted">Mulai Rp 10.000</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -497,15 +605,23 @@
     }
     
     .contact-icon {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         background: rgba(180, 34, 34, 0.1);
-        border-radius: 12px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--primary-red);
-        font-size: 20px;
+        font-size: 18px;
+    }
+    
+    .quick-contact-item {
+        transition: all 0.3s ease;
+    }
+    
+    .quick-contact-item:hover {
+        transform: translateX(5px);
     }
     
     .contact-link {
@@ -544,50 +660,6 @@
         transform: translateY(-3px);
     }
     
-    /* Department Card */
-    .department-card {
-        background: white;
-        border-radius: 20px;
-        border: 1px solid rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .department-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    
-    .dept-icon {
-        width: 80px;
-        height: 80px;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        transition: transform 0.3s ease;
-    }
-    
-    .department-card:hover .dept-icon {
-        transform: scale(1.1);
-    }
-    
-    .dept-contact-btn {
-        display: inline-block;
-        padding: 10px 25px;
-        color: white;
-        text-decoration: none;
-        border-radius: 25px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-    
-    .dept-contact-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        color: white;
-    }
-    
     /* Map Card */
     .map-card {
         background: white;
@@ -615,20 +687,6 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
-    /* FAQ Accordion */
-    .faq-accordion .accordion-button:not(.collapsed) {
-        background: rgba(180, 34, 34, 0.1) !important;
-        color: var(--primary-red) !important;
-        box-shadow: none;
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
-    }
-    
-    .faq-accordion .accordion-button:focus {
-        box-shadow: none;
-        border-color: var(--primary-red);
-    }
-    
     /* Form Styles */
     .input-group-text {
         border-color: #dee2e6;
@@ -647,6 +705,92 @@
         background: var(--primary-red);
         margin: 20px auto;
         border-radius: 2px;
+    }
+    
+    /* Delivery App Cards */
+    .delivery-app-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .delivery-app-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(180, 34, 34, 0.1);
+        border-color: var(--primary-red);
+    }
+    
+    .delivery-app-logo img {
+        transition: transform 0.3s ease;
+        max-height: 50px;
+        object-fit: contain;
+    }
+    
+    .delivery-app-card:hover .delivery-app-logo img {
+        transform: scale(1.1);
+    }
+    
+    .delivery-btn {
+        color: white;
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        margin-top: auto;
+    }
+    
+    .delivery-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(180, 34, 34, 0.3);
+        color: white;
+    }
+    
+    /* WhatsApp Admin Styles dalam Kartu */
+    .whatsapp-admin-item {
+        transition: all 0.3s ease;
+    }
+    
+    .whatsapp-admin-item:hover {
+        transform: translateX(5px);
+        background: #e9ecef !important;
+    }
+    
+    .whatsapp-btn {
+        transition: all 0.3s ease;
+        font-size: 0.85rem;
+    }
+    
+    .whatsapp-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        color: white;
+    }
+    
+    /* Delivery Info Items */
+    .delivery-info-item {
+        background: white;
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .delivery-info-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-color: var(--primary-red);
+    }
+    
+    .delivery-info-item .info-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .delivery-info-item:hover .info-icon div {
+        background: linear-gradient(135deg, #b42222, #e63946);
     }
     
     /* Animation */
@@ -688,6 +832,74 @@
         .map-header .btn {
             width: 100%;
             margin-top: 10px;
+        }
+        
+        .delivery-app-card {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .delivery-info-item {
+            margin-bottom: 15px;
+            padding: 20px 15px;
+        }
+        
+        .delivery-info-item .info-icon div {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+        
+        .whatsapp-admin-item {
+            padding: 15px !important;
+        }
+        
+        .admin-avatar .avatar-circle {
+            width: 35px !important;
+            height: 35px !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .delivery-app-card {
+            padding: 15px;
+        }
+        
+        .delivery-app-logo img {
+            max-height: 40px !important;
+        }
+        
+        .delivery-app-content h4 {
+            font-size: 1.1rem;
+        }
+        
+        .delivery-app-content p {
+            font-size: 0.9rem;
+        }
+        
+        .whatsapp-admin-item {
+            padding: 12px !important;
+        }
+        
+        .admin-info h6 {
+            font-size: 0.9rem;
+        }
+        
+        .admin-info p {
+            font-size: 0.8rem;
+        }
+        
+        .whatsapp-btn {
+            padding: 4px 10px !important;
+            font-size: 0.8rem;
+        }
+        
+        .delivery-info-item h6 {
+            font-size: 0.9rem;
+        }
+        
+        .delivery-info-item p {
+            font-size: 0.8rem;
         }
     }
 </style>
@@ -809,18 +1021,6 @@
             });
         });
         
-        // Accordion icons
-        document.querySelectorAll('.accordion-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const icon = this.querySelector('i.fa-question-circle');
-                if (this.classList.contains('collapsed')) {
-                    icon.className = 'fas fa-chevron-down me-3';
-                } else {
-                    icon.className = 'fas fa-chevron-up me-3';
-                }
-            });
-        });
-        
         // Smooth scroll to map
         document.querySelectorAll('a[href="#map"]').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -856,6 +1056,31 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             observer.observe(el);
+        });
+        
+        // WhatsApp click tracking
+        document.querySelectorAll('a[href*="whatsapp"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // You can add analytics tracking here
+                console.log('WhatsApp link clicked:', this.href);
+            });
+        });
+
+        // Delivery app cards hover effect
+        document.querySelectorAll('.delivery-app-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const logo = this.querySelector('.delivery-app-logo img');
+                if (logo) {
+                    logo.style.transform = 'scale(1.1)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const logo = this.querySelector('.delivery-app-logo img');
+                if (logo) {
+                    logo.style.transform = 'scale(1)';
+                }
+            });
         });
     });
     
