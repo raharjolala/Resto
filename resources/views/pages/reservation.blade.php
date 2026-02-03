@@ -162,9 +162,8 @@
                                                 Nama Lengkap *
                                             </label>
                                             <div class="input-with-icon">
-                                                <i class="fas fa-user input-icon"></i>
                                                 <input type="text" class="form-control" id="name" 
-                                                       placeholder="Masukkan nama lengkap Anda" required>
+                                                        required>
                                             </div>
                                         </div>
                                     </div>
@@ -178,9 +177,8 @@
                                                 Email *
                                             </label>
                                             <div class="input-with-icon">
-                                                <i class="fas fa-envelope input-icon"></i>
                                                 <input type="email" class="form-control" id="email" 
-                                                       placeholder="contoh@email.com" required>
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
@@ -194,9 +192,8 @@
                                                 Nomor WhatsApp *
                                             </label>
                                             <div class="input-with-icon">
-                                                <i class="fas fa-phone input-icon"></i>
                                                 <input type="tel" class="form-control" id="phone" 
-                                                       placeholder="0812 3456 7890" required>
+                                                     required>
                                             </div>
                                         </div>
                                     </div>
@@ -211,7 +208,6 @@
                                             </label>
                                             <div class="guest-selector">
                                                 <div class="input-with-icon">
-                                                    <i class="fas fa-users input-icon"></i>
                                                     <select class="form-select" id="guests" required>
                                                         <option value="" disabled selected>Pilih jumlah tamu</option>
                                                         @for($i = 1; $i <= 8; $i++)
@@ -246,21 +242,12 @@
                                             </label>
                                             <div class="date-picker-container">
                                                 <div class="input-with-icon">
-                                                    <i class="fas fa-calendar-day input-icon"></i>
                                                     <input type="date" class="form-control date-picker" id="date" required 
                                                            min="{{ date('Y-m-d') }}">
                                                 </div>
                                                 <div class="date-info mt-2">
                                                     <small class="text-muted">
-                                                        <i class="fas fa-info-circle me-1"></i>
-                                                        Pilih tanggal yang diinginkan
                                                     </small>
-                                                    <div class="selected-date mt-1 d-none">
-                                                        <span class="badge bg-primary-red">
-                                                            <i class="fas fa-calendar me-1"></i>
-                                                            <span id="selectedDateText"></span>
-                                                        </span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,7 +263,7 @@
                                             </label>
                                             <div class="time-select-container">
                                                 <div class="input-with-icon">
-                                                    <i class="fas fa-clock input-icon"></i>
+                                                    <i class="input-icon"></i>
                                                     <select class="form-select time-select" id="time" required>
                                                         <option value="" disabled selected>Pilih waktu reservasi</option>
                                                         <option value="10:00">10:00 Pagi</option>
@@ -294,8 +281,6 @@
                                                 </div>
                                                 <div class="time-info mt-2">
                                                     <small class="text-muted">
-                                                        <i class="fas fa-info-circle me-1"></i>
-                                                        Waktu operasional: 10:00 - 22:00
                                                     </small>
                                                 </div>
                                             </div>
@@ -321,9 +306,7 @@
                                             Tulis Permintaan Khusus Anda
                                         </label>
                                         <div class="request-textarea">
-                                            <i class="fas fa-comment-alt textarea-icon"></i>
-                                            <textarea class="form-control" id="specialRequests" rows="4" 
-                                                      placeholder="Contoh: Meja dekat jendela, perayaan ulang tahun, aksesibilitas kursi roda, atau permintaan khusus lainnya..."></textarea>
+                                            <textarea class="form-control" id="specialRequests" rows="4"></textarea> </textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -97,87 +97,248 @@
         </div>
     </section>
 
-    <!-- Testimonials Section - Matches Screenshot 3 -->
-    <section class="testimonials-section-main">
-        <div class="testimonials-pattern-bg"></div>
+    <!-- Testimonials Section - PERBAIKAN: 3 testimonial berdampingan -->
+    <section class="testimonials-fixed-section" id="testimonials">
+        <div class="testimonials-fixed-bg"></div>
         
-        <div class="container position-relative">
-            <div class="row">
-                <div class="col-12 text-center mb-5">
-                    <h2 class="testimonials-main-title animate-fade-in">
-                        Ulasan <span class="pelanggan-text">Pelanggan</span>
-                    </h2>
-                    <p class="testimonials-subtitle animate-fade-in" style="animation-delay: 0.1s;">
-                        Apa kata mereka yang telah merasakan kehangatan dan cita rasa Joss Gandos?
-                    </p>
+        <div class="container">
+            <!-- Section Header -->
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <div class="section-header-fixed">
+                        <h2 class="testimonials-fixed-title">
+                            Ulasan Pelanggan
+                        </h2>
+                        <div class="title-divider-fixed">
+                            <span class="divider-line-fixed"></span>
+                            <i class="fas fa-star divider-icon-fixed"></i>
+                            <span class="divider-line-fixed"></span>
+                        </div>
+                        <p class="testimonials-fixed-subtitle">
+                            Apa kata mereka yang telah merasakan kehangatan dan cita rasa Joss Gandos?
+                        </p>
+                    </div>
                 </div>
             </div>
             
-            <div class="testimonials-slider-wrapper">
-                <div class="row g-4">
-                    @php
-                        $testimonials = [
-                            [
-                                'text' => 'Layanan satset dan super ramah. Mushola luass, bisa shalat jamaah. Ruangan vip tersedia karaoke, mantab buat seru-seruan.',
-                                'name' => 'M. Junianto Tri',
-                                'location' => 'RESTO JOSS GANDOS - JEMURSARI',
-                                'avatar' => 'https://ui-avatars.com/api/?name=M+Junianto+Tri&background=dc2626&color=fff&size=200',
-                                'rating' => 5
-                            ],
-                            [
-                                'text' => 'Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul',
-                                'name' => 'Metha Prosper',
-                                'location' => 'RESTO JOSS GANDOS - JEMURSARI',
-                                'avatar' => 'https://ui-avatars.com/api/?name=Metha+Prosper&background=b45309&color=fff&size=200',
-                                'rating' => 5
-                            ],
-                            [
-                                'text' => 'Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerdyain ulang tahun disini seru banget!',
-                                'name' => 'Achmad Thoriq',
-                                'location' => 'RESTO JOSS GANDOS - JEMURSARI',
-                                'avatar' => 'https://ui-avatars.com/api/?name=Achmad+Thoriq&background=b42222&color=fff&size=200',
-                                'rating' => 5
-                            ],
-                        ];
-                    @endphp
-                    
-                    @foreach($testimonials as $index => $testimonial)
-                        <div class="col-lg-4 col-md-6">
-                            <div class="testimonial-card-main animate-fade-in" style="animation-delay: {{ $index * 0.15 }}s;">
-                                <div class="testimonial-rating-stars">
-                                    @for($i = 1; $i <= $testimonial['rating']; $i++)
-                                        <i class="fas fa-star"></i>
-                                    @endfor
+            <!-- Testimonials Carousel - 3 TESTIMONIAL BERDAMPINGAN -->
+            <div class="testimonials-fixed-carousel-wrapper">
+                <div class="testimonials-fixed-carousel" id="testimonialsFixedCarousel">
+                    <!-- Slide 1 - 3 Testimonial Berdampingan -->
+                    <div class="testimonial-fixed-slide active">
+                        <div class="row g-4">
+                            <!-- Testimonial 1 - Achmad Thoriq -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-fixed-card">
+                                    <!-- BINTANG DI DALAM CARD -->
+                                    <div class="testimonial-rating-fixed">
+                                        <div class="stars-fixed">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-text-fixed">
+                                        <div class="quote-mark-fixed">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-content-fixed">
+                                            Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerayain ulang tahun disini seru banget!
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="testimonial-author-fixed">
+                                        <div class="author-info-fixed">
+                                            <h4 class="author-name-fixed">Achmad Thoriq</h4>
+                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <p class="testimonial-text-main">
-                                    "{{ $testimonial['text'] }}"
-                                </p>
-                                
-                                <div class="testimonial-author-main">
-                                    <img src="{{ $testimonial['avatar'] }}" 
-                                         alt="{{ $testimonial['name'] }}" 
-                                         class="testimonial-avatar-main">
-                                    <div class="testimonial-author-info">
-                                        <h6 class="testimonial-author-name">{{ $testimonial['name'] }}</h6>
-                                        <p class="testimonial-author-location">{{ $testimonial['location'] }}</p>
+                            </div>
+                            
+                            <!-- Testimonial 2 - Perpus Uinsa -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-fixed-card">
+                                    <!-- BINTANG DI DALAM CARD -->
+                                    <div class="testimonial-rating-fixed">
+                                        <div class="stars-fixed">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-text-fixed">
+                                        <div class="quote-mark-fixed">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-content-fixed">
+                                            Layanan plus plusnya emang mantab banget.. dibantu fotbar, video tiktok juga.. dilayani dengan ramah dan memperhatikan kebutuhan konsumen.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="testimonial-author-fixed">
+                                        <div class="author-info-fixed">
+                                            <h4 class="author-name-fixed">Perpus Uinsa</h4>
+                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 3 - Karenina Anisya -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-fixed-card">
+                                    <!-- BINTANG DI DALAM CARD -->
+                                    <div class="testimonial-rating-fixed">
+                                        <div class="stars-fixed">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-text-fixed">
+                                        <div class="quote-mark-fixed">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-content-fixed">
+                                            Tempat nya cocok buat bukber, servisnya oke poll staff nya ramah, makanannya enakk tempatnya bersih ada fasilitas mushollanya juga.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="testimonial-author-fixed">
+                                        <div class="author-info-fixed">
+                                            <h4 class="author-name-fixed">Karenina Anisya</h4>
+                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                    
+                    <!-- Slide 2 - 3 Testimonial Berdampingan Lainnya -->
+                    <div class="testimonial-fixed-slide">
+                        <div class="row g-4">
+                            <!-- Testimonial 4 - Filidyo Bramanta -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-fixed-card">
+                                    <div class="testimonial-rating-fixed">
+                                        <div class="stars-fixed">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-text-fixed">
+                                        <div class="quote-mark-fixed">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-content-fixed">
+                                            Pelayanan baik, responsif, dan banyak ruangan yang bisa digunakan untuk meeting dan acara private. Makanan oke dan porsinya cukup.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="testimonial-author-fixed">
+                                        <div class="author-info-fixed">
+                                            <h4 class="author-name-fixed">Filidyo Bramanta</h4>
+                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 5 - M. Junianto Tri -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-fixed-card">
+                                    <div class="testimonial-rating-fixed">
+                                        <div class="stars-fixed">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-text-fixed">
+                                        <div class="quote-mark-fixed">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-content-fixed">
+                                            Layanan sat set dan super ramah. Mushola luas, bisa shalat jamaah. Ruangan VIP tersedia karaoke, mantab buat seru-seruan.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="testimonial-author-fixed">
+                                        <div class="author-info-fixed">
+                                            <h4 class="author-name-fixed">M. Junianto Tri</h4>
+                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Testimonial 6 - Metha Prosper -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-fixed-card">
+                                    <div class="testimonial-rating-fixed">
+                                        <div class="stars-fixed">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="testimonial-text-fixed">
+                                        <div class="quote-mark-fixed">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-content-fixed">
+                                            Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="testimonial-author-fixed">
+                                        <div class="author-info-fixed">
+                                            <h4 class="author-name-fixed">Metha Prosper</h4>
+                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Pagination Dots -->
-                <div class="testimonial-pagination">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot active"></span>
+                <!-- Carousel Dots ONLY (NO ARROWS) -->
+                <div class="carousel-dots-fixed">
+                    <span class="dot-fixed active" data-index="0"></span>
+                    <span class="dot-fixed" data-index="1"></span>
                 </div>
-                
-                <!-- View More Button -->
-                <div class="text-center mt-5 animate-fade-in" style="animation-delay: 0.5s;">
-                    <a href="#" class="view-more-testimonials-btn">
+            </div>
+            
+            <!-- View More Button - PERBAIKAN: Menggunakan URL langsung -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="https://www.google.com/search?q=Resto+Joss+Gandos+Ulasan&rlz=1C1VDKB_enID1074ID1074&oq=Resto+Joss+Gandos+Ulasan&gs_lcrp=EgZjaHJvbWUqBwgAEAAYgAQyBwgAEAAYgAQyBggBEEUYOTIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDYxNjZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x2dd7f7e3d1d54b1b:0x6925233761792d0b,1,,,,"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn-view-more-fixed"
+                       id="googleReviewsBtn">
                         <i class="fab fa-google me-2"></i>
                         Lihat Ulasan Selengkapnya
                     </a>
@@ -186,7 +347,7 @@
         </div>
     </section>
 
-    <!-- CTA Section - Matches Screenshot 4 -->
+    <!-- CTA Section -->
     <section class="cta-section-main">
         <div class="cta-pattern-overlay"></div>
         
@@ -216,7 +377,7 @@
         </div>
     </section>
 
-    <!-- Additional Features Section (Optional Enhancement) -->
+    <!-- Features Section -->
     <section class="features-section">
         <div class="container">
             <div class="row g-4">
@@ -358,7 +519,6 @@
         letter-spacing: 1px;
     }
     
-    /* Navigation Buttons */
     .hero-nav-buttons {
         display: flex;
         justify-content: center;
@@ -410,17 +570,6 @@
     
     .hero-nav-btn i {
         font-size: 1.2rem;
-    }
-    
-    .hero-bottom-text {
-        margin-top: 40px;
-    }
-    
-    .hero-bottom-text p {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 1.1rem;
-        font-style: italic;
-        margin: 0;
     }
     
     /* ============================================
@@ -514,7 +663,6 @@
         color: white;
     }
     
-    /* About Image */
     .about-image-wrapper {
         position: relative;
         padding: 30px;
@@ -560,174 +708,297 @@
     }
     
     /* ============================================
-       TESTIMONIALS SECTION - SCREENSHOT 3 STYLE
+       TESTIMONIALS FIXED SECTION - PERBAIKAN
+       FIXED GLITCH ISSUE AND IMPROVED ANIMATIONS
     ============================================ */
-    .testimonials-section-main {
+    .testimonials-fixed-section {
         position: relative;
         padding: 100px 0;
-        background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 50%, #fef3c7 100%);
+        background: linear-gradient(135deg, #fffaf0 0%, #fff8e7 100%);
         overflow: hidden;
     }
     
-    .testimonials-pattern-bg {
+    .testimonials-fixed-bg {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         background: 
-            repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(220, 38, 38, 0.02) 35px, rgba(220, 38, 38, 0.02) 70px),
-            repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(251, 191, 36, 0.02) 35px, rgba(251, 191, 36, 0.02) 70px);
-        opacity: 0.5;
+            radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 30%),
+            radial-gradient(circle at 90% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 30%);
+        z-index: 1;
     }
     
-    .testimonials-main-title {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        font-weight: 900;
-        color: #1a1a1a;
-        margin-bottom: 15px;
-    }
-    
-    .pelanggan-text {
-        color: #dc2626;
-    }
-    
-    .testimonials-subtitle {
-        font-size: 1.15rem;
-        color: #6b7280;
+    /* Section Header */
+    .section-header-fixed {
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
         margin-bottom: 50px;
     }
     
-    .testimonials-slider-wrapper {
-        position: relative;
+    .testimonials-fixed-title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 900;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        line-height: 1.2;
+        text-align: center;
     }
     
-    .testimonial-card-main {
-        background: white;
-        border-radius: 25px;
-        padding: 35px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-        transition: all 0.4s ease;
-        height: 100%;
+    .title-divider-fixed {
         display: flex;
-        flex-direction: column;
-        border: 2px solid transparent;
-    }
-    
-    .testimonial-card-main:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(220, 38, 38, 0.15);
-        border-color: rgba(220, 38, 38, 0.2);
-    }
-    
-    .testimonial-rating-stars {
-        color: #fbbf24;
-        font-size: 1.2rem;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
         margin-bottom: 20px;
     }
     
-    .testimonial-rating-stars i {
-        margin-right: 3px;
-    }
-    
-    .testimonial-text-main {
-        font-size: 1.05rem;
-        line-height: 1.8;
-        color: #374151;
-        font-style: italic;
-        margin-bottom: 25px;
-        flex: 1;
-    }
-    
-    .testimonial-author-main {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding-top: 25px;
-        border-top: 2px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .testimonial-avatar-main {
+    .divider-line-fixed {
         width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #dc2626;
-        box-shadow: 0 5px 20px rgba(220, 38, 38, 0.3);
+        height: 3px;
+        background: linear-gradient(90deg, #dc2626, #f97316);
+        border-radius: 2px;
     }
     
-    .testimonial-author-info {
+    .divider-icon-fixed {
+        color: #ffd700;
+        font-size: 1.2rem;
+    }
+    
+    .testimonials-fixed-subtitle {
+        font-size: 1.1rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    /* Testimonial Cards - 3 BERDAMPINGAN - FIXED */
+    .testimonials-fixed-carousel-wrapper {
+        position: relative;
+        z-index: 2;
+        margin-top: 30px;
+    }
+    
+    .testimonials-fixed-carousel {
+        overflow: hidden;
+        position: relative;
+        min-height: 350px; /* Fixed height to prevent glitch */
+    }
+    
+    .testimonial-fixed-slide {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translateX(20px);
+    }
+    
+    .testimonial-fixed-slide.active {
+        display: block;
+        position: relative;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .testimonial-fixed-slide.next {
+        transform: translateX(20px);
+    }
+    
+    .testimonial-fixed-slide.prev {
+        transform: translateX(-20px);
+    }
+    
+    .testimonial-fixed-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        height: 100%;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .testimonial-fixed-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Bintang Rating DI DALAM CARD - DI ATAS */
+    .testimonial-rating-fixed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .stars-fixed {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .stars-fixed i {
+        color: #ffd700;
+        font-size: 1.3rem;
+    }
+    
+    /* Testimonial Text */
+    .testimonial-text-fixed {
         flex: 1;
+        margin-bottom: 25px;
+        position: relative;
     }
     
-    .testimonial-author-name {
+    .quote-mark-fixed {
+        color: rgba(220, 38, 38, 0.2);
+        font-size: 2rem;
+        margin-bottom: 15px;
+        line-height: 1;
+    }
+    
+    .testimonial-content-fixed {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #444;
+        margin-bottom: 0;
+        font-style: italic;
+    }
+    
+    /* Testimonial Author */
+    .testimonial-author-fixed {
+        padding-top: 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .author-info-fixed {
+        text-align: center;
+    }
+    
+    .author-name-fixed {
+        font-size: 1.1rem;
         font-weight: 700;
         color: #1a1a1a;
         margin-bottom: 5px;
-        font-size: 1.05rem;
-    }
-    
-    .testimonial-author-location {
-        color: #dc2626;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin: 0;
-        text-transform: uppercase;
         letter-spacing: 0.5px;
     }
     
-    /* Pagination Dots */
-    .testimonial-pagination {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 50px;
+    .author-location-fixed {
+        font-size: 0.85rem;
+        color: #dc2626;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0;
     }
     
-    .dot {
+    /* Carousel Dots ONLY - NO ARROWS - FIXED */
+    .carousel-dots-fixed {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 40px;
+        position: relative;
+        z-index: 3;
+    }
+    
+    .dot-fixed {
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: rgba(220, 38, 38, 0.2);
+        background: rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: all 0.3s ease;
+        position: relative;
+        border: none;
+        padding: 0;
+        margin: 0;
     }
     
-    .dot.active {
+    .dot-fixed.active {
         background: #dc2626;
-        width: 35px;
-        border-radius: 6px;
+        transform: scale(1.3);
     }
     
-    .dot:hover {
-        background: #dc2626;
+    .dot-fixed.active::after {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border: 2px solid #dc2626;
+        border-radius: 50%;
+        animation: pulse-dot-fixed 3s ease-in-out infinite;
     }
     
-    /* View More Button */
-    .view-more-testimonials-btn {
+    @keyframes pulse-dot-fixed {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0.3;
+        }
+    }
+    
+    /* View More Button - PERBAIKAN: Hanya menggunakan href normal */
+    .btn-view-more-fixed {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
         background: linear-gradient(135deg, #dc2626, #b91c1c);
         color: white;
-        padding: 18px 40px;
+        padding: 16px 40px;
         border-radius: 50px;
         text-decoration: none;
         font-weight: 700;
         font-size: 1.05rem;
         transition: all 0.4s ease;
         box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        pointer-events: auto;
+        z-index: 10;
     }
     
-    .view-more-testimonials-btn:hover {
-        transform: translateY(-3px) scale(1.05);
+    .btn-view-more-fixed::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .btn-view-more-fixed:hover::before {
+        left: 100%;
+    }
+    
+    .btn-view-more-fixed:hover {
+        transform: translateY(-3px);
         box-shadow: 0 15px 50px rgba(220, 38, 38, 0.5);
-        color: white;
+        border-color: white;
     }
     
     /* ============================================
-       CTA SECTION - SCREENSHOT 4 STYLE
+       CTA SECTION
     ============================================ */
     .cta-section-main {
         position: relative;
@@ -811,7 +1082,7 @@
     }
     
     /* ============================================
-       FEATURES SECTION (BONUS)
+       FEATURES SECTION
     ============================================ */
     .features-section {
         padding: 80px 0;
@@ -980,6 +1251,15 @@
             width: 100%;
             max-width: 400px;
         }
+        
+        .testimonial-fixed-card {
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .testimonials-fixed-carousel {
+            min-height: 400px;
+        }
     }
     
     @media (max-width: 768px) {
@@ -1001,16 +1281,92 @@
             font-size: clamp(2rem, 5vw, 3rem);
         }
         
-        .testimonials-main-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-        }
-        
         .cta-main-title {
             font-size: clamp(2rem, 5vw, 3rem);
         }
         
-        .testimonial-card-main {
-            padding: 25px;
+        .testimonials-fixed-title {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+        }
+        
+        .testimonial-fixed-card {
+            padding: 20px;
+        }
+        
+        .testimonial-content-fixed {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .btn-view-more-fixed {
+            padding: 14px 30px;
+            font-size: 1rem;
+        }
+        
+        .testimonials-fixed-carousel {
+            min-height: 450px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-nav-buttons {
+            gap: 10px;
+        }
+        
+        .hero-nav-btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .hero-nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .testimonials-fixed-title {
+            font-size: 1.8rem;
+        }
+        
+        .testimonials-fixed-subtitle {
+            font-size: 1rem;
+        }
+        
+        .testimonial-fixed-card {
+            padding: 18px;
+        }
+        
+        .testimonial-content-fixed {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .stars-fixed i {
+            font-size: 1.1rem;
+        }
+        
+        .author-name-fixed {
+            font-size: 1rem;
+        }
+        
+        .author-location-fixed {
+            font-size: 0.8rem;
+        }
+        
+        .btn-view-more-fixed {
+            padding: 12px 25px;
+            font-size: 0.95rem;
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+        }
+        
+        .cta-btn-main {
+            min-width: auto;
+            width: 100%;
+            padding: 18px 25px;
+        }
+        
+        .testimonials-fixed-carousel {
+            min-height: 500px;
         }
     }
 </style>
@@ -1019,51 +1375,183 @@
 @section('scripts')
 <script>
     // ============================================
-    // SMOOTH SCROLL
+    // FIXED TESTIMONIAL CAROUSEL - NO GLITCH
     // ============================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.getElementById('testimonialsFixedCarousel');
+        const slides = document.querySelectorAll('.testimonial-fixed-slide');
+        const dots = document.querySelectorAll('.dot-fixed');
+        
+        let currentSlide = 0;
+        let autoScrollInterval;
+        const slideInterval = 6000; // 6 seconds
+        
+        // Initialize carousel
+        function initCarousel() {
+            if (!carousel || slides.length === 0) return;
+            
+            updateCarousel();
+            startAutoScroll();
+            
+            // Add click event to dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
                 });
+            });
+            
+            // Pause auto-scroll on hover
+            carousel.addEventListener('mouseenter', pauseAutoScroll);
+            carousel.addEventListener('mouseleave', startAutoScroll);
+            
+            // Touch/swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                pauseAutoScroll();
+            });
+            
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoScroll();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                
+                if (touchStartX - touchEndX > swipeThreshold) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else if (touchEndX - touchStartX > swipeThreshold) {
+                    // Swipe right - previous slide
+                    prevSlide();
+                }
             }
-        });
+        }
+        
+        function goToSlide(index) {
+            // Remove active class from all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'next', 'prev');
+            });
+            
+            // Update current slide
+            currentSlide = index;
+            
+            // Update active slide with smooth transition
+            setTimeout(() => {
+                slides[currentSlide].classList.add('active');
+            }, 10);
+            
+            updateDots();
+        }
+        
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            
+            // Add transition classes
+            slides[currentSlide].classList.add('prev');
+            slides[nextIndex].classList.add('next');
+            
+            setTimeout(() => {
+                goToSlide(nextIndex);
+            }, 300);
+        }
+        
+        function prevSlide() {
+            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            
+            // Add transition classes
+            slides[currentSlide].classList.add('next');
+            slides[prevIndex].classList.add('prev');
+            
+            setTimeout(() => {
+                goToSlide(prevIndex);
+            }, 300);
+        }
+        
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function startAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+            
+            autoScrollInterval = setInterval(() => {
+                nextSlide();
+            }, slideInterval);
+        }
+        
+        function pauseAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+        }
+        
+        // Initialize the carousel
+        initCarousel();
+        
+        // ============================================
+        // GOOGLE REVIEWS BUTTON - SIMPLE FIX
+        // Hapus semua event listener yang mungkin konflik
+        // ============================================
+        const googleReviewBtn = document.getElementById('googleReviewsBtn');
+        
+        if (googleReviewBtn) {
+            // Remove any existing event listeners by replacing the element
+            const newBtn = googleReviewBtn.cloneNode(true);
+            googleReviewBtn.parentNode.replaceChild(newBtn, googleReviewBtn);
+            
+            // Tambahkan event listener sederhana untuk fallback
+            const currentBtn = document.getElementById('googleReviewsBtn');
+            
+            // Cegah default behavior ganda
+            currentBtn.addEventListener('click', function(e) {
+                // Cegah double execution
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Biarkan href normal bekerja, sudah ada target="_blank"
+                console.log('Opening Google Reviews in new tab');
+            }, { once: true }); // Hanya sekali untuk mencegah multiple execution
+        }
     });
+    
+    // ============================================
+    // SMOOTH SCROLL - DIHAPUS UNTUK MENCEGAH KONFLIK
+    // ============================================
     
     // ============================================
     // SCROLL ANIMATIONS OBSERVER
     // ============================================
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        rootMargin: '0px 0px -50px 0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.animationPlayState = 'running';
+                const element = entry.target;
+                const animationName = Array.from(element.classList)
+                    .find(className => className.startsWith('animate-'));
+                
+                if (animationName) {
+                    element.style.animationPlayState = 'running';
+                    element.style.opacity = '1';
+                }
             }
         });
     }, observerOptions);
     
+    // Observe all animate elements
     document.querySelectorAll('[class*="animate-"]').forEach(el => {
         el.style.animationPlayState = 'paused';
+        el.style.opacity = '0';
         observer.observe(el);
-    });
-    
-    // ============================================
-    // TESTIMONIAL PAGINATION (Optional)
-    // ============================================
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.addEventListener('click', function() {
-            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-            this.classList.add('active');
-            // Add carousel logic here if needed
-        });
     });
     
     // ============================================
@@ -1076,19 +1564,6 @@
         if (heroImage) {
             heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
         }
-    });
-    
-    // ============================================
-    // HOVER EFFECTS ENHANCEMENT
-    // ============================================
-    document.querySelectorAll('.testimonial-card-main').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
     });
 </script>
 @endsection

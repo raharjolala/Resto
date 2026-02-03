@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Menu Buku Digital - JOSS GANDOS')
+@section('title', 'Menu Digital - JOSS GANDOS')
 
 @section('content')
     <!-- Hero Section -->
@@ -11,7 +11,7 @@
                     <div class="hero-content animate-fade-in">
                         <h1 class="hero-title">
                             Jelajahi Kelezatan<br>
-                            <span>Nusantara</span>
+                            <span class="highlight">Nusantara</span>
                         </h1>
                         <p class="hero-subtitle">
                             Dari Sabang sampai Merauke, setiap sajian adalah perjalanan rasa yang tak terlupakan. 
@@ -19,11 +19,22 @@
                         </p>
                         <div class="d-flex align-items-center gap-3 mt-4">
                             <span class="badge px-3 py-2" style="background: rgba(180, 34, 34, 0.2); color: var(--accent-gold); border-radius: 20px;">
-                                <i class="fas fa-book-open me-1"></i> Menu Buku Digital
+                                <i class="fas fa-utensils me-1"></i> Menu Digital Interaktif
                             </span>
                             <span class="badge px-3 py-2" style="background: rgba(255, 255, 255, 0.2); color: white; border-radius: 20px;">
-                                <i class="fas fa-hand-point-up me-1"></i> Klik & Tarik Halaman
+                                <i class="fas fa-hand-pointer me-1"></i> Klik & Pesan
                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="hero-decoration animate-float">
+                        <div class="decoration-circle">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
+                        <div class="decoration-line"></div>
+                        <div class="decoration-circle">
+                            <i class="fas fa-leaf"></i>
                         </div>
                     </div>
                 </div>
@@ -31,1247 +42,1220 @@
         </div>
     </section>
 
-    <!-- Menu Content with Realistic Book -->
-    <section class="section-padding">
+    <!-- Menu Categories Navigation -->
+    <section class="py-5" style="background: linear-gradient(to bottom, rgba(255, 249, 240, 0.95), rgba(255, 249, 240, 0.8));">
         <div class="container">
-            <div class="menu-navigation mb-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="animate-fade-in">
-                        <h2 class="fw-bold mb-2" style="color: var(--dark-charcoal); font-size: 2.2rem;">Menu Buku Digital</h2>
-                        <p class="text-muted mb-0">Balik halaman seperti buku nyata untuk menjelajahi menu</p>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm px-3" id="prevBtn" style="background: rgba(180, 34, 34, 0.1); color: var(--primary-red);">
-                            <i class="fas fa-chevron-left me-1"></i> Halaman Sebelum
-                        </button>
-                        <span class="px-3 py-2" style="background: var(--light-gray); border-radius: 10px;">
-                            <span id="currentSpread">1-2</span>/<span id="totalSpreads">3</span>
-                        </span>
-                        <button class="btn btn-sm px-3" id="nextBtn" style="background: rgba(180, 34, 34, 0.1); color: var(--primary-red);">
-                            Halaman Berikut <i class="fas fa-chevron-right ms-1"></i>
-                        </button>
+            <div class="text-center mb-5">
+                <div class="section-title mb-4">
+                    <h2 class="mb-3" style="font-size: 2.5rem; color: var(--dark-charcoal);">
+                        Menu <span style="color: var(--primary-red);">Digital</span>
+                    </h2>
+                    <div class="title-decoration">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
+                <p class="text-muted fs-5">Pilih kategori untuk menjelajahi kelezatan Nusantara</p>
             </div>
             
-            <!-- Realistic Book Container -->
-            <div class="real-book-container">
-                <div class="book-shadow"></div>
-                <div class="book">
-                    <!-- COVER PAGE -->
-                    <div class="hardcover_front">
-                        <div class="cover-front-bg"></div>
-                        <div class="cover-content">
-                            <div class="cover-title">
-                                <h2 class="cover-main-title">JOSS</h2>
-                                <h3 class="cover-sub-title">GANDOS</h3>
-                                <div class="cover-decoration"></div>
+            <div class="row justify-content-center g-4">
+                <div class="col-lg-10">
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mb-5" id="menuCategories">
+                        <button class="category-btn active" data-category="all">
+                            <div class="category-icon">
+                                <i class="fas fa-th-large"></i>
                             </div>
-                            <div class="cover-detail">
-                                <h4 class="cover-book-title">Menu Buku Resep</h4>
-                                <p class="cover-description">Kuliner Nusantara</p>
-                            </div>
-                            <div class="cover-gold-decoration">
+                            <span>Semua</span>
+                        </button>
+                        <button class="category-btn" data-category="main">
+                            <div class="category-icon">
                                 <i class="fas fa-utensils"></i>
+                            </div>
+                            <span>Menu Utama</span>
+                        </button>
+                        <button class="category-btn" data-category="appetizer">
+                            <div class="category-icon">
                                 <i class="fas fa-leaf"></i>
-                                <i class="fas fa-pepper-hot"></i>
                             </div>
-                        </div>
-                        <div class="cover-spine">
-                            <div class="spine-text">JOSS GANDOS</div>
-                            <div class="spine-decoration"></div>
-                        </div>
-                    </div>
-                    
-                    <!-- PAGE SPREAD 1 (inside cover + page 1) -->
-                    <div class="page spread-1 active" data-spread="1">
-                        <!-- LEFT PAGE (inside cover) -->
-                        <div class="page-left">
-                            <div class="page-content">
-                                <div class="page-margin">
-                                    <div class="margin-decoration"></div>
-                                </div>
-                                <div class="page-text">
-                                    <h3 class="page-inscription">
-                                        <i class="fas fa-quote-left"></i>
-                                        Setiap Rempah Bercerita Tentang Indonesia
-                                        <i class="fas fa-quote-right"></i>
-                                    </h3>
-                                    <p class="page-author">- Chef Andi, Founder JOSS GANDOS</p>
-                                    <div class="page-logo">
-                                        <div class="logo-circle">JG</div>
-                                    </div>
-                                </div>
+                            <span>Pembuka</span>
+                        </button>
+                        <button class="category-btn" data-category="drink">
+                            <div class="category-icon">
+                                <i class="fas fa-glass-whiskey"></i>
                             </div>
-                        </div>
-                        
-                        <!-- RIGHT PAGE (page 1) -->
-                        <div class="page-right">
-                            <div class="page-content">
-                                <div class="page-header">
-                                    <div class="page-number">1</div>
-                                    <h3 class="page-title">
-                                        <i class="fas fa-utensils me-2" style="color: var(--primary-red);"></i>
-                                        Menu Utama
-                                    </h3>
-                                </div>
-                                
-                                <div class="page-body">
-                                    @php
-                                        $mainDishes = [
-                                            ['name' => 'Nasi Goreng Spesial JOSS', 'price' => 45000, 'desc' => 'Dengan ayam suwir, udang, telur, dan sayuran segar', 'spicy' => 2, 'veg' => false, 'best' => true],
-                                            ['name' => 'Rendang Sapi Padang', 'price' => 55000, 'desc' => 'Dimasak 8 jam dengan rempah pilihan', 'spicy' => 3, 'veg' => false, 'best' => true],
-                                            ['name' => 'Ayam Penyet Sambal Terasi', 'price' => 42000, 'desc' => 'Ayam krispi dengan sambal khas', 'spicy' => 4, 'veg' => false, 'best' => false],
-                                            ['name' => 'Soto Betawi', 'price' => 38000, 'desc' => 'Soto khas Jakarta dengan santan', 'spicy' => 1, 'veg' => false, 'best' => false],
-                                            ['name' => 'Gado-Gado Jakarta', 'price' => 35000, 'desc' => 'Salad khas dengan bumbu kacang', 'spicy' => 1, 'veg' => true, 'best' => false],
-                                            ['name' => 'Nasi Liwet Sunda', 'price' => 40000, 'desc' => 'Nasi liwet dengan ikan asin dan sayuran', 'spicy' => 2, 'veg' => false, 'best' => false],
-                                        ];
-                                    @endphp
-                                    
-                                    @foreach($mainDishes as $item)
-                                        <div class="menu-item">
-                                            <div class="menu-item-content">
-                                                <div class="menu-item-front">
-                                                    <div class="item-header">
-                                                        <h4 class="item-name">{{ $item['name'] }}</h4>
-                                                        @if($item['best'])
-                                                            <span class="item-badge">
-                                                                <i class="fas fa-crown"></i> Terbaik
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                    <p class="item-desc">{{ $item['desc'] }}</p>
-                                                    <div class="item-footer">
-                                                        <div class="item-tags">
-                                                            @if($item['spicy'] > 0)
-                                                                <span class="item-tag spicy">
-                                                                    <i class="fas fa-pepper-hot"></i> Level {{ $item['spicy'] }}
-                                                                </span>
-                                                            @endif
-                                                            @if($item['veg'])
-                                                                <span class="item-tag veg">
-                                                                    <i class="fas fa-leaf"></i> Vegetarian
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                        <div class="item-price">
-                                                            Rp {{ number_format($item['price'], 0, ',', '.') }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="menu-item-back">
-                                                    <div class="back-content">
-                                                        <h5>{{ $item['name'] }}</h5>
-                                                        <p>{{ $item['desc'] }}</p>
-                                                        <button class="btn-order" data-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
-                                                            <i class="fas fa-plus"></i> Pesan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                
-                                <div class="page-footer">
-                                    <div class="page-corner"></div>
-                                </div>
+                            <span>Minuman</span>
+                        </button>
+                        <button class="category-btn" data-category="dessert">
+                            <div class="category-icon">
+                                <i class="fas fa-ice-cream"></i>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <!-- PAGE SPREAD 2 (pages 2-3) -->
-                    <div class="page spread-2" data-spread="2">
-                        <!-- LEFT PAGE (page 2) -->
-                        <div class="page-left">
-                            <div class="page-content">
-                                <div class="page-header">
-                                    <div class="page-number">2</div>
-                                    <h3 class="page-title">
-                                        <i class="fas fa-leaf me-2" style="color: var(--primary-red);"></i>
-                                        Pembuka & Sup
-                                    </h3>
-                                </div>
-                                
-                                <div class="page-body">
-                                    @php
-                                        $appetizers = [
-                                            ['name' => 'Lumpia Sayur', 'price' => 28000, 'desc' => 'Lumpia dengan isian sayuran segar', 'spicy' => 0, 'veg' => true],
-                                            ['name' => 'Sate Ayam', 'price' => 35000, 'desc' => '10 tusuk sate dengan bumbu kacang', 'spicy' => 2, 'veg' => false],
-                                            ['name' => 'Pempek Palembang', 'price' => 32000, 'desc' => 'Pempek ikan dengan cuko khas', 'spicy' => 1, 'veg' => false],
-                                            ['name' => 'Tahu Gejrot', 'price' => 25000, 'desc' => 'Tahu goreng dengan saus kecap pedas', 'spicy' => 3, 'veg' => true],
-                                            ['name' => 'Sup Buntut', 'price' => 45000, 'desc' => 'Sup buntut dengan sayuran', 'spicy' => 1, 'veg' => false],
-                                            ['name' => 'Keripik Tempe', 'price' => 18000, 'desc' => 'Tempe iris tipis digoreng krispi', 'spicy' => 0, 'veg' => true],
-                                        ];
-                                    @endphp
-                                    
-                                    @foreach($appetizers as $item)
-                                        <div class="menu-item">
-                                            <div class="menu-item-content">
-                                                <div class="menu-item-front">
-                                                    <div class="item-header">
-                                                        <h4 class="item-name">{{ $item['name'] }}</h4>
-                                                    </div>
-                                                    <p class="item-desc">{{ $item['desc'] }}</p>
-                                                    <div class="item-footer">
-                                                        <div class="item-tags">
-                                                            @if($item['spicy'] > 0)
-                                                                <span class="item-tag spicy">
-                                                                    <i class="fas fa-pepper-hot"></i> Level {{ $item['spicy'] }}
-                                                                </span>
-                                                            @endif
-                                                            @if($item['veg'])
-                                                                <span class="item-tag veg">
-                                                                    <i class="fas fa-leaf"></i> Vegetarian
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                        <div class="item-price">
-                                                            Rp {{ number_format($item['price'], 0, ',', '.') }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="menu-item-back">
-                                                    <div class="back-content">
-                                                        <h5>{{ $item['name'] }}</h5>
-                                                        <p>{{ $item['desc'] }}</p>
-                                                        <button class="btn-order" data-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
-                                                            <i class="fas fa-plus"></i> Pesan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                
-                                <div class="page-footer">
-                                    <div class="page-corner left"></div>
-                                </div>
+                            <span>Dessert</span>
+                        </button>
+                        <button class="category-btn" data-category="special">
+                            <div class="category-icon">
+                                <i class="fas fa-crown"></i>
                             </div>
-                        </div>
-                        
-                        <!-- RIGHT PAGE (page 3) -->
-                        <div class="page-right">
-                            <div class="page-content">
-                                <div class="page-header">
-                                    <div class="page-number">3</div>
-                                    <h3 class="page-title">
-                                        <i class="fas fa-glass-whiskey me-2" style="color: var(--primary-red);"></i>
-                                        Minuman Segar
-                                    </h3>
-                                </div>
-                                
-                                <div class="page-body">
-                                    @php
-                                        $drinks = [
-                                            ['name' => 'Es Teh Manis', 'price' => 12000, 'desc' => 'Es teh dengan gula aren asli', 'type' => 'cold', 'best' => false],
-                                            ['name' => 'Wedang Jahe', 'price' => 18000, 'desc' => 'Jahe hangat dengan madu asli', 'type' => 'hot', 'best' => false],
-                                            ['name' => 'Es Cincau', 'price' => 15000, 'desc' => 'Cincau hitam dengan sirup gula merah', 'type' => 'cold', 'best' => true],
-                                            ['name' => 'Kopi Tubruk', 'price' => 20000, 'desc' => 'Kopi khas Indonesia', 'type' => 'hot', 'best' => false],
-                                            ['name' => 'Jus Alpukat', 'price' => 22000, 'desc' => 'Alpukat segar dengan susu kental', 'type' => 'cold', 'best' => false],
-                                            ['name' => 'Bajigur Sunda', 'price' => 25000, 'desc' => 'Minuman hangat khas Sunda', 'type' => 'hot', 'best' => true],
-                                        ];
-                                    @endphp
-                                    
-                                    @foreach($drinks as $item)
-                                        <div class="menu-item">
-                                            <div class="menu-item-content">
-                                                <div class="menu-item-front">
-                                                    <div class="item-header">
-                                                        <h4 class="item-name">{{ $item['name'] }}</h4>
-                                                        @if($item['best'])
-                                                            <span class="item-badge">
-                                                                <i class="fas fa-star"></i> Rekomendasi
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                    <p class="item-desc">{{ $item['desc'] }}</p>
-                                                    <div class="item-footer">
-                                                        <div class="item-tags">
-                                                            <span class="item-tag {{ $item['type'] }}">
-                                                                <i class="fas fa-{{ $item['type'] == 'hot' ? 'fire' : 'snowflake' }}"></i>
-                                                                {{ $item['type'] == 'hot' ? 'Panas' : 'Dingin' }}
-                                                            </span>
-                                                        </div>
-                                                        <div class="item-price">
-                                                            Rp {{ number_format($item['price'], 0, ',', '.') }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="menu-item-back">
-                                                    <div class="back-content">
-                                                        <h5>{{ $item['name'] }}</h5>
-                                                        <p>{{ $item['desc'] }}</p>
-                                                        <button class="btn-order" data-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
-                                                            <i class="fas fa-plus"></i> Pesan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                
-                                <div class="page-footer">
-                                    <div class="page-corner"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- PAGE SPREAD 3 (pages 4-5) -->
-                    <div class="page spread-3" data-spread="3">
-                        <!-- LEFT PAGE (page 4) -->
-                        <div class="page-left">
-                            <div class="page-content">
-                                <div class="page-header">
-                                    <div class="page-number">4</div>
-                                    <h3 class="page-title">
-                                        <i class="fas fa-ice-cream me-2" style="color: var(--primary-red);"></i>
-                                        Pencuci Mulut
-                                    </h3>
-                                </div>
-                                
-                                <div class="page-body">
-                                    @php
-                                        $desserts = [
-                                            ['name' => 'Es Campur', 'price' => 22000, 'desc' => 'Es campur dengan buah segar', 'type' => 'cold', 'best' => true],
-                                            ['name' => 'Klepon', 'price' => 18000, 'desc' => 'Kue tradisional isi gula merah', 'type' => 'normal', 'best' => false],
-                                            ['name' => 'Pisang Goreng', 'price' => 20000, 'desc' => 'Pisang goreng dengan keju dan coklat', 'type' => 'hot', 'best' => false],
-                                            ['name' => 'Bubur Sumsum', 'price' => 15000, 'desc' => 'Bubur dengan saus gula merah', 'type' => 'warm', 'best' => false],
-                                            ['name' => 'Lapis Legit', 'price' => 25000, 'desc' => 'Kue lapis legit khas Indonesia', 'type' => 'normal', 'best' => true],
-                                            ['name' => 'Martabak Manis', 'price' => 30000, 'desc' => 'Martabak dengan topping pilihan', 'type' => 'hot', 'best' => false],
-                                        ];
-                                    @endphp
-                                    
-                                    @foreach($desserts as $item)
-                                        <div class="menu-item">
-                                            <div class="menu-item-content">
-                                                <div class="menu-item-front">
-                                                    <div class="item-header">
-                                                        <h4 class="item-name">{{ $item['name'] }}</h4>
-                                                        @if($item['best'])
-                                                            <span class="item-badge">
-                                                                <i class="fas fa-heart"></i> Favorit
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                    <p class="item-desc">{{ $item['desc'] }}</p>
-                                                    <div class="item-footer">
-                                                        <div class="item-tags">
-                                                            <span class="item-tag {{ $item['type'] }}">
-                                                                @if($item['type'] == 'cold')
-                                                                    <i class="fas fa-snowflake"></i> Dingin
-                                                                @elseif($item['type'] == 'hot')
-                                                                    <i class="fas fa-fire"></i> Panas
-                                                                @elseif($item['type'] == 'warm')
-                                                                    <i class="fas fa-temperature-low"></i> Hangat
-                                                                @else
-                                                                    <i class="fas fa-utensil-spoon"></i> Normal
-                                                                @endif
-                                                            </span>
-                                                        </div>
-                                                        <div class="item-price">
-                                                            Rp {{ number_format($item['price'], 0, ',', '.') }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="menu-item-back">
-                                                    <div class="back-content">
-                                                        <h5>{{ $item['name'] }}</h5>
-                                                        <p>{{ $item['desc'] }}</p>
-                                                        <button class="btn-order" data-name="{{ $item['name'] }}" data-price="{{ $item['price'] }}">
-                                                            <i class="fas fa-plus"></i> Pesan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                
-                                <div class="page-footer">
-                                    <div class="page-corner left"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- RIGHT PAGE (page 5 - closing page) -->
-                        <div class="page-right">
-                            <div class="page-content">
-                                <div class="page-margin">
-                                    <div class="margin-decoration"></div>
-                                </div>
-                                <div class="page-text">
-                                    <h3 class="page-closing">
-                                        Terima Kasih Atas Kunjungan Anda
-                                    </h3>
-                                    <div class="contact-info">
-                                        <p><i class="fas fa-map-marker-alt"></i> JL Baye Kuliner No. 123, Jakarta</p>
-                                        <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
-                                        <p><i class="fas fa-clock"></i> Buka Setiap Hari 10:00 - 22:00</p>
-                                    </div>
-                                    <div class="closing-logo mt-5">
-                                        <div class="logo-circle">JG</div>
-                                        <p class="mt-3 mb-0" style="color: var(--warm-brown);">JOSS GANDOS Restoran</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- BACK COVER -->
-                    <div class="hardcover_back">
-                        <div class="cover-back-bg"></div>
-                        <div class="back-cover-content">
-                            <div class="back-logo">JG</div>
-                            <p class="back-text">Restoran Indonesia</p>
-                            <div class="back-decoration"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Page turn handles -->
-                <div class="page-turn left-turn" id="prevPageArea">
-                    <div class="turn-indicator">
-                        <i class="fas fa-angle-left"></i>
-                        <span>Balik Halaman</span>
-                    </div>
-                </div>
-                <div class="page-turn right-turn" id="nextPageArea">
-                    <div class="turn-indicator">
-                        <span>Balik Halaman</span>
-                        <i class="fas fa-angle-right"></i>
+                            <span>Spesial</span>
+                        </button>
                     </div>
                 </div>
             </div>
-            
-            <!-- Page Navigation Tips -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="modern-card animate-fade-in">
-                        <div class="p-4" style="background: rgba(180, 34, 34, 0.05); border-radius: 15px;">
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <h5 class="fw-bold mb-2" style="color: var(--primary-red);">
-                                        <i class="fas fa-lightbulb me-2"></i> Tips Navigasi Buku
-                                    </h5>
-                                    <p class="mb-0" style="color: var(--warm-brown);">
-                                        Klik area kiri/kanan buku untuk membalik • Gunakan tombol navigasi • Tarik halaman dengan mouse atau sentuhan
-                                    </p>
-                                </div>
-                                <div class="col-md-4 text-end">
-                                    <button class="btn btn-sm px-3" style="background: var(--primary-red); color: white;" onclick="autoFlipDemo()">
-                                        <i class="fas fa-play me-1"></i> Demo Otomatis
-                                    </button>
-                                </div>
-                            </div>
+
+            <!-- Search Bar -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-6">
+                    <div class="menu-search-container">
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <input type="text" class="search-input" id="menuSearch" 
+                               placeholder="Cari menu favorit Anda...">
+                        <div class="search-decoration">
+                            <i class="fas fa-pepper-hot"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Menu Items Grid -->
+    <section class="section-padding wood-bg">
+        <div class="container">
+            <!-- Menu Stats -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="menu-stats-card modern-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-3 text-center">
+                                <div class="stats-item">
+                                    <div class="stats-icon" style="background: rgba(178, 34, 34, 0.1);">
+                                        <i class="fas fa-utensils" style="color: var(--primary-red);"></i>
+                                    </div>
+                                    <h4 class="stats-number mt-3" id="totalItems">20</h4>
+                                    <p class="stats-label">Total Menu</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="stats-item">
+                                    <div class="stats-icon" style="background: rgba(212, 160, 23, 0.1);">
+                                        <i class="fas fa-crown" style="color: var(--secondary-gold);"></i>
+                                    </div>
+                                    <h4 class="stats-number mt-3" id="specialItems">5</h4>
+                                    <p class="stats-label">Menu Spesial</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="stats-item">
+                                    <div class="stats-icon" style="background: rgba(42, 157, 143, 0.1);">
+                                        <i class="fas fa-leaf" style="color: #2a9d8f;"></i>
+                                    </div>
+                                    <h4 class="stats-number mt-3" id="vegItems">3</h4>
+                                    <p class="stats-label">Vegetarian</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="stats-item">
+                                    <div class="stats-icon" style="background: rgba(230, 57, 70, 0.1);">
+                                        <i class="fas fa-pepper-hot" style="color: #e63946;"></i>
+                                    </div>
+                                    <h4 class="stats-number mt-3" id="spicyItems">8</h4>
+                                    <p class="stats-label">Menu Pedas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="row g-4" id="menuGrid">
+                @php
+                    $menuItems = [
+                        // Menu Utama
+                        [
+                            'id' => 1,
+                            'name' => 'Nasi Goreng Spesial JOSS',
+                            'description' => 'Nasi goreng dengan ayam suwir premium, udang segar, telur mata sapi, dan sayuran pilihan. Dibumbui rempah khas Indonesia yang membuatnya istimewa.',
+                            'price' => 45000,
+                            'category' => 'main',
+                            'image' => 'https://images.unsplash.com/photo-1551189018-2c6c2b72d5c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['best_seller', 'spicy'],
+                            'spicy_level' => 2,
+                            'cooking_time' => '15 menit',
+                            'calories' => '650 kcal',
+                            'popularity' => 95
+                        ],
+                        [
+                            'id' => 2,
+                            'name' => 'Rendang Sapi Padang',
+                            'description' => 'Daging sapi pilihan dimasak selama 8 jam dengan rempah-rempah khas Padang. Tekstur empuk dan bumbu meresap sempurna.',
+                            'price' => 55000,
+                            'category' => 'main',
+                            'image' => 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['best_seller', 'spicy', 'premium'],
+                            'spicy_level' => 3,
+                            'cooking_time' => '8 jam',
+                            'calories' => '720 kcal',
+                            'popularity' => 98
+                        ],
+                        [
+                            'id' => 3,
+                            'name' => 'Ayam Penyet Sambal Terasi',
+                            'description' => 'Ayam kampung goreng krispi disajikan dengan sambal terasi pedas, lalapan segar, dan nasi putih panas.',
+                            'price' => 42000,
+                            'category' => 'main',
+                            'image' => 'https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['spicy'],
+                            'spicy_level' => 4,
+                            'cooking_time' => '25 menit',
+                            'calories' => '580 kcal',
+                            'popularity' => 88
+                        ],
+                        [
+                            'id' => 4,
+                            'name' => 'Soto Betawi',
+                            'description' => 'Soto khas Jakarta dengan kuah santan gurih, daging sapi, jeroan, dan emping melinjo. Disajikan dengan nasi atau ketupat.',
+                            'price' => 38000,
+                            'category' => 'main',
+                            'image' => 'https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => [],
+                            'spicy_level' => 1,
+                            'cooking_time' => '40 menit',
+                            'calories' => '520 kcal',
+                            'popularity' => 85
+                        ],
+                        [
+                            'id' => 5,
+                            'name' => 'Gado-Gado Jakarta',
+                            'description' => 'Salad khas Indonesia dengan sayuran segar, telur, tahu, tempe, dan bumbu kacang spesial. Makanan sehat dan bergizi.',
+                            'price' => 35000,
+                            'category' => 'main',
+                            'image' => 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['vegetarian'],
+                            'spicy_level' => 1,
+                            'cooking_time' => '20 menit',
+                            'calories' => '420 kcal',
+                            'popularity' => 82
+                        ],
+                        [
+                            'id' => 6,
+                            'name' => 'Nasi Liwet Sunda',
+                            'description' => 'Nasi liwet khas Sunda dengan ikan asin, ayam, telur, dan sayuran. Dimasak dengan rempah tradisional.',
+                            'price' => 40000,
+                            'category' => 'main',
+                            'image' => 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['traditional'],
+                            'spicy_level' => 2,
+                            'cooking_time' => '45 menit',
+                            'calories' => '610 kcal',
+                            'popularity' => 87
+                        ],
+
+                        // Pembuka & Sup
+                        [
+                            'id' => 7,
+                            'name' => 'Lumpia Sayur',
+                            'description' => 'Lumpia renyah dengan isian sayuran segar dan daging ayam cincang. Disajikan dengan saus asam manis.',
+                            'price' => 28000,
+                            'category' => 'appetizer',
+                            'image' => 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['vegetarian', 'best_seller'],
+                            'spicy_level' => 0,
+                            'cooking_time' => '15 menit',
+                            'calories' => '280 kcal',
+                            'popularity' => 90
+                        ],
+                        [
+                            'id' => 8,
+                            'name' => 'Sate Ayam',
+                            'description' => '10 tusuk sate ayam dengan bumbu kacang khas. Disajikan dengan lontong, bawang goreng, dan kecap manis.',
+                            'price' => 35000,
+                            'category' => 'appetizer',
+                            'image' => 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => [],
+                            'spicy_level' => 2,
+                            'cooking_time' => '20 menit',
+                            'calories' => '320 kcal',
+                            'popularity' => 92
+                        ],
+                        [
+                            'id' => 9,
+                            'name' => 'Pempek Palembang',
+                            'description' => 'Pempek ikan tenggiri dengan cuko khas Palembang. Tekstur kenyal dengan rasa gurih yang khas.',
+                            'price' => 32000,
+                            'category' => 'appetizer',
+                            'image' => 'https://images.unsplash.com/photo-1551189018-2c6c2b72d5c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => [],
+                            'spicy_level' => 1,
+                            'cooking_time' => '30 menit',
+                            'calories' => '290 kcal',
+                            'popularity' => 84
+                        ],
+
+                        // Minuman
+                        [
+                            'id' => 10,
+                            'name' => 'Es Teh Manis',
+                            'description' => 'Es teh dengan gula aren asli yang memberikan rasa manis alami. Menyegarkan dan cocok untuk semua menu.',
+                            'price' => 12000,
+                            'category' => 'drink',
+                            'image' => 'https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => [],
+                            'spicy_level' => 0,
+                            'temperature' => 'dingin',
+                            'calories' => '80 kcal',
+                            'popularity' => 95
+                        ],
+                        [
+                            'id' => 11,
+                            'name' => 'Wedang Jahe',
+                            'description' => 'Minuman hangat dari jahe segar dengan madu asli. Menghangatkan badan dan baik untuk kesehatan.',
+                            'price' => 18000,
+                            'category' => 'drink',
+                            'image' => 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['healthy'],
+                            'spicy_level' => 0,
+                            'temperature' => 'panas',
+                            'calories' => '60 kcal',
+                            'popularity' => 88
+                        ],
+                        [
+                            'id' => 12,
+                            'name' => 'Es Cincau',
+                            'description' => 'Cincau hitam dengan sirup gula merah dan santan. Minuman tradisional yang menyegarkan.',
+                            'price' => 15000,
+                            'category' => 'drink',
+                            'image' => 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['best_seller', 'traditional'],
+                            'spicy_level' => 0,
+                            'temperature' => 'dingin',
+                            'calories' => '120 kcal',
+                            'popularity' => 93
+                        ],
+
+                        // Pencuci Mulut
+                        [
+                            'id' => 13,
+                            'name' => 'Es Campur',
+                            'description' => 'Es campur dengan buah-buahan segar, kolang-kaling, nata de coco, dan sirup vanila. Semangkuk kesegaran.',
+                            'price' => 22000,
+                            'category' => 'dessert',
+                            'image' => 'https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['best_seller', 'sweet'],
+                            'spicy_level' => 0,
+                            'temperature' => 'dingin',
+                            'calories' => '280 kcal',
+                            'popularity' => 96
+                        ],
+                        [
+                            'id' => 14,
+                            'name' => 'Klepon',
+                            'description' => 'Kue tradisional berisi gula merah dengan baluran kelapa parut. Manis legit dan kenyal.',
+                            'price' => 18000,
+                            'category' => 'dessert',
+                            'image' => 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['traditional'],
+                            'spicy_level' => 0,
+                            'temperature' => 'normal',
+                            'calories' => '150 kcal',
+                            'popularity' => 89
+                        ],
+
+                        // Spesial Menu
+                        [
+                            'id' => 15,
+                            'name' => 'Bebek Goreng JOSS',
+                            'description' => 'Bebek pilihan digoreng krispi dengan bumbu rahasia khas JOSS GANDOS. Disajikan dengan sambal matah dan nasi.',
+                            'price' => 65000,
+                            'category' => 'special',
+                            'image' => 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['signature', 'spicy', 'premium'],
+                            'spicy_level' => 3,
+                            'cooking_time' => '40 menit',
+                            'calories' => '780 kcal',
+                            'popularity' => 97
+                        ],
+                        [
+                            'id' => 16,
+                            'name' => 'Gurame Bakar Bumbu Rujak',
+                            'description' => 'Gurame segar dibakar dengan bumbu rujak khas. Rasa manis, asam, pedas yang seimbang.',
+                            'price' => 75000,
+                            'category' => 'special',
+                            'image' => 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'tags' => ['signature', 'spicy'],
+                            'spicy_level' => 4,
+                            'cooking_time' => '30 menit',
+                            'calories' => '620 kcal',
+                            'popularity' => 94
+                        ],
+                    ];
+                @endphp
+
+                @foreach($menuItems as $item)
+                <div class="col-lg-4 col-md-6 menu-card-item" data-category="{{ $item['category'] }}">
+                    <div class="modern-card menu-card" data-item-id="{{ $item['id'] }}">
+                        <!-- Card Image -->
+                        <div class="menu-card-img">
+                            <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="img-fluid">
+                            <div class="menu-card-overlay">
+                                <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#detailModal" data-item='@json($item)'>
+                                    <i class="fas fa-eye"></i> Detail
+                                </button>
+                            </div>
+                            
+                            <!-- Badges -->
+                            <div class="menu-badges">
+                                @if(in_array('best_seller', $item['tags']))
+                                <div class="menu-badge best-seller">
+                                    <i class="fas fa-crown"></i> Best Seller
+                                </div>
+                                @endif
+                                @if(in_array('signature', $item['tags']))
+                                <div class="menu-badge signature">
+                                    <i class="fas fa-star"></i> Signature
+                                </div>
+                                @endif
+                                @if(isset($item['popularity']) && $item['popularity'] > 90)
+                                <div class="menu-badge popularity">
+                                    <i class="fas fa-fire"></i> {{ $item['popularity'] }}%
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <!-- Card Content -->
+                        <div class="menu-card-body">
+                            <div class="menu-card-header">
+                                <h3 class="menu-card-title">{{ $item['name'] }}</h3>
+                                <div class="menu-card-price">
+                                    Rp {{ number_format($item['price'], 0, ',', '.') }}
+                                </div>
+                            </div>
+                            
+                            <p class="menu-card-desc">{{ Str::limit($item['description'], 90) }}</p>
+                            
+                            <!-- Tags -->
+                            <div class="menu-card-tags mb-3">
+                                @if(in_array('vegetarian', $item['tags']))
+                                <span class="menu-tag veg">
+                                    <i class="fas fa-leaf"></i> Vegetarian
+                                </span>
+                                @endif
+                                @if(in_array('spicy', $item['tags']) && isset($item['spicy_level']))
+                                <span class="menu-tag spicy">
+                                    @for($i = 0; $i < min($item['spicy_level'], 3); $i++)
+                                        <i class="fas fa-pepper-hot"></i>
+                                    @endfor
+                                    Pedas
+                                </span>
+                                @endif
+                                @if(in_array('traditional', $item['tags']))
+                                <span class="menu-tag traditional">
+                                    <i class="fas fa-landmark"></i> Tradisional
+                                </span>
+                                @endif
+                                @if(in_array('premium', $item['tags']))
+                                <span class="menu-tag premium">
+                                    <i class="fas fa-gem"></i> Premium
+                                </span>
+                                @endif
+                            </div>
+                            
+                            <!-- Additional Info -->
+                            <div class="menu-card-info">
+                                @if(isset($item['cooking_time']))
+                                <div class="info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{ $item['cooking_time'] }}</span>
+                                </div>
+                                @endif
+                                @if(isset($item['calories']))
+                                <div class="info-item">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>{{ $item['calories'] }}</span>
+                                </div>
+                                @endif
+                            </div>
+                            
+                            <!-- Action Button -->
+                            <div class="menu-card-footer">
+                                <button class="btn btn-primary w-100 order-btn" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#orderModal"
+                                        data-item='@json($item)'>
+                                    <i class="fas fa-utensils me-2"></i> Pesan Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="noResults" class="text-center py-5 d-none">
+                <div class="no-results-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h4 class="mt-3 mb-2">Menu Tidak Ditemukan</h4>
+                <p class="text-muted">Coba kategori lain atau gunakan kata kunci berbeda</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, rgba(178, 34, 34, 0.05), rgba(212, 160, 23, 0.05));">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h3 class="mb-3" style="color: var(--dark-charcoal); font-size: 2rem;">Menu <span style="color: var(--primary-red);">Rekomendasi</span></h3>
+                <p class="text-muted">Temukan favorit pelanggan kami</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="featured-card featured-1">
+                        <div class="featured-content">
+                            <div class="featured-badge">#1 Best Seller</div>
+                            <h4>Rendang Sapi Padang</h4>
+                            <p>Daging empuk dengan rempah khas</p>
+                            <div class="featured-price">Rp 55.000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="featured-card featured-2">
+                        <div class="featured-content">
+                            <div class="featured-badge">Signature Dish</div>
+                            <h4>Bebek Goreng JOSS</h4>
+                            <p>Bebek krispi dengan bumbu rahasia</p>
+                            <div class="featured-price">Rp 65.000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="featured-card featured-3">
+                        <div class="featured-content">
+                            <div class="featured-badge">Most Popular</div>
+                            <h4>Es Campur</h4>
+                            <p>Kesegaran dalam setiap sendok</p>
+                            <div class="featured-price">Rp 22.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 position-relative">
+                    <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" style="top: 20px; right: 20px; z-index: 1;"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Pesan Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="orderModalBody">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('styles')
 <style>
-    /* Real Book Container */
-    .real-book-container {
-        position: relative;
-        width: 100%;
-        max-width: 1000px;
-        height: 700px;
-        margin: 0 auto;
-        perspective: 2000px;
+    /* Hero Decoration */
+    .hero-decoration {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
     }
     
-    .book-shadow {
-        position: absolute;
-        width: 90%;
-        height: 30px;
-        background: rgba(0,0,0,0.3);
+    .decoration-circle {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
-        bottom: -15px;
-        left: 5%;
-        filter: blur(10px);
-        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--accent-gold);
+        border: 2px solid rgba(255, 193, 69, 0.3);
     }
     
-    /* Main Book Container */
-    .book {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transform-style: preserve-3d;
-        transform: translateZ(0);
+    .decoration-line {
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
     }
     
-    /* Hard Covers */
-    .hardcover_front, .hardcover_back {
-        position: absolute;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(145deg, var(--primary-dark), #8a0000, var(--primary-red));
-        border-radius: 5px 15px 15px 5px;
-        box-shadow: 
-            -10px 0 30px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2),
-            inset -5px 0 20px rgba(0,0,0,0.3);
-        transform-origin: left center;
-        transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        z-index: 20;
-        overflow: hidden;
-    }
-    
-    .hardcover_back {
-        left: 50%;
-        border-radius: 15px 5px 5px 15px;
-        transform-origin: right center;
-        background: linear-gradient(145deg, #8a0000, var(--primary-dark));
-    }
-    
-    .cover-front-bg, .cover-back-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 Q40,10 60,20 T100,20" stroke="%23FFD700" stroke-width="0.5" fill="none" opacity="0.1"/><path d="M20,50 Q40,40 60,50 T100,50" stroke="%23FFD700" stroke-width="0.5" fill="none" opacity="0.1"/><path d="M20,80 Q40,70 60,80 T100,80" stroke="%23FFD700" stroke-width="0.5" fill="none" opacity="0.1"/></svg>');
-        background-size: 100px;
-        opacity: 0.3;
-    }
-    
-    .cover-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 40px;
-        color: #FFD700;
+    /* Menu Categories */
+    .category-btn {
+        padding: 15px 25px;
+        border: 2px solid transparent;
+        background: white;
+        color: var(--dark-charcoal);
+        border-radius: 15px;
+        font-weight: 500;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        text-align: center;
-        z-index: 2;
+        gap: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        min-width: 120px;
     }
     
-    .cover-title {
-        margin-bottom: 40px;
+    .category-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(178, 34, 34, 0.15);
     }
     
-    .cover-main-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 4.5rem;
-        font-weight: 900;
-        color: #FFD700;
-        text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
-        letter-spacing: 5px;
-        margin-bottom: 0;
+    .category-btn.active {
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        color: white;
+        border-color: var(--primary-red);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(178, 34, 34, 0.2);
     }
     
-    .cover-sub-title {
-        font-family: 'Great Vibes', cursive;
-        font-size: 2.8rem;
-        color: #FFF;
-        margin-top: -15px;
-        text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        color: var(--primary-red);
+        transition: all 0.3s ease;
     }
     
-    .cover-decoration {
-        width: 180px;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #FFD700, transparent);
-        margin: 20px auto;
+    .category-btn.active .category-icon {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        transform: rotate(15deg);
     }
     
-    .cover-book-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.6rem;
-        color: #FFF;
-        margin-bottom: 10px;
+    .category-btn span {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    
+    /* Search Bar */
+    .menu-search-container {
+        position: relative;
+        background: white;
+        border-radius: 15px;
+        padding: 15px 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .search-icon {
+        color: var(--primary-red);
+        font-size: 1.2rem;
+    }
+    
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        color: var(--dark-charcoal);
+        background: transparent;
+    }
+    
+    .search-input::placeholder {
+        color: rgba(139, 115, 85, 0.6);
+    }
+    
+    .search-decoration {
+        color: var(--accent-gold);
+        font-size: 1.1rem;
+        opacity: 0.5;
+    }
+    
+    /* Menu Stats */
+    .menu-stats-card {
+        padding: 30px;
+        background: white !important;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .stats-item {
+        padding: 20px;
+    }
+    
+    .stats-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin: 0 auto;
+    }
+    
+    .stats-number {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--dark-charcoal);
+        margin-bottom: 5px;
+    }
+    
+    .stats-label {
+        color: var(--warm-brown);
+        font-size: 0.9rem;
         font-weight: 500;
     }
     
-    .cover-description {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        color: rgba(255,255,255,0.8);
-        letter-spacing: 3px;
-        text-transform: uppercase;
-    }
-    
-    .cover-gold-decoration {
-        position: absolute;
-        bottom: 30px;
-        display: flex;
-        gap: 30px;
-        font-size: 1.3rem;
-        color: #FFD700;
-        opacity: 0.7;
-    }
-    
-    .cover-spine {
-        position: absolute;
-        left: -25px;
-        top: 20px;
-        bottom: 20px;
-        width: 25px;
-        background: linear-gradient(to right, #8a0000, var(--primary-dark), #8a0000);
-        border-radius: 5px 0 0 5px;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-    }
-    
-    .spine-text {
-        color: #FFD700;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        letter-spacing: 3px;
-        transform: rotate(180deg);
-    }
-    
-    .spine-decoration {
-        width: 15px;
-        height: 2px;
-        background: #FFD700;
-        margin: 10px 0;
-    }
-    
-    .back-cover-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #FFD700;
-        z-index: 2;
-    }
-    
-    .back-logo {
-        font-size: 3.5rem;
-        font-weight: 900;
-        color: rgba(255,215,0,0.3);
-        font-family: 'Playfair Display', serif;
-    }
-    
-    .back-text {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
-        color: rgba(255,255,255,0.5);
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        margin-top: 10px;
-    }
-    
-    .back-decoration {
-        width: 130px;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #FFD700, transparent);
-        margin-top: 20px;
-    }
-    
-    /* Page Spreads */
-    .page {
-        position: absolute;
-        width: 100%;
+    /* Menu Cards */
+    .menu-card {
         height: 100%;
-        transform-style: preserve-3d;
-        transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        display: none;
-    }
-    
-    .page.active {
-        display: flex;
-        transform: rotateY(0deg);
-        z-index: 10;
-    }
-    
-    .page-left, .page-right {
-        position: relative;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(to right, #f9f3e9 0%, #fff 5%, #fff 95%, #f9f3e9 100%);
-        overflow: hidden;
-    }
-    
-    .page-left {
-        border-radius: 0 2px 2px 0;
-        box-shadow: 
-            inset 5px 0 10px rgba(0,0,0,0.05),
-            0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .page-right {
-        border-radius: 2px 0 0 2px;
-        box-shadow: 
-            inset -5px 0 10px rgba(0,0,0,0.05),
-            0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    /* Page Content */
-    .page-content {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        padding: 40px;
-        background: #fff;
-        overflow-y: auto;
-    }
-    
-    .page-left .page-content {
-        border-right: 1px solid rgba(0,0,0,0.05);
-    }
-    
-    .page-right .page-content {
-        border-left: 1px solid rgba(0,0,0,0.05);
-    }
-    
-    /* Page Margin */
-    .page-margin {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 40px;
-        background: linear-gradient(to right, #f9f3e9, #f5f0e1);
-    }
-    
-    .page-right .page-margin {
-        left: auto;
-        right: 0;
-        background: linear-gradient(to left, #f9f3e9, #f5f0e1);
-    }
-    
-    .margin-decoration {
-        position: absolute;
-        top: 50%;
-        left: 20px;
-        width: 3px;
-        height: 100px;
-        background: rgba(180, 34, 34, 0.2);
-        transform: translate(-50%, -50%);
-    }
-    
-    .page-right .margin-decoration {
-        left: auto;
-        right: 20px;
-        transform: translate(50%, -50%);
-    }
-    
-    /* Page Header */
-    .page-header {
-        position: relative;
-        margin-bottom: 30px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid rgba(180, 34, 34, 0.1);
-    }
-    
-    .page-number {
-        position: absolute;
-        top: -10px;
-        right: 0;
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, var(--primary-red), var(--secondary-gold));
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1.1rem;
-        box-shadow: 0 4px 10px rgba(180, 34, 34, 0.3);
-        font-family: 'Playfair Display', serif;
-    }
-    
-    .page-left .page-number {
-        right: auto;
-        left: 0;
-    }
-    
-    .page-title {
-        font-family: 'Playfair Display', serif;
-        color: var(--dark-charcoal);
-        font-size: 1.8rem;
-        position: relative;
-        display: inline-block;
-        padding-right: 50px;
-    }
-    
-    .page-left .page-title {
-        padding-right: 0;
-        padding-left: 50px;
-    }
-    
-    /* Page Body */
-    .page-body {
-        height: calc(100% - 120px);
-        overflow-y: auto;
-        padding-right: 10px;
-    }
-    
-    .page-left .page-body {
-        padding-right: 5px;
-        padding-left: 10px;
-    }
-    
-    /* Menu Items */
-    .menu-item {
-        margin-bottom: 15px;
-        perspective: 1000px;
-    }
-    
-    .menu-item-content {
-        position: relative;
-        width: 100%;
-        height: 90px;
-        transform-style: preserve-3d;
-        transition: transform 0.6s;
-        cursor: pointer;
-    }
-    
-    .menu-item:hover .menu-item-content {
-        transform: rotateY(180deg);
-    }
-    
-    .menu-item-front, .menu-item-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        border-radius: 8px;
-        padding: 15px;
-    }
-    
-    .menu-item-front {
-        background: white;
-        border: 1px solid rgba(180, 34, 34, 0.1);
-        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    }
-    
-    .item-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 8px;
-    }
-    
-    .item-name {
-        font-weight: 600;
-        color: var(--dark-charcoal);
-        font-size: 0.95rem;
-        margin: 0;
-    }
-    
-    .item-badge {
-        background: var(--accent-gold);
-        color: white;
-        padding: 3px 8px;
-        border-radius: 4px;
-        font-size: 0.65rem;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
-    
-    .item-desc {
-        color: var(--warm-brown);
-        font-size: 0.8rem;
-        margin-bottom: 10px;
-        line-height: 1.4;
-    }
-    
-    .item-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .item-tags {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-    }
-    
-    .item-tag {
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.7rem;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-    }
-    
-    .item-tag.spicy {
-        background: rgba(230, 57, 70, 0.1);
-        color: #e63946;
-    }
-    
-    .item-tag.veg {
-        background: rgba(42, 157, 143, 0.1);
-        color: #2a9d8f;
-    }
-    
-    .item-tag.hot {
-        background: rgba(180, 34, 34, 0.1);
-        color: var(--primary-red);
-    }
-    
-    .item-tag.cold {
-        background: rgba(33, 158, 188, 0.1);
-        color: #2196BC;
-    }
-    
-    .item-price {
-        font-weight: 600;
-        color: var(--primary-red);
-        font-size: 0.95rem;
-    }
-    
-    .menu-item-back {
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
-        transform: rotateY(180deg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    
-    .back-content h5 {
-        color: white;
-        margin-bottom: 8px;
-        font-size: 0.95rem;
-    }
-    
-    .back-content p {
-        color: rgba(255,255,255,0.8);
-        font-size: 0.8rem;
-        margin-bottom: 12px;
-    }
-    
-    .btn-order {
-        background: white;
-        color: var(--primary-red);
-        border: none;
-        padding: 5px 12px;
         border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.8rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin: 0 auto;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+        position: relative;
+        border: none;
     }
     
-    .btn-order:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+    .menu-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 30px 60px rgba(178, 34, 34, 0.15);
     }
     
-    /* Page Footer */
-    .page-footer {
-        position: absolute;
-        bottom: 20px;
-        left: 40px;
-        right: 40px;
-    }
-    
-    .page-corner {
-        width: 30px;
-        height: 30px;
-        border-bottom: 2px solid rgba(180, 34, 34, 0.1);
-        border-right: 2px solid rgba(180, 34, 34, 0.1);
-        position: absolute;
-        bottom: 0;
-        right: 0;
-    }
-    
-    .page-corner.left {
-        right: auto;
-        left: 0;
-        border-right: none;
-        border-left: 2px solid rgba(180, 34, 34, 0.1);
-    }
-    
-    /* Special Pages */
-    .page-text {
-        position: absolute;
-        top: 50%;
-        left: 60px;
-        right: 60px;
-        transform: translateY(-50%);
-        text-align: center;
-    }
-    
-    .page-inscription {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.8rem;
-        color: var(--dark-charcoal);
-        margin-bottom: 20px;
-        line-height: 1.4;
-    }
-    
-    .page-inscription i {
-        color: var(--primary-red);
-        opacity: 0.3;
-        margin: 0 10px;
-    }
-    
-    .page-author {
-        color: var(--warm-brown);
-        font-style: italic;
-        margin-bottom: 40px;
-    }
-    
-    .page-logo, .closing-logo {
-        margin-top: 30px;
-    }
-    
-    .logo-circle {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, var(--primary-red), var(--secondary-gold));
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.8rem;
-        font-weight: bold;
-        margin: 0 auto;
-        box-shadow: 0 8px 20px rgba(180, 34, 34, 0.3);
-    }
-    
-    .page-closing {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.6rem;
-        color: var(--dark-charcoal);
-        margin-bottom: 30px;
-    }
-    
-    .contact-info {
-        text-align: center;
-        margin-top: 30px;
-    }
-    
-    .contact-info p {
-        color: var(--warm-brown);
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .contact-info i {
-        color: var(--primary-red);
-        width: 20px;
-    }
-    
-    /* Page Turn Handles */
-    .page-turn {
+    .menu-card::before {
+        content: '';
         position: absolute;
         top: 0;
-        width: 80px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 30;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary-red), var(--secondary-gold));
         opacity: 0;
         transition: opacity 0.3s ease;
     }
     
-    .left-turn {
-        left: 0;
-    }
-    
-    .right-turn {
-        right: 0;
-    }
-    
-    .page-turn:hover {
+    .menu-card:hover::before {
         opacity: 1;
     }
     
-    .turn-indicator {
-        background: rgba(180, 34, 34, 0.1);
-        padding: 15px 10px;
-        border-radius: 8px;
+    .menu-card-img {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+    }
+    
+    .menu-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+    
+    .menu-card:hover .menu-card-img img {
+        transform: scale(1.1);
+    }
+    
+    .menu-card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 50%);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 25px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .menu-card:hover .menu-card-overlay {
+        opacity: 1;
+    }
+    
+    .quick-view-btn {
+        background: white;
         color: var(--primary-red);
-        font-size: 0.8rem;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .quick-view-btn:hover {
+        background: var(--primary-red);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+    }
+    
+    /* Badges */
+    .menu-badges {
+        position: absolute;
+        top: 15px;
+        left: 15px;
         display: flex;
         flex-direction: column;
+        gap: 8px;
+        z-index: 2;
+    }
+    
+    .menu-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: flex;
         align-items: center;
         gap: 5px;
-        backdrop-filter: blur(5px);
-        border: 1px solid rgba(180, 34, 34, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        backdrop-filter: blur(10px);
     }
     
-    .turn-indicator i {
+    .menu-badge.best-seller {
+        background: linear-gradient(135deg, #FFC145, #FFA000);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .menu-badge.signature {
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .menu-badge.popularity {
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--primary-red);
+        border: 1px solid rgba(178, 34, 34, 0.2);
+    }
+    
+    /* Card Body */
+    .menu-card-body {
+        padding: 25px;
+    }
+    
+    .menu-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    
+    .menu-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--dark-charcoal);
+        margin: 0;
+        flex: 1;
+        line-height: 1.3;
+    }
+    
+    .menu-card-price {
         font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-red);
+        white-space: nowrap;
+        margin-left: 15px;
     }
     
-    /* Book States */
-    .book.open .hardcover_front {
-        transform: rotateY(-180deg);
-        z-index: 15;
+    .menu-card-desc {
+        color: var(--warm-brown);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        min-height: 60px;
     }
     
-    .book.open .hardcover_back {
-        transform: rotateY(180deg);
-        z-index: 15;
+    /* Tags */
+    .menu-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
     }
     
-    /* Scrollbar */
-    .page-body::-webkit-scrollbar {
-        width: 4px;
+    .menu-tag {
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
     }
     
-    .page-body::-webkit-scrollbar-track {
-        background: rgba(0,0,0,0.05);
-        border-radius: 10px;
+    .menu-tag.veg {
+        background: rgba(42, 157, 143, 0.15);
+        color: #2a9d8f;
+        border: 1px solid rgba(42, 157, 143, 0.2);
     }
     
-    .page-body::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, var(--primary-red), var(--secondary-gold));
-        border-radius: 10px;
+    .menu-tag.spicy {
+        background: rgba(230, 57, 70, 0.15);
+        color: #e63946;
+        border: 1px solid rgba(230, 57, 70, 0.2);
+    }
+    
+    .menu-tag.traditional {
+        background: rgba(139, 115, 85, 0.15);
+        color: var(--warm-brown);
+        border: 1px solid rgba(139, 115, 85, 0.2);
+    }
+    
+    .menu-tag.premium {
+        background: rgba(178, 34, 34, 0.15);
+        color: var(--primary-red);
+        border: 1px solid rgba(178, 34, 34, 0.2);
+    }
+    
+    /* Info Items */
+    .menu-card-info {
+        display: flex;
+        gap: 20px;
+        padding: 15px 0;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+    
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--warm-brown);
+        font-size: 0.9rem;
+    }
+    
+    .info-item i {
+        color: var(--primary-red);
+        width: 18px;
+        font-size: 1rem;
+    }
+    
+    /* Order Button */
+    .order-btn {
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        border: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .order-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(178, 34, 34, 0.3);
+    }
+    
+    /* No Results */
+    .no-results-icon {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, rgba(178, 34, 34, 0.1), rgba(212, 160, 23, 0.1));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 2.5rem;
+        color: var(--primary-red);
+    }
+    
+    /* Featured Section */
+    .featured-card {
+        height: 300px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        padding: 30px;
+        transition: all 0.4s ease;
+    }
+    
+    .featured-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .featured-1 {
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent), 
+                    url('https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .featured-2 {
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent), 
+                    url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .featured-3 {
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent), 
+                    url('https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .featured-content {
+        color: white;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .featured-badge {
+        background: var(--accent-gold);
+        color: var(--dark-charcoal);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    
+    .featured-content h4 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    
+    .featured-content p {
+        opacity: 0.9;
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+    }
+    
+    .featured-price {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--accent-gold);
+    }
+    
+    /* Detail Modal */
+    #detailModal .modal-content {
+        border-radius: 25px;
+        overflow: hidden;
+        border: none;
+        background: transparent;
+    }
+    
+    .detail-modal-content {
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+    }
+    
+    .detail-modal-img {
+        height: 350px;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    .detail-modal-body {
+        padding: 40px;
+    }
+    
+    .detail-price {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary-red);
+        margin-bottom: 20px;
+    }
+    
+    .detail-description {
+        color: var(--warm-brown);
+        line-height: 1.8;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    
+    .detail-info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .detail-info-item {
+        background: rgba(248, 249, 250, 0.5);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .detail-info-label {
+        color: var(--warm-brown);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .detail-info-value {
+        font-weight: 600;
+        color: var(--dark-charcoal);
+        font-size: 1.1rem;
+    }
+    
+    /* Order Modal */
+    #orderModal .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
     }
     
     /* Animations */
-    @keyframes pageFlip {
-        0% { transform: rotateY(0deg); }
-        100% { transform: rotateY(-180deg); }
+    .menu-card-item {
+        animation: fadeInUp 0.6s ease-out forwards;
+        animation-delay: calc(var(--item-index) * 0.1s);
+        opacity: 0;
     }
     
-    @keyframes bookOpen {
-        0% { transform: rotateY(0deg); }
-        100% { transform: rotateY(-180deg); }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
-    @keyframes subtleGlow {
-        0%, 100% { box-shadow: -10px 0 30px rgba(0,0,0,0.3); }
-        50% { box-shadow: -10px 0 40px rgba(180, 34, 34, 0.4); }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
     }
     
     /* Responsive */
     @media (max-width: 992px) {
-        .real-book-container {
-            height: 600px;
+        .category-btn {
+            min-width: 100px;
+            padding: 12px 20px;
         }
         
-        .cover-main-title {
-            font-size: 3.5rem;
+        .stats-number {
+            font-size: 1.8rem;
         }
         
-        .cover-sub-title {
-            font-size: 2.2rem;
-        }
-        
-        .page-content {
-            padding: 25px;
-        }
-        
-        .page-title {
-            font-size: 1.5rem;
-        }
-        
-        .page-inscription {
-            font-size: 1.5rem;
+        .menu-card-img {
+            height: 200px;
         }
     }
     
     @media (max-width: 768px) {
-        .real-book-container {
-            height: 500px;
+        .hero-decoration {
+            margin-top: 30px;
         }
         
-        .cover-content {
+        .category-btn {
+            min-width: 90px;
+            padding: 10px 15px;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .menu-search-container {
+            padding: 12px 20px;
+        }
+        
+        .menu-stats-card {
             padding: 20px;
         }
         
-        .cover-main-title {
-            font-size: 2.8rem;
+        .stats-item {
+            padding: 15px;
         }
         
-        .cover-sub-title {
-            font-size: 1.8rem;
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
         }
         
-        .page-content {
-            padding: 20px;
-        }
-        
-        .page-body {
-            height: calc(100% - 100px);
-        }
-        
-        .menu-item-content {
-            height: 85px;
-        }
-        
-        .page-turn {
-            width: 50px;
-        }
-        
-        .turn-indicator {
-            padding: 10px 5px;
-            font-size: 0.7rem;
-        }
-        
-        .turn-indicator i {
+        .menu-card-title {
             font-size: 1.2rem;
+        }
+        
+        .menu-card-price {
+            font-size: 1.3rem;
+        }
+        
+        .featured-card {
+            height: 250px;
         }
     }
     
     @media (max-width: 576px) {
-        .real-book-container {
-            height: 450px;
+        .category-btn {
+            min-width: 80px;
+            padding: 8px 12px;
         }
         
-        .cover-main-title {
-            font-size: 2.2rem;
+        .category-btn span {
+            font-size: 0.8rem;
         }
         
-        .cover-sub-title {
-            font-size: 1.4rem;
+        .menu-card-body {
+            padding: 20px;
         }
         
-        .page-content {
-            padding: 15px;
+        .menu-card-info {
+            flex-direction: column;
+            gap: 10px;
         }
         
-        .page-title {
-            font-size: 1.3rem;
+        .detail-modal-body {
+            padding: 25px;
         }
         
-        .menu-item-content {
-            height: 95px;
-        }
-        
-        .item-name {
-            font-size: 0.9rem;
-        }
-        
-        .item-desc {
-            font-size: 0.75rem;
+        .detail-info-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>
@@ -1279,310 +1263,379 @@
 
 @section('scripts')
 <script>
-    // Book State Management
-    let currentSpread = 1;
-    const totalSpreads = 3;
-    const book = document.querySelector('.book');
-    const spreads = document.querySelectorAll('.page');
-    const currentSpreadEl = document.getElementById('currentSpread');
-    const totalSpreadsEl = document.getElementById('totalSpreads');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevPageArea = document.getElementById('prevPageArea');
-    const nextPageArea = document.getElementById('nextPageArea');
-    const hardcoverFront = document.querySelector('.hardcover_front');
-    const hardcoverBack = document.querySelector('.hardcover_back');
-    
-    totalSpreadsEl.textContent = totalSpreads;
-    
-    // Open book on load
-    setTimeout(() => {
-        book.classList.add('open');
-        hardcoverFront.style.animation = 'subtleGlow 3s ease-in-out infinite';
-        updateUI();
-    }, 800);
-    
-    // Turn page function
-    function turnPage(direction) {
-        if (direction === 'next' && currentSpread < totalSpreads) {
-            const current = document.querySelector(`.page[data-spread="${currentSpread}"]`);
-            const next = document.querySelector(`.page[data-spread="${currentSpread + 1}"]`);
+    // Menu Filtering
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const menuItems = document.querySelectorAll('.menu-card-item');
+        const menuSearch = document.getElementById('menuSearch');
+        const menuGrid = document.getElementById('menuGrid');
+        const noResults = document.getElementById('noResults');
+        
+        // Stats elements
+        const totalItemsEl = document.getElementById('totalItems');
+        const specialItemsEl = document.getElementById('specialItems');
+        const vegItemsEl = document.getElementById('vegItems');
+        const spicyItemsEl = document.getElementById('spicyItems');
+        
+        // Calculate stats
+        function calculateStats() {
+            const total = menuItems.length;
+            const special = Array.from(menuItems).filter(item => 
+                item.dataset.category === 'special').length;
+            const veg = Array.from(menuItems).filter(item => 
+                item.querySelector('.menu-tag.veg')).length;
+            const spicy = Array.from(menuItems).filter(item => 
+                item.querySelector('.menu-tag.spicy')).length;
             
-            if (!current || !next) return;
-            
-            // Animate page turn
-            current.style.transform = 'rotateY(-180deg)';
-            current.style.opacity = '0';
-            current.style.pointerEvents = 'none';
-            
-            setTimeout(() => {
-                current.classList.remove('active');
-                current.style.transform = '';
-                current.style.opacity = '';
-                current.style.pointerEvents = '';
-                
-                next.classList.add('active');
-                next.style.opacity = '0';
-                next.style.transform = 'rotateY(180deg)';
-                
-                // Animate new spread in
-                setTimeout(() => {
-                    next.style.transform = 'rotateY(0deg)';
-                    next.style.opacity = '1';
-                    currentSpread++;
-                    updateUI();
-                    
-                    // Play page turn sound effect
-                    playPageTurnSound();
-                }, 50);
-            }, 800);
-        } 
-        else if (direction === 'prev' && currentSpread > 1) {
-            const current = document.querySelector(`.page[data-spread="${currentSpread}"]`);
-            const prev = document.querySelector(`.page[data-spread="${currentSpread - 1}"]`);
-            
-            if (!current || !prev) return;
-            
-            // Animate page turn back
-            current.style.transform = 'rotateY(180deg)';
-            current.style.opacity = '0';
-            current.style.pointerEvents = 'none';
-            
-            setTimeout(() => {
-                current.classList.remove('active');
-                current.style.transform = '';
-                current.style.opacity = '';
-                current.style.pointerEvents = '';
-                
-                prev.classList.add('active');
-                prev.style.opacity = '0';
-                prev.style.transform = 'rotateY(-180deg)';
-                
-                // Animate previous spread in
-                setTimeout(() => {
-                    prev.style.transform = 'rotateY(0deg)';
-                    prev.style.opacity = '1';
-                    currentSpread--;
-                    updateUI();
-                    
-                    // Play page turn sound effect
-                    playPageTurnSound();
-                }, 50);
-            }, 800);
+            // Animate numbers
+            animateNumber(totalItemsEl, total);
+            animateNumber(specialItemsEl, special);
+            animateNumber(vegItemsEl, veg);
+            animateNumber(spicyItemsEl, spicy);
         }
-    }
-    
-    function updateUI() {
-        // Update spread indicator
-        const pageStart = (currentSpread - 1) * 2;
-        const pageEnd = pageStart + 1;
-        currentSpreadEl.textContent = `${pageStart + 1}-${pageEnd + 1}`;
         
-        // Update button states
-        prevBtn.disabled = currentSpread === 1;
-        nextBtn.disabled = currentSpread === totalSpreads;
+        function animateNumber(element, target) {
+            let current = 0;
+            const increment = target / 30;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.round(current);
+            }, 30);
+        }
         
-        // Update button styles
-        prevBtn.style.opacity = currentSpread === 1 ? '0.5' : '1';
-        nextBtn.style.opacity = currentSpread === totalSpreads ? '0.5' : '1';
-        
-        // Show/hide page turn areas
-        prevPageArea.style.opacity = currentSpread === 1 ? '0' : '0.3';
-        nextPageArea.style.opacity = currentSpread === totalSpreads ? '0' : '0.3';
-        
-        // Add visual effects for current spread
-        spreads.forEach(spread => {
-            spread.style.boxShadow = '';
+        // Set animation delay for each card
+        menuItems.forEach((item, index) => {
+            item.style.setProperty('--item-index', index);
         });
         
-        const activeSpread = document.querySelector(`.page[data-spread="${currentSpread}"]`);
-        if (activeSpread) {
-            activeSpread.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
-        }
-    }
-    
-    // Event listeners
-    prevBtn.addEventListener('click', () => turnPage('prev'));
-    nextBtn.addEventListener('click', () => turnPage('next'));
-    
-    // Page turn areas
-    prevPageArea.addEventListener('click', () => turnPage('prev'));
-    nextPageArea.addEventListener('click', () => turnPage('next'));
-    
-    // Click on book edges to turn pages
-    book.addEventListener('click', (e) => {
-        const rect = book.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const width = rect.width;
-        
-        // Left 20% for previous page
-        if (clickX < width * 0.2) {
-            turnPage('prev');
-        }
-        // Right 20% for next page
-        else if (clickX > width * 0.8) {
-            turnPage('next');
-        }
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-            turnPage('prev');
-        } else if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-            turnPage('next');
-        }
-    });
-    
-    // Drag to turn
-    let isDragging = false;
-    let startX = 0;
-    let dragThreshold = 50;
-    
-    book.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        book.style.cursor = 'grabbing';
-    });
-    
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        
-        const deltaX = e.clientX - startX;
-        if (Math.abs(deltaX) > dragThreshold) {
-            if (deltaX > 0) {
-                turnPage('prev');
-            } else {
-                turnPage('next');
-            }
-            isDragging = false;
-            book.style.cursor = '';
-        }
-    });
-    
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        book.style.cursor = '';
-    });
-    
-    // Touch support for mobile
-    book.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        e.preventDefault();
-    }, { passive: false });
-    
-    book.addEventListener('touchmove', (e) => {
-        if (!startX) return;
-        
-        const currentX = e.touches[0].clientX;
-        const deltaX = currentX - startX;
-        
-        if (Math.abs(deltaX) > 30) {
-            if (deltaX > 0) {
-                turnPage('prev');
-            } else {
-                turnPage('next');
-            }
-            startX = currentX;
-        }
-        e.preventDefault();
-    }, { passive: false });
-    
-    book.addEventListener('touchend', () => {
-        startX = 0;
-    });
-    
-    // Auto flip demo
-    function autoFlipDemo() {
-        let demoSpread = currentSpread;
-        const demoInterval = setInterval(() => {
-            if (demoSpread < totalSpreads) {
-                turnPage('next');
-                demoSpread++;
-            } else {
-                clearInterval(demoInterval);
-                // Return to start after demo
-                setTimeout(() => {
-                    while (currentSpread > 1) {
-                        turnPage('prev');
-                    }
-                }, 1000);
-            }
-        }, 2000);
-    }
-    
-    // Page turn sound effect
-    function playPageTurnSound() {
-        // Create a simple page turn sound using Web Audio API
-        try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.3);
-            
-            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.3);
-        } catch (e) {
-            // Fallback to silent if Web Audio API not supported
-        }
-    }
-    
-    // Order button functionality
-    document.querySelectorAll('.btn-order').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const itemName = this.getAttribute('data-name');
-            const itemPrice = this.getAttribute('data-price');
-            
-            // Animate the card
-            const card = this.closest('.menu-item-content');
-            card.style.transform = 'rotateY(180deg)';
-            
-            // Show notification
-            createNotification('success', `${itemName} ditambahkan ke pesanan!`, `Rp ${parseInt(itemPrice).toLocaleString('id-ID')}`);
-            
-            // Reset card after 2 seconds
-            setTimeout(() => {
-                card.style.transform = '';
-            }, 2000);
-            
-            // Here you would typically add to cart
-            // addToCart(itemName, itemPrice);
+        // Category Filter
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button with animation
+                categoryButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.animation = 'none';
+                    setTimeout(() => {
+                        btn.style.animation = '';
+                    }, 10);
+                });
+                this.classList.add('active');
+                this.style.animation = 'pulse 0.3s ease';
+                
+                const category = this.dataset.category;
+                filterMenu(category);
+            });
         });
+        
+        // Search Filter
+        menuSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            filterMenu('all', searchTerm);
+        });
+        
+        function filterMenu(category, searchTerm = '') {
+            let visibleCount = 0;
+            
+            menuItems.forEach(item => {
+                const itemCategory = item.dataset.category;
+                const itemName = item.querySelector('.menu-card-title').textContent.toLowerCase();
+                const itemDesc = item.querySelector('.menu-card-desc').textContent.toLowerCase();
+                
+                const matchesCategory = category === 'all' || itemCategory === category;
+                const matchesSearch = !searchTerm || 
+                    itemName.includes(searchTerm) || 
+                    itemDesc.includes(searchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                    
+                    // Add animation
+                    item.style.animation = 'fadeInUp 0.5s ease-out forwards';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.classList.remove('d-none');
+                menuGrid.classList.add('d-none');
+            } else {
+                noResults.classList.add('d-none');
+                menuGrid.classList.remove('d-none');
+            }
+            
+            // Update stats
+            calculateStats();
+        }
+        
+        // Quick View Modal
+        document.querySelectorAll('.quick-view-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const itemData = JSON.parse(this.dataset.item);
+                showDetailModal(itemData);
+            });
+        });
+        
+        // Order Button
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const itemData = JSON.parse(this.dataset.item);
+                showOrderModal(itemData);
+                
+                // Button animation
+                this.style.animation = 'pulse 0.3s ease';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 300);
+            });
+        });
+        
+        // Calculate initial stats
+        calculateStats();
     });
     
-    // Notification function
-    function createNotification(type, message, detail) {
+    // Detail Modal
+    function showDetailModal(item) {
+        const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+        const modalBody = document.querySelector('#detailModal .modal-body');
+        
+        // Build modal content
+        let tagsHTML = '';
+        if (item.tags && item.tags.length > 0) {
+            tagsHTML = item.tags.map(tag => {
+                const tagClasses = {
+                    'best_seller': 'danger',
+                    'signature': 'warning',
+                    'spicy': 'danger',
+                    'vegetarian': 'success',
+                    'traditional': 'secondary',
+                    'premium': 'primary',
+                    'healthy': 'success'
+                }[tag] || 'secondary';
+                
+                const tagLabels = {
+                    'best_seller': 'Best Seller',
+                    'signature': 'Signature',
+                    'spicy': 'Pedas',
+                    'vegetarian': 'Vegetarian',
+                    'traditional': 'Tradisional',
+                    'premium': 'Premium',
+                    'healthy': 'Sehat'
+                }[tag] || tag;
+                
+                return `<span class="badge bg-${tagClasses} me-2 mb-2">${tagLabels}</span>`;
+            }).join('');
+        }
+        
+        // Spicy level indicator
+        let spicyHTML = '';
+        if (item.spicy_level && item.spicy_level > 0) {
+            spicyHTML = `
+                <div class="spicy-level mt-3">
+                    <small class="text-muted d-block mb-2">Level Pedas:</small>
+                    <div class="d-flex gap-1">
+                        ${Array.from({length: 5}).map((_, i) => `
+                            <div class="spicy-dot ${i < item.spicy_level ? 'active' : ''}"></div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        const content = `
+            <div class="detail-modal-content">
+                <img src="${item.image}" alt="${item.name}" class="detail-modal-img">
+                <div class="detail-modal-body">
+                    <h3 class="mb-3" style="color: var(--dark-charcoal); font-weight: 700;">${item.name}</h3>
+                    <div class="detail-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+                    
+                    <div class="mb-4">
+                        ${tagsHTML}
+                        ${spicyHTML}
+                    </div>
+                    
+                    <p class="detail-description">${item.description}</p>
+                    
+                    <div class="detail-info-grid">
+                        <div class="detail-info-item">
+                            <div class="detail-info-label">Kategori</div>
+                            <div class="detail-info-value">${getCategoryName(item.category)}</div>
+                        </div>
+                        
+                        ${item.cooking_time ? `
+                        <div class="detail-info-item">
+                            <div class="detail-info-label">Waktu Masak</div>
+                            <div class="detail-info-value">${item.cooking_time}</div>
+                        </div>
+                        ` : ''}
+                        
+                        ${item.temperature ? `
+                        <div class="detail-info-item">
+                            <div class="detail-info-label">Suhu</div>
+                            <div class="detail-info-value">${item.temperature}</div>
+                        </div>
+                        ` : ''}
+                        
+                        ${item.calories ? `
+                        <div class="detail-info-item">
+                            <div class="detail-info-label">Kalori</div>
+                            <div class="detail-info-value">${item.calories}</div>
+                        </div>
+                        ` : ''}
+                        
+                        ${item.popularity ? `
+                        <div class="detail-info-item">
+                            <div class="detail-info-label">Popularitas</div>
+                            <div class="detail-info-value">${item.popularity}%</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button class="btn btn-primary btn-lg py-3" 
+                                onclick="showOrderModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                            <i class="fas fa-utensils me-2"></i> Pesan Sekarang
+                        </button>
+                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i> Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        modalBody.innerHTML = content;
+        modal.show();
+        
+        // Add spicy level dots style
+        const style = document.createElement('style');
+        style.textContent = `
+            .spicy-dot {
+                width: 25px;
+                height: 8px;
+                border-radius: 4px;
+                background: #e0e0e0;
+                transition: all 0.3s ease;
+            }
+            .spicy-dot.active {
+                background: #e63946;
+            }
+            .spicy-dot.active:nth-child(1) { opacity: 0.6; }
+            .spicy-dot.active:nth-child(2) { opacity: 0.8; }
+            .spicy-dot.active:nth-child(3) { opacity: 1; }
+            .spicy-dot.active:nth-child(4) { 
+                opacity: 1;
+                animation: pulse 1s infinite;
+            }
+            .spicy-dot.active:nth-child(5) { 
+                opacity: 1;
+                animation: pulse 0.5s infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Order Modal
+    function showOrderModal(item) {
+        const modal = new bootstrap.Modal(document.getElementById('orderModal'));
+        const modalBody = document.getElementById('orderModalBody');
+        
+        const content = `
+            <div class="text-center">
+                <div class="mb-4">
+                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center" 
+                         style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-red), var(--secondary-gold));">
+                        <i class="fas fa-utensils fa-2x text-white"></i>
+                    </div>
+                </div>
+                
+                <h5 class="mb-3">Pesan ${item.name}</h5>
+                <p class="text-muted mb-4">Silakan hubungi kami untuk memesan menu ini:</p>
+                
+                <div class="order-info mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Menu:</span>
+                        <strong>${item.name}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Harga:</span>
+                        <strong class="text-primary">Rp ${item.price.toLocaleString('id-ID')}</strong>
+                    </div>
+                </div>
+                
+                <div class="order-actions mt-4">
+                    <a href="tel:+6289699071599" class="btn btn-primary btn-lg w-100 mb-3">
+                        <i class="fas fa-phone me-2"></i> Telepon Sekarang
+                    </a>
+                    <a href="https://wa.me/6289699071599?text=Halo%2C%20saya%20ingin%20memesan%20${encodeURIComponent(item.name)}%20dari%20JOSS%20GANDOS" 
+                       class="btn btn-success btn-lg w-100 mb-3" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i> WhatsApp
+                    </a>
+                    <a href="{{ route('reservation.create') }}" class="btn btn-outline-primary w-100">
+                        <i class="fas fa-calendar-alt me-2"></i> Reservasi Online
+                    </a>
+                </div>
+                
+                <div class="mt-4 pt-3 border-top">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Jam operasional: 10:00 - 22:00 WIB
+                    </small>
+                </div>
+            </div>
+        `;
+        
+        modalBody.innerHTML = content;
+        modal.show();
+    }
+    
+    function getCategoryName(category) {
+        const categories = {
+            'main': 'Menu Utama',
+            'appetizer': 'Pembuka',
+            'drink': 'Minuman',
+            'dessert': 'Pencuci Mulut',
+            'special': 'Menu Spesial'
+        };
+        return categories[category] || category;
+    }
+    
+    // Notification
+    function showNotification(message, type = 'info') {
         const notification = document.createElement('div');
-        notification.className = `alert position-fixed top-0 end-0 m-4 shadow`;
-        notification.style.zIndex = '9999';
-        notification.style.borderRadius = '15px';
-        notification.style.border = '2px solid var(--primary-red)';
-        notification.style.background = 'white';
-        notification.style.animation = 'slideInRight 0.3s ease-out';
+        notification.className = 'position-fixed top-0 end-0 m-4 p-3 rounded shadow';
+        notification.style.cssText = `
+            background: white;
+            border-left: 4px solid ${type === 'success' ? '#4CAF50' : type === 'error' ? '#F44336' : '#2196F3'};
+            z-index: 9999;
+            max-width: 350px;
+            animation: slideInRight 0.3s ease-out;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        `;
+        
         notification.innerHTML = `
             <div class="d-flex align-items-center">
                 <div class="me-3">
-                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary-red), var(--secondary-gold)); 
-                            border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                        <i class="fas fa-check"></i>
-                    </div>
+                    <i class="fas fa-info-circle fa-lg" style="color: var(--primary-red);"></i>
                 </div>
                 <div class="flex-grow-1">
-                    <strong class="d-block" style="color: var(--dark-charcoal);">${message}</strong>
-                    <small style="color: var(--warm-brown);">${detail || 'Menu berhasil ditambahkan'}</small>
+                    <div style="color: var(--dark-charcoal); line-height: 1.4;">${message}</div>
                 </div>
                 <button type="button" class="btn-close ms-3" onclick="this.parentElement.parentElement.remove()"></button>
             </div>
         `;
+        
         document.body.appendChild(notification);
         
         setTimeout(() => {
@@ -1595,39 +1648,24 @@
         }, 3000);
     }
     
-    // Add CSS for animations
+    // Add animation CSS
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
+            from { transform: translateX(30px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     `;
     document.head.appendChild(style);
     
-    // Show turn handles on hover
-    book.addEventListener('mouseenter', () => {
-        if (currentSpread > 1) prevPageArea.style.opacity = '0.3';
-        if (currentSpread < totalSpreads) nextPageArea.style.opacity = '0.3';
-    });
-    
-    book.addEventListener('mouseleave', () => {
-        prevPageArea.style.opacity = '0';
-        nextPageArea.style.opacity = '0';
-    });
-    
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        updateUI();
-        
-        // Console message
-        console.log('%c📖 Menu Buku JOSS GANDOS 📖', 'background: linear-gradient(135deg, #B22222, #D4A017); color: white; padding: 10px 20px; border-radius: 5px; font-size: 14px; font-weight: bold;');
-        console.log('%cBalik halaman untuk menemukan kelezatan Nusantara!', 'color: #8B7355; font-style: italic;');
-    });
+    // Console welcome message
+    console.log('%c🍽️ Menu Digital JOSS GANDOS 🍽️', 
+        'background: linear-gradient(135deg, #B22222, #D4A017); color: white; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold;');
+    console.log('%cSelamat menikmati kelezatan Nusantara!', 'color: #8B7355; font-style: italic;');
 </script>
 @endsection

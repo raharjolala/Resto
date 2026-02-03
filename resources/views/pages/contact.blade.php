@@ -67,11 +67,11 @@
                                         </label>
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-text bg-white border-end-0">
-                                                <i class="fas fa-user text-muted"></i>
+                                                <i class="text-muted"></i>
                                             </span>
                                             <input type="text" class="form-control border-start-0" 
                                                    id="name" name="name" required 
-                                                   placeholder="Nama lengkap Anda">
+                                                   placeholder="">
                                         </div>
                                         <div class="invalid-feedback">Harap isi nama lengkap</div>
                                     </div>
@@ -82,11 +82,11 @@
                                         </label>
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-text bg-white border-end-0">
-                                                <i class="fas fa-envelope text-muted"></i>
+                                                <i class="text-muted"></i>
                                             </span>
                                             <input type="email" class="form-control border-start-0" 
                                                    id="email" name="email" required 
-                                                   placeholder="email@contoh.com">
+                                                   placeholder="">
                                         </div>
                                         <div class="invalid-feedback">Harap isi email yang valid</div>
                                     </div>
@@ -99,11 +99,11 @@
                                         </label>
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-text bg-white border-end-0">
-                                                <i class="fas fa-phone text-muted"></i>
+                                                <i class="text-muted"></i>
                                             </span>
                                             <input type="tel" class="form-control border-start-0" 
                                                    id="phone" name="phone" required 
-                                                   placeholder="0812-3456-7890">
+                                                   placeholder="">
                                         </div>
                                         <div class="invalid-feedback">Harap isi nomor telepon</div>
                                     </div>
@@ -114,7 +114,7 @@
                                         </label>
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-text bg-white border-end-0">
-                                                <i class="fas fa-tag text-muted"></i>
+                                                <i class="text-muted"></i>
                                             </span>
                                             <select class="form-select border-start-0" id="subject" name="subject" required>
                                                 <option value="" selected disabled>Pilih subjek</option>
@@ -136,7 +136,7 @@
                                     </label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-white align-items-start border-end-0" style="padding-top: 14px;">
-                                            <i class="fas fa-edit text-muted"></i>
+                                            <i class="text-muted"></i>
                                         </span>
                                         <textarea class="form-control border-start-0" 
                                                   id="message" name="message" rows="6" required 
@@ -183,7 +183,7 @@
                                     <div>
                                         <h6 class="fw-bold mb-1" style="color: #333;">Lokasi Restoran</h6>
                                         <p class="mb-0 text-muted" style="font-size: 0.95rem;">
-                                            Jl. Jemursari No. 123, Surabaya
+                                            Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231
                                         </p>
                                     </div>
                                 </div>
@@ -261,13 +261,13 @@
                                 <div>
                                     <h4 class="text-white mb-2 fw-bold">Lokasi Kami</h4>
                                     <p class="text-white mb-0 opacity-90" style="font-size: 1.1rem;">
-                                        Jl. Jemursari No. 123, Surabaya
+                                        Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 text-md-end">
-                            <a href="https://maps.google.com/?q=Jl+Jemursari+No.+123+Surabaya" 
+                            <a href="https://maps.google.com/?q=Jl+Jetis+Seraten,+Ketintang,+Kec.+Gayungan,+Surabaya,+Jawa+Timur+60231" 
                                target="_blank" 
                                class="btn btn-light btn-lg px-4 py-2">
                                 <i class="fas fa-directions me-2"></i> Petunjuk Arah
@@ -280,7 +280,7 @@
                 <div class="map-container">
                     <div class="ratio ratio-16x9">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715058999945!2d112.73278731532677!3d-7.270442994754604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa1a4d1c8b07%3A0xc79190bc5e7be85!2sJl.%20Jemursari%2C%20Kec.%20Wonocolo%2C%20Surabaya%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1641914256999!5m2!1sid!2sid" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715058999945!2d112.73278731532677!3d-7.270442994754604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa1a4d1c8b07%3A0xc79190bc5e7be85!2sJl.%20Jetis%20Seraten%2C%20Ketintang%2C%20Kec.%20Gayungan%2C%20Surabaya%2C%20Jawa%20Timur%2060231!5e0!3m2!1sid!2sid!4v1641914256999!5m2!1sid!2sid" 
                             style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy">
@@ -333,7 +333,7 @@
     <!-- Delivery Services Section -->
     <section class="section-padding bg-white">
         <div class="container">
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-lg-8 mx-auto text-center">
                     <h2 class="display-5 fw-bold mb-3" style="color: #b42222;">
                         Pesan <span class="text-warning">Delivery</span>
@@ -346,11 +346,11 @@
             </div>
 
             <!-- Delivery Apps -->
-            <div class="row g-4 mb-5">
+            <div class="row g-4">
                 <!-- GoFood -->
                 <div class="col-md-4">
                     <div class="delivery-app-card text-center animate-fade-in">
-                        <div class="delivery-app-logo mb-4">
+                        <div class="delivery-app-logo mb-3">
                             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnA6euTxY_3bBbvCPE1E_j98O3fWg1WF2IbWmr4cNbt9VsFiY_Fwq7j9TnutdF8KDblPyno9HNOidxExb_pwbQtuMOT8Cdyc7KD01WhRtDlA82X4JybUimnGfUFdoBV9jsTN_eZEzbj37RlpPfXW2InMsaNsEf8bwd4ePUCRclJX9pRf11C-tHNTiZ/w380/GKL20_GoFood%20-%20Koleksilogo.com.jpg" 
                                  alt="GoFood" 
                                  class="img-fluid" 
@@ -358,13 +358,13 @@
                         </div>
                         <div class="delivery-app-content">
                             <h4 class="fw-bold mb-3" style="color: #333;">GoFood</h4>
-                            <p class="text-muted mb-4">
+                            <p class="text-muted mb-3">
                                 Pesan melalui aplikasi GoFood untuk pengiriman cepat dan mudah
                             </p>
                             <a href="https://gofood.co.id/surabaya/restaurant/bebek-joss-gandos-jemursari-8571aff2-33b6-4f54-9fd9-a132a900eb17" 
                                target="_blank"
-                               class="btn w-100 py-3 fw-bold delivery-btn"
-                               style="background: linear-gradient(135deg, #b42222, #e63946);">
+                               class="btn w-100 py-2 fw-bold delivery-btn"
+                               style="background: linear-gradient(135deg, #b42222, #e63946); border: none; border-radius: 10px;">
                                 <i class="fas fa-external-link-alt me-2"></i> Buka di GoFood
                             </a>
                         </div>
@@ -374,7 +374,7 @@
                 <!-- GrabFood -->
                 <div class="col-md-4">
                     <div class="delivery-app-card text-center animate-fade-in">
-                        <div class="delivery-app-logo mb-4">
+                        <div class="delivery-app-logo mb-3">
                             <img src="https://seduhteh.wordpress.com/wp-content/uploads/2019/11/grabfood-vector-logo.png" 
                                  alt="GrabFood" 
                                  class="img-fluid" 
@@ -382,13 +382,13 @@
                         </div>
                         <div class="delivery-app-content">
                             <h4 class="fw-bold mb-3" style="color: #333;">GrabFood</h4>
-                            <p class="text-muted mb-4">
+                            <p class="text-muted mb-3">
                                 Pesan melalui aplikasi GrabFood dengan berbagai pilihan menu lengkap
                             </p>
                             <a href="https://food.grab.com/id/en/restaurant/online-delivery/IDGFSTI00002n8d?sourceID=20251119_121557_7BFCA7D892634AB597F132E1189364C5_MEXMPS" 
                                target="_blank"
-                               class="btn w-100 py-3 fw-bold delivery-btn"
-                               style="background: linear-gradient(135deg, #b42222, #e63946);">
+                               class="btn w-100 py-2 fw-bold delivery-btn"
+                               style="background: linear-gradient(135deg, #b42222, #e63946); border: none; border-radius: 10px;">
                                 <i class="fas fa-external-link-alt me-2"></i> Buka di GrabFood
                             </a>
                         </div>
@@ -397,8 +397,8 @@
 
                 <!-- WhatsApp Order dengan Admin -->
                 <div class="col-md-4">
-                    <div class="delivery-app-card text-center animate-fade-in" style="height: auto;">
-                        <div class="delivery-app-logo mb-4">
+                    <div class="delivery-app-card text-center animate-fade-in">
+                        <div class="delivery-app-logo mb-3">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2048px-WhatsApp.svg.png" 
                                  alt="WhatsApp" 
                                  class="img-fluid" 
@@ -406,124 +406,45 @@
                         </div>
                         <div class="delivery-app-content">
                             <h4 class="fw-bold mb-3" style="color: #333;">WhatsApp Order</h4>
-                            <p class="text-muted mb-4">
+                            <p class="text-muted mb-3">
                                 Pesan langsung via WhatsApp untuk konsultasi menu khusus
                             </p>
                             
-                            <!-- WhatsApp Admin Contacts -->
-                            <div class="whatsapp-admin-list mb-4">
-                                <div class="whatsapp-admin-item d-flex align-items-center mb-3 p-3" style="background: #f8f9fa; border-radius: 10px;">
-                                    <div class="admin-avatar me-3">
-                                        <div class="avatar-circle" style="width: 40px; height: 40px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                    </div>
-                                    <div class="admin-info flex-grow-1">
-                                        <h6 class="fw-bold mb-1" style="color: #333;">Admin 1</h6>
-                                        <p class="mb-0 text-muted" style="font-size: 0.9rem;">0896-9907-1599</p>
-                                    </div>
-                                    <div class="admin-action">
+                            <!-- WhatsApp Admin Contacts - DUA BUTTON SEJAJAR -->
+                            <div class="whatsapp-admin-buttons mb-3">
+                                <div class="row g-2">
+                                    <div class="col-6">
                                         <a href="https://wa.me/6289699071599?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
                                            target="_blank"
-                                           class="btn btn-sm whatsapp-btn"
-                                           style="background: #25D366; color: white; border-radius: 8px; padding: 5px 12px;">
-                                            <i class="fab fa-whatsapp me-1"></i> Chat
+                                           class="btn w-100 py-2 whatsapp-admin-btn d-flex align-items-center justify-content-center"
+                                           style="background: linear-gradient(135deg, #b42222, #e63946); color: white; border: none; border-radius: 10px; font-weight: 500; transition: all 0.3s ease;">
+                                            <i class="fab fa-whatsapp me-2 fs-5"></i>
+                                            <div class="text-start">
+                                                <div class="fw-bold" style="font-size: 0.9rem;">Admin 1</div>
+                                                <div style="font-size: 0.75rem; opacity: 0.9;">0896-9907-1599</div>
+                                            </div>
                                         </a>
                                     </div>
-                                </div>
-                                
-                                <div class="whatsapp-admin-item d-flex align-items-center p-3" style="background: #f8f9fa; border-radius: 10px;">
-                                    <div class="admin-avatar me-3">
-                                        <div class="avatar-circle" style="width: 40px; height: 40px; background: #128C7E; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                    </div>
-                                    <div class="admin-info flex-grow-1">
-                                        <h6 class="fw-bold mb-1" style="color: #333;">Admin 2</h6>
-                                        <p class="mb-0 text-muted" style="font-size: 0.9rem;">0895-3268-2495</p>
-                                    </div>
-                                    <div class="admin-action">
+                                    <div class="col-6">
                                         <a href="https://wa.me/6289532682495?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
                                            target="_blank"
-                                           class="btn btn-sm whatsapp-btn"
-                                           style="background: #25D366; color: white; border-radius: 8px; padding: 5px 12px;">
-                                            <i class="fab fa-whatsapp me-1"></i> Chat
+                                           class="btn w-100 py-2 whatsapp-admin-btn d-flex align-items-center justify-content-center"
+                                           style="background: linear-gradient(135deg, #b42222, #e63946); color: white; border: none; border-radius: 10px; font-weight: 500; transition: all 0.3s ease;">
+                                            <i class="fab fa-whatsapp me-2 fs-5"></i>
+                                            <div class="text-start">
+                                                <div class="fw-bold" style="font-size: 0.9rem;">Admin 2</div>
+                                                <div style="font-size: 0.75rem; opacity: 0.9;">0895-3268-2495</div>
+                                            </div>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="whatsapp-tips mb-4 p-3" style="background: #f0fff4; border-radius: 10px; border-left: 4px solid #25D366;">
-                                <p class="mb-0 text-muted" style="font-size: 0.85rem;">
-                                    <i class="fas fa-lightbulb me-1" style="color: #25D366;"></i>
-                                    <strong>Tips:</strong> Sertakan alamat lengkap dan nomor telepon saat pesan
-                                </p>
-                            </div>
-                            
-                            <a href="https://wa.me/6289699071599?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
-                               target="_blank"
-                               class="btn w-100 py-3 fw-bold delivery-btn"
-                               style="background: linear-gradient(135deg, #b42222, #e63946);">
-                                <i class="fab fa-whatsapp me-2"></i> Pesan via WhatsApp
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Delivery Information -->
-            <div class="row mt-5">
-                <div class="col-lg-8 mx-auto">
-                    <div class="delivery-info-grid animate-fade-in">
-                        <div class="row g-4">
-                            <div class="col-md-3 col-6">
-                                <div class="delivery-info-item text-center p-3">
-                                    <div class="info-icon mb-3">
-                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                    </div>
-                                    <h6 class="fw-bold mb-2">Waktu Pengiriman</h6>
-                                    <p class="mb-0 text-muted">45-60 menit</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="delivery-info-item text-center p-3">
-                                    <div class="info-icon mb-3">
-                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                    </div>
-                                    <h6 class="fw-bold mb-2">Area Pengiriman</h6>
-                                    <p class="mb-0 text-muted">Seluruh Surabaya</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="delivery-info-item text-center p-3">
-                                    <div class="info-icon mb-3">
-                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
-                                            <i class="fas fa-money-bill-wave"></i>
-                                        </div>
-                                    </div>
-                                    <h6 class="fw-bold mb-2">Min. Pembelian</h6>
-                                    <p class="mb-0 text-muted">Rp 25.000</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="delivery-info-item text-center p-3">
-                                    <div class="info-icon mb-3">
-                                        <div style="width: 60px; height: 60px; background: #b42222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
-                                            <i class="fas fa-truck"></i>
-                                        </div>
-                                    </div>
-                                    <h6 class="fw-bold mb-2">Ongkir</h6>
-                                    <p class="mb-0 text-muted">Mulai Rp 10.000</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 @endsection
@@ -707,17 +628,18 @@
         border-radius: 2px;
     }
     
-    /* Delivery App Cards */
+    /* Delivery App Cards - SEMUA BUTTON SEJAJAR */
     .delivery-app-card {
         background: white;
         border-radius: 15px;
-        padding: 25px;
+        padding: 20px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         border: 1px solid rgba(0,0,0,0.1);
         transition: all 0.3s ease;
         height: 100%;
         display: flex;
         flex-direction: column;
+        min-height: 220px;
     }
     
     .delivery-app-card:hover {
@@ -736,12 +658,16 @@
         transform: scale(1.1);
     }
     
+    /* SEMUA BUTTON DELIVERY MENGGUNAKAN STYLE YANG SAMA */
     .delivery-btn {
         color: white;
         border: none;
-        border-radius: 12px;
+        border-radius: 10px;
         transition: all 0.3s ease;
         margin-top: auto;
+        font-weight: 600;
+        padding: 10px;
+        background: linear-gradient(135deg, #b42222, #e63946) !important;
     }
     
     .delivery-btn:hover {
@@ -750,47 +676,27 @@
         color: white;
     }
     
-    /* WhatsApp Admin Styles dalam Kartu */
-    .whatsapp-admin-item {
+    /* WhatsApp Admin Buttons - WARNA MERAH */
+    .whatsapp-admin-btn {
+        color: white;
+        border: none;
+        border-radius: 10px;
         transition: all 0.3s ease;
+        padding: 10px 12px;
+        text-align: left;
+        background: linear-gradient(135deg, #b42222, #e63946) !important;
+        height: 100%;
     }
     
-    .whatsapp-admin-item:hover {
-        transform: translateX(5px);
-        background: #e9ecef !important;
-    }
-    
-    .whatsapp-btn {
-        transition: all 0.3s ease;
-        font-size: 0.85rem;
-    }
-    
-    .whatsapp-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    .whatsapp-admin-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(180, 34, 34, 0.3);
         color: white;
     }
     
-    /* Delivery Info Items */
-    .delivery-info-item {
-        background: white;
-        border-radius: 12px;
-        border: 1px solid rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .delivery-info-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        border-color: var(--primary-red);
-    }
-    
-    .delivery-info-item .info-icon {
-        transition: transform 0.3s ease;
-    }
-    
-    .delivery-info-item:hover .info-icon div {
-        background: linear-gradient(135deg, #b42222, #e63946);
+    /* WhatsApp icon color */
+    .whatsapp-admin-btn .fab {
+        color: white !important;
     }
     
     /* Animation */
@@ -809,7 +715,7 @@
         }
     }
     
-    /* Responsive */
+    /* Responsive untuk semua tombol sejajar */
     @media (max-width: 768px) {
         .contact-hero-section {
             padding: 80px 0;
@@ -835,34 +741,32 @@
         }
         
         .delivery-app-card {
-            padding: 20px;
+            padding: 15px;
             margin-bottom: 20px;
+            min-height: 400px;
         }
         
-        .delivery-info-item {
-            margin-bottom: 15px;
-            padding: 20px 15px;
+        .delivery-app-logo img {
+            max-height: 40px;
         }
         
-        .delivery-info-item .info-icon div {
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
+        .delivery-btn, .whatsapp-admin-btn {
+            padding: 8px 10px;
         }
         
-        .whatsapp-admin-item {
-            padding: 15px !important;
+        .whatsapp-admin-btn .fw-bold {
+            font-size: 0.8rem !important;
         }
         
-        .admin-avatar .avatar-circle {
-            width: 35px !important;
-            height: 35px !important;
+        .whatsapp-admin-btn div div:last-child {
+            font-size: 0.7rem !important;
         }
     }
     
     @media (max-width: 576px) {
         .delivery-app-card {
             padding: 15px;
+            min-height: 380px;
         }
         
         .delivery-app-logo img {
@@ -877,29 +781,53 @@
             font-size: 0.9rem;
         }
         
-        .whatsapp-admin-item {
-            padding: 12px !important;
-        }
-        
-        .admin-info h6 {
+        .delivery-btn, .whatsapp-admin-btn {
+            padding: 8px;
             font-size: 0.9rem;
         }
         
-        .admin-info p {
-            font-size: 0.8rem;
+        .whatsapp-admin-btn {
+            padding: 6px 8px;
         }
         
-        .whatsapp-btn {
-            padding: 4px 10px !important;
-            font-size: 0.8rem;
+        .whatsapp-admin-btn .fab {
+            font-size: 0.9rem !important;
         }
         
-        .delivery-info-item h6 {
-            font-size: 0.9rem;
+        .whatsapp-admin-btn .fw-bold {
+            font-size: 0.75rem !important;
         }
         
-        .delivery-info-item p {
-            font-size: 0.8rem;
+        .whatsapp-admin-btn div div:last-child {
+            font-size: 0.65rem !important;
+        }
+        
+        .whatsapp-info {
+            font-size: 0.8rem !important;
+            padding: 8px !important;
+        }
+    }
+    
+    @media (max-width: 400px) {
+        .whatsapp-admin-btn {
+            flex-direction: column;
+            text-align: center !important;
+            padding: 8px 4px;
+        }
+        
+        .whatsapp-admin-btn .fab {
+            margin-right: 0 !important;
+            margin-bottom: 4px;
+            font-size: 1rem !important;
+        }
+        
+        .whatsapp-admin-btn .text-start {
+            text-align: center !important;
+        }
+        
+        .delivery-btn {
+            font-size: 0.85rem;
+            padding: 8px 4px;
         }
     }
 </style>

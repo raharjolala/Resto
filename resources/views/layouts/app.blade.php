@@ -76,11 +76,11 @@
             z-index: -1;
         }
         
-        /* Navigation */
+        /* ================= NAVBAR FIXES - TENGAH TIDAK MENYAMPING ================= */
         .navbar {
             background: rgba(255, 249, 240, 0.98) !important;
             backdrop-filter: blur(15px);
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             position: fixed;
             top: 0;
             width: 100%;
@@ -95,17 +95,47 @@
         }
         
         .navbar.scrolled {
-            padding: 0.75rem 0;
+            padding: 0.6rem 0;
             box-shadow: 0 8px 30px rgba(139, 0, 0, 0.1);
         }
         
-        /* PERUBAHAN: Brand dengan Logo Image dan Teks */
+        /* Container lebih ketat */
+        .navbar > .container {
+            max-width: 1200px;
+            padding-right: 20px;
+            padding-left: 20px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Navbar container untuk mencegah overflow */
+        .navbar-collapse {
+            overflow: visible !important;
+            flex-grow: 0;
+        }
+        
+        /* Navbar items di tengah */
+        .navbar-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* Brand dengan Logo Image dan Teks */
         .navbar-brand {
             display: flex;
             align-items: center;
             text-decoration: none;
             transition: all 0.3s ease;
-            gap: 15px;
+            gap: 12px;
+            margin-right: auto;
+            flex-shrink: 0;
         }
         
         .navbar-brand:hover {
@@ -113,10 +143,11 @@
         }
         
         .brand-logo {
-            height: 50px;
+            height: 45px;
             width: auto;
             display: block;
             transition: all 0.3s ease;
+            object-fit: contain;
         }
         
         .navbar.scrolled .brand-logo {
@@ -131,7 +162,7 @@
         
         .brand-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-red);
             line-height: 1.1;
@@ -141,30 +172,38 @@
         
         .brand-subtitle {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: var(--secondary-gold);
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         
+        /* Nav Links - DI TENGAH TIDAK MENYAMPING */
         .nav-link {
             color: var(--dark-charcoal) !important;
             font-weight: 500;
-            padding: 0.75rem 1.5rem !important;
-            margin: 0 0.25rem;
+            padding: 0.6rem 0.9rem !important;
+            margin: 0 0.1rem;
             position: relative;
             transition: all 0.3s ease;
             border-radius: 8px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .nav-link i {
+            font-size: 0.85rem;
+            margin-right: 0.35rem;
         }
         
         .nav-link::before {
             content: '';
             position: absolute;
-            bottom: 0.5rem;
+            bottom: 0.35rem;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
@@ -174,35 +213,41 @@
             transition: width 0.3s ease;
         }
         
-        .nav-link::after {
-            content: '•';
-            position: absolute;
-            right: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--secondary-gold);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-link:last-child::after {
-            display: none;
-        }
-        
         .nav-link:hover::before,
         .nav-link.active::before {
-            width: 60%;
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            opacity: 0.5;
+            width: 70%;
         }
         
         .nav-link:hover, .nav-link.active {
             color: var(--primary-red) !important;
             background: rgba(178, 34, 34, 0.05);
             transform: translateY(-2px);
+        }
+        
+        /* Reservasi Button - POSISI DI KANAN */
+        .navbar .btn-primary {
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+            border: none;
+            padding: 0.6rem 1.4rem !important;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            min-width: 115px;
+            white-space: nowrap;
+            margin-left: 0.5rem;
+        }
+        
+        .navbar .btn-primary i {
+            margin-right: 0.35rem;
+        }
+        
+        .navbar .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(178, 34, 34, 0.3);
         }
         
         /* Main Content */
@@ -456,7 +501,7 @@
             opacity: 0.3;
         }
         
-        /* PERUBAHAN: Footer Logo dengan Image dan Teks */
+        /* Footer Logo dengan Image dan Teks */
         .footer-logo-container {
             display: flex;
             flex-direction: column;
@@ -466,12 +511,12 @@
         .footer-logo-wrapper {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 1.5rem;
         }
         
         .footer-logo {
-            height: 60px;
+            height: 55px;
             width: auto;
             display: block;
             transition: all 0.3s ease;
@@ -489,7 +534,7 @@
         
         .footer-brand-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: white;
             line-height: 1.1;
@@ -501,10 +546,10 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 0.8rem;
             font-weight: 500;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.3px;
             color: var(--accent-gold);
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         
         .footer-title {
@@ -635,8 +680,14 @@
             animation: float 3s ease-in-out infinite;
         }
         
-        /* Responsive Design */
+        /* ================= RESPONSIVE DESIGN - TIDAK MENYAMPING ================= */
         @media (max-width: 1200px) {
+            .navbar > .container {
+                max-width: 100%;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+            
             .hero-title {
                 font-size: 3rem;
             }
@@ -645,12 +696,59 @@
                 font-size: 2.2rem;
             }
             
+            /* Navbar adjustment untuk laptop */
+            .nav-link {
+                padding: 0.55rem 0.8rem !important;
+                font-size: 0.88rem;
+            }
+            
+            .navbar .btn-primary {
+                padding: 0.55rem 1.2rem !important;
+                font-size: 0.88rem;
+                min-width: 105px;
+            }
+            
             .brand-name {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.65rem;
             }
             
             .footer-brand-name {
                 font-size: 1.5rem;
+            }
+            
+            .footer-brand-subtitle {
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 1100px) {
+            /* Sedikit penyesuaian untuk layar medium */
+            .nav-link {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.85rem;
+            }
+            
+            .nav-link i {
+                font-size: 0.8rem;
+                margin-right: 0.25rem;
+            }
+            
+            .navbar .btn-primary {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.85rem;
+                min-width: 100px;
+            }
+            
+            .brand-name {
+                font-size: 1.15rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.6rem;
             }
         }
         
@@ -663,6 +761,32 @@
                 padding: 4rem 0;
             }
             
+            /* Tablet view - Navbar menjadi vertikal DI TENGAH */
+            .navbar-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                padding: 1rem 0;
+                text-align: center;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem !important;
+                font-size: 0.9rem;
+                margin: 0.1rem;
+                width: auto;
+                display: inline-block;
+            }
+            
+            .navbar .btn-primary {
+                margin: 0.5rem auto;
+                width: auto;
+                padding: 0.6rem 1.4rem !important;
+                font-size: 0.9rem;
+                display: block;
+                max-width: 200px;
+            }
+            
             .brand-logo {
                 height: 40px;
             }
@@ -672,12 +796,7 @@
             }
             
             .brand-subtitle {
-                font-size: 0.7rem;
-            }
-            
-            .nav-link {
-                padding: 0.5rem 1rem !important;
-                text-align: center;
+                font-size: 0.65rem;
             }
             
             .footer-logo {
@@ -685,17 +804,21 @@
             }
             
             .footer-brand-name {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
             
             .footer-brand-subtitle {
                 font-size: 0.7rem;
             }
+            
+            main {
+                margin-top: 75px;
+            }
         }
         
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .hero-subtitle {
@@ -703,7 +826,7 @@
             }
             
             .section-title h2 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
                 padding: 0 2rem;
             }
             
@@ -712,12 +835,17 @@
             }
             
             body::after {
-                width: 100px;
-                height: 100px;
+                width: 150px;
+                height: 150px;
+            }
+            
+            /* Mobile view - Navbar lebih compact */
+            .navbar-brand {
+                gap: 10px;
             }
             
             .brand-logo {
-                height: 35px;
+                height: 38px;
             }
             
             .brand-name {
@@ -725,8 +853,19 @@
             }
             
             .brand-subtitle {
-                font-size: 0.65rem;
+                font-size: 0.6rem;
                 letter-spacing: 1px;
+            }
+            
+            .nav-link {
+                padding: 0.5rem 0.85rem !important;
+                font-size: 0.85rem;
+            }
+            
+            .navbar .btn-primary {
+                padding: 0.5rem 1.2rem !important;
+                font-size: 0.85rem;
+                min-width: 95px;
             }
             
             .footer-logo {
@@ -734,30 +873,35 @@
             }
             
             .footer-brand-name {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .footer-brand-subtitle {
                 font-size: 0.65rem;
                 letter-spacing: 1px;
             }
+            
+            main {
+                margin-top: 70px;
+            }
         }
         
         @media (max-width: 576px) {
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .section-title h2 {
-                font-size: 1.6rem;
+                font-size: 1.7rem;
             }
             
+            /* Small mobile - navbar items lebih rapat */
             .navbar-brand {
-                gap: 10px;
+                gap: 8px;
             }
             
             .brand-logo {
-                height: 30px;
+                height: 35px;
             }
             
             .brand-name {
@@ -765,8 +909,25 @@
             }
             
             .brand-subtitle {
-                font-size: 0.6rem;
-                letter-spacing: 0.5px;
+                font-size: 0.55rem;
+                letter-spacing: 0.8px;
+            }
+            
+            .nav-link {
+                padding: 0.45rem 0.7rem !important;
+                font-size: 0.8rem;
+                margin: 0.05rem;
+            }
+            
+            .nav-link i {
+                font-size: 0.75rem;
+                margin-right: 0.2rem;
+            }
+            
+            .navbar .btn-primary {
+                padding: 0.45rem 1rem !important;
+                font-size: 0.8rem;
+                min-width: 90px;
             }
             
             .footer-logo-wrapper {
@@ -778,22 +939,63 @@
             }
             
             .footer-brand-name {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .footer-brand-subtitle {
                 font-size: 0.6rem;
-                letter-spacing: 0.5px;
+                letter-spacing: 0.8px;
             }
         }
         
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
+            /* Extra small devices - navbar di tengah sempurna */
             .navbar-brand {
-                gap: 8px;
+                gap: 6px;
             }
             
             .brand-logo {
-                height: 25px;
+                height: 32px;
+            }
+            
+            .brand-name {
+                font-size: 0.95rem;
+            }
+            
+            .brand-subtitle {
+                font-size: 0.5rem;
+                letter-spacing: 0.5px;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.6rem !important;
+                font-size: 0.75rem;
+            }
+            
+            .navbar-toggler {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+            }
+            
+            .navbar .btn-primary {
+                padding: 0.4rem 0.9rem !important;
+                font-size: 0.75rem;
+                min-width: 85px;
+            }
+            
+            .navbar-nav {
+                gap: 0.3rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            /* Very small devices */
+            .navbar-brand {
+                gap: 5px;
+            }
+            
+            .brand-logo {
+                height: 30px;
             }
             
             .brand-name {
@@ -801,21 +1003,18 @@
             }
             
             .brand-subtitle {
-                font-size: 0.55rem;
+                font-size: 0.45rem;
             }
             
-            .footer-logo-wrapper {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
+            .nav-link {
+                padding: 0.35rem 0.5rem !important;
+                font-size: 0.7rem;
             }
             
-            .footer-logo {
-                height: 35px;
-            }
-            
-            .footer-brand-name {
-                font-size: 0.9rem;
+            .navbar .btn-primary {
+                padding: 0.35rem 0.8rem !important;
+                font-size: 0.7rem;
+                min-width: 80px;
             }
         }
         
@@ -852,125 +1051,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        /* Wood Texture Background */
-        .wood-bg {
-            background-image: 
-                linear-gradient(rgba(232, 215, 184, 0.1), rgba(232, 215, 184, 0.05)),
-                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='none'/%3E%3Cpath d='M0 20h100M0 40h100M0 60h100M0 80h100' stroke='%238B7355' stroke-width='0.5' stroke-opacity='0.1'/%3E%3C/svg%3E");
-            background-size: 100px;
-        }
-        
-        /* Batik Pattern */
-        .batik-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B22222' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 60px;
-        }
-        
-        /* Wayang-inspired border */
-        .wayang-border {
-            position: relative;
-        }
-        
-        .wayang-border::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--primary-red) 20%, 
-                var(--secondary-gold) 50%, 
-                var(--primary-red) 80%, 
-                transparent 100%);
-        }
-        
-        /* Traditional Divider */
-        .traditional-divider {
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--primary-red) 25%, 
-                var(--secondary-gold) 50%, 
-                var(--primary-red) 75%, 
-                transparent);
-            margin: 2rem 0;
-            position: relative;
-        }
-        
-        .traditional-divider::before,
-        .traditional-divider::after {
-            content: '✦';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--secondary-gold);
-            font-size: 1.2rem;
-        }
-        
-        .traditional-divider::before {
-            left: 30%;
-        }
-        
-        .traditional-divider::after {
-            right: 30%;
-        }
-        
-        /* Indonesian Pattern Overlay */
-        .indonesian-pattern {
-            position: relative;
-        }
-        
-        .indonesian-pattern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60,0 Q90,30 60,60 Q30,90 60,120' stroke='%23D4A017' stroke-width='0.3' fill='none' opacity='0.05'/%3E%3Cpath d='M0,60 Q30,90 60,60 Q90,30 120,60' stroke='%23B22222' stroke-width='0.3' fill='none' opacity='0.05'/%3E%3C/svg%3E");
-            background-size: 120px;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        /* Enhanced Card Hover Effects */
-        .modern-card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .modern-card-hover:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary-red), var(--secondary-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Border Animation */
-        .border-animate {
-            position: relative;
-            border: 2px solid transparent;
-            background: linear-gradient(var(--neutral-cream), var(--neutral-cream)) padding-box,
-                        linear-gradient(135deg, var(--primary-red), var(--secondary-gold)) border-box;
-            animation: borderRotate 3s linear infinite;
-        }
-        
-        @keyframes borderRotate {
-            0% {
-                border-image: linear-gradient(0deg, var(--primary-red), var(--secondary-gold)) 1;
-            }
-            100% {
-                border-image: linear-gradient(360deg, var(--primary-red), var(--secondary-gold)) 1;
-            }
-        }
     </style>
     
     @yield('styles')
@@ -979,7 +1059,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <!-- PERUBAHAN: Logo dan Teks di Header -->
+            <!-- Logo dan Teks di Header -->
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="https://restojossgandos.com/public/img/logojossgandos.png" 
                      alt="JOSS GANDOS - Restoran Indonesia" 
@@ -993,38 +1073,40 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
+                <ul class="navbar-nav mx-auto align-items-lg-center">
+                    <!-- Menu Items DI TENGAH -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="fas fa-home me-2"></i>Home
+                            <i class="fas fa-home me-1"></i>Home
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
-                            <i class="fas fa-history me-2"></i>Tentang
+                            <i class="fas fa-history me-1"></i>Tentang
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('menu') ? 'active' : '' }}" href="{{ route('menu') }}">
-                            <i class="fas fa-utensils me-2"></i>Menu
+                            <i class="fas fa-utensils me-1"></i>Menu
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
-                            <i class="fas fa-images me-2"></i>Gallery
+                            <i class="fas fa-images me-1"></i>Gallery
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            <i class="fas fa-phone me-2"></i>Kontak
-                        </a>
-                    </li>
-                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a href="{{ route('reservation.create') }}" class="btn btn-primary">
-                            <i class="fas fa-calendar-alt me-2"></i> Reservasi
+                            <i class="fas fa-phone me-1"></i>Kontak
                         </a>
                     </li>
                 </ul>
+                <!-- Reservasi Button DI KANAN -->
+                <div class="d-lg-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
+                    <a href="{{ route('reservation.create') }}" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt me-1"></i> Reservasi
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -1038,7 +1120,7 @@
     <footer>
         <div class="container">
             <div class="row">
-                <!-- PERUBAHAN: Logo dan Teks di Footer -->
+                <!-- Logo dan Teks di Footer -->
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="footer-logo-container">
                         <div class="footer-logo-wrapper">
@@ -1160,7 +1242,7 @@
             const brandLogo = document.querySelector('.brand-logo');
             
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
+                if (window.scrollY > 30) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
@@ -1326,7 +1408,7 @@
                     logo.style.borderRadius = '5px';
                     logo.style.color = 'white';
                     logo.style.fontFamily = "'Poppins', sans-serif";
-                    logo.style.fontSize = '1.2rem';
+                    logo.style.fontSize = '1rem';
                     logo.style.fontWeight = '700';
                     logo.style.display = 'flex';
                     logo.style.alignItems = 'center';
@@ -1338,6 +1420,105 @@
                     logo.style.height = '50px';
                 });
             };
+            
+            // Fix for navbar on mobile devices
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            if (navbarToggler && navbarCollapse) {
+                navbarToggler.addEventListener('click', function() {
+                    if (navbarCollapse.classList.contains('show')) {
+                        document.body.style.overflow = 'auto';
+                    } else {
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+                
+                // Close navbar when clicking outside on mobile
+                document.addEventListener('click', function(event) {
+                    if (window.innerWidth < 992 && 
+                        !navbarToggler.contains(event.target) && 
+                        !navbarCollapse.contains(event.target) && 
+                        navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                });
+            }
+            
+            // Fix for zoom 100% - prevent horizontal scroll
+            function handleZoom() {
+                const viewportWidth = window.innerWidth;
+                const bodyWidth = document.body.clientWidth;
+                
+                if (bodyWidth > viewportWidth) {
+                    document.documentElement.style.overflowX = 'hidden';
+                    document.body.style.overflowX = 'hidden';
+                } else {
+                    document.documentElement.style.overflowX = 'auto';
+                    document.body.style.overflowX = 'auto';
+                }
+            }
+            
+            // Initial check
+            handleZoom();
+            
+            // Check on resize and zoom
+            window.addEventListener('resize', handleZoom);
+            
+            // Check after CSS animations
+            setTimeout(handleZoom, 1000);
+            
+            // Function to center navbar items
+            function centerNavbarItems() {
+                const navbarNav = document.querySelector('.navbar-nav');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                if (window.innerWidth >= 992) {
+                    // Calculate total width of nav items
+                    let totalWidth = 0;
+                    navLinks.forEach(link => {
+                        totalWidth += link.offsetWidth;
+                    });
+                    
+                    // Calculate available space
+                    const container = document.querySelector('.navbar > .container');
+                    const brandWidth = document.querySelector('.navbar-brand').offsetWidth;
+                    const buttonWidth = document.querySelector('.navbar .btn-primary').offsetWidth;
+                    const availableWidth = container.offsetWidth - brandWidth - buttonWidth - 100; // padding/margin
+                    
+                    // If nav items are too wide, adjust
+                    if (totalWidth > availableWidth * 0.85) {
+                        // Reduce padding slightly
+                        navLinks.forEach(link => {
+                            link.style.padding = '0.5rem 0.7rem !important';
+                            link.style.fontSize = '0.85rem';
+                        });
+                    } else {
+                        // Reset to normal
+                        navLinks.forEach(link => {
+                            link.style.padding = '';
+                            link.style.fontSize = '';
+                        });
+                    }
+                    
+                    // Center the nav items
+                    const remainingSpace = availableWidth - totalWidth;
+                    if (remainingSpace > 0) {
+                        navbarNav.style.marginLeft = (remainingSpace / 2) + 'px';
+                    } else {
+                        navbarNav.style.marginLeft = '0';
+                    }
+                } else {
+                    navbarNav.style.marginLeft = '0';
+                }
+            }
+            
+            // Run centering on load and resize
+            window.addEventListener('load', centerNavbarItems);
+            window.addEventListener('resize', centerNavbarItems);
+            
+            // Also run after a short delay to ensure all elements are loaded
+            setTimeout(centerNavbarItems, 500);
         });
         
         // Notification function
