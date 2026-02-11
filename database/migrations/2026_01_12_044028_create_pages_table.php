@@ -36,8 +36,47 @@ return new class extends Migration
             'image' => null
         ];
 
+        // Default home page content
+        $homeContent = [
+            // Hero Section
+            'hero_title_line1' => 'Selamat Datang di',
+            'hero_title_line2' => 'Resto Joss Gandos',
+            'hero_subtitle' => 'Pelopor No. 1 Resto dan Cafe di Jemursari',
+            'hero_button1_text' => 'Jelajahi',
+            'hero_button2_text' => 'Reservasi',
+            
+            // Welcome/About Section
+            'welcome_title_line1' => 'Selamat Datang',
+            'welcome_title_line2' => 'Resto Joss Gandos',
+            'welcome_description' => 'Tempat di mana rasa, suasana, dan kehangatan berpadu menjadi satu. Setiap kunjungan adalah perjalanan rasa yang membuat Anda ingin kembali lagi.',
+            
+            'feature_1_text' => 'Bahan premium pilihan terbaik',
+            'feature_2_text' => 'Chef berpengalaman & profesional',
+            'feature_3_text' => 'Suasana nyaman untuk keluarga',
+            'feature_4_text' => 'Pelayanan ramah & cepat',
+            
+            'stat_menu_count' => '50',
+            'stat_customer_count' => '1000',
+            'stat_rating_count' => '5',
+            
+            // Services Section
+            'services_title_line1' => 'Fasilitas &',
+            'services_title_line2' => 'Pelayanan Premium',
+            'services_subtitle' => 'Nikmati berbagai fasilitas dan layanan terbaik untuk kenyamanan Anda',
+            
+            // Testimonials Section
+            'testimonials_title_line1' => 'Apa Kata',
+            'testimonials_title_line2' => 'Pelanggan Kami?',
+            'testimonials_subtitle' => 'Ribuan pelanggan puas telah merasakan kehangatan dan kelezatan Joss Gandos',
+            
+            // CTA Section
+            'cta_title_line1' => 'Siap Merasakan',
+            'cta_title_line2' => 'Pengalaman Kuliner Terbaik?',
+            'cta_description' => 'Bergabunglah dengan ribuan pelanggan yang telah merasakan kelezatan hidangan istimewa kami. Pesan dan reservasi sekarang!',
+        ];
+
         // Check if pages already exist
-        $existingPages = DB::table('pages')->whereIn('name', ['about', 'home', 'contact'])->count();
+        $existingPages = DB::table('pages')->whereIn('name', ['about', 'home'])->count();
         
         if ($existingPages === 0) {
             DB::table('pages')->insert([
@@ -55,36 +94,10 @@ return new class extends Migration
                 [
                     'name' => 'home',
                     'slug' => 'beranda',
-                    'title' => 'Selamat Datang di JOSS GANDOS',
-                    'content' => json_encode([
-                        'hero_subtitle' => 'Nikmati Berbagai Sajian Kuliner Lezat dengan Suasana yang Nyaman dan Ramah di Joss Gandos.',
-                        'hero_image' => null,
-                        'features' => [
-                            ['title' => 'Makanan Lezat', 'description' => 'Hidangan berkualitas tinggi'],
-                            ['title' => 'Pelayanan Ramah', 'description' => 'Staff profesional dan ramah'],
-                            ['title' => 'Suasana Nyaman', 'description' => 'Tempat yang cozy untuk bersantai']
-                        ]
-                    ]),
-                    'meta_title' => 'JOSS GANDOS - Restoran & Cafe Terbaik',
+                    'title' => 'Resto Joss Gandos - Pelopor No. 1 Resto dan Cafe di Jemursari',
+                    'content' => json_encode($homeContent),
+                    'meta_title' => 'Resto Joss Gandos - Pelopor No. 1 Resto dan Cafe di Jemursari',
                     'meta_description' => 'JOSS GANDOS - Restoran dan Cafe dengan makanan lezat dan suasana nyaman',
-                    'is_active' => true,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'name' => 'contact',
-                    'slug' => 'hubungi-kami',
-                    'title' => 'Hubungi Kami',
-                    'content' => json_encode([
-                        'description' => 'Silakan hubungi kami untuk reservasi atau pertanyaan lainnya.',
-                        'address' => 'JL Baye Kuliner No. 123, Jakarta, Indonesia',
-                        'phone' => '(021) 1234-5678',
-                        'email' => 'info@jossgandos.com',
-                        'hours' => 'Setiap Hari: 10:00 - 22:00 WIB',
-                        'map_embed' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8195613506864!3d-6.194741395493371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5390917b759%3A0x6b45e67356080477!2sJakarta%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1641914256999!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
-                    ]),
-                    'meta_title' => 'Hubungi JOSS GANDOS',
-                    'meta_description' => 'Hubungi JOSS GANDOS untuk reservasi atau informasi lebih lanjut',
                     'is_active' => true,
                     'created_at' => now(),
                     'updated_at' => now(),

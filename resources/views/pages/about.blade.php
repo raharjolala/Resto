@@ -404,11 +404,6 @@
                         </div>
                         <p class="text-muted mb-4">{{ $member['desc'] }}</p>
                         
-                        <div class="team-social">
-                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1608,7 +1603,7 @@
             
             item.addEventListener('mouseleave', function() {
                 const icon = this.querySelector('.milestone-icon');
-                const title = this.querySelector('h5');
+                const title = this.querySlector('h5');
                 
                 if (icon) icon.style.transform = 'scale(1.1)';
                 if (title) title.style.color = 'var(--dark-charcoal)';

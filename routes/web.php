@@ -4,18 +4,37 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\PageController; // Import PageController
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
 
-// ==================== PUBLIC WEBSITE ROUTES ====================
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [PageController::class, 'indexAbout'])->name('about');
+
+// Admin routes (dengan middleware auth)
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    // Page management
+    Route::get('/pages/home/edit', [PageController::class, 'editHome'])->name('pages.home.edit');
+    Route::post('/pages/home/update', [PageController::class, 'updateHome'])->name('pages.home.update');
+    
+    Route::get('/pages/about/edit', [PageController::class, 'editAbout'])->name('pages.about.edit');
+    Route::post('/pages/about/update', [PageController::class, 'updateAbout'])->name('pages.about.update');
+});
+
+// Fallback routes (jika ada route lain yang belum didefinisikan)
+Route::fallback(function () {
+    return redirect()->route('home');
+});
+// ==================== PUBLIC WEBSITE ROUTES ====================
+// Home Page - menggunakan HomeController yang baru
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 
-// PASTIKAN ROUTE ABOUT MENGGUNAKAN PageController
+// About Page - using PageController for dynamic content
 Route::get('/about', [PageController::class, 'indexAbout'])->name('about');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -43,7 +62,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     
     // ===== EDIT PAGES ROUTES =====
-    // Home Page Edit
+    // Home Page Edit - tetap di PageController
     Route::get('/pages/home/edit', [PageController::class, 'editHome'])->name('admin.pages.home.edit');
     Route::post('/pages/home/update', [PageController::class, 'updateHome'])->name('admin.pages.home.update');
     
@@ -58,7 +77,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Settings
     Route::get('/settings', [AdminController::class, 'editSettings'])->name('admin.settings.edit');
     Route::post('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
-    // ===== END EDIT PAGES ROUTES =====
     
     // Menu Management
     Route::get('/menu', [AdminController::class, 'menuIndex'])->name('admin.menu.index');
@@ -97,69 +115,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 // ==================== FALLBACK/COMPATIBILITY ROUTES ====================
 Route::get('/login', function () {
     return redirect()->route('admin.login');
-});
-
-// ==================== DEBUG ROUTES ====================
-Route::get('/check-pages-columns', function() {
-    try {
-        echo "<h1>Checking Pages Table Structure</h1>";
-        
-        $columns = \Illuminate\Support\Facades\Schema::getColumnListing('pages');
-        
-        echo "<h2>Columns in 'pages' table:</h2>";
-        echo "<ul>";
-        foreach ($columns as $column) {
-            echo "<li>$column</li>";
-        }
-        echo "</ul>";
-        
-        echo "<h2>Data in 'pages' table:</h2>";
-        $pages = \Illuminate\Support\Facades\DB::table('pages')->get();
-        
-        if ($pages->isEmpty()) {
-            echo "No data found";
-        } else {
-            echo "<table border='1' cellpadding='5'>";
-            echo "<tr><th>ID</th><th>Slug</th><th>Title</th><th>Created At</th></tr>";
-            foreach ($pages as $page) {
-                echo "<tr>";
-                echo "<td>{$page->id}</td>";
-                echo "<td>{$page->slug}</td>";
-                echo "<td>{$page->title}</td>";
-                echo "<td>{$page->created_at}</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-        }
-        
-    } catch (\Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
-});
-
-Route::get('/fix-pages-data', function() {
-    try {
-        echo "<h1>Fixing Pages Data</h1>";
-        
-        // Cek jika ada data dengan is_active
-        $count = \Illuminate\Support\Facades\DB::table('pages')
-            ->whereNotNull('is_active')
-            ->count();
-            
-        echo "Pages with is_active column: $count<br>";
-        
-        // Jika ada, hapus kolom is_active dari data
-        if ($count > 0) {
-            \Illuminate\Support\Facades\DB::table('pages')
-                ->update(['is_active' => null]);
-            echo "Removed is_active data<br>";
-        }
-        
-        echo "Done!";
-        
-    } catch (\Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
 });
 
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');

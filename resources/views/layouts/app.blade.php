@@ -11,8 +11,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Great+Vibes&family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - MENAMBAHKAN FONT INTER YANG LEBIH CLEAN -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     @stack('styles')
     
@@ -28,6 +28,7 @@
             --light-gray: #F8F9FA;
             --wood-light: #E8D7B8;
             --batik-pattern: #F0E6D2;
+            --gradient-red: linear-gradient(135deg, #B22222, #8B0000, #A52A2A);
         }
         
         * {
@@ -37,7 +38,7 @@
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--dark-charcoal);
             line-height: 1.7;
             background-color: var(--neutral-cream);
@@ -76,7 +77,7 @@
             z-index: -1;
         }
         
-        /* ================= NAVBAR FIXES - TENGAH TIDAK MENYAMPING ================= */
+        /* ================= NAVBAR DENGAN SHADOW GRADIENT MERAH PADA ACTIVE STATE ================= */
         .navbar {
             background: rgba(255, 249, 240, 0.98) !important;
             backdrop-filter: blur(15px);
@@ -116,13 +117,13 @@
             flex-grow: 0;
         }
         
-        /* Navbar items di tengah */
+        /* Navbar items di tengah - SEMUA ITEM DALAM SATU BARIS */
         .navbar-nav {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.2rem;
             padding: 0;
             margin: 0;
         }
@@ -161,93 +162,120 @@
         }
         
         .brand-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--primary-red);
             line-height: 1.1;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         
         .brand-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
             letter-spacing: 1.2px;
             color: var(--secondary-gold);
             text-transform: uppercase;
             margin-top: 2px;
         }
         
-        /* Nav Links - DI TENGAH TIDAK MENYAMPING */
+        /* Nav Links - DENGAN SHADOW GRADIENT MERAH PADA ACTIVE STATE */
         .nav-link {
             color: var(--dark-charcoal) !important;
-            font-weight: 500;
-            padding: 0.6rem 0.9rem !important;
+            font-weight: 600;
+            padding: 0.7rem 1rem !important;
             margin: 0 0.1rem;
             position: relative;
             transition: all 0.3s ease;
             border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             white-space: nowrap;
             flex-shrink: 0;
+            letter-spacing: normal;
+            text-transform: none;
         }
         
+        /* HAPUS ICON DARI NAV LINK */
         .nav-link i {
-            font-size: 0.85rem;
-            margin-right: 0.35rem;
+            display: none !important;
         }
         
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0.35rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-red), var(--secondary-gold));
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            width: 70%;
-        }
-        
+        /* Hover dan active state dengan shadow gradient merah */
         .nav-link:hover, .nav-link.active {
             color: var(--primary-red) !important;
             background: rgba(178, 34, 34, 0.05);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            /* Shadow gradient merah */
+            box-shadow: 0 4px 15px rgba(178, 34, 34, 0.15), 
+                        inset 0 0 0 1px rgba(178, 34, 34, 0.1);
         }
         
-        /* Reservasi Button - POSISI DI KANAN */
-        .navbar .btn-primary {
-            background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        /* Active state yang lebih menonjol */
+        .nav-link.active {
+            background: rgba(178, 34, 34, 0.08);
+            box-shadow: 0 6px 20px rgba(178, 34, 34, 0.2),
+                        0 0 0 2px rgba(178, 34, 34, 0.1);
+        }
+        
+        /* Reservasi Button - GRADIENT MERAH */
+        .nav-link.reservasi-btn {
+            background: linear-gradient(135deg, #B22222, #8B0000, #A52A2A) !important;
+            color: white !important;
             border: none;
-            padding: 0.6rem 1.4rem !important;
-            font-weight: 600;
+            padding: 0.7rem 1.5rem !important;
+            font-weight: 700;
             border-radius: 10px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            min-width: 115px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             white-space: nowrap;
-            margin-left: 0.5rem;
+            margin-left: 0.8rem;
+            letter-spacing: normal;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            /* Shadow gradient merah yang lebih kuat */
+            box-shadow: 0 6px 20px rgba(178, 34, 34, 0.3),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2);
         }
         
-        .navbar .btn-primary i {
-            margin-right: 0.35rem;
-        }
-        
-        .navbar .btn-primary:hover {
+        .nav-link.reservasi-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(178, 34, 34, 0.3);
+            /* Shadow gradient merah yang lebih kuat saat hover */
+            box-shadow: 0 10px 30px rgba(178, 34, 34, 0.4),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            color: white !important;
+            background: linear-gradient(135deg, #8B0000, #B22222, #8B0000) !important;
+        }
+        
+        /* Active state untuk tombol reservasi */
+        .nav-link.reservasi-btn.active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(178, 34, 34, 0.5),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2),
+                        0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Efek tambahan untuk tombol reservasi */
+        .nav-link.reservasi-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .nav-link.reservasi-btn:hover::after {
+            opacity: 1;
         }
         
         /* Main Content */
@@ -290,7 +318,7 @@
         }
         
         .hero-title {
-            font-family: 'Libre Baskerville', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
@@ -352,7 +380,7 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--dark-charcoal);
-            font-family: 'Libre Baskerville', serif;
+            font-family: 'Playfair Display', serif;
             position: relative;
             display: inline-block;
             padding: 0 3rem;
@@ -443,12 +471,12 @@
             background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
             border: none;
             padding: 0.875rem 2rem;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 10px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
         
         .btn-primary::before {
@@ -533,20 +561,21 @@
         }
         
         .footer-brand-name {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 1.6rem;
-            font-weight: 700;
+            font-weight: 800;
             color: white;
             line-height: 1.1;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
         
         .footer-brand-subtitle {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 1.3px;
+            font-weight: 600;
+            letter-spacing: 1px;
             color: var(--accent-gold);
             text-transform: uppercase;
             margin-top: 2px;
@@ -556,8 +585,8 @@
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
             color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
             position: relative;
             padding-bottom: 0.75rem;
         }
@@ -595,6 +624,8 @@
             text-decoration: none;
             transition: all 0.3s ease;
             display: inline-block;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
         }
         
         .footer-links a:hover {
@@ -680,7 +711,7 @@
             animation: float 3s ease-in-out infinite;
         }
         
-        /* ================= RESPONSIVE DESIGN - TIDAK MENYAMPING ================= */
+        /* ================= RESPONSIVE DESIGN ================= */
         @media (max-width: 1200px) {
             .navbar > .container {
                 max-width: 100%;
@@ -698,22 +729,25 @@
             
             /* Navbar adjustment untuk laptop */
             .nav-link {
-                padding: 0.55rem 0.8rem !important;
-                font-size: 0.88rem;
+                padding: 0.6rem 0.8rem !important;
+                font-size: 0.9rem;
+                margin: 0 0.05rem;
             }
             
-            .navbar .btn-primary {
-                padding: 0.55rem 1.2rem !important;
-                font-size: 0.88rem;
-                min-width: 105px;
+            .nav-link.reservasi-btn {
+                padding: 0.6rem 1.3rem !important;
+                font-size: 0.9rem;
+                margin-left: 0.6rem;
             }
             
             .brand-name {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
+                letter-spacing: 0.6px;
             }
             
             .brand-subtitle {
-                font-size: 0.65rem;
+                font-size: 0.7rem;
+                letter-spacing: 1px;
             }
             
             .footer-brand-name {
@@ -722,33 +756,32 @@
             
             .footer-brand-subtitle {
                 font-size: 0.75rem;
+                letter-spacing: 0.8px;
             }
         }
         
         @media (max-width: 1100px) {
             /* Sedikit penyesuaian untuk layar medium */
             .nav-link {
-                padding: 0.5rem 0.75rem !important;
-                font-size: 0.85rem;
+                padding: 0.55rem 0.7rem !important;
+                font-size: 0.88rem;
+                margin: 0 0.05rem;
             }
             
-            .nav-link i {
-                font-size: 0.8rem;
-                margin-right: 0.25rem;
-            }
-            
-            .navbar .btn-primary {
-                padding: 0.5rem 1rem !important;
-                font-size: 0.85rem;
-                min-width: 100px;
+            .nav-link.reservasi-btn {
+                padding: 0.55rem 1.1rem !important;
+                font-size: 0.88rem;
+                margin-left: 0.5rem;
             }
             
             .brand-name {
-                font-size: 1.15rem;
+                font-size: 1.3rem;
+                letter-spacing: 0.5px;
             }
             
             .brand-subtitle {
-                font-size: 0.6rem;
+                font-size: 0.65rem;
+                letter-spacing: 0.8px;
             }
         }
         
@@ -761,27 +794,27 @@
                 padding: 4rem 0;
             }
             
-            /* Tablet view - Navbar menjadi vertikal DI TENGAH */
+            /* Tablet view - Navbar menjadi vertikal */
             .navbar-nav {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 0.5rem;
+                gap: 0.3rem;
                 padding: 1rem 0;
                 text-align: center;
             }
             
             .nav-link {
-                padding: 0.6rem 1rem !important;
+                padding: 0.6rem 0.9rem !important;
                 font-size: 0.9rem;
-                margin: 0.1rem;
+                margin: 0.05rem;
                 width: auto;
                 display: inline-block;
             }
             
-            .navbar .btn-primary {
-                margin: 0.5rem auto;
+            .nav-link.reservasi-btn {
+                margin: 0.3rem auto;
                 width: auto;
-                padding: 0.6rem 1.4rem !important;
+                padding: 0.6rem 1.3rem !important;
                 font-size: 0.9rem;
                 display: block;
                 max-width: 200px;
@@ -792,11 +825,13 @@
             }
             
             .brand-name {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
+                letter-spacing: 0.5px;
             }
             
             .brand-subtitle {
                 font-size: 0.65rem;
+                letter-spacing: 0.8px;
             }
             
             .footer-logo {
@@ -809,6 +844,7 @@
             
             .footer-brand-subtitle {
                 font-size: 0.7rem;
+                letter-spacing: 0.8px;
             }
             
             main {
@@ -849,23 +885,25 @@
             }
             
             .brand-name {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+                letter-spacing: 0.4px;
             }
             
             .brand-subtitle {
                 font-size: 0.6rem;
-                letter-spacing: 1px;
+                letter-spacing: 0.6px;
             }
             
             .nav-link {
-                padding: 0.5rem 0.85rem !important;
+                padding: 0.5rem 0.8rem !important;
                 font-size: 0.85rem;
+                margin: 0 0.03rem;
             }
             
-            .navbar .btn-primary {
-                padding: 0.5rem 1.2rem !important;
+            .nav-link.reservasi-btn {
+                padding: 0.5rem 1.1rem !important;
                 font-size: 0.85rem;
-                min-width: 95px;
+                margin-left: 0.4rem;
             }
             
             .footer-logo {
@@ -878,7 +916,7 @@
             
             .footer-brand-subtitle {
                 font-size: 0.65rem;
-                letter-spacing: 1px;
+                letter-spacing: 0.6px;
             }
             
             main {
@@ -905,29 +943,25 @@
             }
             
             .brand-name {
-                font-size: 1rem;
+                font-size: 1.1rem;
+                letter-spacing: 0.3px;
             }
             
             .brand-subtitle {
                 font-size: 0.55rem;
-                letter-spacing: 0.8px;
+                letter-spacing: 0.5px;
             }
             
             .nav-link {
                 padding: 0.45rem 0.7rem !important;
                 font-size: 0.8rem;
-                margin: 0.05rem;
+                margin: 0 0.02rem;
             }
             
-            .nav-link i {
-                font-size: 0.75rem;
-                margin-right: 0.2rem;
-            }
-            
-            .navbar .btn-primary {
+            .nav-link.reservasi-btn {
                 padding: 0.45rem 1rem !important;
                 font-size: 0.8rem;
-                min-width: 90px;
+                margin-left: 0.3rem;
             }
             
             .footer-logo-wrapper {
@@ -944,7 +978,7 @@
             
             .footer-brand-subtitle {
                 font-size: 0.6rem;
-                letter-spacing: 0.8px;
+                letter-spacing: 0.5px;
             }
         }
         
@@ -960,16 +994,18 @@
             
             .brand-name {
                 font-size: 0.95rem;
+                letter-spacing: 0.2px;
             }
             
             .brand-subtitle {
                 font-size: 0.5rem;
-                letter-spacing: 0.5px;
+                letter-spacing: 0.4px;
             }
             
             .nav-link {
                 padding: 0.4rem 0.6rem !important;
                 font-size: 0.75rem;
+                margin: 0 0.01rem;
             }
             
             .navbar-toggler {
@@ -977,14 +1013,14 @@
                 font-size: 0.875rem;
             }
             
-            .navbar .btn-primary {
+            .nav-link.reservasi-btn {
                 padding: 0.4rem 0.9rem !important;
                 font-size: 0.75rem;
-                min-width: 85px;
+                margin-left: 0.2rem;
             }
             
             .navbar-nav {
-                gap: 0.3rem;
+                gap: 0.2rem;
             }
         }
         
@@ -1000,21 +1036,24 @@
             
             .brand-name {
                 font-size: 0.9rem;
+                letter-spacing: 0.1px;
             }
             
             .brand-subtitle {
                 font-size: 0.45rem;
+                letter-spacing: 0.3px;
             }
             
             .nav-link {
                 padding: 0.35rem 0.5rem !important;
                 font-size: 0.7rem;
+                margin: 0;
             }
             
-            .navbar .btn-primary {
+            .nav-link.reservasi-btn {
                 padding: 0.35rem 0.8rem !important;
                 font-size: 0.7rem;
-                min-width: 80px;
+                margin-left: 0.1rem;
             }
         }
         
@@ -1074,39 +1113,39 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto align-items-lg-center">
-                    <!-- Menu Items DI TENGAH -->
+                    <!-- Menu Items dengan Shadow Gradient Merah pada Active State -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="fas fa-home me-1"></i>Home
+                            Home
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
-                            <i class="fas fa-history me-1"></i>Tentang
+                            About
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('menu') ? 'active' : '' }}" href="{{ route('menu') }}">
-                            <i class="fas fa-utensils me-1"></i>Menu
+                            Menu
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
-                            <i class="fas fa-images me-1"></i>Gallery
+                            Galeri
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            <i class="fas fa-phone me-1"></i>Kontak
+                            Kontak
+                        </a>
+                    </li>
+                    <!-- Reservasi dengan Gradient Merah -->
+                    <li class="nav-item">
+                        <a href="{{ route('reservation.create') }}" class="nav-link reservasi-btn {{ request()->routeIs('reservation.create') ? 'active' : '' }}">
+                            Reservasi
                         </a>
                     </li>
                 </ul>
-                <!-- Reservasi Button DI KANAN -->
-                <div class="d-lg-flex align-items-center ms-lg-3 mt-3 mt-lg-0">
-                    <a href="{{ route('reservation.create') }}" class="btn btn-primary">
-                        <i class="fas fa-calendar-alt me-1"></i> Reservasi
-                    </a>
-                </div>
             </div>
         </div>
     </nav>
@@ -1138,16 +1177,13 @@
                             yang kami jaga dengan penuh kebanggaan.
                         </p>
                         <div class="social-icons">
-                            <a href="https://instagram.com/jossgandos" class="social-icon" target="_blank" aria-label="Instagram">
+                            <a href="https://www.instagram.com/restojossgandos/" class="social-icon" target="_blank" aria-label="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="https://facebook.com/jossgandos" class="social-icon" target="_blank" aria-label="Facebook">
+                            <a href="https://www.facebook.com/RestoJossGandos" class="social-icon" target="_blank" aria-label="Facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="https://wa.me/6281234567890" class="social-icon" target="_blank" aria-label="WhatsApp">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                            <a href="https://tiktok.com/@jossgandos" class="social-icon" target="_blank" aria-label="TikTok">
+                            <a href="https://www.tiktok.com/@restojossgandos" class="social-icon" target="_blank" aria-label="TikTok">
                                 <i class="fab fa-tiktok"></i>
                             </a>
                         </div>
@@ -1158,11 +1194,12 @@
                 <div class="col-lg-2 col-md-6 mb-5">
                     <h5 class="footer-title">Navigasi</h5>
                     <ul class="footer-links">
-                        <li><a href="{{ route('home') }}">Beranda</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('menu') }}">Menu</a></li>
-                        <li><a href="{{ route('about') }}">Tentang Kami</a></li>
-                        <li><a href="{{ route('gallery') }}">Gallery</a></li>
+                        <li><a href="{{ route('about') }}">About</a></li>
+                        <li><a href="{{ route('gallery') }}">Galeri</a></li>
                         <li><a href="{{ route('contact') }}">Kontak</a></li>
+                        <li><a href="{{ route('reservation.create') }}">Reservasi</a></li>
                     </ul>
                 </div>
                 
@@ -1178,15 +1215,6 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-concierge-bell me-3" style="color: var(--accent-gold); width: 20px;"></i>
-                            <div>
-                                <p class="mb-1 fw-semibold" style="color: white;">Layanan Catering</p>
-                                <p class="mb-0 text-white-50 small">08:00 - 20:00 WIB</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- Contact Info -->
@@ -1197,7 +1225,7 @@
                             <i class="fas fa-map-marker-alt me-3 mt-1" style="color: var(--accent-gold); width: 20px;"></i>
                             <div>
                                 <p class="mb-1 fw-semibold" style="color: white;">Alamat</p>
-                                <p class="mb-0 text-white-50 small">Jl. Raya Jemursari No.15<br>Surabaya, Indonesia 60237</p>
+                                <p class="mb-0 text-white-50 small">Jl. Jetis Seraten, Ketintang, Kec. Gayungan<br>Surabaya, Jawa Timur 60231</p>
                             </div>
                         </div>
                     </div>
@@ -1215,7 +1243,7 @@
                             <i class="fas fa-envelope me-3" style="color: var(--accent-gold); width: 20px;"></i>
                             <div>
                                 <p class="mb-1 fw-semibold" style="color: white;">Email</p>
-                                <p class="mb-0 text-white-50 small">bebekjossgandossby@gmail.com</p>
+                                <p class="mb-0 text-white-50 small">adminjossgandos@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -1224,10 +1252,7 @@
             
             <!-- Copyright -->
             <div class="copyright">
-                <p class="mb-2">&copy; 2015 - {{ date('Y') }} JOSS GANDOS. Hak cipta dilindungi.</p>
-                <p class="mt-3 small text-white-50">
-                    Cita rasa Indonesia, disajikan dengan modernitas dan tradisi.
-                </p>
+                <p class="mb-2">&copy; {{ date('Y') }} Resto Joss Gandos. Hak cipta dilindungi.</p>
             </div>
         </div>
     </footer>
@@ -1350,7 +1375,7 @@
             });
             
             // Add ripple effect to buttons
-            document.querySelectorAll('.btn-primary').forEach(button => {
+            document.querySelectorAll('.btn-primary, .nav-link.reservasi-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     const ripple = document.createElement('span');
                     const rect = this.getBoundingClientRect();
@@ -1407,9 +1432,9 @@
                     logo.style.padding = '10px';
                     logo.style.borderRadius = '5px';
                     logo.style.color = 'white';
-                    logo.style.fontFamily = "'Poppins', sans-serif";
+                    logo.style.fontFamily = "'Inter', sans-serif";
                     logo.style.fontSize = '1rem';
-                    logo.style.fontWeight = '700';
+                    logo.style.fontWeight = '800';
                     logo.style.display = 'flex';
                     logo.style.alignItems = 'center';
                     logo.style.justifyContent = 'center';
@@ -1471,7 +1496,8 @@
             // Function to center navbar items
             function centerNavbarItems() {
                 const navbarNav = document.querySelector('.navbar-nav');
-                const navLinks = document.querySelectorAll('.nav-link');
+                const navLinks = document.querySelectorAll('.nav-link:not(.reservasi-btn)');
+                const reservasiBtn = document.querySelector('.nav-link.reservasi-btn');
                 
                 if (window.innerWidth >= 992) {
                     // Calculate total width of nav items
@@ -1480,25 +1506,36 @@
                         totalWidth += link.offsetWidth;
                     });
                     
+                    if (reservasiBtn) {
+                        totalWidth += reservasiBtn.offsetWidth;
+                    }
+                    
                     // Calculate available space
                     const container = document.querySelector('.navbar > .container');
                     const brandWidth = document.querySelector('.navbar-brand').offsetWidth;
-                    const buttonWidth = document.querySelector('.navbar .btn-primary').offsetWidth;
-                    const availableWidth = container.offsetWidth - brandWidth - buttonWidth - 100; // padding/margin
+                    const availableWidth = container.offsetWidth - brandWidth - 100; // padding/margin
                     
                     // If nav items are too wide, adjust
                     if (totalWidth > availableWidth * 0.85) {
                         // Reduce padding slightly
                         navLinks.forEach(link => {
-                            link.style.padding = '0.5rem 0.7rem !important';
+                            link.style.padding = '0.4rem 0.6rem !important';
                             link.style.fontSize = '0.85rem';
                         });
+                        if (reservasiBtn) {
+                            reservasiBtn.style.padding = '0.4rem 0.8rem !important';
+                            reservasiBtn.style.fontSize = '0.85rem';
+                        }
                     } else {
                         // Reset to normal
                         navLinks.forEach(link => {
                             link.style.padding = '';
                             link.style.fontSize = '';
                         });
+                        if (reservasiBtn) {
+                            reservasiBtn.style.padding = '';
+                            reservasiBtn.style.fontSize = '';
+                        }
                     }
                     
                     // Center the nav items
@@ -1531,7 +1568,7 @@
                 z-index: 9999;
                 max-width: 350px;
                 animation: slideInRight 0.3s ease;
-                font-family: 'Poppins', sans-serif;
+                font-family: 'Inter', sans-serif;
                 border: 1px solid rgba(180, 34, 34, 0.1);
                 border-radius: 12px;
                 backdrop-filter: blur(10px);

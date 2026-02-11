@@ -1,423 +1,567 @@
+[file name]: image.png
+[file content begin]
+Selamat Datang
+Resto Loss Candles
+[file content end]
+
 @extends('layouts.app')
 
-@section('title', 'Resto Joss Gandos - Pelopor No. 1 Resto dan Cafe di Jemursari')
+@section('title', $page->meta_title ?? 'Resto Joss Gandos - Pelopor No. 1 Resto dan Cafe di Jemursari')
+
+@section('meta_description', $page->meta_description ?? 'JOSS GANDOS - Restoran dan Cafe dengan makanan lezat dan suasana nyaman')
 
 @section('content')
-    <!-- Hero Section - Matches Screenshot 1 -->
-    <section class="hero-section-main">
-        <div class="hero-overlay"></div>
-        <div class="hero-background-image"></div>
+    @php
+        // Default content jika tidak ada dari database
+        $defaultContent = [
+            // Hero Section
+            'hero_title_line1' => 'Selamat Datang di',
+            'hero_title_line2' => 'Resto Joss Gandos',
+            'hero_subtitle' => 'Pelopor No. 1 Resto dan Cafe di Jemursari',
+            'hero_button1_text' => 'Jelajahi',
+            'hero_button2_text' => 'Reservasi',
+            
+            // Welcome/About Section
+            'welcome_title_line1' => 'Selamat Datang',
+            'welcome_title_line2' => 'Resto Joss Gandos',
+            'welcome_description' => 'Tempat di mana rasa, suasana, dan kehangatan berpadu menjadi satu. Setiap kunjungan adalah perjalanan rasa yang membuat Anda ingin kembali lagi.',
+            
+            'feature_1_text' => 'Bahan premium pilihan terbaik',
+            'feature_2_text' => 'Chef berpengalaman & profesional',
+            'feature_3_text' => 'Suasana nyaman untuk keluarga',
+            'feature_4_text' => 'Pelayanan ramah & cepat',
+            
+            // Services Section
+            'services_title_line1' => 'Fasilitas &',
+            'services_title_line2' => 'Pelayanan Premium',
+            'services_subtitle' => 'Nikmati berbagai fasilitas dan layanan terbaik untuk kenyamanan Anda',
+            
+            // Testimonials Section
+            'testimonials_title_line1' => 'Apa Kata',
+            'testimonials_title_line2' => 'Pelanggan Kami?',
+            'testimonials_subtitle' => 'Ribuan pelanggan puas telah merasakan kehangatan dan kelezatan Joss Gandos',
+            
+            // CTA Section
+            'cta_title_line1' => 'Siap Merasakan',
+            'cta_title_line2' => 'Pengalaman Kuliner Terbaik?',
+            'cta_description' => 'Bergabunglah dengan ribuan pelanggan yang telah merasakan kelezatan hidangan istimewa kami. Pesan dan reservasi sekarang!',
+        ];
         
-        <div class="container position-relative">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-12 text-center">
-                    <div class="hero-content-wrapper">
-                        <!-- EST Badge -->
-                        <div class="est-badge animate-fade-in">
-                            EST. 2017
-                        </div>
-                        
-                        <!-- Main Title -->
-                        <h1 class="hero-main-title animate-slide-up">
-                            Resto <span class="joss-text">Joss Gandos</span>
-                        </h1>
-                        
-                        <!-- Subtitle -->
-                        <p class="hero-main-subtitle animate-slide-up" style="animation-delay: 0.2s;">
-                            Pelopor No. 1 Resto dan Cafe di Jemursari
-                        </p>
-                        
-                        <!-- Navigation Buttons -->
-                        <div class="hero-nav-buttons animate-slide-up" style="animation-delay: 0.3s;">
-                            <a href="#about" class="hero-nav-btn">
-                                <i class="fas fa-info-circle"></i>
-                                <span>Tentang Kami</span>
-                            </a>
-                            <a href="{{ route('menu') }}" class="hero-nav-btn">
-                                <i class="fas fa-book-open"></i>
-                                <span>Menu Kami</span>
-                            </a>
-                            <a href="#gallery" class="hero-nav-btn">
-                                <i class="fas fa-images"></i>
-                                <span>Galeri Kami</span>
-                            </a>
-                            <a href="{{ route('reservation.create') }}" class="hero-nav-btn">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>Reservasi</span>
-                            </a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        // Gabungkan default dengan content dari database
+        $content = array_merge($defaultContent, $content ?? []);
+    @endphp
 
-    <!-- About Section - Matches Screenshot 2 -->
-    <section class="about-section" id="about">
-        <div class="about-pattern-bg"></div>
-        
-        <div class="container position-relative">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="about-content animate-slide-right">
-                        <div class="section-label">
-                            SELAMAT DATANG
-                        </div>
-                        
-                        <h2 class="about-title">
-                            Resto <span class="joss-text">Joss</span><br>
-                            <span class="gandos-text">Gandos</span>
-                        </h2>
-                        
-                        <div class="about-divider"></div>
-                        
-                        <p class="about-description">
-                            Tempat di mana rasa, suasana, dan kehangatan berpadu menjadi satu. 
-                            Setiap kunjungan adalah perjalanan rasa yang membuat Anda ingin kembali lagi.
-                        </p>
-                        
-                        <a href="{{ route('menu') }}" class="about-cta-btn">
-                            Lihat Menu Kami <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <div class="about-image-wrapper animate-slide-left">
-                        <div class="about-image-glow"></div>
-                        <div class="about-image-frame">
-                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                 alt="Resto Joss Gandos Team" 
-                                 class="about-main-image">
+    <!-- Hero Carousel Section - AUTO SLIDE (FULLY ROUNDED DESIGN) -->
+    <section class="hero-carousel-section">
+        <div class="hero-carousel-wrapper">
+            <!-- Slide 1 - Welcome -->
+            <div class="hero-carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-carousel-overlay"></div>
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 text-center">
+                            <div class="hero-carousel-content">
+                                <span class="hero-badge" data-aos="fade-down">EST. 2017</span>
+                                <h1 class="hero-carousel-title" data-aos="fade-up" data-aos-delay="100">
+                                    {{ $content['hero_title_line1'] }}<br>
+                                    <span class="text-gradient">{{ $content['hero_title_line2'] }}</span>
+                                </h1>
+                                <p class="hero-carousel-subtitle" data-aos="fade-up" data-aos-delay="200">
+                                    {{ $content['hero_subtitle'] }}
+                                </p>
+                                <div class="hero-carousel-buttons" data-aos="fade-up" data-aos-delay="300">
+                                    @if(!empty($content['hero_button1_text']))
+                                        <a href="#welcome" class="btn-hero btn-hero-primary">
+                                            <span>{{ $content['hero_button1_text'] }}</span>
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    @endif
+                                    @if(!empty($content['hero_button2_text']))
+                                        <a href="{{ route('reservation.create') }}" class="btn-hero btn-hero-outline">
+                                            <span>{{ $content['hero_button2_text'] }}</span>
+                                            <i class="fas fa-calendar-check"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Slide 2 - Menu -->
+            <div class="hero-carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-carousel-overlay"></div>
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 text-center">
+                            <div class="hero-carousel-content">
+                                <span class="hero-badge">MENU SPESIAL</span>
+                                <h1 class="hero-carousel-title">
+                                    Cita Rasa<br>
+                                    <span class="text-gradient">Autentik Nusantara</span>
+                                </h1>
+                                <p class="hero-carousel-subtitle">
+                                    50+ Menu Pilihan dengan Bahan Premium
+                                </p>
+                                <div class="hero-carousel-buttons">
+                                    <a href="{{ route('menu') }}" class="btn-hero btn-hero-primary">
+                                        <span>Lihat Menu</span>
+                                        <i class="fas fa-book-open"></i>
+                                    </a>
+                                    <a href="#order" class="btn-hero btn-hero-outline">
+                                        <span>Pesan Sekarang</span>
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 - Facilities -->
+            <div class="hero-carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-carousel-overlay"></div>
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 text-center">
+                            <div class="hero-carousel-content">
+                                <span class="hero-badge">FASILITAS LENGKAP</span>
+                                <h1 class="hero-carousel-title">
+                                    Suasana Nyaman<br>
+                                    <span class="text-gradient">Untuk Keluarga</span>
+                                </h1>
+                                <p class="hero-carousel-subtitle">
+                                    AC Room • Karaoke • Musholla • Private Room
+                                </p>
+                                <div class="hero-carousel-buttons">
+                                    <a href="#gallery" class="btn-hero btn-hero-primary">
+                                        <span>Lihat Galeri</span>
+                                        <i class="fas fa-images"></i>
+                                    </a>
+                                    <a href="#testimonials" class="btn-hero btn-hero-outline">
+                                        <span>Testimoni</span>
+                                        <i class="fas fa-star"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Indicators -->
+            <div class="hero-carousel-indicators">
+                <span class="hero-indicator active" onclick="heroCarouselGoTo(0)"></span>
+                <span class="hero-indicator" onclick="heroCarouselGoTo(1)"></span>
+                <span class="hero-indicator" onclick="heroCarouselGoTo(2)"></span>
+            </div>
         </div>
     </section>
 
-    <!-- Testimonials Section - PERBAIKAN: 3 testimonial berdampingan -->
-    <section class="testimonials-fixed-section" id="testimonials">
-        <div class="testimonials-fixed-bg"></div>
-        
+    <!-- Welcome Section (Ganti dari About Section) -->
+    <section class="welcome-content-section" id="welcome">
         <div class="container">
-            <!-- Section Header -->
-            <div class="row mb-5">
-                <div class="col-12 text-center">
-                    <div class="section-header-fixed">
-                        <h2 class="testimonials-fixed-title">
-                            Ulasan Pelanggan
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="welcome-image-simple">
+                        <div class="welcome-image-main-simple">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="welcome-content-enhanced">
+                        <h2 class="welcome-title-main">
+                            {{ $content['welcome_title_line1'] }}<br>
+                            <span class="text-gradient">{{ $content['welcome_title_line2'] }}</span>
                         </h2>
-                        <div class="title-divider-fixed">
-                            <span class="divider-line-fixed"></span>
-                            <i class="fas fa-star divider-icon-fixed"></i>
-                            <span class="divider-line-fixed"></span>
+
+                        <div class="section-divider-enhanced">
+                            <span></span>
+                            <i class="fas fa-star"></i>
+                            <span></span>
                         </div>
-                        <p class="testimonials-fixed-subtitle">
-                            Apa kata mereka yang telah merasakan kehangatan dan cita rasa Joss Gandos?
+
+                        <p class="welcome-description-main">
+                            {{ $content['welcome_description'] }}
                         </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Testimonials Carousel - 3 TESTIMONIAL BERDAMPINGAN -->
-            <div class="testimonials-fixed-carousel-wrapper">
-                <div class="testimonials-fixed-carousel" id="testimonialsFixedCarousel">
-                    <!-- Slide 1 - 3 Testimonial Berdampingan -->
-                    <div class="testimonial-fixed-slide active">
-                        <div class="row g-4">
-                            <!-- Testimonial 1 - Achmad Thoriq -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="testimonial-fixed-card">
-                                    <!-- BINTANG DI DALAM CARD -->
-                                    <div class="testimonial-rating-fixed">
-                                        <div class="stars-fixed">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="testimonial-text-fixed">
-                                        <div class="quote-mark-fixed">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p class="testimonial-content-fixed">
-                                            Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerayain ulang tahun disini seru banget!
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="testimonial-author-fixed">
-                                        <div class="author-info-fixed">
-                                            <h4 class="author-name-fixed">Achmad Thoriq</h4>
-                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
-                                        </div>
-                                    </div>
+
+                        <div class="welcome-features-enhanced">
+                            @if(!empty($content['feature_1_text']))
+                                <div class="feature-item-enhanced">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>{{ $content['feature_1_text'] }}</span>
                                 </div>
-                            </div>
-                            
-                            <!-- Testimonial 2 - Perpus Uinsa -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="testimonial-fixed-card">
-                                    <!-- BINTANG DI DALAM CARD -->
-                                    <div class="testimonial-rating-fixed">
-                                        <div class="stars-fixed">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="testimonial-text-fixed">
-                                        <div class="quote-mark-fixed">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p class="testimonial-content-fixed">
-                                            Layanan plus plusnya emang mantab banget.. dibantu fotbar, video tiktok juga.. dilayani dengan ramah dan memperhatikan kebutuhan konsumen.
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="testimonial-author-fixed">
-                                        <div class="author-info-fixed">
-                                            <h4 class="author-name-fixed">Perpus Uinsa</h4>
-                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
-                                        </div>
-                                    </div>
+                            @endif
+                            @if(!empty($content['feature_2_text']))
+                                <div class="feature-item-enhanced">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>{{ $content['feature_2_text'] }}</span>
                                 </div>
-                            </div>
-                            
-                            <!-- Testimonial 3 - Karenina Anisya -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="testimonial-fixed-card">
-                                    <!-- BINTANG DI DALAM CARD -->
-                                    <div class="testimonial-rating-fixed">
-                                        <div class="stars-fixed">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="testimonial-text-fixed">
-                                        <div class="quote-mark-fixed">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p class="testimonial-content-fixed">
-                                            Tempat nya cocok buat bukber, servisnya oke poll staff nya ramah, makanannya enakk tempatnya bersih ada fasilitas mushollanya juga.
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="testimonial-author-fixed">
-                                        <div class="author-info-fixed">
-                                            <h4 class="author-name-fixed">Karenina Anisya</h4>
-                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
-                                        </div>
-                                    </div>
+                            @endif
+                            @if(!empty($content['feature_3_text']))
+                                <div class="feature-item-enhanced">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>{{ $content['feature_3_text'] }}</span>
                                 </div>
-                            </div>
+                            @endif
+                            @if(!empty($content['feature_4_text']))
+                                <div class="feature-item-enhanced">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>{{ $content['feature_4_text'] }}</span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="welcome-action-buttons">
+                            <a href="{{ route('menu') }}" class="btn-enhanced btn-primary-enhanced">
+                                <span>Lihat Menu Kami</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                    
-                    <!-- Slide 2 - 3 Testimonial Berdampingan Lainnya -->
-                    <div class="testimonial-fixed-slide">
-                        <div class="row g-4">
-                            <!-- Testimonial 4 - Filidyo Bramanta -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="testimonial-fixed-card">
-                                    <div class="testimonial-rating-fixed">
-                                        <div class="stars-fixed">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="testimonial-text-fixed">
-                                        <div class="quote-mark-fixed">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p class="testimonial-content-fixed">
-                                            Pelayanan baik, responsif, dan banyak ruangan yang bisa digunakan untuk meeting dan acara private. Makanan oke dan porsinya cukup.
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="testimonial-author-fixed">
-                                        <div class="author-info-fixed">
-                                            <h4 class="author-name-fixed">Filidyo Bramanta</h4>
-                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Testimonial 5 - M. Junianto Tri -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="testimonial-fixed-card">
-                                    <div class="testimonial-rating-fixed">
-                                        <div class="stars-fixed">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="testimonial-text-fixed">
-                                        <div class="quote-mark-fixed">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p class="testimonial-content-fixed">
-                                            Layanan sat set dan super ramah. Mushola luas, bisa shalat jamaah. Ruangan VIP tersedia karaoke, mantab buat seru-seruan.
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="testimonial-author-fixed">
-                                        <div class="author-info-fixed">
-                                            <h4 class="author-name-fixed">M. Junianto Tri</h4>
-                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Testimonial 6 - Metha Prosper -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="testimonial-fixed-card">
-                                    <div class="testimonial-rating-fixed">
-                                        <div class="stars-fixed">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="testimonial-text-fixed">
-                                        <div class="quote-mark-fixed">
-                                            <i class="fas fa-quote-left"></i>
-                                        </div>
-                                        <p class="testimonial-content-fixed">
-                                            Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul
-                                        </p>
-                                    </div>
-                                    
-                                    <div class="testimonial-author-fixed">
-                                        <div class="author-info-fixed">
-                                            <h4 class="author-name-fixed">Metha Prosper</h4>
-                                            <p class="author-location-fixed">RESTO JOSS GANDOS - JEMURSARI</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Carousel Dots ONLY (NO ARROWS) -->
-                <div class="carousel-dots-fixed">
-                    <span class="dot-fixed active" data-index="0"></span>
-                    <span class="dot-fixed" data-index="1"></span>
-                </div>
-            </div>
-            
-            <!-- View More Button - PERBAIKAN: Menggunakan URL langsung -->
-            <div class="row mt-5">
-                <div class="col-12 text-center">
-                    <a href="https://www.google.com/search?q=Resto+Joss+Gandos+Ulasan&rlz=1C1VDKB_enID1074ID1074&oq=Resto+Joss+Gandos+Ulasan&gs_lcrp=EgZjaHJvbWUqBwgAEAAYgAQyBwgAEAAYgAQyBggBEEUYOTIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDYxNjZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x2dd7f7e3d1d54b1b:0x6925233761792d0b,1,,,,"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="btn-view-more-fixed"
-                       id="googleReviewsBtn">
-                        <i class="fab fa-google me-2"></i>
-                        Lihat Ulasan Selengkapnya
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section-main">
-        <div class="cta-pattern-overlay"></div>
-        
-        <div class="container position-relative">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h2 class="cta-main-title animate-slide-up">
-                        Siap Merasakan<br>
-                        Pengalaman Kuliner Terbaik?
-                    </h2>
-                    
-                    <p class="cta-main-subtitle animate-fade-in" style="animation-delay: 0.2s;">
-                        Bergabunglah dengan ribuan pelanggan yang telah merasakan kelezatan<br>
-                        hidangan istimewa kami. Pesan dan reservasi sekarang!
+    <!-- Services Section -->
+    <section class="services-section-enhanced">
+        <div class="container">
+            <div class="section-header-enhanced text-center" data-aos="fade-up">
+                <div class="section-tag-enhanced mx-auto">
+                    <span class="tag-dot"></span>
+                    LAYANAN KAMI
+                </div>
+                <h2 class="section-title-enhanced">
+                    {{ $content['services_title_line1'] }}<br>
+                    <span class="text-gradient">{{ $content['services_title_line2'] }}</span>
+                </h2>
+                @if(!empty($content['services_subtitle']))
+                    <p class="section-subtitle-enhanced">
+                        {{ $content['services_subtitle'] }}
                     </p>
-                    
-                    <div class="cta-buttons-wrapper animate-scale-in" style="animation-delay: 0.3s;">
-                        <a href="#order" class="cta-btn-main cta-btn-outline">
-                            Pesan Sekarang
-                        </a>
-                        <a href="{{ route('reservation.create') }}" class="cta-btn-main cta-btn-solid">
-                            Reservasi Sekarang
-                        </a>
-                    </div>
-                </div>
+                @endif
             </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card-mini animate-fade-in">
-                        <div class="feature-icon-mini">
+            <div class="row g-4 mt-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card-enhanced">
+                        <div class="service-icon-enhanced">
                             <i class="fas fa-utensils"></i>
                         </div>
-                        <h6 class="feature-title-mini">Menu Variatif</h6>
-                        <p class="feature-desc-mini">50+ pilihan menu autentik</p>
+                        <h3 class="service-title-enhanced">Dine In</h3>
+                        <p class="service-description-enhanced">
+                            Nikmati hidangan istimewa di ruangan ber-AC dengan suasana nyaman dan elegan
+                        </p>
+                        <div class="service-hover-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card-mini animate-fade-in" style="animation-delay: 0.1s;">
-                        <div class="feature-icon-mini">
-                            <i class="fas fa-award"></i>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card-enhanced">
+                        <div class="service-icon-enhanced">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <h6 class="feature-title-mini">Kualitas Terjamin</h6>
-                        <p class="feature-desc-mini">Bahan premium pilihan</p>
+                        <h3 class="service-title-enhanced">Private Room</h3>
+                        <p class="service-description-enhanced">
+                            Ruangan VIP untuk acara spesial, meeting, dan gathering dengan fasilitas karaoke
+                        </p>
+                        <div class="service-hover-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card-mini animate-fade-in" style="animation-delay: 0.2s;">
-                        <div class="feature-icon-mini">
-                            <i class="fas fa-headset"></i>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card-enhanced">
+                        <div class="service-icon-enhanced">
+                            <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <h6 class="feature-title-mini">Pelayanan Ramah</h6>
-                        <p class="feature-desc-mini">Tim profesional siap melayani</p>
+                        <h3 class="service-title-enhanced">Event & Catering</h3>
+                        <p class="service-description-enhanced">
+                            Layanan catering dan penyelenggaraan acara untuk berbagai kebutuhan Anda
+                        </p>
+                        <div class="service-hover-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card-mini animate-fade-in" style="animation-delay: 0.3s;">
-                        <div class="feature-icon-mini">
-                            <i class="fas fa-home"></i>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card-enhanced">
+                        <div class="service-icon-enhanced">
+                            <i class="fas fa-wifi"></i>
                         </div>
-                        <h6 class="feature-title-mini">Suasana Nyaman</h6>
-                        <p class="feature-desc-mini">Ruangan ber-AC & karaoke</p>
+                        <h3 class="service-title-enhanced">Free WiFi</h3>
+                        <p class="service-description-enhanced">
+                            Internet cepat gratis untuk mendukung aktivitas bisnis dan hiburan Anda
+                        </p>
+                        <div class="service-hover-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card-enhanced">
+                        <div class="service-icon-enhanced">
+                            <i class="fas fa-mosque"></i>
+                        </div>
+                        <h3 class="service-title-enhanced">Musholla</h3>
+                        <p class="service-description-enhanced">
+                            Fasilitas musholla yang bersih dan nyaman untuk beribadah dengan tenang
+                        </p>
+                        <div class="service-hover-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-card-enhanced">
+                        <div class="service-icon-enhanced">
+                            <i class="fas fa-parking"></i>
+                        </div>
+                        <h3 class="service-title-enhanced">Parkir Luas</h3>
+                        <p class="service-description-enhanced">
+                            Area parkir yang luas dan aman untuk mobil dan motor kendaraan Anda
+                        </p>
+                        <div class="service-hover-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - AUTO SLIDE CAROUSEL -->
+    <section class="testimonials-section-enhanced" id="testimonials">
+        <div class="container">
+            <div class="section-header-enhanced text-center" data-aos="fade-up">
+                <div class="section-tag-enhanced mx-auto">
+                    <span class="tag-dot"></span>
+                    TESTIMONI
+                </div>
+                <h2 class="section-title-enhanced">
+                    {{ $content['testimonials_title_line1'] }}<br>
+                    <span class="text-gradient">{{ $content['testimonials_title_line2'] }}</span>
+                </h2>
+                @if(!empty($content['testimonials_subtitle']))
+                    <p class="section-subtitle-enhanced">
+                        {{ $content['testimonials_subtitle'] }}
+                    </p>
+                @endif
+            </div>
+
+            <div class="testimonials-carousel-wrapper" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonials-carousel-container" id="testimonialsCarousel">
+                    <!-- Slide 1 -->
+                    <div class="testimonials-slide active">
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-card-enhanced">
+                                    <div class="testimonial-rating-enhanced">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text-enhanced">
+                                        "Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerayain ulang tahun disini seru banget!"
+                                    </p>
+                                    <div class="testimonial-author-enhanced">
+                                        <div class="author-avatar-enhanced">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="author-info-enhanced">
+                                            <h4>Achmad Thoriq</h4>
+                                            <p>Google Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-card-enhanced">
+                                    <div class="testimonial-rating-enhanced">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text-enhanced">
+                                        "Layanan plus plusnya emang mantab banget.. dibantu fotbar, video tiktok juga.. dilayani dengan ramah dan memperhatikan kebutuhan konsumen."
+                                    </p>
+                                    <div class="testimonial-author-enhanced">
+                                        <div class="author-avatar-enhanced">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="author-info-enhanced">
+                                            <h4>Perpus Uinsa</h4>
+                                            <p>Google Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-card-enhanced">
+                                    <div class="testimonial-rating-enhanced">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text-enhanced">
+                                        "Tempat nya cocok buat bukber, servisnya oke poll staff nya ramah, makanannya enakk tempatnya bersih ada fasilitas mushollanya juga."
+                                    </p>
+                                    <div class="testimonial-author-enhanced">
+                                        <div class="author-avatar-enhanced">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="author-info-enhanced">
+                                            <h4>Karenina Anisya</h4>
+                                            <p>Google Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="testimonials-slide">
+                        <div class="row g-4">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-card-enhanced">
+                                    <div class="testimonial-rating-enhanced">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text-enhanced">
+                                        "Pelayanan baik, responsif, dan banyak ruangan yang bisa digunakan untuk meeting dan acara private. Makanan oke dan porsinya cukup."
+                                    </p>
+                                    <div class="testimonial-author-enhanced">
+                                        <div class="author-avatar-enhanced">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="author-info-enhanced">
+                                            <h4>Filidyo Bramanta</h4>
+                                            <p>Google Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-card-enhanced">
+                                    <div class="testimonial-rating-enhanced">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text-enhanced">
+                                        "Layanan sat set dan super ramah. Mushola luas, bisa shalat jamaah. Ruangan VIP tersedia karaoke, mantab buat seru-seruan."
+                                    </p>
+                                    <div class="testimonial-author-enhanced">
+                                        <div class="author-avatar-enhanced">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="author-info-enhanced">
+                                            <h4>M. Junianto Tri</h4>
+                                            <p>Google Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="testimonial-card-enhanced">
+                                    <div class="testimonial-rating-enhanced">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="testimonial-text-enhanced">
+                                        "Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul"
+                                    </p>
+                                    <div class="testimonial-author-enhanced">
+                                        <div class="author-avatar-enhanced">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="author-info-enhanced">
+                                            <h4>Metha Prosper</h4>
+                                            <p>Google Reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Indicators -->
+                <div class="testimonials-indicators">
+                    <span class="testimonial-indicator active" onclick="testimonialsCarouselGoTo(0)"></span>
+                    <span class="testimonial-indicator" onclick="testimonialsCarouselGoTo(1)"></span>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="https://www.google.com/search?q=Resto+Joss+Gandos+Ulasan" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="btn-enhanced btn-secondary-enhanced">
+                    <i class="fab fa-google me-2"></i>
+                    <span>Lihat Semua Review di Google</span>
+                    <i class="fas fa-external-link-alt ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rounded CTA Section -->
+    <section class="rounded-cta-section">
+        <div class="container">
+            <div class="rounded-cta-card" data-aos="fade-up">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-8">
+                        <div class="rounded-cta-content">
+                            <h3 class="rounded-cta-title">
+                                {{ $content['cta_title_line1'] }}<br>
+                                <span class="text-gradient">{{ $content['cta_title_line2'] }}</span>
+                            </h3>
+                            @if(!empty($content['cta_description']))
+                                <p class="rounded-cta-description">
+                                    {{ $content['cta_description'] }}
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="rounded-cta-buttons">
+                            <a href="{{ route('menu') }}" class="btn-rounded-cta btn-rounded-cta-primary">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Pesan Sekarang</span>
+                            </a>
+                            <a href="{{ route('reservation.create') }}" class="btn-rounded-cta btn-rounded-cta-secondary">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Reservasi Sekarang</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -427,1143 +571,1048 @@
 
 @section('styles')
 <style>
+    :root {
+        --primary: #dc2626;
+        --primary-dark: #b91c1c;
+        --secondary: #f97316;
+        --accent: #fbbf24;
+        --dark: #1a1a1a;
+        --light: #f8fafc;
+        --white: #ffffff;
+        --text-dark: #1e293b;
+        --text-gray: #64748b;
+        --border: #e2e8f0;
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+        --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+        --gradient-primary: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
+        --gradient-red-white: linear-gradient(135deg, #dc2626 0%, #ffffff 100%);
+        --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     /* ============================================
-       HERO SECTION - SCREENSHOT 1 STYLE
+       HERO CAROUSEL - FULLY ROUNDED DESIGN
     ============================================ */
-    .hero-section-main {
+    .hero-carousel-section {
         position: relative;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
+        height: 100vh;
         overflow: hidden;
-        background: #1a1a1a;
+        margin-top: -1px;
     }
-    
-    .hero-background-image {
+
+    .hero-carousel-wrapper {
+        position: relative;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        margin: 20px auto;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(220, 38, 38, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .hero-carousel-wrapper {
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            margin: 10px auto;
+            border-radius: 30px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-carousel-wrapper {
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            margin: 8px auto;
+            border-radius: 25px;
+        }
+    }
+
+    /* ============================================
+       WELCOME CONTENT SECTION - IMAGE SEDERHANA
+    ============================================ */
+    .welcome-content-section {
+        padding: 120px 0;
+        background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .welcome-content-section::before {
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23dc2626" fill-opacity="0.03" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
         background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+        opacity: 0.5;
     }
-    
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.85) 100%);
-        z-index: 1;
+
+    /* Welcome Image - Simplified */
+    .welcome-image-simple {
+        position: relative;
     }
-    
-    .hero-content-wrapper {
+
+    .welcome-image-main-simple {
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+    }
+
+    .welcome-image-main-simple img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+
+    .welcome-image-main-simple:hover img {
+        transform: scale(1.03);
+    }
+
+    /* Welcome Content */
+    .welcome-content-enhanced {
         position: relative;
         z-index: 2;
-        padding: 40px 20px;
+        padding-left: 20px;
     }
-    
-    .est-badge {
+
+    .welcome-title-main {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        color: var(--text-dark);
+        line-height: 1.1;
+        margin-bottom: 25px;
+    }
+
+    .welcome-description-main {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-gray);
+        margin-bottom: 35px;
+        max-width: 600px;
+    }
+
+    .welcome-features-enhanced {
+        display: grid;
+        gap: 15px;
+        margin-bottom: 35px;
+    }
+
+    .feature-item-enhanced {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1rem;
+        color: var(--text-gray);
+    }
+
+    .feature-item-enhanced i {
+        color: var(--primary);
+        font-size: 1.2rem;
+    }
+
+    /* Action Buttons */
+    .welcome-action-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+
+    /* ============================================
+       ROUNDED CTA SECTION
+    ============================================ */
+    .rounded-cta-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+    }
+
+    .rounded-cta-card {
+        background: var(--white);
+        border-radius: 30px;
+        padding: 50px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(220, 38, 38, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .rounded-cta-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(220, 38, 38, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    .rounded-cta-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .rounded-cta-title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 900;
+        color: var(--text-dark);
+        line-height: 1.1;
+        margin-bottom: 15px;
+    }
+
+    .rounded-cta-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-gray);
+        margin-bottom: 0;
+        max-width: 500px;
+    }
+
+    .rounded-cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .btn-rounded-cta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 30px;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: var(--transition);
+        justify-content: center;
+        text-align: center;
+        border: 2px solid transparent;
+    }
+
+    .btn-rounded-cta-primary {
+        background: var(--gradient-primary);
+        color: var(--white);
+        box-shadow: 0 8px 30px rgba(220, 38, 38, 0.3);
+    }
+
+    .btn-rounded-cta-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(220, 38, 38, 0.5);
+        color: var(--white);
+    }
+
+    .btn-rounded-cta-secondary {
+        background: var(--white);
+        color: var(--primary);
+        border-color: var(--primary);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btn-rounded-cta-secondary:hover {
+        background: var(--primary);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(220, 38, 38, 0.3);
+    }
+
+    .btn-rounded-cta i {
+        font-size: 1.2rem;
+    }
+
+    /* ============================================
+       EXISTING STYLES (Unchanged)
+    ============================================ */
+    .hero-carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hero-carousel-slide.active {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .hero-carousel-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+            rgba(15, 23, 42, 0.95) 0%, 
+            rgba(30, 41, 59, 0.88) 50%, 
+            rgba(15, 23, 42, 0.92) 100%);
+    }
+
+    .hero-carousel-content {
+        position: relative;
+        z-index: 2;
+        color: var(--white);
+        padding: 20px;
+    }
+
+    .hero-badge {
         display: inline-block;
-        background: linear-gradient(135deg, #dc2626, #b91c1c);
-        color: white;
-        padding: 8px 30px;
+        background: var(--gradient-primary);
+        color: var(--white);
+        padding: 10px 30px;
         border-radius: 50px;
         font-weight: 700;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         letter-spacing: 3px;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4);
-        animation: pulse 2s ease-in-out infinite;
+        animation: badgePulse 3s ease-in-out infinite;
     }
-    
-    @keyframes pulse {
+
+    @keyframes badgePulse {
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.05); }
     }
-    
-    .hero-main-title {
+
+    .hero-carousel-title {
         font-family: 'Playfair Display', serif;
-        font-size: clamp(3rem, 10vw, 7rem);
+        font-size: clamp(3rem, 8vw, 5.5rem);
         font-weight: 900;
-        color: white;
-        margin-bottom: 20px;
         line-height: 1.1;
+        margin-bottom: 20px;
         text-shadow: 3px 3px 20px rgba(0, 0, 0, 0.8);
     }
-    
-    .joss-text {
+
+    .text-gradient {
         background: linear-gradient(135deg, #dc2626 0%, #f97316 50%, #fbbf24 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        display: inline-block;
-        animation: gradientFlow 3s ease infinite;
         background-size: 200% 200%;
+        animation: gradientFlow 5s ease infinite;
     }
-    
+
     @keyframes gradientFlow {
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
     }
-    
-    .hero-main-subtitle {
-        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+
+    .hero-carousel-subtitle {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
         color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 50px;
-        font-weight: 400;
+        margin-bottom: 40px;
         letter-spacing: 1px;
     }
-    
-    .hero-nav-buttons {
+
+    .hero-carousel-buttons {
         display: flex;
-        justify-content: center;
         gap: 15px;
+        justify-content: center;
         flex-wrap: wrap;
-        margin-bottom: 50px;
     }
-    
-    .hero-nav-btn {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        color: white;
-        padding: 18px 35px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.4s ease;
-        overflow: hidden;
-    }
-    
-    .hero-nav-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s ease;
-    }
-    
-    .hero-nav-btn:hover::before {
-        left: 100%;
-    }
-    
-    .hero-nav-btn:hover {
-        background: rgba(220, 38, 38, 0.9);
-        border-color: #dc2626;
-        color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5);
-    }
-    
-    .hero-nav-btn i {
-        font-size: 1.2rem;
-    }
-    
-    /* ============================================
-       ABOUT SECTION - SCREENSHOT 2 STYLE
-    ============================================ */
-    .about-section {
-        position: relative;
-        padding: 100px 0;
-        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-        overflow: hidden;
-    }
-    
-    .about-pattern-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(220, 38, 38, 0.02) 35px, rgba(220, 38, 38, 0.02) 70px),
-            radial-gradient(circle at 20% 50%, rgba(251, 191, 36, 0.05) 0%, transparent 50%);
-        opacity: 0.6;
-    }
-    
-    .about-content {
-        padding-right: 50px;
-    }
-    
-    .section-label {
-        display: inline-block;
-        color: #dc2626;
-        font-weight: 700;
-        font-size: 0.9rem;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-    }
-    
-    .about-title {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        font-weight: 900;
-        color: #1a1a1a;
-        margin-bottom: 25px;
-        line-height: 1.2;
-    }
-    
-    .about-title .joss-text {
-        color: #dc2626;
-    }
-    
-    .about-title .gandos-text {
-        background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    .about-divider {
-        width: 80px;
-        height: 4px;
-        background: linear-gradient(90deg, #dc2626, #f97316, #fbbf24);
-        border-radius: 2px;
-        margin-bottom: 30px;
-    }
-    
-    .about-description {
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #4b5563;
-        margin-bottom: 40px;
-    }
-    
-    .about-cta-btn {
+
+    .btn-hero {
         display: inline-flex;
         align-items: center;
-        background: linear-gradient(135deg, #dc2626, #b91c1c);
-        color: white;
+        gap: 10px;
         padding: 18px 40px;
         border-radius: 50px;
         text-decoration: none;
         font-weight: 700;
-        font-size: 1.05rem;
-        transition: all 0.4s ease;
+        font-size: 1rem;
+        transition: var(--transition);
+    }
+
+    .btn-hero-primary {
+        background: var(--gradient-primary);
+        color: var(--white);
+        box-shadow: 0 10px 40px rgba(220, 38, 38, 0.4);
+    }
+
+    .btn-hero-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 50px rgba(220, 38, 38, 0.6);
+        color: var(--white);
+    }
+
+    .btn-hero-outline {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: var(--white);
+        backdrop-filter: blur(10px);
+    }
+
+    .btn-hero-outline:hover {
+        background: var(--white);
+        color: var(--primary);
+        border-color: var(--white);
+        transform: translateY(-3px);
+    }
+
+    /* Carousel Indicators */
+    .hero-carousel-indicators {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 10;
+    }
+
+    .hero-indicator {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .hero-indicator.active {
+        background: var(--white);
+        transform: scale(1.3);
+        box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+    }
+
+    .hero-indicator:hover {
+        background: var(--white);
+        transform: scale(1.2);
+    }
+
+    /* Section Divider */
+    .section-divider-enhanced {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .section-divider-enhanced span {
+        flex: 1;
+        max-width: 60px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+    }
+
+    .section-divider-enhanced i {
+        color: var(--accent);
+        font-size: 1.2rem;
+    }
+
+    /* Buttons */
+    .btn-enhanced {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 18px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: var(--transition);
+    }
+
+    .btn-primary-enhanced {
+        background: var(--gradient-primary);
+        color: var(--white);
         box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
     }
-    
-    .about-cta-btn:hover {
-        transform: translateY(-3px) scale(1.05);
+
+    .btn-primary-enhanced:hover {
+        transform: translateY(-3px);
         box-shadow: 0 15px 50px rgba(220, 38, 38, 0.5);
-        color: white;
+        color: var(--white);
     }
-    
-    .about-image-wrapper {
-        position: relative;
-        padding: 30px;
+
+    .btn-secondary-enhanced {
+        background: var(--white);
+        color: var(--primary);
+        border: 2px solid var(--primary);
+        box-shadow: var(--shadow-sm);
     }
-    
-    .about-image-glow {
-        position: absolute;
-        top: 0;
-        right: -50px;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(220, 38, 38, 0.2) 0%, transparent 70%);
-        border-radius: 50%;
-        filter: blur(60px);
-        animation: float 8s ease-in-out infinite;
+
+    .btn-secondary-enhanced:hover {
+        background: var(--primary);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 50px rgba(220, 38, 38, 0.4);
     }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-30px); }
-    }
-    
-    .about-image-frame {
-        position: relative;
-        border-radius: 30px;
-        overflow: hidden;
-        box-shadow: 
-            0 30px 80px rgba(0, 0, 0, 0.15),
-            0 0 0 10px rgba(220, 38, 38, 0.1),
-            0 0 0 20px rgba(251, 191, 36, 0.05);
-        transition: transform 0.5s ease;
-    }
-    
-    .about-image-frame:hover {
-        transform: scale(1.02) rotate(1deg);
-    }
-    
-    .about-main-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 30px;
-    }
-    
+
     /* ============================================
-       TESTIMONIALS FIXED SECTION - PERBAIKAN
-       FIXED GLITCH ISSUE AND IMPROVED ANIMATIONS
+       SERVICES SECTION
     ============================================ */
-    .testimonials-fixed-section {
+    .services-section-enhanced {
+        padding: 120px 0;
+        background: var(--white);
+    }
+
+    .section-header-enhanced {
+        margin-bottom: 50px;
+    }
+
+    .section-tag-enhanced {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(220, 38, 38, 0.08);
+        color: var(--primary);
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .tag-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--primary);
+        border-radius: 50%;
+    }
+
+    .section-title-enhanced {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        color: var(--text-dark);
+        line-height: 1.1;
+        margin-bottom: 25px;
+    }
+
+    .section-subtitle-enhanced {
+        font-size: 1.1rem;
+        color: var(--text-gray);
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Service Cards */
+    .service-card-enhanced {
         position: relative;
-        padding: 100px 0;
-        background: linear-gradient(135deg, #fffaf0 0%, #fff8e7 100%);
+        background: var(--white);
+        border-radius: 25px;
+        padding: 40px 30px;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid var(--border);
+        transition: var(--transition);
+        height: 100%;
         overflow: hidden;
     }
-    
-    .testimonials-fixed-bg {
+
+    .service-card-enhanced::before {
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 30%),
-            radial-gradient(circle at 90% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 30%);
-        z-index: 1;
+        width: 100%;
+        height: 5px;
+        background: var(--gradient-primary);
+        transform: scaleX(0);
+        transition: var(--transition);
     }
-    
-    /* Section Header */
-    .section-header-fixed {
-        position: relative;
-        z-index: 2;
-        padding: 0 20px;
-        margin-bottom: 50px;
+
+    .service-card-enhanced:hover::before {
+        transform: scaleX(1);
     }
-    
-    .testimonials-fixed-title {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 6vw, 3.5rem);
-        font-weight: 900;
-        color: #1a1a1a;
-        margin-bottom: 15px;
-        line-height: 1.2;
-        text-align: center;
+
+    .service-card-enhanced:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(220, 38, 38, 0.2);
     }
-    
-    .title-divider-fixed {
+
+    .service-icon-enhanced {
+        width: 80px;
+        height: 80px;
+        background: var(--gradient-primary);
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 15px;
+        color: var(--white);
+        font-size: 2rem;
+        margin-bottom: 25px;
+        transition: var(--transition);
+    }
+
+    .service-card-enhanced:hover .service-icon-enhanced {
+        transform: scale(1.1) rotate(10deg);
+    }
+
+    .service-title-enhanced {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 15px;
+    }
+
+    .service-description-enhanced {
+        font-size: 0.95rem;
+        color: var(--text-gray);
+        line-height: 1.7;
         margin-bottom: 20px;
     }
-    
-    .divider-line-fixed {
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(90deg, #dc2626, #f97316);
-        border-radius: 2px;
-    }
-    
-    .divider-icon-fixed {
-        color: #ffd700;
+
+    .service-hover-arrow {
+        color: var(--primary);
         font-size: 1.2rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: var(--transition);
     }
-    
-    .testimonials-fixed-subtitle {
-        font-size: 1.1rem;
-        color: #666;
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
-        font-weight: 400;
-        text-align: center;
+
+    .service-card-enhanced:hover .service-hover-arrow {
+        opacity: 1;
+        transform: translateX(0);
     }
-    
-    /* Testimonial Cards - 3 BERDAMPINGAN - FIXED */
-    .testimonials-fixed-carousel-wrapper {
+
+    /* ============================================
+       TESTIMONIALS SECTION
+    ============================================ */
+    .testimonials-section-enhanced {
+        padding: 120px 0;
+        background: linear-gradient(135deg, #fffbf5 0%, #fff8ed 100%);
+    }
+
+    .testimonials-carousel-wrapper {
         position: relative;
-        z-index: 2;
-        margin-top: 30px;
+        margin-top: 50px;
     }
-    
-    .testimonials-fixed-carousel {
+
+    .testimonials-carousel-container {
+        position: relative;
         overflow: hidden;
-        position: relative;
-        min-height: 350px; /* Fixed height to prevent glitch */
+        min-height: 400px;
     }
-    
-    .testimonial-fixed-slide {
+
+    .testimonials-slide {
         display: none;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         opacity: 0;
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        transform: translateX(20px);
+        transition: opacity 0.6s ease;
     }
-    
-    .testimonial-fixed-slide.active {
+
+    .testimonials-slide.active {
         display: block;
         position: relative;
         opacity: 1;
-        transform: translateX(0);
     }
-    
-    .testimonial-fixed-slide.next {
-        transform: translateX(20px);
-    }
-    
-    .testimonial-fixed-slide.prev {
-        transform: translateX(-20px);
-    }
-    
-    .testimonial-fixed-card {
-        background: white;
-        border-radius: 15px;
-        padding: 30px;
+
+    .testimonial-card-enhanced {
+        background: var(--white);
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(220, 38, 38, 0.08);
+        transition: var(--transition);
         height: 100%;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
     }
-    
-    .testimonial-fixed-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-    }
-    
-    /* Bintang Rating DI DALAM CARD - DI ATAS */
-    .testimonial-rating-fixed {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    
-    .stars-fixed {
-        display: flex;
-        gap: 5px;
-    }
-    
-    .stars-fixed i {
-        color: #ffd700;
-        font-size: 1.3rem;
-    }
-    
-    /* Testimonial Text */
-    .testimonial-text-fixed {
-        flex: 1;
-        margin-bottom: 25px;
-        position: relative;
-    }
-    
-    .quote-mark-fixed {
-        color: rgba(220, 38, 38, 0.2);
-        font-size: 2rem;
-        margin-bottom: 15px;
+
+    .testimonial-card-enhanced::before {
+        content: '"';
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 100px;
+        font-family: 'Playfair Display', serif;
+        color: rgba(220, 38, 38, 0.05);
         line-height: 1;
     }
-    
-    .testimonial-content-fixed {
+
+    .testimonial-card-enhanced:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(220, 38, 38, 0.15);
+    }
+
+    .testimonial-rating-enhanced {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    .testimonial-rating-enhanced i {
+        color: #fbbf24;
+        font-size: 1.2rem;
+    }
+
+    .testimonial-text-enhanced {
         font-size: 1rem;
         line-height: 1.7;
-        color: #444;
-        margin-bottom: 0;
+        color: var(--text-gray);
+        margin-bottom: 25px;
         font-style: italic;
     }
-    
-    /* Testimonial Author */
-    .testimonial-author-fixed {
+
+    .testimonial-author-enhanced {
+        display: flex;
+        align-items: center;
+        gap: 15px;
         padding-top: 20px;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        border-top: 2px solid var(--border);
     }
-    
-    .author-info-fixed {
-        text-align: center;
+
+    .author-avatar-enhanced {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
     }
-    
-    .author-name-fixed {
+
+    .author-info-enhanced h4 {
         font-size: 1.1rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: var(--text-dark);
         margin-bottom: 5px;
-        letter-spacing: 0.5px;
     }
-    
-    .author-location-fixed {
+
+    .author-info-enhanced p {
         font-size: 0.85rem;
-        color: #dc2626;
+        color: var(--primary);
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
         margin: 0;
     }
-    
-    /* Carousel Dots ONLY - NO ARROWS - FIXED */
-    .carousel-dots-fixed {
+
+    .testimonials-indicators {
         display: flex;
         justify-content: center;
-        gap: 12px;
+        gap: 15px;
         margin-top: 40px;
-        position: relative;
-        z-index: 3;
     }
-    
-    .dot-fixed {
+
+    .testimonial-indicator {
         width: 12px;
         height: 12px;
+        background: rgba(220, 38, 38, 0.2);
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.1);
         cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        border: none;
-        padding: 0;
-        margin: 0;
+        transition: var(--transition);
     }
-    
-    .dot-fixed.active {
-        background: #dc2626;
+
+    .testimonial-indicator.active {
+        background: var(--primary);
         transform: scale(1.3);
+        box-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
     }
-    
-    .dot-fixed.active::after {
-        content: '';
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        border: 2px solid #dc2626;
-        border-radius: 50%;
-        animation: pulse-dot-fixed 3s ease-in-out infinite;
+
+    .testimonial-indicator:hover {
+        background: var(--primary);
+        transform: scale(1.2);
     }
-    
-    @keyframes pulse-dot-fixed {
-        0%, 100% {
-            transform: scale(1);
-            opacity: 0.7;
-        }
-        50% {
-            transform: scale(1.2);
-            opacity: 0.3;
-        }
-    }
-    
-    /* View More Button - PERBAIKAN: Hanya menggunakan href normal */
-    .btn-view-more-fixed {
-        display: inline-flex;
-        align-items: center;
-        background: linear-gradient(135deg, #dc2626, #b91c1c);
-        color: white;
-        padding: 16px 40px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1.05rem;
-        transition: all 0.4s ease;
-        box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
-        border: 2px solid transparent;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        pointer-events: auto;
-        z-index: 10;
-    }
-    
-    .btn-view-more-fixed::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s ease;
-    }
-    
-    .btn-view-more-fixed:hover::before {
-        left: 100%;
-    }
-    
-    .btn-view-more-fixed:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 50px rgba(220, 38, 38, 0.5);
-        border-color: white;
-    }
-    
-    /* ============================================
-       CTA SECTION
-    ============================================ */
-    .cta-section-main {
-        position: relative;
-        padding: 120px 0;
-        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-        overflow: hidden;
-    }
-    
-    .cta-pattern-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(220, 38, 38, 0.02) 35px, rgba(220, 38, 38, 0.02) 70px),
-            radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.05) 0%, transparent 50%);
-        opacity: 0.6;
-    }
-    
-    .cta-main-title {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        font-weight: 900;
-        color: #dc2626;
-        margin-bottom: 25px;
-        line-height: 1.3;
-    }
-    
-    .cta-main-subtitle {
-        font-size: 1.2rem;
-        color: #6b7280;
-        margin-bottom: 50px;
-        line-height: 1.7;
-    }
-    
-    .cta-buttons-wrapper {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-    
-    .cta-btn-main {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px 45px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1.1rem;
-        transition: all 0.4s ease;
-        min-width: 250px;
-    }
-    
-    .cta-btn-outline {
-        background: transparent;
-        border: 3px solid #dc2626;
-        color: #dc2626;
-    }
-    
-    .cta-btn-outline:hover {
-        background: #dc2626;
-        color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 15px 50px rgba(220, 38, 38, 0.4);
-    }
-    
-    .cta-btn-solid {
-        background: linear-gradient(135deg, #dc2626, #b91c1c);
-        color: white;
-        border: 3px solid transparent;
-        box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
-    }
-    
-    .cta-btn-solid:hover {
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 15px 50px rgba(220, 38, 38, 0.5);
-        color: white;
-    }
-    
-    /* ============================================
-       FEATURES SECTION
-    ============================================ */
-    .features-section {
-        padding: 80px 0;
-        background: white;
-    }
-    
-    .feature-card-mini {
-        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-        border-radius: 20px;
-        padding: 30px;
-        text-align: center;
-        transition: all 0.4s ease;
-        border: 2px solid rgba(0, 0, 0, 0.05);
-        height: 100%;
-    }
-    
-    .feature-card-mini:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(220, 38, 38, 0.1);
-        border-color: rgba(220, 38, 38, 0.2);
-    }
-    
-    .feature-icon-mini {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #dc2626, #f97316);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 2rem;
-        margin: 0 auto 20px;
-        box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
-        transition: transform 0.3s ease;
-    }
-    
-    .feature-card-mini:hover .feature-icon-mini {
-        transform: scale(1.1) rotate(10deg);
-    }
-    
-    .feature-title-mini {
-        font-weight: 700;
-        color: #1a1a1a;
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-    }
-    
-    .feature-desc-mini {
-        color: #6b7280;
-        font-size: 0.95rem;
-        margin: 0;
-    }
-    
-    /* ============================================
-       ANIMATIONS
-    ============================================ */
-    @keyframes animate-fade-in {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    
-    @keyframes animate-slide-up {
-        from {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes animate-slide-right {
-        from {
-            opacity: 0;
-            transform: translateX(-40px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes animate-slide-left {
-        from {
-            opacity: 0;
-            transform: translateX(40px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes animate-scale-in {
-        from {
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    
-    .animate-fade-in {
-        animation: animate-fade-in 1s ease-out forwards;
-        opacity: 0;
-    }
-    
-    .animate-slide-up {
-        animation: animate-slide-up 1s ease-out forwards;
-        opacity: 0;
-    }
-    
-    .animate-slide-right {
-        animation: animate-slide-right 1s ease-out forwards;
-        opacity: 0;
-    }
-    
-    .animate-slide-left {
-        animation: animate-slide-left 1s ease-out forwards;
-        opacity: 0;
-    }
-    
-    .animate-scale-in {
-        animation: animate-scale-in 0.8s ease-out forwards;
-        opacity: 0;
-    }
-    
+
     /* ============================================
        RESPONSIVE DESIGN
     ============================================ */
     @media (max-width: 992px) {
-        .hero-nav-buttons {
-            flex-direction: column;
-            max-width: 400px;
-            margin: 0 auto 50px;
+        .welcome-content-section,
+        .services-section-enhanced,
+        .testimonials-section-enhanced,
+        .rounded-cta-section {
+            padding: 80px 0;
         }
-        
-        .hero-nav-btn {
-            width: 100%;
+
+        .welcome-content-enhanced {
+            padding-left: 0;
+            padding-top: 30px;
+        }
+
+        .rounded-cta-card {
+            padding: 40px;
+        }
+
+        .rounded-cta-buttons {
+            margin-top: 20px;
+        }
+
+        .welcome-action-buttons {
             justify-content: center;
         }
-        
-        .about-content {
-            padding-right: 0;
-            margin-bottom: 50px;
+    }
+
+    @media (max-width: 768px) {
+        .hero-carousel-section {
+            height: 90vh;
         }
-        
-        .about-image-wrapper {
-            padding: 20px;
-        }
-        
-        .cta-buttons-wrapper {
+
+        .hero-carousel-buttons {
             flex-direction: column;
             align-items: center;
         }
-        
-        .cta-btn-main {
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .testimonial-fixed-card {
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        
-        .testimonials-fixed-carousel {
-            min-height: 400px;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .hero-main-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-        }
-        
-        .est-badge {
-            font-size: 0.8rem;
-            padding: 6px 20px;
-        }
-        
-        .hero-nav-btn {
-            padding: 15px 25px;
-            font-size: 0.95rem;
-        }
-        
-        .about-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-        }
-        
-        .cta-main-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-        }
-        
-        .testimonials-fixed-title {
-            font-size: clamp(2rem, 5vw, 2.8rem);
-        }
-        
-        .testimonial-fixed-card {
-            padding: 20px;
-        }
-        
-        .testimonial-content-fixed {
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .btn-view-more-fixed {
-            padding: 14px 30px;
-            font-size: 1rem;
-        }
-        
-        .testimonials-fixed-carousel {
-            min-height: 450px;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .hero-nav-buttons {
-            gap: 10px;
-        }
-        
-        .hero-nav-btn {
-            padding: 12px 20px;
-            font-size: 0.9rem;
-        }
-        
-        .hero-nav-btn i {
-            font-size: 1rem;
-        }
-        
-        .testimonials-fixed-title {
-            font-size: 1.8rem;
-        }
-        
-        .testimonials-fixed-subtitle {
-            font-size: 1rem;
-        }
-        
-        .testimonial-fixed-card {
-            padding: 18px;
-        }
-        
-        .testimonial-content-fixed {
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-        
-        .stars-fixed i {
-            font-size: 1.1rem;
-        }
-        
-        .author-name-fixed {
-            font-size: 1rem;
-        }
-        
-        .author-location-fixed {
-            font-size: 0.8rem;
-        }
-        
-        .btn-view-more-fixed {
-            padding: 12px 25px;
-            font-size: 0.95rem;
+
+        .btn-hero {
             width: 100%;
             max-width: 300px;
             justify-content: center;
         }
-        
-        .cta-btn-main {
-            min-width: auto;
-            width: 100%;
-            padding: 18px 25px;
+
+        .welcome-title-main,
+        .rounded-cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
         }
-        
-        .testimonials-fixed-carousel {
-            min-height: 500px;
+
+        .welcome-description-main,
+        .rounded-cta-description {
+            font-size: 1rem;
+        }
+
+        .welcome-image-main-simple img {
+            height: 400px;
+        }
+
+        .rounded-cta-card {
+            padding: 30px;
+        }
+
+        .btn-rounded-cta {
+            padding: 16px 25px;
+            font-size: 0.95rem;
+        }
+
+        .welcome-action-buttons {
+            flex-direction: column;
+        }
+
+        .btn-enhanced {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-carousel-section {
+            height: 85vh;
+        }
+
+        .hero-carousel-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .hero-carousel-subtitle {
+            font-size: 1rem;
+        }
+
+        .hero-badge {
+            padding: 8px 20px;
+            font-size: 0.75rem;
+        }
+
+        .btn-hero {
+            padding: 15px 30px;
+            font-size: 0.95rem;
+        }
+
+        .btn-rounded-cta {
+            padding: 14px 20px;
+            font-size: 0.9rem;
+        }
+
+        .welcome-title-main,
+        .rounded-cta-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+        }
+
+        .welcome-description-main,
+        .rounded-cta-description {
+            font-size: 0.95rem;
+        }
+
+        .welcome-image-main-simple img {
+            height: 350px;
+        }
+
+        .rounded-cta-card {
+            padding: 25px;
+        }
+
+        .service-card-enhanced {
+            padding: 30px 20px;
+        }
+
+        .service-icon-enhanced {
+            width: 70px;
+            height: 70px;
+            font-size: 1.8rem;
         }
     }
 </style>
+
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 @endsection
 
 @section('scripts')
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // ============================================
-    // FIXED TESTIMONIAL CAROUSEL - NO GLITCH
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        const carousel = document.getElementById('testimonialsFixedCarousel');
-        const slides = document.querySelectorAll('.testimonial-fixed-slide');
-        const dots = document.querySelectorAll('.dot-fixed');
-        
-        let currentSlide = 0;
-        let autoScrollInterval;
-        const slideInterval = 6000; // 6 seconds
-        
-        // Initialize carousel
-        function initCarousel() {
-            if (!carousel || slides.length === 0) return;
-            
-            updateCarousel();
-            startAutoScroll();
-            
-            // Add click event to dots
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    goToSlide(index);
-                });
-            });
-            
-            // Pause auto-scroll on hover
-            carousel.addEventListener('mouseenter', pauseAutoScroll);
-            carousel.addEventListener('mouseleave', startAutoScroll);
-            
-            // Touch/swipe support for mobile
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            carousel.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                pauseAutoScroll();
-            });
-            
-            carousel.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-                startAutoScroll();
-            });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                
-                if (touchStartX - touchEndX > swipeThreshold) {
-                    // Swipe left - next slide
-                    nextSlide();
-                } else if (touchEndX - touchStartX > swipeThreshold) {
-                    // Swipe right - previous slide
-                    prevSlide();
-                }
-            }
-        }
-        
-        function goToSlide(index) {
-            // Remove active class from all slides
-            slides.forEach(slide => {
-                slide.classList.remove('active', 'next', 'prev');
-            });
-            
-            // Update current slide
-            currentSlide = index;
-            
-            // Update active slide with smooth transition
-            setTimeout(() => {
-                slides[currentSlide].classList.add('active');
-            }, 10);
-            
-            updateDots();
-        }
-        
-        function nextSlide() {
-            let nextIndex = (currentSlide + 1) % slides.length;
-            
-            // Add transition classes
-            slides[currentSlide].classList.add('prev');
-            slides[nextIndex].classList.add('next');
-            
-            setTimeout(() => {
-                goToSlide(nextIndex);
-            }, 300);
-        }
-        
-        function prevSlide() {
-            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-            
-            // Add transition classes
-            slides[currentSlide].classList.add('next');
-            slides[prevIndex].classList.add('prev');
-            
-            setTimeout(() => {
-                goToSlide(prevIndex);
-            }, 300);
-        }
-        
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-        
-        function startAutoScroll() {
-            if (autoScrollInterval) clearInterval(autoScrollInterval);
-            
-            autoScrollInterval = setInterval(() => {
-                nextSlide();
-            }, slideInterval);
-        }
-        
-        function pauseAutoScroll() {
-            if (autoScrollInterval) clearInterval(autoScrollInterval);
-        }
-        
-        // Initialize the carousel
-        initCarousel();
-        
-        // ============================================
-        // GOOGLE REVIEWS BUTTON - SIMPLE FIX
-        // Hapus semua event listener yang mungkin konflik
-        // ============================================
-        const googleReviewBtn = document.getElementById('googleReviewsBtn');
-        
-        if (googleReviewBtn) {
-            // Remove any existing event listeners by replacing the element
-            const newBtn = googleReviewBtn.cloneNode(true);
-            googleReviewBtn.parentNode.replaceChild(newBtn, googleReviewBtn);
-            
-            // Tambahkan event listener sederhana untuk fallback
-            const currentBtn = document.getElementById('googleReviewsBtn');
-            
-            // Cegah default behavior ganda
-            currentBtn.addEventListener('click', function(e) {
-                // Cegah double execution
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Biarkan href normal bekerja, sudah ada target="_blank"
-                console.log('Opening Google Reviews in new tab');
-            }, { once: true }); // Hanya sekali untuk mencegah multiple execution
-        }
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
     });
-    
+
     // ============================================
-    // SMOOTH SCROLL - DIHAPUS UNTUK MENCEGAH KONFLIK
+    // HERO CAROUSEL - AUTO SLIDE
     // ============================================
-    
+    let heroCurrentSlide = 0;
+    const heroSlides = document.querySelectorAll('.hero-carousel-slide');
+    const heroIndicators = document.querySelectorAll('.hero-indicator');
+    let heroAutoSlideInterval;
+
+    function heroCarouselShowSlide(index) {
+        heroSlides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            heroIndicators[i].classList.remove('active');
+        });
+
+        heroCurrentSlide = (index + heroSlides.length) % heroSlides.length;
+        heroSlides[heroCurrentSlide].classList.add('active');
+        heroIndicators[heroCurrentSlide].classList.add('active');
+    }
+
+    function heroCarouselNext() {
+        heroCarouselShowSlide(heroCurrentSlide + 1);
+        heroResetAutoSlide();
+    }
+
+    function heroCarouselPrev() {
+        heroCarouselShowSlide(heroCurrentSlide - 1);
+        heroResetAutoSlide();
+    }
+
+    function heroCarouselGoTo(index) {
+        heroCarouselShowSlide(index);
+        heroResetAutoSlide();
+    }
+
+    function heroAutoSlide() {
+        heroAutoSlideInterval = setInterval(() => {
+            heroCarouselNext();
+        }, 5000);
+    }
+
+    function heroResetAutoSlide() {
+        clearInterval(heroAutoSlideInterval);
+        heroAutoSlide();
+    }
+
+    // Start auto slide
+    heroAutoSlide();
+
+    // Pause on hover
+    document.querySelector('.hero-carousel-section').addEventListener('mouseenter', () => {
+        clearInterval(heroAutoSlideInterval);
+    });
+
+    document.querySelector('.hero-carousel-section').addEventListener('mouseleave', () => {
+        heroAutoSlide();
+    });
+
     // ============================================
-    // SCROLL ANIMATIONS OBSERVER
+    // TESTIMONIALS CAROUSEL - AUTO SLIDE
     // ============================================
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-                const animationName = Array.from(element.classList)
-                    .find(className => className.startsWith('animate-'));
-                
-                if (animationName) {
-                    element.style.animationPlayState = 'running';
-                    element.style.opacity = '1';
+    let testimonialsCurrentSlide = 0;
+    const testimonialsSlides = document.querySelectorAll('.testimonials-slide');
+    const testimonialIndicators = document.querySelectorAll('.testimonial-indicator');
+    let testimonialsAutoSlideInterval;
+
+    function testimonialsCarouselShowSlide(index) {
+        testimonialsSlides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            testimonialIndicators[i].classList.remove('active');
+        });
+
+        testimonialsCurrentSlide = (index + testimonialsSlides.length) % testimonialsSlides.length;
+        testimonialsSlides[testimonialsCurrentSlide].classList.add('active');
+        testimonialIndicators[testimonialsCurrentSlide].classList.add('active');
+    }
+
+    function testimonialsCarouselNext() {
+        testimonialsCarouselShowSlide(testimonialsCurrentSlide + 1);
+        testimonialsResetAutoSlide();
+    }
+
+    function testimonialsCarouselPrev() {
+        testimonialsCarouselShowSlide(testimonialsCurrentSlide - 1);
+        testimonialsResetAutoSlide();
+    }
+
+    function testimonialsCarouselGoTo(index) {
+        testimonialsCarouselShowSlide(index);
+        testimonialsResetAutoSlide();
+    }
+
+    function testimonialsAutoSlide() {
+        testimonialsAutoSlideInterval = setInterval(() => {
+            testimonialsCarouselNext();
+        }, 6000);
+    }
+
+    function testimonialsResetAutoSlide() {
+        clearInterval(testimonialsAutoSlideInterval);
+        testimonialsAutoSlide();
+    }
+
+    // Start auto slide
+    testimonialsAutoSlide();
+
+    // Pause on hover
+    document.querySelector('.testimonials-carousel-wrapper').addEventListener('mouseenter', () => {
+        clearInterval(testimonialsAutoSlideInterval);
+    });
+
+    document.querySelector('.testimonials-carousel-wrapper').addEventListener('mouseleave', () => {
+        testimonialsAutoSlide();
+    });
+
+    // ============================================
+    // SMOOTH SCROLL
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '#order') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             }
         });
-    }, observerOptions);
-    
-    // Observe all animate elements
-    document.querySelectorAll('[class*="animate-"]').forEach(el => {
-        el.style.animationPlayState = 'paused';
-        el.style.opacity = '0';
-        observer.observe(el);
-    });
-    
-    // ============================================
-    // PARALLAX EFFECT ON SCROLL
-    // ============================================
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const heroImage = document.querySelector('.hero-background-image');
-        
-        if (heroImage) {
-            heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
     });
 </script>
 @endsection
