@@ -222,7 +222,43 @@
         margin-top: 2px;
     }
 
-    /* Carousel Navigation */
+    /* Carousel Navigation Arrows */
+    .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 20;
+        font-size: 1.2rem;
+    }
+
+    .carousel-arrow:hover {
+        background: var(--primary-red);
+        border-color: var(--accent-gold);
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 0 20px rgba(220, 20, 60, 0.5);
+    }
+
+    .carousel-arrow.prev {
+        left: 30px;
+    }
+
+    .carousel-arrow.next {
+        right: 30px;
+    }
+
+    /* Carousel Navigation Dots */
     .carousel-nav {
         position: absolute;
         bottom: 30px;
@@ -312,17 +348,18 @@
         padding: 0 10px;
     }
 
-    /* Menu Card - Clean & Minimal */
+    /* Menu Card - Enhanced Hover Effects */
     .menu-card {
         background: white;
         border-radius: 20px;
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.4s ease;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         opacity: 0;
         transform: translateY(20px);
         animation: cardReveal 0.6s forwards;
+        border: 1px solid rgba(220, 20, 60, 0);
     }
 
     @keyframes cardReveal {
@@ -332,9 +369,11 @@
         }
     }
 
+    /* ENHANCED HOVER EFFECTS */
     .menu-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(220, 20, 60, 0.2);
+        border-color: var(--primary-red);
     }
 
     .card-image-container {
@@ -348,11 +387,30 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.6s ease;
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Image zoom effect on hover */
     .menu-card:hover .card-image-container img {
-        transform: scale(1.05);
+        transform: scale(1.12);
+    }
+
+    /* Image overlay effect on hover */
+    .card-image-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(220, 20, 60, 0.2), rgba(139, 0, 0, 0.2));
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+    }
+
+    .menu-card:hover .card-image-container::after {
+        opacity: 1;
     }
 
     .card-badge {
@@ -369,10 +427,27 @@
         text-transform: uppercase;
         z-index: 2;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+    }
+
+    /* Badge enhancement on hover */
+    .menu-card:hover .card-badge {
+        background: var(--primary-red);
+        color: white;
+        box-shadow: 0 6px 16px rgba(220, 20, 60, 0.3);
+        transform: scale(1.05);
     }
 
     .card-content {
         padding: 20px;
+        transition: all 0.4s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Content slide up effect on hover */
+    .menu-card:hover .card-content {
+        transform: translateY(-3px);
     }
 
     .card-header {
@@ -380,6 +455,7 @@
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 12px;
+        transition: all 0.3s ease;
     }
 
     .card-title {
@@ -389,6 +465,12 @@
         color: var(--dark-charcoal);
         line-height: 1.4;
         flex: 1;
+        transition: color 0.3s ease;
+    }
+
+    /* Title color change on hover */
+    .menu-card:hover .card-title {
+        color: var(--primary-red);
     }
 
     .card-price {
@@ -397,6 +479,14 @@
         color: var(--primary-red);
         margin-left: 15px;
         white-space: nowrap;
+        transition: all 0.4s ease;
+        position: relative;
+    }
+
+    /* Price animation on hover */
+    .menu-card:hover .card-price {
+        transform: scale(1.1);
+        color: var(--dark-red);
     }
 
     .price-currency-small {
@@ -404,6 +494,11 @@
         font-weight: 500;
         color: #888;
         margin-right: 2px;
+        transition: color 0.3s ease;
+    }
+
+    .menu-card:hover .price-currency-small {
+        color: var(--primary-red);
     }
 
     .card-description {
@@ -412,11 +507,53 @@
         line-height: 1.5;
         margin-bottom: 15px;
         font-weight: 300;
+        transition: all 0.4s ease;
+        border-left: 2px solid transparent;
+        padding-left: 0;
+    }
+
+    /* Description accent on hover */
+    .menu-card:hover .card-description {
+        color: #444;
+        border-left: 2px solid var(--primary-red);
+        padding-left: 12px;
     }
 
     /* Clean card footer - hanya untuk spacing */
     .card-footer {
         height: 5px;
+        background: linear-gradient(to right, var(--primary-red), var(--accent-gold));
+        width: 0;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 0 0 20px 20px;
+    }
+
+    /* Footer gradient animation on hover */
+    .menu-card:hover .card-footer {
+        width: 100%;
+    }
+
+    /* Add a subtle shine effect */
+    .menu-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transition: left 0.7s ease;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .menu-card:hover::before {
+        left: 100%;
     }
 
     /* Responsive Design */
@@ -451,6 +588,16 @@
         .menu-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+        }
+        .carousel-arrow {
+            width: 45px;
+            height: 45px;
+        }
+        .carousel-arrow.prev {
+            left: 20px;
+        }
+        .carousel-arrow.next {
+            right: 20px;
         }
     }
 
@@ -496,6 +643,11 @@
         .card-image-container {
             height: 180px;
         }
+        .carousel-arrow {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
     }
 
     @media (max-width: 576px) {
@@ -538,6 +690,16 @@
         .card-image-container {
             height: 200px;
         }
+        .carousel-arrow {
+            width: 35px;
+            height: 35px;
+        }
+        .carousel-arrow.prev {
+            left: 10px;
+        }
+        .carousel-arrow.next {
+            right: 10px;
+        }
     }
 
     @media (max-width: 400px) {
@@ -561,6 +723,11 @@
         .menu-grid {
             padding: 0 5px;
         }
+        .carousel-arrow {
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+        }
     }
 </style>
 @endsection
@@ -568,6 +735,14 @@
 @section('content')
     <!-- Hero Carousel Section -->
     <section class="hero-carousel-section">
+        <!-- Navigation Arrows -->
+        <div class="carousel-arrow prev">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="carousel-arrow next">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
         <!-- Slide 1 -->
         <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
             <div class="hero-content">
@@ -681,7 +856,6 @@
                 <div class="menu-card" data-category="main" style="animation-delay: 0.1s">
                     <div class="card-image-container">
                         <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nasi Goreng Spesial">
-                        <span class="card-badge">Best Seller</span>
                     </div>
                     <div class="card-content">
                         <div class="card-header">
@@ -700,7 +874,6 @@
                 <div class="menu-card" data-category="main" style="animation-delay: 0.2s">
                     <div class="card-image-container">
                         <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rendang Sapi">
-                        <span class="card-badge">Premium</span>
                     </div>
                     <div class="card-content">
                         <div class="card-header">
@@ -719,7 +892,6 @@
                 <div class="menu-card" data-category="appetizer" style="animation-delay: 0.3s">
                     <div class="card-image-container">
                         <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sate Ayam">
-                        <span class="card-badge">Favorit</span>
                     </div>
                     <div class="card-content">
                         <div class="card-header">
@@ -756,7 +928,6 @@
                 <div class="menu-card" data-category="drink" style="animation-delay: 0.5s">
                     <div class="card-image-container">
                         <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Es Cincau">
-                        <span class="card-badge">Populer</span>
                     </div>
                     <div class="card-content">
                         <div class="card-header">
@@ -850,9 +1021,11 @@
 @section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // ========== SIMPLE CAROUSEL ==========
+    // ========== SIMPLE CAROUSEL WITH PREV/NEXT BUTTONS ==========
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.carousel-dot');
+    const prevBtn = document.querySelector('.carousel-arrow.prev');
+    const nextBtn = document.querySelector('.carousel-arrow.next');
     let currentSlide = 0;
     let slideInterval;
 
@@ -870,14 +1043,30 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(currentSlide);
     }
 
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
     function startAutoSlide() {
         clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 5000);
+        slideInterval = setInterval(nextSlide, 3000);
     }
 
     // Initialize
     showSlide(currentSlide);
     startAutoSlide();
+
+    // Button controls
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        startAutoSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        startAutoSlide();
+    });
 
     // Dot controls
     dots.forEach((dot, index) => {
@@ -930,17 +1119,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========== CARD HOVER EFFECTS ==========
-    menuCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-        });
-    });
-
+    // ========== REMOVE CONFLICTING HOVER EFFECTS ==========
+    // The hover effects are now handled entirely by CSS
+    // This removes the JavaScript hover effects to prevent conflicts
+    
     // ========== INITIAL CARD ANIMATION ==========
     setTimeout(() => {
         menuCards.forEach((card, index) => {
