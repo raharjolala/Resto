@@ -3,115 +3,89 @@
 @section('title', 'Reservasi - JOSS GANDOS')
 
 @section('content')
-    <!-- Modern Hero Section -->
-    <section class="modern-hero position-relative overflow-hidden">
-        <div class="hero-gradient-overlay"></div>
-        <div class="hero-pattern"></div>
-        
-        <div class="container position-relative z-3">
-            <div class="row align-items-center min-vh-80">
-                <div class="col-lg-8 col-md-10 mx-auto text-center">
-                    <div class="hero-content" data-aos="fade-up">
-                        <div class="hero-badge mb-4">
-                            <div class="floating-badge">
-                                <i class="fas fa-crown"></i>
-                                <span>Restoran Terbaik 2024</span>
-                            </div>
-                        </div>
-                        <h1 class="hero-title display-2 fw-bold text-white mb-4">
-                            Nikmati Momen Spesial
-                            <span class="text-gradient">di JOSS GANDOS</span>
-                        </h1>
-                        <p class="hero-subtitle lead text-light opacity-90 mb-5">
-                            Pesan meja favorit Anda dengan mudah dan rasakan pengalaman kuliner tak terlupakan
-                        </p>
-                        
-                        <div class="hero-stats">
-                            <div class="row g-4 justify-content-center">
-                                <div class="col-auto">
-                                    <div class="stat-item">
-                                        <div class="stat-number text-warning">5</div>
-                                        <div class="stat-label">Menit Konfirmasi</div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="stat-divider"></div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="stat-item">
-                                        <div class="stat-number text-warning">100%</div>
-                                        <div class="stat-label">Gratis Reservasi</div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="stat-divider"></div>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="stat-item">
-                                        <div class="stat-number text-warning">⭐ 4.9</div>
-                                        <div class="stat-label">Rating Pelanggan</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="scroll-indicator mt-5">
-                            <a href="#reservation-form" class="scroll-down">
-                                <i class="fas fa-chevron-down"></i>
-                            </a>
-                        </div>
-                    </div>
+  <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+<section class="elegant-hero">
+    <!-- Soft Gradient Background -->
+    <div class="elegant-gradient"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="hero-shape shape-1"></div>
+    <div class="hero-shape shape-2"></div>
+    <div class="hero-shape shape-3"></div>
+    
+    <!-- Animated Particles -->
+    <div class="particle-container">
+        @for($i = 1; $i <= 30; $i++)
+            <div class="particle"></div>
+        @endfor
+    </div>
+    
+    <div class="container">
+        <div class="row align-items-center" style="min-height: 85vh;">
+            <div class="col-lg-6 col-xl-6">
+                <!-- Premium Badge dengan Animasi -->
+                <div class="premium-badge animate__animated animate__fadeInUp">
+                    <span class="badge-dot"></span>
+                    <span>RESERVASI ONLINE</span>
+                    <span class="badge-dot"></span>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Floating Elements -->
-        <div class="floating-elements">
-            <div class="element element-1"></div>
-            <div class="element element-2"></div>
-            <div class="element element-3"></div>
-        </div>
-    </section>
-
-    <!-- Process Steps -->
-    <section class="process-section section-padding bg-light-cream">
-        <div class="container">
-            <div class="row justify-content-center mb-6">
-                <div class="col-lg-8 text-center">
-                    <div class="section-header" data-aos="fade-up">
-                        <span class="section-tag mb-3 d-inline-block">PROSES MUDAH</span>
-                        <h2 class="display-4 fw-bold mb-4">Reservasi dalam <span class="text-gradient">3 Langkah Sederhana</span></h2>
-                        <p class="lead text-muted">Nikmati kemudahan booking dengan sistem kami yang user-friendly</p>
-                    </div>
+                
+                <!-- Main Heading -->
+                <h1 class="elegant-heading">
+                    <span class="heading-line reveal-text">Pesan Meja</span>
+                    <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">Untuk Momen</span>
+                    <span class="heading-line reveal-text" style="animation-delay: 0.4s">Spesial Anda</span>
+                </h1>
+                
+                <!-- Description -->
+                <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
+                    Pastikan tempat duduk terbaik untuk acara keluarga, pertemuan bisnis, 
+                    atau momen romantis bersama orang tersayang di Joss Gandos.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="elegant-cta">
+                    <a href="#reservation-form" class="btn-elegant btn-primary-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Reservasi Sekarang</span>
+                        <i class="fas fa-calendar-check"></i>
+                    </a>
+                    <a href="#benefits" class="btn-elegant btn-outline-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Info & Manfaat</span>
+                        <i class="fas fa-info-circle"></i>
+                    </a>
                 </div>
             </div>
             
-            <div class="process-timeline" data-aos="fade-up">
-                <div class="row g-4">
-                    @foreach([
-                        ['number' => '01', 'icon' => 'fas fa-edit', 'title' => 'Isi Formulir', 'desc' => 'Lengkapi data reservasi dengan informasi Anda'],
-                        ['number' => '02', 'icon' => 'fas fa-bell', 'title' => 'Konfirmasi Instan', 'desc' => 'Dapatkan konfirmasi via WhatsApp & Email'],
-                        ['number' => '03', 'title' => 'Nikmati Waktu', 'icon' => 'fas fa-utensils', 'desc' => 'Datang dan nikmati pengalaman terbaik']
-                    ] as $step)
-                    <div class="col-lg-4">
-                        <div class="process-card card border-0 shadow-lg h-100">
-                            <div class="card-body p-5 text-center">
-                                <div class="process-number mb-4">
-                                    <span class="number-circle">{{ $step['number'] }}</span>
-                                </div>
-                                <div class="process-icon mb-4">
-                                    <i class="{{ $step['icon'] }} fa-3x text-primary-red"></i>
-                                </div>
-                                <h4 class="fw-bold mb-3">{{ $step['title'] }}</h4>
-                                <p class="text-muted mb-0">{{ $step['desc'] }}</p>
+            <!-- HERO IMAGE -->
+            <div class="col-lg-6 col-xl-6">
+                <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
+                    <div class="hero-image-container hero-image-extra-large">
+                        <div class="hero-image-frame hero-frame-premium">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                 alt="Reservasi Resto Joss Gandos"
+                                 class="hero-image img-fluid">
+                            
+                            <div class="image-overlay"></div>
+                            <div class="image-glow"></div>
+                            <div class="image-shine"></div>
+                            
+                            <div class="image-frame">
+                                <div class="frame-corner top-left"></div>
+                                <div class="frame-corner top-right"></div>
+                                <div class="frame-corner bottom-left"></div>
+                                <div class="frame-corner bottom-right"></div>
+                            </div>
+                            
+                            <div class="image-premium-label animate__animated animate__pulse animate__infinite">
+                                <span>#PESAN MEJA</span>
                             </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>   
 
     <!-- Reservation Form -->
     <section id="reservation-form" class="form-section section-padding">
@@ -119,7 +93,6 @@
             <div class="row justify-content-center mb-6">
                 <div class="col-lg-8 text-center">
                     <div class="section-header" data-aos="fade-up">
-                        <span class="section-tag mb-3 d-inline-block">RESERVASI ONLINE</span>
                         <h2 class="display-4 fw-bold mb-4">Booking Meja <span class="text-gradient">Anda Sekarang</span></h2>
                         <p class="lead text-muted">Pastikan tempat duduk terbaik untuk momen spesial Anda</p>
                     </div>
@@ -353,12 +326,11 @@
     </section>
 
     <!-- Benefits Section -->
-    <section class="benefits-section section-padding bg-light-cream">
+    <section class="benefits-section section-padding bg-light-cream" id="benefits">
         <div class="container">
             <div class="row justify-content-center mb-6">
                 <div class="col-lg-8 text-center">
                     <div class="section-header" data-aos="fade-up">
-                        <span class="section-tag mb-3 d-inline-block">KEUNTUNGAN</span>
                         <h2 class="display-4 fw-bold mb-4">Kenapa Reservasi <span class="text-gradient">Online?</span></h2>
                         <p class="lead text-muted">Manfaat yang Anda dapatkan dengan booking meja melalui sistem kami</p>
                     </div>
@@ -488,225 +460,461 @@
         --box-shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.15);
     }
     
-    /* Modern Hero Section */
-    .modern-hero {
-        background: linear-gradient(135deg, rgba(25, 25, 25, 0.95) 0%, rgba(0, 0, 0, 0.95) 100%), 
-                    url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        padding: 140px 0 80px;
-        margin-top: -80px;
+    /* ============================================
+       CSS VARIABLES - MODERN SOPHISTICATED PALETTE
+    ============================================ */
+    :root {
+        /* Primary Colors - Refined & Sophisticated */
+        --primary: #C62828;           /* Modern Red (lebih soft & elegant) */
+        --primary-dark: #B71C1C;      /* Deep Wine Red */
+        --primary-light: #EF5350;     /* Coral Red */
+        
+        /* Secondary & Accent - Warm & Balanced */
+        --secondary: #F57C00;         /* Warm Orange */
+        --accent: #FFA726;            /* Sophisticated Amber (bukan gold murni) */
+        --accent-light: #FFB74D;      /* Light Amber */
+        
+        /* Neutral Colors */
+        --dark: #1a1a1a;
+        --light: #f8fafc;
+        --white: #ffffff;
+        --text-dark: #1e293b;
+        --text-gray: #64748b;
+        --border: #e2e8f0;
+        
+        /* Background Colors - Warm & Inviting */
+        --bg-cream: #FFF8F0;          /* Warm Cream */
+        --bg-peach: #FFEBEE;          /* Soft Peach */
+        --hero-bg: #8D1212;           /* Rich Maroon (lebih terang dari sebelumnya) */
+        
+        /* Shadows */
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+        --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+        
+        /* Gradients - More Refined */
+        --gradient-primary: linear-gradient(135deg, #C62828 0%, #F57C00 100%);
+        --gradient-hero: radial-gradient(circle at 70% 30%, #A52A2A 0%, #8D1212 40%, #6B1111 100%);
+        
+        /* Transitions */
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+   /* ========== ELEGANT RED GRADIENT HERO ========== */
+    .elegant-hero {
         position: relative;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        padding: 100px 0 60px;
+        margin-top: -80px;
         overflow: hidden;
+        background: var(--hero-bg);
     }
-    
-    .hero-gradient-overlay {
+
+    .elegant-gradient {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, 
-                    rgba(178, 34, 34, 0.3) 0%, 
-                    rgba(212, 160, 23, 0.2) 100%);
+        background: var(--gradient-hero);
         z-index: 1;
     }
+
+    .hero-shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        z-index: 2;
+    }
+
+    .shape-1 {
+        width: 600px;
+        height: 600px;
+        background: rgba(198, 40, 40, 0.15);
+        top: -200px;
+        right: -100px;
+        animation: shapeFloat 20s ease-in-out infinite;
+    }
+
+    .shape-2 {
+        width: 400px;
+        height: 400px;
+        background: rgba(245, 124, 0, 0.12);
+        bottom: -100px;
+        left: -50px;
+        animation: shapeFloat 25s ease-in-out infinite reverse;
+    }
     
-    .hero-pattern {
+    .shape-3 {
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 167, 38, 0.1);
+        top: 50%;
+        left: 20%;
+        filter: blur(100px);
+        animation: shapeFloat 18s ease-in-out infinite;
+    }
+
+    @keyframes shapeFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -30px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    .particle-container {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05) 2px, transparent 2px),
-                          radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
-        background-size: 50px 50px;
-        z-index: 1;
+        overflow: hidden;
+        z-index: 2;
     }
-    
-    .min-vh-80 {
-        min-height: 80vh;
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 167, 38, 0.35);
+        border-radius: 50%;
+        animation: particleFloat 15s infinite linear;
     }
-    
-    .floating-badge {
+
+    .particle:nth-child(1) { top: 20%; left: 10%; animation-duration: 12s; }
+    .particle:nth-child(2) { top: 70%; left: 20%; animation-duration: 18s; background: rgba(255,255,255,0.4); }
+    .particle:nth-child(3) { top: 30%; left: 80%; animation-duration: 20s; width: 6px; height: 6px; }
+    .particle:nth-child(4) { top: 80%; left: 40%; animation-duration: 14s; }
+    .particle:nth-child(5) { top: 40%; left: 90%; animation-duration: 22s; width: 5px; height: 5px; }
+    .particle:nth-child(6) { top: 50%; left: 50%; animation-duration: 16s; width: 8px; height: 8px; }
+    .particle:nth-child(7) { top: 15%; left: 60%; animation-duration: 24s; }
+    .particle:nth-child(8) { top: 85%; left: 75%; animation-duration: 19s; }
+    .particle:nth-child(9) { top: 45%; left: 25%; animation-duration: 21s; }
+    .particle:nth-child(10) { top: 10%; left: 40%; animation-duration: 17s; }
+
+    @keyframes particleFloat {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 0.5; }
+        90% { opacity: 0.5; }
+        100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+    }
+
+    .container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .reveal-text {
+        animation: revealText 1.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    @keyframes revealText {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .premium-badge {
         display: inline-flex;
         align-items: center;
         gap: 12px;
-        background: linear-gradient(135deg, var(--secondary-gold), var(--accent-gold));
-        color: var(--dark-charcoal);
-        padding: 12px 24px;
-        border-radius: 50px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        box-shadow: 0 10px 20px rgba(212, 160, 23, 0.3);
-        animation: float 3s ease-in-out infinite;
+        padding: 10px 24px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 20px;
     }
-    
-    .floating-badge i {
-        font-size: 1.2rem;
+
+    .badge-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-light);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 167, 38, 0.6);
+        animation: pulse 2s infinite;
     }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.8; }
     }
-    
-    .hero-title {
-        font-size: 3.5rem;
-        font-weight: 800;
+
+    .premium-badge span {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 3px;
+    }
+
+    .elegant-heading {
+        margin-bottom: 20px;
+    }
+
+    .heading-line {
+        display: block;
+        font-size: 4.2rem;
+        font-weight: 700;
         line-height: 1.2;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        color: white;
+        text-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
-    
-    .text-gradient {
-        background: linear-gradient(135deg, var(--accent-gold), #FFD700);
+
+    .gradient-highlight {
+        background: linear-gradient(120deg, #FFB74D, #FFA726, #F57C00);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        position: relative;
-    }
-    
-    .hero-stats {
-        margin-top: 40px;
-    }
-    
-    .stat-item {
-        text-align: center;
-    }
-    
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        line-height: 1;
-        margin-bottom: 5px;
-    }
-    
-    .stat-label {
-        font-size: 0.9rem;
-        opacity: 0.9;
-        color: white;
-    }
-    
-    .stat-divider {
-        width: 1px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.3);
-        margin: 0 20px;
-    }
-    
-    .scroll-indicator {
-        margin-top: 40px;
-    }
-    
-    .scroll-down {
         display: inline-block;
-        width: 50px;
-        height: 50px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
+    }
+
+    .elegant-desc {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 600px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        letter-spacing: 0.3px;
+    }
+
+    .elegant-cta {
         display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .btn-elegant {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+        overflow: hidden;
+        border: none;
+    }
+
+    .btn-primary-elegant {
+        background: white;
+        color: var(--primary-dark);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary-elegant:hover {
+        background: #fff5f5;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        color: var(--primary-dark);
+    }
+
+    .btn-primary-elegant i {
+        transition: transform 0.3s ease;
+    }
+
+    .btn-primary-elegant:hover i {
+        transform: translateX(8px);
+    }
+
+    .btn-outline-elegant {
+        background: transparent;
+        color: white;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .btn-outline-elegant:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: translateY(-3px);
+    }
+
+    /* ========== HERO IMAGE ========== */
+    .hero-image-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: white;
-        text-decoration: none;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        animation: bounce 2s infinite;
-        transition: all 0.3s ease;
+        padding: 10px;
     }
-    
-    .scroll-down:hover {
-        background: rgba(255, 255, 255, 0.2);
+
+    .hero-image-container.hero-image-extra-large {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .hero-image-frame.hero-frame-premium {
+        position: relative;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+        border: 12px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(8px);
+        transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
+        transform: translateY(0);
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.7s ease;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+    }
+
+    .hero-image-frame.hero-frame-premium:hover {
+        transform: translateY(-15px) scale(1.03);
+        border-color: rgba(255, 167, 38, 0.6);
+        box-shadow: 0 50px 80px -20px rgba(198, 40, 40, 0.6);
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .hero-image {
         transform: scale(1.1);
     }
-    
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
-    
-    .floating-elements {
+
+    .image-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none;
+        background: linear-gradient(145deg, 
+            rgba(198, 40, 40, 0.2) 0%, 
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(198, 40, 40, 0.2) 100%);
+        opacity: 0.3;
+        transition: opacity 0.5s ease;
         z-index: 2;
+        pointer-events: none;
     }
-    
-    .floating-elements .element {
+
+    .hero-image-frame.hero-frame-premium:hover .image-overlay {
+        opacity: 0.7;
+    }
+
+    .image-glow {
         position: absolute;
-        border-radius: 50%;
-        background: linear-gradient(135deg, rgba(212, 160, 23, 0.1), rgba(178, 34, 34, 0.1));
-        animation: float-element 20s infinite linear;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(255, 167, 38, 0.3) 0%, 
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 3;
+        pointer-events: none;
     }
-    
-    .floating-elements .element-1 {
-        width: 200px;
-        height: 200px;
-        top: 10%;
-        left: 5%;
-        animation-delay: 0s;
+
+    .hero-image-frame.hero-frame-premium:hover .image-glow {
+        opacity: 0.8;
     }
-    
-    .floating-elements .element-2 {
-        width: 150px;
-        height: 150px;
-        bottom: 20%;
-        right: 10%;
-        animation-delay: 5s;
+
+    .image-shine {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(30deg) translateX(-100%);
+        transition: transform 0.8s ease;
+        z-index: 4;
+        pointer-events: none;
     }
-    
-    .floating-elements .element-3 {
-        width: 100px;
-        height: 100px;
-        top: 50%;
-        left: 80%;
-        animation-delay: 10s;
+
+    .hero-image-frame.hero-frame-premium:hover .image-shine {
+        transform: rotate(30deg) translateX(100%);
     }
-    
-    @keyframes float-element {
-        0% {
-            transform: translateY(0) rotate(0deg);
-        }
-        50% {
-            transform: translateY(-20px) rotate(180deg);
-        }
-        100% {
-            transform: translateY(0) rotate(360deg);
-        }
+
+    .image-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
     }
-    
-    /* Section Styles */
-    .section-padding {
-        padding: 100px 0;
+
+    .frame-corner {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        border-color: rgba(255, 167, 38, 0.7);
+        transition: all 0.4s ease;
     }
-    
-    .mb-6 {
-        margin-bottom: 5rem;
+
+    .frame-corner.top-left {
+        top: 20px;
+        left: 20px;
+        border-top: 3px solid var(--accent);
+        border-left: 3px solid var(--accent);
     }
-    
-    .bg-light-cream {
-        background-color: var(--light-cream);
+
+    .frame-corner.top-right {
+        top: 20px;
+        right: 20px;
+        border-top: 3px solid var(--accent);
+        border-right: 3px solid var(--accent);
     }
-    
-    .bg-gradient-primary {
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+
+    .frame-corner.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        border-bottom: 3px solid var(--accent);
+        border-left: 3px solid var(--accent);
     }
-    
-    .section-tag {
-        background: var(--primary-red);
-        color: white;
-        padding: 8px 24px;
+
+    .frame-corner.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        border-bottom: 3px solid var(--accent);
+        border-right: 3px solid var(--accent);
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .frame-corner {
+        width: 50px;
+        height: 50px;
+        border-color: var(--accent-light);
+    }
+
+    .image-premium-label {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background: rgba(255, 167, 38, 0.95);
+        color: var(--primary-dark);
+        padding: 10px 25px;
         border-radius: 50px;
+        font-weight: 700;
+        letter-spacing: 3px;
         font-size: 0.9rem;
-        letter-spacing: 1px;
-        font-weight: 600;
-        text-transform: uppercase;
+        z-index: 7;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
-    
+
     /* Process Section */
     .process-card {
         background: white;

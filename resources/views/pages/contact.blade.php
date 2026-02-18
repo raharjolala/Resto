@@ -5,39 +5,92 @@
 @section('meta-description', 'Hubungi JOSS GANDOS untuk reservasi, catering, atau informasi lainnya. Kami siap melayani Anda')
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="contact-hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
-                url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
-        <div class="container">
-            <div class="row align-items-center min-vh-50">
-                <div class="col-lg-8 mx-auto text-center">
-                    <div class="hero-content animate-fade-in">
-                        <h1 class="hero-title display-3 fw-bold text-white mb-4">
-                            Hubungi <span class="text-warning">Kami</span>
-                        </h1>
-                        <p class="hero-subtitle lead text-light mb-5" style="font-size: 1.25rem;">
-                            Kami selalu siap mendengarkan dan membantu Anda. 
-                            Hubungi kami untuk informasi, reservasi, atau masukan berharga.
-                        </p>
-                        <div class="d-flex flex-wrap gap-3 justify-content-center">
-                            <span class="badge px-4 py-3" style="background: rgba(255, 204, 0, 0.2); color: #ffcc00; border-radius: 25px; font-size: 1rem;">
-                                <i class="fas fa-headset me-2"></i> Support 24/7
-                            </span>
-                            <span class="badge px-4 py-3" style="background: rgba(255, 255, 255, 0.2); color: white; border-radius: 25px; font-size: 1rem;">
-                                <i class="fas fa-clock me-2"></i> Response < 2 Jam
-                            </span>
-                            <span class="badge px-4 py-3" style="background: rgba(255, 204, 0, 0.2); color: #ffcc00; border-radius: 25px; font-size: 1rem;">
-                                <i class="fas fa-envelope me-2"></i> Email Responsif
-                            </span>
+   <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+<section class="elegant-hero">
+    <!-- Soft Gradient Background -->
+    <div class="elegant-gradient"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="hero-shape shape-1"></div>
+    <div class="hero-shape shape-2"></div>
+    <div class="hero-shape shape-3"></div>
+    
+    <!-- Animated Particles -->
+    <div class="particle-container">
+        @for($i = 1; $i <= 30; $i++)
+            <div class="particle"></div>
+        @endfor
+    </div>
+    
+    <div class="container">
+        <div class="row align-items-center" style="min-height: 85vh;">
+            <div class="col-lg-6 col-xl-6">
+                <!-- Premium Badge dengan Animasi -->
+                <div class="premium-badge animate__animated animate__fadeInUp">
+                    <span class="badge-dot"></span>
+                    <span>HUBUNGI KAMI</span>
+                    <span class="badge-dot"></span>
+                </div>
+                
+                <!-- Main Heading -->
+                <h1 class="elegant-heading">
+                    <span class="heading-line reveal-text">Kami Siap</span>
+                    <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">Mendengar</span>
+                    <span class="heading-line reveal-text" style="animation-delay: 0.4s">Cerita Anda</span>
+                </h1>
+                
+                <!-- Description -->
+                <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
+                    Ada pertanyaan tentang menu, reservasi, atau ingin mengadakan acara spesial? 
+                    Tim Joss Gandos siap membantu dan melayani Anda dengan sepenuh hati.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="elegant-cta">
+                    <a href="#contact-form" class="btn-elegant btn-primary-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Kirim Pesan</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </a>
+                    <a href="#map" class="btn-elegant btn-outline-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Lihat Lokasi</span>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- HERO IMAGE -->
+            <div class="col-lg-6 col-xl-6">
+                <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
+                    <div class="hero-image-container hero-image-extra-large">
+                        <div class="hero-image-frame hero-frame-premium">
+                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                 alt="Hubungi Resto Joss Gandos"
+                                 class="hero-image img-fluid">
+                            
+                            <div class="image-overlay"></div>
+                            <div class="image-glow"></div>
+                            <div class="image-shine"></div>
+                            
+                            <div class="image-frame">
+                                <div class="frame-corner top-left"></div>
+                                <div class="frame-corner top-right"></div>
+                                <div class="frame-corner bottom-left"></div>
+                                <div class="frame-corner bottom-right"></div>
+                            </div>
+                            
+                            <div class="image-premium-label animate__animated animate__pulse animate__infinite">
+                                <span>#HUBUNGI KAMI</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contact Form & Info Section -->
-    <section class="section-padding bg-light">
+    <section class="section-padding bg-light" id="contact-form">
         <div class="container">
             <div class="row g-5">
                 <!-- Contact Form -->
@@ -451,6 +504,46 @@
 
 @section('styles')
 <style>
+    /* ============================================
+       CSS VARIABLES - MODERN SOPHISTICATED PALETTE
+    ============================================ */
+    :root {
+        /* Primary Colors - Refined & Sophisticated */
+        --primary: #C62828;           /* Modern Red (lebih soft & elegant) */
+        --primary-dark: #B71C1C;      /* Deep Wine Red */
+        --primary-light: #EF5350;     /* Coral Red */
+        
+        /* Secondary & Accent - Warm & Balanced */
+        --secondary: #F57C00;         /* Warm Orange */
+        --accent: #FFA726;            /* Sophisticated Amber (bukan gold murni) */
+        --accent-light: #FFB74D;      /* Light Amber */
+        
+        /* Neutral Colors */
+        --dark: #1a1a1a;
+        --light: #f8fafc;
+        --white: #ffffff;
+        --text-dark: #1e293b;
+        --text-gray: #64748b;
+        --border: #e2e8f0;
+        
+        /* Background Colors - Warm & Inviting */
+        --bg-cream: #FFF8F0;          /* Warm Cream */
+        --bg-peach: #FFEBEE;          /* Soft Peach */
+        --hero-bg: #8D1212;           /* Rich Maroon (lebih terang dari sebelumnya) */
+        
+        /* Shadows */
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+        --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+        
+        /* Gradients - More Refined */
+        --gradient-primary: linear-gradient(135deg, #C62828 0%, #F57C00 100%);
+        --gradient-hero: radial-gradient(circle at 70% 30%, #A52A2A 0%, #8D1212 40%, #6B1111 100%);
+        
+        /* Transitions */
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     /* Custom Styles for Contact Page */
     :root {
         --primary-red: #b42222;
@@ -459,58 +552,421 @@
         --light-gray: #f8f9fa;
     }
     
-    /* Hero Section */
-    .contact-hero-section {
-        padding: 120px 0;
-        background-size: cover;
-        background-position: center;
+   /* ========== ELEGANT RED GRADIENT HERO ========== */
+    .elegant-hero {
         position: relative;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        padding: 100px 0 60px;
+        margin-top: -80px;
+        overflow: hidden;
+        background: var(--hero-bg);
     }
-    
-    .contact-hero-section::before {
-        content: '';
+
+    .elegant-gradient {
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, rgba(180, 34, 34, 0.3), rgba(255, 204, 0, 0.3));
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-hero);
         z-index: 1;
     }
-    
-    .contact-hero-section .hero-content {
-        position: relative;
+
+    .hero-shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
         z-index: 2;
     }
-    
-    .section-padding {
-        padding: 80px 0;
+
+    .shape-1 {
+        width: 600px;
+        height: 600px;
+        background: rgba(198, 40, 40, 0.15);
+        top: -200px;
+        right: -100px;
+        animation: shapeFloat 20s ease-in-out infinite;
+    }
+
+    .shape-2 {
+        width: 400px;
+        height: 400px;
+        background: rgba(245, 124, 0, 0.12);
+        bottom: -100px;
+        left: -50px;
+        animation: shapeFloat 25s ease-in-out infinite reverse;
     }
     
-    /* Contact Form Card */
-    .contact-form-card {
-        background: white;
-        border: 1px solid rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .shape-3 {
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 167, 38, 0.1);
+        top: 50%;
+        left: 20%;
+        filter: blur(100px);
+        animation: shapeFloat 18s ease-in-out infinite;
     }
-    
-    .contact-form-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+
+    @keyframes shapeFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -30px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.95); }
     }
-    
-    .form-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, var(--primary-red), #e63946);
-        border-radius: 12px;
+
+    .particle-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 2;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 167, 38, 0.35);
+        border-radius: 50%;
+        animation: particleFloat 15s infinite linear;
+    }
+
+    .particle:nth-child(1) { top: 20%; left: 10%; animation-duration: 12s; }
+    .particle:nth-child(2) { top: 70%; left: 20%; animation-duration: 18s; background: rgba(255,255,255,0.4); }
+    .particle:nth-child(3) { top: 30%; left: 80%; animation-duration: 20s; width: 6px; height: 6px; }
+    .particle:nth-child(4) { top: 80%; left: 40%; animation-duration: 14s; }
+    .particle:nth-child(5) { top: 40%; left: 90%; animation-duration: 22s; width: 5px; height: 5px; }
+    .particle:nth-child(6) { top: 50%; left: 50%; animation-duration: 16s; width: 8px; height: 8px; }
+    .particle:nth-child(7) { top: 15%; left: 60%; animation-duration: 24s; }
+    .particle:nth-child(8) { top: 85%; left: 75%; animation-duration: 19s; }
+    .particle:nth-child(9) { top: 45%; left: 25%; animation-duration: 21s; }
+    .particle:nth-child(10) { top: 10%; left: 40%; animation-duration: 17s; }
+
+    @keyframes particleFloat {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 0.5; }
+        90% { opacity: 0.5; }
+        100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+    }
+
+    .container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .reveal-text {
+        animation: revealText 1.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    @keyframes revealText {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 24px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .badge-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-light);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 167, 38, 0.6);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .premium-badge span {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 3px;
+    }
+
+    .elegant-heading {
+        margin-bottom: 20px;
+    }
+
+    .heading-line {
+        display: block;
+        font-size: 4.2rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: white;
+        text-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .gradient-highlight {
+        background: linear-gradient(120deg, #FFB74D, #FFA726, #F57C00);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+    }
+
+    .elegant-desc {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 600px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        letter-spacing: 0.3px;
+    }
+
+    .elegant-cta {
         display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .btn-elegant {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+        overflow: hidden;
+        border: none;
+    }
+
+    .btn-primary-elegant {
+        background: white;
+        color: var(--primary-dark);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary-elegant:hover {
+        background: #fff5f5;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        color: var(--primary-dark);
+    }
+
+    .btn-primary-elegant i {
+        transition: transform 0.3s ease;
+    }
+
+    .btn-primary-elegant:hover i {
+        transform: translateX(8px);
+    }
+
+    .btn-outline-elegant {
+        background: transparent;
+        color: white;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .btn-outline-elegant:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: translateY(-3px);
+    }
+
+    /* ========== HERO IMAGE ========== */
+    .hero-image-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: white;
-        font-size: 24px;
+        padding: 10px;
     }
-    
+
+    .hero-image-container.hero-image-extra-large {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .hero-image-frame.hero-frame-premium {
+        position: relative;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+        border: 12px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(8px);
+        transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
+        transform: translateY(0);
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.7s ease;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+    }
+
+    .hero-image-frame.hero-frame-premium:hover {
+        transform: translateY(-15px) scale(1.03);
+        border-color: rgba(255, 167, 38, 0.6);
+        box-shadow: 0 50px 80px -20px rgba(198, 40, 40, 0.6);
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .hero-image {
+        transform: scale(1.1);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, 
+            rgba(198, 40, 40, 0.2) 0%, 
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(198, 40, 40, 0.2) 100%);
+        opacity: 0.3;
+        transition: opacity 0.5s ease;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .image-overlay {
+        opacity: 0.7;
+    }
+
+    .image-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(255, 167, 38, 0.3) 0%, 
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .image-glow {
+        opacity: 0.8;
+    }
+
+    .image-shine {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(30deg) translateX(-100%);
+        transition: transform 0.8s ease;
+        z-index: 4;
+        pointer-events: none;
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .image-shine {
+        transform: rotate(30deg) translateX(100%);
+    }
+
+    .image-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .frame-corner {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        border-color: rgba(255, 167, 38, 0.7);
+        transition: all 0.4s ease;
+    }
+
+    .frame-corner.top-left {
+        top: 20px;
+        left: 20px;
+        border-top: 3px solid var(--accent);
+        border-left: 3px solid var(--accent);
+    }
+
+    .frame-corner.top-right {
+        top: 20px;
+        right: 20px;
+        border-top: 3px solid var(--accent);
+        border-right: 3px solid var(--accent);
+    }
+
+    .frame-corner.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        border-bottom: 3px solid var(--accent);
+        border-left: 3px solid var(--accent);
+    }
+
+    .frame-corner.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        border-bottom: 3px solid var(--accent);
+        border-right: 3px solid var(--accent);
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .frame-corner {
+        width: 50px;
+        height: 50px;
+        border-color: var(--accent-light);
+    }
+
+    .image-premium-label {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background: rgba(255, 167, 38, 0.95);
+        color: var(--primary-dark);
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+        z-index: 7;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
     /* Contact Info Card */
     .contact-info-card {
         background: white;
@@ -956,6 +1412,20 @@
                 const mapSection = document.getElementById('map');
                 if (mapSection) {
                     mapSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Smooth scroll to contact form
+        document.querySelectorAll('a[href="#contact-form"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const formSection = document.getElementById('contact-form');
+                if (formSection) {
+                    formSection.scrollIntoView({ 
                         behavior: 'smooth',
                         block: 'start'
                     });

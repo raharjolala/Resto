@@ -3,99 +3,91 @@
 @section('title', 'Galeri - JOSS GANDOS')
 
 @section('content')
-    <!-- Hero Section - Enhanced Complex Design -->
-    <section class="hero-gallery position-relative overflow-hidden">
-        <!-- Animated Background -->
-        <div class="hero-bg-wrapper">
-            <div class="hero-bg-image" style="background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;"></div>
-            <div class="hero-gradient-overlay"></div>
-        </div>
-        
-        <!-- Animated Shapes -->
-        <div class="hero-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
-        
-        <div class="container position-relative" style="z-index: 3;">
-            <div class="row align-items-center min-vh-70">
-                <div class="col-lg-7">
-                    <div class="hero-content">
-                        <div class="hero-badge mb-4">
-                            <i class="fas fa-camera me-2"></i>
-                            <span>Galeri Foto Premium</span>
-                        </div>
-                        
-                        <h1 class="hero-title mb-4">
-                            Koleksi Foto
-                            <span class="d-block text-gradient">JOSS GANDOS</span>
-                        </h1>
-                        
-                        <p class="hero-subtitle mb-4">
-                            Jelajahi momen-momen istimewa, hidangan lezat, dan suasana hangat yang 
-                            menjadikan JOSS GANDOS destinasi kuliner terbaik di kota Anda.
-                        </p>
-                        
-                        <div class="hero-stats">
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="fas fa-images"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>100+</h3>
-                                    <p>Foto</p>
-                                </div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="fas fa-layer-group"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>4</h3>
-                                    <p>Kategori</p>
-                                </div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="stat-info">
-                                    <h3>HD</h3>
-                                    <p>Kualitas</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+ <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+<section class="elegant-hero">
+    <!-- Soft Gradient Background -->
+    <div class="elegant-gradient"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="hero-shape shape-1"></div>
+    <div class="hero-shape shape-2"></div>
+    <div class="hero-shape shape-3"></div>
+    
+    <!-- Animated Particles -->
+    <div class="particle-container">
+        @for($i = 1; $i <= 30; $i++)
+            <div class="particle"></div>
+        @endfor
+    </div>
+    
+    <div class="container">
+        <div class="row align-items-center" style="min-height: 85vh;">
+            <div class="col-lg-6 col-xl-6">
+                <!-- Premium Badge dengan Animasi -->
+                <div class="premium-badge animate__animated animate__fadeInUp">
+                    <span class="badge-dot"></span>
+                    <span>GALERI KULINER</span>
+                    <span class="badge-dot"></span>
                 </div>
                 
-                <div class="col-lg-5">
-                    <div class="hero-images-grid">
-                        <div class="grid-item grid-item-1">
-                            <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Food 1">
-                        </div>
-                        <div class="grid-item grid-item-2">
-                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Food 2">
-                        </div>
-                        <div class="grid-item grid-item-3">
-                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Interior">
+                <!-- Main Heading -->
+                <h1 class="elegant-heading">
+                    <span class="heading-line reveal-text">Jelajahi Keindahan</span>
+                    <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">Setiap Hidangan</span>
+                    <span class="heading-line reveal-text" style="animation-delay: 0.4s">& Momen Spesial</span>
+                </h1>
+                
+                <!-- Description -->
+                <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
+                    Abadikan setiap kelezatan dalam bingkai visual. Dari hidangan istimewa hingga suasana hangat yang menciptakan kenangan tak terlupakan bersama Joss Gandos.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="elegant-cta">
+                    <a href="#gallery" class="btn-elegant btn-primary-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Jelajahi Galeri</span>
+                        <i class="fas fa-images"></i>
+                    </a>
+                    <a href="#kategori" class="btn-elegant btn-outline-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Lihat Kategori</span>
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- HERO IMAGE -->
+            <div class="col-lg-6 col-xl-6">
+                <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
+                    <div class="hero-image-container hero-image-extra-large">
+                        <div class="hero-image-frame hero-frame-premium">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                 alt="Galeri Resto Joss Gandos"
+                                 class="hero-image img-fluid">
+                            
+                            <div class="image-overlay"></div>
+                            <div class="image-glow"></div>
+                            <div class="image-shine"></div>
+                            
+                            <div class="image-frame">
+                                <div class="frame-corner top-left"></div>
+                                <div class="frame-corner top-right"></div>
+                                <div class="frame-corner bottom-left"></div>
+                                <div class="frame-corner bottom-right"></div>
+                            </div>
+                            
+                            <div class="image-premium-label animate__animated animate__pulse animate__infinite">
+                                <span>#MOMENT JOSS GANDOS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-            <span>Scroll untuk melihat</span>
-        </div>
-    </section>
+    </div>
+</section>    
 
     <!-- Gallery Section -->
-    <section class="gallery-section position-relative">
+    <section class="gallery-section position-relative" id="gallery">
         <!-- Background Pattern -->
         <div class="pattern-bg"></div>
         
@@ -103,7 +95,6 @@
             
             <!-- Section Header -->
             <div class="section-header text-center mb-5">
-                <div class="section-tag">Portfolio</div>
                 <h2 class="section-title">Galeri Kami</h2>
                 <div class="section-divider mx-auto"></div>
                 <p class="section-desc mx-auto">
@@ -112,7 +103,7 @@
             </div>
             
             <!-- Filter Navigation -->
-            <div class="text-center mb-5">
+            <div class="text-center mb-5" id="kategori">
                 <div class="filter-wrapper">
                     <div class="filter-nav d-inline-flex flex-wrap gap-3">
                         <button class="filter-btn active" data-filter="all">
@@ -364,269 +355,459 @@
         100% { background-position: 1000px 0; }
     }
     
-    /* Hero Section */
-    .hero-gallery {
-        min-height: 100vh;
+    /* ============================================
+       CSS VARIABLES - MODERN SOPHISTICATED PALETTE
+    ============================================ */
+    :root {
+        /* Primary Colors - Refined & Sophisticated */
+        --primary: #C62828;           /* Modern Red (lebih soft & elegant) */
+        --primary-dark: #B71C1C;      /* Deep Wine Red */
+        --primary-light: #EF5350;     /* Coral Red */
+        
+        /* Secondary & Accent - Warm & Balanced */
+        --secondary: #F57C00;         /* Warm Orange */
+        --accent: #FFA726;            /* Sophisticated Amber (bukan gold murni) */
+        --accent-light: #FFB74D;      /* Light Amber */
+        
+        /* Neutral Colors */
+        --dark: #1a1a1a;
+        --light: #f8fafc;
+        --white: #ffffff;
+        --text-dark: #1e293b;
+        --text-gray: #64748b;
+        --border: #e2e8f0;
+        
+        /* Background Colors - Warm & Inviting */
+        --bg-cream: #FFF8F0;          /* Warm Cream */
+        --bg-peach: #FFEBEE;          /* Soft Peach */
+        --hero-bg: #8D1212;           /* Rich Maroon (lebih terang dari sebelumnya) */
+        
+        /* Shadows */
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+        --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+        
+        /* Gradients - More Refined */
+        --gradient-primary: linear-gradient(135deg, #C62828 0%, #F57C00 100%);
+        --gradient-hero: radial-gradient(circle at 70% 30%, #A52A2A 0%, #8D1212 40%, #6B1111 100%);
+        
+        /* Transitions */
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ========== ELEGANT RED GRADIENT HERO ========== */
+    .elegant-hero {
+        position: relative;
+        min-height: 85vh;
         display: flex;
         align-items: center;
-        position: relative;
-        overflow: hidden;
         padding: 100px 0 60px;
+        margin-top: -80px;
+        overflow: hidden;
+        background: var(--hero-bg);
     }
-    
-    .min-vh-70 {
-        min-height: 70vh;
-    }
-    
-    .hero-bg-wrapper {
+
+    .elegant-gradient {
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-hero);
         z-index: 1;
     }
-    
-    .hero-bg-image {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0.1;
-    }
-    
-    .hero-gradient-overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, var(--red-dark) 0%, var(--red-primary) 50%, var(--red-light) 100%);
-    }
-    
-    .hero-shapes {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 2;
-        overflow: hidden;
-    }
-    
-    .shape {
+
+    .hero-shape {
         position: absolute;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 71, 87, 0.1), rgba(139, 0, 0, 0.1));
-        animation: float 15s infinite ease-in-out;
+        filter: blur(80px);
+        z-index: 2;
     }
-    
+
     .shape-1 {
+        width: 600px;
+        height: 600px;
+        background: rgba(198, 40, 40, 0.15);
+        top: -200px;
+        right: -100px;
+        animation: shapeFloat 20s ease-in-out infinite;
+    }
+
+    .shape-2 {
         width: 400px;
         height: 400px;
-        top: -100px;
-        left: -100px;
-        animation-delay: 0s;
-    }
-    
-    .shape-2 {
-        width: 300px;
-        height: 300px;
-        bottom: -50px;
-        right: 10%;
-        animation-delay: 3s;
+        background: rgba(245, 124, 0, 0.12);
+        bottom: -100px;
+        left: -50px;
+        animation: shapeFloat 25s ease-in-out infinite reverse;
     }
     
     .shape-3 {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 167, 38, 0.1);
         top: 50%;
-        right: -50px;
-        animation-delay: 6s;
+        left: 20%;
+        filter: blur(100px);
+        animation: shapeFloat 18s ease-in-out infinite;
     }
-    
-    .hero-content {
-        animation: fadeIn 1s ease;
+
+    @keyframes shapeFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -30px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.95); }
     }
-    
-    .hero-badge {
+
+    .particle-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 2;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 167, 38, 0.35);
+        border-radius: 50%;
+        animation: particleFloat 15s infinite linear;
+    }
+
+    .particle:nth-child(1) { top: 20%; left: 10%; animation-duration: 12s; }
+    .particle:nth-child(2) { top: 70%; left: 20%; animation-duration: 18s; background: rgba(255,255,255,0.4); }
+    .particle:nth-child(3) { top: 30%; left: 80%; animation-duration: 20s; width: 6px; height: 6px; }
+    .particle:nth-child(4) { top: 80%; left: 40%; animation-duration: 14s; }
+    .particle:nth-child(5) { top: 40%; left: 90%; animation-duration: 22s; width: 5px; height: 5px; }
+    .particle:nth-child(6) { top: 50%; left: 50%; animation-duration: 16s; width: 8px; height: 8px; }
+    .particle:nth-child(7) { top: 15%; left: 60%; animation-duration: 24s; }
+    .particle:nth-child(8) { top: 85%; left: 75%; animation-duration: 19s; }
+    .particle:nth-child(9) { top: 45%; left: 25%; animation-duration: 21s; }
+    .particle:nth-child(10) { top: 10%; left: 40%; animation-duration: 17s; }
+
+    @keyframes particleFloat {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 0.5; }
+        90% { opacity: 0.5; }
+        100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+    }
+
+    .container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .reveal-text {
+        animation: revealText 1.5s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    @keyframes revealText {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .premium-badge {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
+        padding: 10px 24px;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
+        border-radius: 100px;
         border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 10px 20px;
-        border-radius: 30px;
-        color: white;
-        font-weight: 600;
-        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .badge-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-light);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 167, 38, 0.6);
         animation: pulse 2s infinite;
     }
-    
-    .hero-title {
-        font-size: 4rem;
-        font-weight: 800;
-        color: white;
-        line-height: 1.2;
-        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.8; }
     }
-    
-    .text-gradient {
-        background: linear-gradient(135deg, #fff 0%, var(--red-accent) 100%);
+
+    .premium-badge span {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 3px;
+    }
+
+    .elegant-heading {
+        margin-bottom: 20px;
+    }
+
+    .heading-line {
+        display: block;
+        font-size: 4.2rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: white;
+        text-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .gradient-highlight {
+        background: linear-gradient(120deg, #FFB74D, #FFA726, #F57C00);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        display: inline-block;
     }
-    
-    .hero-subtitle {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1.1rem;
+
+    .elegant-desc {
+        font-size: 1.2rem;
         line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
         max-width: 600px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        letter-spacing: 0.3px;
     }
-    
-    .hero-stats {
+
+    .elegant-cta {
         display: flex;
-        gap: 30px;
-        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
     }
-    
-    .stat-item {
-        display: flex;
+
+    .btn-elegant {
+        position: relative;
+        display: inline-flex;
         align-items: center;
-        gap: 15px;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 20px 25px;
-        border-radius: 15px;
-        transition: all 0.3s ease;
+        gap: 12px;
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+        overflow: hidden;
+        border: none;
     }
-    
-    .stat-item:hover {
+
+    .btn-primary-elegant {
+        background: white;
+        color: var(--primary-dark);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary-elegant:hover {
+        background: #fff5f5;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        color: var(--primary-dark);
+    }
+
+    .btn-primary-elegant i {
+        transition: transform 0.3s ease;
+    }
+
+    .btn-primary-elegant:hover i {
+        transform: translateX(8px);
+    }
+
+    .btn-outline-elegant {
+        background: transparent;
+        color: white;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .btn-outline-elegant:hover {
         background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: translateY(-3px);
     }
-    
-    .stat-icon {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--red-light), var(--red-accent));
-        border-radius: 12px;
+
+    /* ========== HERO IMAGE ========== */
+    .hero-image-wrapper {
+        position: relative;
+        width: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
-        color: white;
+        padding: 10px;
     }
-    
-    .stat-info h3 {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: white;
-        margin: 0;
-        line-height: 1;
-    }
-    
-    .stat-info p {
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 5px 0 0 0;
-    }
-    
-    .hero-images-grid {
+
+    .hero-image-container.hero-image-extra-large {
         position: relative;
-        height: 500px;
-        display: none;
-    }
-    
-    .grid-item {
-        position: absolute;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        border: 3px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .grid-item img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
+        max-width: 720px;
+        margin: 0 auto;
     }
-    
-    .grid-item:hover img {
+
+    .hero-image-frame.hero-frame-premium {
+        position: relative;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+        border: 12px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(8px);
+        transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
+        transform: translateY(0);
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.7s ease;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+    }
+
+    .hero-image-frame.hero-frame-premium:hover {
+        transform: translateY(-15px) scale(1.03);
+        border-color: rgba(255, 167, 38, 0.6);
+        box-shadow: 0 50px 80px -20px rgba(198, 40, 40, 0.6);
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .hero-image {
         transform: scale(1.1);
     }
-    
-    .grid-item-1 {
-        width: 250px;
-        height: 250px;
+
+    .image-overlay {
+        position: absolute;
         top: 0;
         left: 0;
-        animation: float 10s infinite ease-in-out;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, 
+            rgba(198, 40, 40, 0.2) 0%, 
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(198, 40, 40, 0.2) 100%);
+        opacity: 0.3;
+        transition: opacity 0.5s ease;
+        z-index: 2;
+        pointer-events: none;
     }
-    
-    .grid-item-2 {
-        width: 200px;
-        height: 200px;
-        top: 100px;
-        right: 50px;
-        animation: float 12s infinite ease-in-out;
-        animation-delay: 2s;
+
+    .hero-image-frame.hero-frame-premium:hover .image-overlay {
+        opacity: 0.7;
     }
-    
-    .grid-item-3 {
-        width: 220px;
-        height: 220px;
-        bottom: 50px;
-        left: 100px;
-        animation: float 14s infinite ease-in-out;
-        animation-delay: 4s;
-    }
-    
-    @media (min-width: 992px) {
-        .hero-images-grid {
-            display: block;
-        }
-    }
-    
-    .scroll-indicator {
+
+    .image-glow {
         position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(255, 167, 38, 0.3) 0%, 
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
         z-index: 3;
-        text-align: center;
-        animation: fadeIn 2s ease;
+        pointer-events: none;
     }
-    
-    .scroll-mouse {
-        width: 30px;
-        height: 50px;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        border-radius: 15px;
-        position: relative;
-        margin: 0 auto 10px;
+
+    .hero-image-frame.hero-frame-premium:hover .image-glow {
+        opacity: 0.8;
     }
-    
-    .scroll-wheel {
-        width: 4px;
-        height: 10px;
-        background: white;
-        border-radius: 2px;
+
+    .image-shine {
         position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        animation: scroll 1.5s infinite;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(30deg) translateX(-100%);
+        transition: transform 0.8s ease;
+        z-index: 4;
+        pointer-events: none;
     }
-    
-    @keyframes scroll {
-        0% { opacity: 1; top: 8px; }
-        100% { opacity: 0; top: 25px; }
+
+    .hero-image-frame.hero-frame-premium:hover .image-shine {
+        transform: rotate(30deg) translateX(100%);
     }
-    
-    .scroll-indicator span {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.85rem;
-        display: block;
+
+    .image-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .frame-corner {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        border-color: rgba(255, 167, 38, 0.7);
+        transition: all 0.4s ease;
+    }
+
+    .frame-corner.top-left {
+        top: 20px;
+        left: 20px;
+        border-top: 3px solid var(--accent);
+        border-left: 3px solid var(--accent);
+    }
+
+    .frame-corner.top-right {
+        top: 20px;
+        right: 20px;
+        border-top: 3px solid var(--accent);
+        border-right: 3px solid var(--accent);
+    }
+
+    .frame-corner.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        border-bottom: 3px solid var(--accent);
+        border-left: 3px solid var(--accent);
+    }
+
+    .frame-corner.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        border-bottom: 3px solid var(--accent);
+        border-right: 3px solid var(--accent);
+    }
+
+    .hero-image-frame.hero-frame-premium:hover .frame-corner {
+        width: 50px;
+        height: 50px;
+        border-color: var(--accent-light);
+    }
+
+    .image-premium-label {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background: rgba(255, 167, 38, 0.95);
+        color: var(--primary-dark);
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+        z-index: 7;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
     /* Gallery Section */
