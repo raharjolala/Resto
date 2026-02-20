@@ -66,7 +66,24 @@ class AdminController extends Controller
             $recentReservations = Reservation::with('branch')
                 ->latest()
                 ->limit(5)
-                ->get();
+                ->get()
+                ->map(function($reservation) {
+                    // Transform to match the expected format in the dashboard
+                    return (object)[
+                        'customer_name' => $reservation->customer_name,
+                        'name' => $reservation->customer_name,
+                        'email' => $reservation->email,
+                        'date' => $reservation->reservation_date,
+                        'reservation_date' => $reservation->reservation_date,
+                        'time' => $reservation->reservation_time,
+                        'reservation_time' => $reservation->reservation_time,
+                        'guests' => $reservation->guest_count,
+                        'guest_count' => $reservation->guest_count,
+                        'people' => $reservation->guest_count,
+                        'status' => $reservation->status,
+                        'branch' => $reservation->branch
+                    ];
+                });
             
             $recentMenuItems = MenuItem::with('category')
                 ->latest()
@@ -101,6 +118,8 @@ class AdminController extends Controller
             
         } catch (\Exception $e) {
             Log::error('Error in dashboard: ' . $e->getMessage());
+            
+            // Return empty data in case of error
             return view('admin.dashboard', [
                 'totalMenu' => 0,
                 'totalPromotions' => 0,
@@ -516,16 +535,33 @@ class AdminController extends Controller
     // ==================== RESERVATIONS MANAGEMENT ====================
 
     /**
-     * Display reservations list
+     * Display reservations list with counts
      */
     public function reservationsIndex()
     {
         try {
             $reservations = Reservation::with('branch')
-                ->orderBy('reservation_date', 'desc')
-                ->orderBy('reservation_time', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->get();
-            return view('admin.reservations.index', compact('reservations'));
+            
+            // Calculate counts by status
+            $pendingCount = Reservation::where('status', 'pending')->count();
+            $confirmedCount = Reservation::where('status', 'confirmed')->count();
+            $completedCount = Reservation::where('status', 'completed')->count();
+            $cancelledCount = Reservation::where('status', 'cancelled')->count();
+            $totalCount = Reservation::count();
+            
+            // Debug: Log the data to check if reservations exist
+            Log::info('Reservations count: ' . $reservations->count());
+            
+            return view('admin.reservations.index', compact(
+                'reservations', 
+                'pendingCount', 
+                'confirmedCount', 
+                'completedCount', 
+                'cancelledCount',
+                'totalCount'
+            ));
         } catch (\Exception $e) {
             Log::error('Error in reservationsIndex: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -542,16 +578,23 @@ class AdminController extends Controller
             
             $request->validate([
                 'status' => 'required|in:pending,confirmed,completed,cancelled',
-                'notes' => 'nullable|string',
             ]);
 
             $reservation->update([
                 'status' => $request->status,
-                'admin_notes' => $request->notes,
             ]);
 
+            $statusMessages = [
+                'pending' => 'dikembalikan ke status Pending',
+                'confirmed' => 'dikonfirmasi',
+                'completed' => 'diselesaikan',
+                'cancelled' => 'dibatalkan'
+            ];
+
+            $message = "Reservasi #{$reservation->id} berhasil {$statusMessages[$request->status]}!";
+
             return redirect()->route('admin.reservations.index')
-                ->with('success', 'Status reservasi berhasil diperbarui!');
+                ->with('success', $message);
 
         } catch (\Exception $e) {
             Log::error('Error updating reservation: ' . $e->getMessage());
@@ -587,9 +630,7 @@ class AdminController extends Controller
     public function branchesIndex()
     {
         try {
-            $branches = Branch::orderBy('is_main', 'desc')
-                ->orderBy('name')
-                ->get();
+            $branches = Branch::orderBy('name')->get();
             return view('admin.branches.index', compact('branches'));
         } catch (\Exception $e) {
             Log::error('Error in branchesIndex: ' . $e->getMessage());
@@ -608,20 +649,13 @@ class AdminController extends Controller
                 'address' => 'required|string',
                 'phone' => 'required|string|max:20',
                 'email' => 'nullable|email|max:255',
-                'map_url' => 'nullable|url',
-                'is_main' => 'boolean',
+                'map_link' => 'nullable|url',
+                'opening_hours' => 'nullable|string',
                 'is_active' => 'boolean',
-                'opening_hours' => 'required|string',
             ]);
 
             $data = $request->all();
-            $data['is_main'] = $request->has('is_main');
             $data['is_active'] = $request->has('is_active');
-            
-            // If this is main branch, remove main status from others
-            if ($data['is_main']) {
-                Branch::where('is_main', true)->update(['is_main' => false]);
-            }
             
             Branch::create($data);
 
@@ -649,20 +683,13 @@ class AdminController extends Controller
                 'address' => 'required|string',
                 'phone' => 'required|string|max:20',
                 'email' => 'nullable|email|max:255',
-                'map_url' => 'nullable|url',
-                'is_main' => 'boolean',
+                'map_link' => 'nullable|url',
+                'opening_hours' => 'nullable|string',
                 'is_active' => 'boolean',
-                'opening_hours' => 'required|string',
             ]);
 
             $data = $request->all();
-            $data['is_main'] = $request->has('is_main');
             $data['is_active'] = $request->has('is_active');
-            
-            // If this is main branch, remove main status from others
-            if ($data['is_main']) {
-                Branch::where('is_main', true)->where('id', '!=', $id)->update(['is_main' => false]);
-            }
             
             $branch->update($data);
 
@@ -684,6 +711,13 @@ class AdminController extends Controller
     {
         try {
             $branch = Branch::findOrFail($id);
+            
+            // Check if branch has reservations
+            if ($branch->reservations()->count() > 0) {
+                return redirect()->back()
+                    ->with('error', 'Cabang tidak dapat dihapus karena masih memiliki data reservasi!');
+            }
+            
             $branch->delete();
 
             return redirect()->route('admin.branches.index')
@@ -753,7 +787,7 @@ class AdminController extends Controller
     public function reviewsIndex()
     {
         try {
-            $reviews = Review::with('user')
+            $reviews = Review::with('user', 'branch')
                 ->orderBy('created_at', 'desc')
                 ->get();
             return view('admin.reviews.index', compact('reviews'));

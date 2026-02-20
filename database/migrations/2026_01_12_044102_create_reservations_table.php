@@ -1,4 +1,5 @@
 <?php
+// database/migrations/2026_01_12_044102_create_reservations_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,10 +15,9 @@ return new class extends Migration
             $table->string('customer_name');
             $table->string('email');
             $table->string('phone');
-            $table->foreignId('branch_id')->nullable()->constrained()->nullOnDelete();
             $table->date('reservation_date');
             $table->time('reservation_time');
-            $table->integer('guest_count');
+            $table->string('guest_count');
             $table->text('special_request')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'cancelled', 'completed'])->default('pending');
             $table->timestamps();

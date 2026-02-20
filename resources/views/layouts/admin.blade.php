@@ -818,30 +818,6 @@
                         <span>Reservasi</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/branches*') ? 'active' : '' }}" href="{{ route('admin.branches.index') }}">
-                        <i class="fas fa-store"></i>
-                        <span>Cabang</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
-                        <i class="fas fa-users"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/reviews*') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}">
-                        <i class="fas fa-star"></i>
-                        <span>Reviews</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/settings*') ? 'active' : '' }}" href="{{ route('admin.settings.edit') }}">
-                        <i class="fas fa-cog"></i>
-                        <span>Pengaturan</span>
-                    </a>
-                </li>
             </ul>
             
             <div class="logout-btn">
