@@ -8,9 +8,21 @@
 @php
     // DEFAULT CONTENT - DIPINDAHKAN KE ATAS AGAR VARIABLE $content TERSEDIA
     $defaultContent = [
+        // Hero Section
+        'hero_title_line1' => 'Nikmati Kelezatan',
+        'hero_title_line2' => 'Hidangan Spesial',
+        'hero_title_line3' => 'di Joss Gandos',
+        'hero_description' => 'Rasakan sensasi kuliner terbaik dengan cita rasa autentik, bahan berkualitas, dan suasana nyaman yang cocok untuk keluarga, teman, atau acara spesial Anda.',
+        'hero_button_menu' => 'Lihat Menu',
+        'hero_button_reservation' => 'Pesan Meja',
+        'hero_image_url' => 'https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw',
+        'hero_premium_badge' => '#1 RESTO & CAFE KETINTANG',
+        
+        // Welcome Section
         'welcome_title_line1' => 'Selamat Datang',
         'welcome_title_line2' => 'Resto Joss Gandos',
         'welcome_description' => 'Tempat di mana rasa, suasana, dan kehangatan berpadu menjadi satu. Setiap kunjungan adalah perjalanan rasa yang membuat Anda ingin kembali lagi.',
+        'welcome_image_url' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         
         'feature_1_text' => 'Bahan premium pilihan terbaik',
         'feature_2_text' => 'Chef berpengalaman & profesional',
@@ -21,16 +33,99 @@
         'services_title_line2' => 'Pelayanan Premium',
         'services_subtitle' => 'Nikmati berbagai fasilitas dan layanan terbaik untuk kenyamanan Anda',
         
+        // Services Details
+        'service_1_icon' => 'fas fa-utensils',
+        'service_1_title' => 'Dine In',
+        'service_1_description' => 'Nikmati hidangan istimewa di ruangan ber-AC dengan suasana nyaman dan elegan',
+        
+        'service_2_icon' => 'fas fa-users',
+        'service_2_title' => 'Private Room',
+        'service_2_description' => 'Ruangan VIP untuk acara spesial, meeting, dan gathering dengan fasilitas karaoke',
+        
+        'service_3_icon' => 'fas fa-calendar-alt',
+        'service_3_title' => 'Event & Catering',
+        'service_3_description' => 'Layanan catering dan penyelenggaraan acara untuk berbagai kebutuhan Anda',
+        
+        'service_4_icon' => 'fas fa-wifi',
+        'service_4_title' => 'Free WiFi',
+        'service_4_description' => 'Internet cepat gratis untuk mendukung aktivitas bisnis dan hiburan Anda',
+        
+        'service_5_icon' => 'fas fa-mosque',
+        'service_5_title' => 'Musholla',
+        'service_5_description' => 'Fasilitas musholla yang bersih dan nyaman untuk beribadah dengan tenang',
+        
+        'service_6_icon' => 'fas fa-parking',
+        'service_6_title' => 'Parkir Luas',
+        'service_6_description' => 'Area parkir yang luas dan aman untuk mobil dan motor kendaraan Anda',
+        
+        // Testimonials Section
         'testimonials_title_line1' => 'Apa Kata',
         'testimonials_title_line2' => 'Pelanggan Kami?',
         'testimonials_subtitle' => 'Ribuan pelanggan puas telah merasakan kehangatan dan kelezatan Joss Gandos',
         
+        // Testimoni 1
+        'testimonial_1_name' => 'Achmad Thoriq',
+        'testimonial_1_text' => 'Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerayain ulang tahun disini seru banget!',
+        'testimonial_1_source' => 'Google Reviews',
+        'testimonial_1_rating' => 5,
+        
+        // Testimoni 2
+        'testimonial_2_name' => 'Perpus Uinsa',
+        'testimonial_2_text' => 'Layanan plus plusnya emang mantab banget.. dibantu fotbar, video tiktok juga.. dilayani dengan ramah dan memperhatikan kebutuhan konsumen.',
+        'testimonial_2_source' => 'Google Reviews',
+        'testimonial_2_rating' => 5,
+        
+        // Testimoni 3
+        'testimonial_3_name' => 'Karenina Anisya',
+        'testimonial_3_text' => 'Tempat nya cocok buat bukber, servisnya oke poll staff nya ramah, makanannya enakk tempatnya bersih ada fasilitas mushollanya juga.',
+        'testimonial_3_source' => 'Google Reviews',
+        'testimonial_3_rating' => 5,
+        
+        // Testimoni 4
+        'testimonial_4_name' => 'Filidyo Bramanta',
+        'testimonial_4_text' => 'Pelayanan baik, responsif, dan banyak ruangan yang bisa digunakan untuk meeting dan acara private. Makanan oke dan porsinya cukup.',
+        'testimonial_4_source' => 'Google Reviews',
+        'testimonial_4_rating' => 5,
+        
+        // Testimoni 5
+        'testimonial_5_name' => 'M. Junianto Tri',
+        'testimonial_5_text' => 'Layanan sat set dan super ramah. Mushola luas, bisa shalat jamaah. Ruangan VIP tersedia karaoke, mantab buat seru-seruan.',
+        'testimonial_5_source' => 'Google Reviews',
+        'testimonial_5_rating' => 5,
+        
+        // Testimoni 6
+        'testimonial_6_name' => 'Metha Prosper',
+        'testimonial_6_text' => 'Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul',
+        'testimonial_6_source' => 'Google Reviews',
+        'testimonial_6_rating' => 5,
+        
+        // Testimoni 7 (BARU)
+        'testimonial_7_name' => 'Budi Santoso',
+        'testimonial_7_text' => 'Tempatnya cozy banget, cocok buat nongkrong sama teman-teman. Pelayanan cepat dan ramah, makanannya juga enak-enak. Bakal kesini lagi!',
+        'testimonial_7_source' => 'Google Reviews',
+        'testimonial_7_rating' => 5,
+        
+        // Testimoni 8 (BARU)
+        'testimonial_8_name' => 'Siti Nurhaliza',
+        'testimonial_8_text' => 'Suasananya nyaman, bersih, dan staffnya sangat helpful. Menu variatif dan harganya terjangkau. Recommended buat makan keluarga.',
+        'testimonial_8_source' => 'Google Reviews',
+        'testimonial_8_rating' => 5,
+        
+        // Testimoni 9 (BARU)
+        'testimonial_9_name' => 'Rizki Firmansyah',
+        'testimonial_9_text' => 'Live musicnya seru, makanannya lezat, minumannya juga segar-segar. Pelayanan memuaskan, bikin betah berlama-lama.',
+        'testimonial_9_source' => 'Google Reviews',
+        'testimonial_9_rating' => 5,
+        
+        // CTA Section
         'cta_title_line1' => 'Siap Merasakan',
         'cta_title_line2' => 'Pengalaman Kuliner Terbaik?',
         'cta_description' => 'Bergabunglah dengan ribuan pelanggan yang telah merasakan kelezatan hidangan istimewa kami. Pesan dan reservasi sekarang!',
+        'cta_button1_text' => 'Pesan Sekarang',
+        'cta_button2_text' => 'Reservasi Sekarang',
     ];
     
-    $content = array_merge($defaultContent, $content ?? []);
+    $content = array_merge($defaultContent, $page->content ?? []);
 @endphp
 
 <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
@@ -56,31 +151,30 @@
                 <!-- Premium Badge dengan Animasi -->
                 <div class="premium-badge animate__animated animate__fadeInUp">
                     <span class="badge-dot"></span>
-                    <span>#1 RESTO & CAFE KETINTANG</span>
+                    <span>{{ $content['hero_premium_badge'] }}</span>
                     <span class="badge-dot"></span>
                 </div>
                 
                 <!-- Main Heading -->
                 <h1 class="elegant-heading">
-                    <span class="heading-line reveal-text">Nikmati Kelezatan</span>
-                    <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">Hidangan Spesial</span>
-                    <span class="heading-line reveal-text" style="animation-delay: 0.4s">di Joss Gandos</span>
+                    <span class="heading-line reveal-text">{{ $content['hero_title_line1'] }}</span>
+                    <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">{{ $content['hero_title_line2'] }}</span>
+                    <span class="heading-line reveal-text" style="animation-delay: 0.4s">{{ $content['hero_title_line3'] }}</span>
                 </h1>
                 
                 <!-- Description -->
                 <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
-                    Rasakan sensasi kuliner terbaik dengan cita rasa autentik, bahan berkualitas, 
-                    dan suasana nyaman yang cocok untuk keluarga, teman, atau acara spesial Anda.
+                    {{ $content['hero_description'] }}
                 </p>
                 
                 <!-- CTA Buttons -->
                 <div class="elegant-cta">
                     <a href="{{ route('menu') }}" class="btn-elegant btn-primary-elegant animate__animated animate__fadeInUp animate__delay-1s">
-                        <span>Lihat Menu</span>
+                        <span>{{ $content['hero_button_menu'] }}</span>
                         <i class="fas fa-utensils"></i>
                     </a>
                     <a href="{{ route('reservation.create') }}" class="btn-elegant btn-outline-elegant animate__animated animate__fadeInUp animate__delay-1s">
-                        <span>Pesan Meja</span>
+                        <span>{{ $content['hero_button_reservation'] }}</span>
                         <i class="fas fa-calendar-alt"></i>
                     </a>
                 </div>
@@ -91,7 +185,7 @@
                 <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
                     <div class="hero-image-container hero-image-extra-large">
                         <div class="hero-image-frame hero-frame-premium">
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw"
+                            <img src="{{ $content['hero_image_url'] }}"
                                  alt="Resto Joss Gandos Ketintang"
                                  class="hero-image img-fluid">
                             
@@ -107,7 +201,7 @@
                             </div>
                             
                             <div class="image-premium-label animate__animated animate__pulse animate__infinite">
-                                <span>#1 DI KETINTANG</span>
+                                <span>{{ $content['hero_premium_badge'] }}</span>
                             </div>
                         </div>
                     </div>
@@ -124,7 +218,7 @@
             <div class="col-lg-6" data-aos="fade-right">
                 <div class="welcome-image-simple">
                     <div class="welcome-image-main-simple">
-                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior">
+                        <img src="{{ $content['welcome_image_url'] }}" alt="Restaurant Interior">
                     </div>
                 </div>
             </div>
@@ -194,8 +288,8 @@
                 LAYANAN KAMI
             </div>
             <h2 class="section-title-enhanced">
-                {{ $content['services_title_line1'] }}<br>
-                <span class="text-gradient">{{ $content['services_title_line2'] }}</span>
+                {{ $content['services_title_line1'] ?? 'Fasilitas &' }}<br>
+                <span class="text-gradient">{{ $content['services_title_line2'] ?? 'Pelayanan Premium' }}</span>
             </h2>
             @if(!empty($content['services_subtitle']))
                 <p class="section-subtitle-enhanced">
@@ -205,91 +299,32 @@
         </div>
 
         <div class="row g-4 mt-4">
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            @for($i = 1; $i <= 6; $i++)
+            @php
+                $iconDefault = $i == 1 ? 'fas fa-utensils' : ($i == 2 ? 'fas fa-users' : ($i == 3 ? 'fas fa-calendar-alt' : ($i == 4 ? 'fas fa-wifi' : ($i == 5 ? 'fas fa-mosque' : 'fas fa-parking'))));
+                $titleDefault = $i == 1 ? 'Dine In' : ($i == 2 ? 'Private Room' : ($i == 3 ? 'Event & Catering' : ($i == 4 ? 'Free WiFi' : ($i == 5 ? 'Musholla' : 'Parkir Luas'))));
+                $descDefault = $i == 1 ? 'Nikmati hidangan istimewa di ruangan ber-AC dengan suasana nyaman dan elegan' : 
+                               ($i == 2 ? 'Ruangan VIP untuk acara spesial, meeting, dan gathering dengan fasilitas karaoke' : 
+                               ($i == 3 ? 'Layanan catering dan penyelenggaraan acara untuk berbagai kebutuhan Anda' : 
+                               ($i == 4 ? 'Internet cepat gratis untuk mendukung aktivitas bisnis dan hiburan Anda' : 
+                               ($i == 5 ? 'Fasilitas musholla yang bersih dan nyaman untuk beribadah dengan tenang' : 
+                               'Area parkir yang luas dan aman untuk mobil dan motor kendaraan Anda'))));
+            @endphp
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ 100 * $i }}">
                 <div class="service-card-enhanced">
                     <div class="service-icon-enhanced">
-                        <i class="fas fa-utensils"></i>
+                        <i class="{{ $content['service_'.$i.'_icon'] ?? $iconDefault }}"></i>
                     </div>
-                    <h3 class="service-title-enhanced">Dine In</h3>
+                    <h3 class="service-title-enhanced">{{ $content['service_'.$i.'_title'] ?? $titleDefault }}</h3>
                     <p class="service-description-enhanced">
-                        Nikmati hidangan istimewa di ruangan ber-AC dengan suasana nyaman dan elegan
+                        {{ $content['service_'.$i.'_description'] ?? $descDefault }}
                     </p>
                     <div class="service-hover-arrow">
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
             </div>
-            <!-- Service cards lainnya (sama seperti sebelumnya) -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card-enhanced">
-                    <div class="service-icon-enhanced">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="service-title-enhanced">Private Room</h3>
-                    <p class="service-description-enhanced">
-                        Ruangan VIP untuk acara spesial, meeting, dan gathering dengan fasilitas karaoke
-                    </p>
-                    <div class="service-hover-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card-enhanced">
-                    <div class="service-icon-enhanced">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3 class="service-title-enhanced">Event & Catering</h3>
-                    <p class="service-description-enhanced">
-                        Layanan catering dan penyelenggaraan acara untuk berbagai kebutuhan Anda
-                    </p>
-                    <div class="service-hover-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-card-enhanced">
-                    <div class="service-icon-enhanced">
-                        <i class="fas fa-wifi"></i>
-                    </div>
-                    <h3 class="service-title-enhanced">Free WiFi</h3>
-                    <p class="service-description-enhanced">
-                        Internet cepat gratis untuk mendukung aktivitas bisnis dan hiburan Anda
-                    </p>
-                    <div class="service-hover-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-card-enhanced">
-                    <div class="service-icon-enhanced">
-                        <i class="fas fa-mosque"></i>
-                    </div>
-                    <h3 class="service-title-enhanced">Musholla</h3>
-                    <p class="service-description-enhanced">
-                        Fasilitas musholla yang bersih dan nyaman untuk beribadah dengan tenang
-                    </p>
-                    <div class="service-hover-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-card-enhanced">
-                    <div class="service-icon-enhanced">
-                        <i class="fas fa-parking"></i>
-                    </div>
-                    <h3 class="service-title-enhanced">Parkir Luas</h3>
-                    <p class="service-description-enhanced">
-                        Area parkir yang luas dan aman untuk mobil dan motor kendaraan Anda
-                    </p>
-                    <div class="service-hover-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </div>
-            </div>
+            @endfor
         </div>
     </div>
 </section>
@@ -303,8 +338,8 @@
                 TESTIMONI
             </div>
             <h2 class="section-title-enhanced">
-                {{ $content['testimonials_title_line1'] }}<br>
-                <span class="text-gradient">{{ $content['testimonials_title_line2'] }}</span>
+                {{ $content['testimonials_title_line1'] ?? 'Apa Kata' }}<br>
+                <span class="text-gradient">{{ $content['testimonials_title_line2'] ?? 'Pelanggan Kami?' }}</span>
             </h2>
             @if(!empty($content['testimonials_subtitle']))
                 <p class="section-subtitle-enhanced">
@@ -318,150 +353,117 @@
                 <!-- Slide 1 -->
                 <div class="testimonials-slide active">
                     <div class="row g-4">
+                        @for($i = 1; $i <= 3; $i++)
+                        @php
+                            $nameDefault = $i == 1 ? 'Achmad Thoriq' : ($i == 2 ? 'Perpus Uinsa' : 'Karenina Anisya');
+                            $textDefault = $i == 1 ? 'Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerayain ulang tahun disini seru banget!' : 
+                                          ($i == 2 ? 'Layanan plus plusnya emang mantab banget.. dibantu fotbar, video tiktok juga.. dilayani dengan ramah dan memperhatikan kebutuhan konsumen.' : 
+                                          'Tempat nya cocok buat bukber, servisnya oke poll staff nya ramah, makanannya enakk tempatnya bersih ada fasilitas mushollanya juga.');
+                        @endphp
                         <div class="col-lg-4 col-md-6">
                             <div class="testimonial-card-enhanced">
                                 <div class="testimonial-rating-enhanced">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    @for($r = 1; $r <= 5; $r++)
+                                        @if($r <= ($content['testimonial_'.$i.'_rating'] ?? 5))
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <p class="testimonial-text-enhanced">
-                                    "Family resto bagus di Surabaya. Makanannya enak terutama kepala salmon dan ayam kremesnya 👍. Ngerayain ulang tahun disini seru banget!"
+                                    "{{ $content['testimonial_'.$i.'_text'] ?? $textDefault }}"
                                 </p>
                                 <div class="testimonial-author-enhanced">
                                     <div class="author-avatar-enhanced">
                                         <i class="fas fa-user"></i>
                                     </div>
                                     <div class="author-info-enhanced">
-                                        <h4>Achmad Thoriq</h4>
-                                        <p>Google Reviews</p>
+                                        <h4>{{ $content['testimonial_'.$i.'_name'] ?? $nameDefault }}</h4>
+                                        <p>{{ $content['testimonial_'.$i.'_source'] ?? 'Google Reviews' }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="testimonial-card-enhanced">
-                                <div class="testimonial-rating-enhanced">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="testimonial-text-enhanced">
-                                    "Layanan plus plusnya emang mantab banget.. dibantu fotbar, video tiktok juga.. dilayani dengan ramah dan memperhatikan kebutuhan konsumen."
-                                </p>
-                                <div class="testimonial-author-enhanced">
-                                    <div class="author-avatar-enhanced">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="author-info-enhanced">
-                                        <h4>Perpus Uinsa</h4>
-                                        <p>Google Reviews</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="testimonial-card-enhanced">
-                                <div class="testimonial-rating-enhanced">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="testimonial-text-enhanced">
-                                    "Tempat nya cocok buat bukber, servisnya oke poll staff nya ramah, makanannya enakk tempatnya bersih ada fasilitas mushollanya juga."
-                                </p>
-                                <div class="testimonial-author-enhanced">
-                                    <div class="author-avatar-enhanced">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="author-info-enhanced">
-                                        <h4>Karenina Anisya</h4>
-                                        <p>Google Reviews</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endfor
                     </div>
                 </div>
 
                 <!-- Slide 2 -->
                 <div class="testimonials-slide">
                     <div class="row g-4">
+                        @for($i = 4; $i <= 6; $i++)
+                        @php
+                            $nameDefault = $i == 4 ? 'Filidyo Bramanta' : ($i == 5 ? 'M. Junianto Tri' : 'Metha Prosper');
+                            $textDefault = $i == 4 ? 'Pelayanan baik, responsif, dan banyak ruangan yang bisa digunakan untuk meeting dan acara private. Makanan oke dan porsinya cukup.' : 
+                                          ($i == 5 ? 'Layanan sat set dan super ramah. Mushola luas, bisa shalat jamaah. Ruangan VIP tersedia karaoke, mantab buat seru-seruan.' : 
+                                          'Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul');
+                        @endphp
                         <div class="col-lg-4 col-md-6">
                             <div class="testimonial-card-enhanced">
                                 <div class="testimonial-rating-enhanced">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    @for($r = 1; $r <= 5; $r++)
+                                        @if($r <= ($content['testimonial_'.$i.'_rating'] ?? 5))
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <p class="testimonial-text-enhanced">
-                                    "Pelayanan baik, responsif, dan banyak ruangan yang bisa digunakan untuk meeting dan acara private. Makanan oke dan porsinya cukup."
+                                    "{{ $content['testimonial_'.$i.'_text'] ?? $textDefault }}"
                                 </p>
                                 <div class="testimonial-author-enhanced">
                                     <div class="author-avatar-enhanced">
                                         <i class="fas fa-user"></i>
                                     </div>
                                     <div class="author-info-enhanced">
-                                        <h4>Filidyo Bramanta</h4>
-                                        <p>Google Reviews</p>
+                                        <h4>{{ $content['testimonial_'.$i.'_name'] ?? $nameDefault }}</h4>
+                                        <p>{{ $content['testimonial_'.$i.'_source'] ?? 'Google Reviews' }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endfor
+                    </div>
+                </div>
+
+                <!-- Slide 3 - BARISAN TESTIMONI BARU -->
+                <div class="testimonials-slide">
+                    <div class="row g-4">
+                        @for($i = 7; $i <= 9; $i++)
+                        @php
+                            $nameDefault = $i == 7 ? 'Budi Santoso' : ($i == 8 ? 'Siti Nurhaliza' : 'Rizki Firmansyah');
+                            $textDefault = $i == 7 ? 'Tempatnya cozy banget, cocok buat nongkrong sama teman-teman. Pelayanan cepat dan ramah, makanannya juga enak-enak. Bakal kesini lagi!' : 
+                                          ($i == 8 ? 'Suasananya nyaman, bersih, dan staffnya sangat helpful. Menu variatif dan harganya terjangkau. Recommended buat makan keluarga.' : 
+                                          'Live musicnya seru, makanannya lezat, minumannya juga segar-segar. Pelayanan memuaskan, bikin betah berlama-lama.');
+                        @endphp
                         <div class="col-lg-4 col-md-6">
                             <div class="testimonial-card-enhanced">
                                 <div class="testimonial-rating-enhanced">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    @for($r = 1; $r <= 5; $r++)
+                                        @if($r <= ($content['testimonial_'.$i.'_rating'] ?? 5))
+                                            <i class="fas fa-star"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
                                 </div>
                                 <p class="testimonial-text-enhanced">
-                                    "Layanan sat set dan super ramah. Mushola luas, bisa shalat jamaah. Ruangan VIP tersedia karaoke, mantab buat seru-seruan."
+                                    "{{ $content['testimonial_'.$i.'_text'] ?? $textDefault }}"
                                 </p>
                                 <div class="testimonial-author-enhanced">
                                     <div class="author-avatar-enhanced">
                                         <i class="fas fa-user"></i>
                                     </div>
                                     <div class="author-info-enhanced">
-                                        <h4>M. Junianto Tri</h4>
-                                        <p>Google Reviews</p>
+                                        <h4>{{ $content['testimonial_'.$i.'_name'] ?? $nameDefault }}</h4>
+                                        <p>{{ $content['testimonial_'.$i.'_source'] ?? 'Google Reviews' }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="testimonial-card-enhanced">
-                                <div class="testimonial-rating-enhanced">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="testimonial-text-enhanced">
-                                    "Menu makanannya oke, rasanya endul, ruangannya ber-AC, bisa karaokean juga sama teman-teman. Joss Gandos dech... Mantul"
-                                </p>
-                                <div class="testimonial-author-enhanced">
-                                    <div class="author-avatar-enhanced">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="author-info-enhanced">
-                                        <h4>Metha Prosper</h4>
-                                        <p>Google Reviews</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -469,6 +471,7 @@
             <div class="testimonials-indicators">
                 <span class="testimonial-indicator active" onclick="testimonialsCarouselGoTo(0)"></span>
                 <span class="testimonial-indicator" onclick="testimonialsCarouselGoTo(1)"></span>
+                <span class="testimonial-indicator" onclick="testimonialsCarouselGoTo(2)"></span>
             </div>
         </div>
 
@@ -507,11 +510,11 @@
                     <div class="rounded-cta-buttons">
                         <a href="{{ route('menu') }}" class="btn-rounded-cta btn-rounded-cta-primary">
                             <i class="fas fa-shopping-bag"></i>
-                            <span>Pesan Sekarang</span>
+                            <span>{{ $content['cta_button1_text'] ?? 'Pesan Sekarang' }}</span>
                         </a>
                         <a href="{{ route('reservation.create') }}" class="btn-rounded-cta btn-rounded-cta-secondary">
                             <i class="fas fa-calendar-check"></i>
-                            <span>Reservasi Sekarang</span>
+                            <span>{{ $content['cta_button2_text'] ?? 'Reservasi Sekarang' }}</span>
                         </a>
                     </div>
                 </div>

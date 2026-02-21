@@ -12,21 +12,29 @@
         </button>
     </div>
 
-    <div class="row">
-        {{-- Debug info --}}
-        @php
-            // Uncomment untuk debugging
-            // dump($galleryItems ?? 'No galleryItems variable');
-        @endphp
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
 
+    @if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    <div class="row">
         @if(isset($galleryItems) && $galleryItems->count() > 0)
             @foreach($galleryItems as $item)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
                     <div class="card-img-top" style="height: 200px; overflow: hidden;">
-                        @if($item->image)
-                        <img src="{{ asset('storage/gallery/' . $item->image) }}" 
-                             alt="{{ $item->title }}" 
+                        @if($item->image_path)
+                        <img src="{{ asset('storage/gallery/' . $item->image_path) }}" 
+                             alt="{{ $item->caption }}" 
                              style="width: 100%; height: 100%; object-fit: cover;">
                         @else
                         <div class="d-flex align-items-center justify-content-center" style="height: 200px; background: #f8f9fa;">
@@ -35,17 +43,27 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ $item->title ?? 'Tanpa Judul' }}</h5>
-                        @if($item->description)
-                        <p class="card-text text-muted">{{ Str::limit($item->description, 100) }}</p>
-                        @endif
+                        <h5 class="card-title">{{ $item->caption ?? 'Tanpa Judul' }}</h5>
                         
-                        @if($item->category)
-                        <span class="badge bg-info mb-2">{{ $item->category }}</span>
-                        @endif
+                        @php
+                            $categoryLabels = [
+                                'food' => 'Makanan',
+                                'facility' => 'Fasilitas',
+                                'event' => 'Acara',
+                                'interior' => 'Interior'
+                            ];
+                        @endphp
+                        
+                        <span class="badge bg-{{ $item->category == 'food' ? 'success' : ($item->category == 'facility' ? 'warning' : ($item->category == 'event' ? 'info' : 'primary')) }} mb-2">
+                            {{ $categoryLabels[$item->category] ?? ucfirst($item->category) }}
+                        </span>
                         
                         <div class="mt-3">
-                            <form action="{{ route('admin.gallery.destroy', $item->id) }}" method="POST" class="d-inline">
+                            <span class="badge bg-{{ $item->is_active ? 'success' : 'secondary' }}">
+                                {{ $item->is_active ? 'Aktif' : 'Tidak Aktif' }}
+                            </span>
+                            
+                            <form action="{{ route('admin.gallery.destroy', $item->id) }}" method="POST" class="d-inline float-end">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" 
@@ -62,11 +80,7 @@
             <div class="col-12">
                 <div class="alert alert-info">
                     <i class="fas fa-info-circle"></i> 
-                    @if(!isset($galleryItems))
-                        Data gallery tidak tersedia. Pastikan database dan model Gallery sudah diatur.
-                    @else
-                        Belum ada foto di gallery
-                    @endif
+                    Belum ada foto di gallery. Klik tombol "Tambah Foto" untuk menambahkan.
                 </div>
             </div>
         @endif
@@ -86,30 +100,42 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="title" class="form-label">Judul Foto *</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
                         <label for="image" class="form-label">File Foto *</label>
-                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*" required>
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="form-text">Format: JPG, PNG, JPEG. Maksimal 2MB.</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="description" class="form-label">Deskripsi (Opsional)</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
                         <label for="category" class="form-label">Kategori</label>
-                        <select class="form-select" id="category" name="category">
+                        <select class="form-select @error('category') is-invalid @enderror" id="category" name="category">
                             <option value="">Pilih Kategori</option>
-                            <option value="makanan">Makanan</option>
-                            <option value="minuman">Minuman</option>
-                            <option value="fasilitas">Fasilitas</option>
-                            <option value="acara">Acara</option>
-                            <option value="interior">Interior</option>
+                            <option value="makanan" {{ old('category') == 'makanan' ? 'selected' : '' }}>Makanan</option>
+                            <option value="minuman" {{ old('category') == 'minuman' ? 'selected' : '' }}>Minuman</option>
+                            <option value="fasilitas" {{ old('category') == 'fasilitas' ? 'selected' : '' }}>Fasilitas</option>
+                            <option value="acara" {{ old('category') == 'acara' ? 'selected' : '' }}>Acara</option>
+                            <option value="interior" {{ old('category') == 'interior' ? 'selected' : '' }}>Interior</option>
                         </select>
+                        @error('category')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">

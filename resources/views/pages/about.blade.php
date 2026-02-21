@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - JOSS GANDOS')
-@section('meta-description', 'Tentang JOSS GANDOS - Sejarah, visi, misi, dan perjalanan restoran kami sejak 2017')
+@section('title', $page->meta_title ?? 'Tentang Kami - JOSS GANDOS')
+@section('meta-description', $page->meta_description ?? 'Tentang JOSS GANDOS - Sejarah, visi, misi, dan perjalanan restoran kami sejak 2017')
+
+@php
+    $content = $page->content ?? [];
+@endphp
 
 @section('content')
-<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP - PADDING/MARGIN DIPERKECIL -->
+<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
 <section class="elegant-hero">
     <!-- Soft Gradient Background -->
     <div class="elegant-gradient"></div>
@@ -14,41 +18,11 @@
     <div class="hero-shape shape-2"></div>
     <div class="hero-shape shape-3"></div>
     
-    <!-- Animated Particles - SUPER BANYAK -->
+    <!-- Animated Particles -->
     <div class="particle-container">
+        @for($i = 1; $i <= 33; $i++)
         <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+        @endfor
     </div>
     
     <div class="container">
@@ -70,8 +44,7 @@
                 
                 <!-- Description dengan Animasi -->
                 <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
-                    Delapan tahun perjalanan dari semangat IT hingga menjadi pionir kuliner 
-                    di Jemursari dengan menu andalan yang menginspirasi.
+                    {{ $content['hero_subtitle'] ?? 'Delapan tahun perjalanan dari semangat IT hingga menjadi pionir kuliner di Jemursari dengan menu andalan yang menginspirasi.' }}
                 </p>
                 
                 <!-- CTA Buttons dengan Animasi -->
@@ -88,13 +61,13 @@
                 
             </div>
             
-            <!-- HERO IMAGE - SANGAT BESAR & IKON HILANG SAAT HOVER -->
+            <!-- HERO IMAGE -->
             <div class="col-lg-6 col-xl-6">
                 <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
                     <div class="hero-image-container hero-image-extra-large">
                         <!-- Main Image Frame -->
                         <div class="hero-image-frame hero-frame-premium">
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw"
+                            <img src="{{ $content['hero_image'] ?? 'https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw' }}"
                                  alt="Resto Joss Gandos Ketintang"
                                  class="hero-image img-fluid">
                             
@@ -151,13 +124,13 @@
                 
                 <div class="history-content" data-aos="fade-up">
                     <p class="lead">
-                        Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.
+                        {{ $content['history_description_1'] ?? 'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.' }}
                     </p>
                     <p>
-                        Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah <strong>Bebek Joss Gandos</strong> — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.
+                        {{ $content['history_description_2'] ?? 'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.' }}
                     </p>
                     <p class="mb-0">
-                        Nama <strong>'Joss Gandos'</strong> dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.
+                        {{ $content['history_description_3'] ?? 'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.' }}
                     </p>
                 </div>
             </div>
@@ -170,6 +143,24 @@
                     </div>
                     
                     <div class="timeline-wrapper">
+                        @php
+                            $timeline = $content['timeline'] ?? [];
+                        @endphp
+                        
+                        @forelse($timeline as $item)
+                        <div class="timeline-item">
+                            <div class="timeline-year">{{ $item['year'] ?? '' }}</div>
+                            <div class="timeline-content">
+                                <h5>{{ $item['title'] ?? '' }}</h5>
+                                <ul>
+                                    @foreach(($item['items'] ?? []) as $listItem)
+                                    <li>{{ $listItem }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @empty
+                        <!-- Default timeline jika tidak ada data -->
                         <div class="timeline-item">
                             <div class="timeline-year">2017</div>
                             <div class="timeline-content">
@@ -265,6 +256,7 @@
                                 </ul>
                             </div>
                         </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -272,7 +264,7 @@
     </div>
 </section>
 
-<!-- VISI MISI - SATU CARD ELEGAN - ICON TEGAK, HOVER TIDAK BERUBAH WARNA/MIRING -->
+<!-- VISI MISI - SATU CARD ELEGAN -->
 <section class="vision-mission-single-card-section" style="padding: 80px 0;">
     <div class="container">
         <div class="row justify-content-center">
@@ -288,7 +280,7 @@
                     </div>
                     
                     <div class="card-content-wrapper">
-                        <!-- VISI SECTION - ICON DIAMOND (TEGAK) -->
+                        <!-- VISI SECTION -->
                         <div class="visi-section">
                             <div class="visi-header">
                                 <div class="icon-badge visi-icon-badge">
@@ -299,14 +291,12 @@
                             
                             <div class="visi-text">
                                 <p>
-                                    Menjadi restoran pilihan utama di Surabaya yang dikenal dengan 
-                                    cita rasa autentik, pelayanan ramah, serta 
-                                    suasana nyaman untuk seluruh keluarga.
+                                    {{ $content['vision_quote'] ?? 'Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.' }}
                                 </p>
                             </div>
                         </div>
                         
-                        <!-- MISI SECTION - ICON BULLSEYE/TARGET (TEGAK) -->
+                        <!-- MISI SECTION -->
                         <div class="misi-section">
                             <div class="misi-header">
                                 <div class="icon-badge misi-icon-badge">
@@ -316,7 +306,20 @@
                             </div>
                             
                             <div class="misi-list">
-                                <!-- Misi 1 - HOVER TIDAK BERUBAH WARNA, TIDAK MIRING -->
+                                @php
+                                    $missions = $content['missions'] ?? [];
+                                @endphp
+                                
+                                @forelse($missions as $index => $mission)
+                                <div class="misi-item misi-item-static">
+                                    <div class="misi-number-static">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</div>
+                                    <div class="misi-content">
+                                        <h4>{{ $mission['title'] ?? '' }}</h4>
+                                        <p>{{ $mission['description'] ?? '' }}</p>
+                                    </div>
+                                </div>
+                                @empty
+                                <!-- Default missions -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">01</div>
                                     <div class="misi-content">
@@ -324,8 +327,6 @@
                                         <p>Menyajikan hidangan berkualitas tinggi dengan bahan segar.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- Misi 2 -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">02</div>
                                     <div class="misi-content">
@@ -333,8 +334,6 @@
                                         <p>Pelayanan cepat, ramah, dan profesional.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- Misi 3 -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">03</div>
                                     <div class="misi-content">
@@ -342,8 +341,6 @@
                                         <p>Suasana bersih, nyaman, dan bersahabat.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- Misi 4 -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">04</div>
                                     <div class="misi-content">
@@ -351,8 +348,6 @@
                                         <p>Terus berinovasi menu dan layanan.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- Misi 5 -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">05</div>
                                     <div class="misi-content">
@@ -360,8 +355,6 @@
                                         <p>Menjaga standar kebersihan (hygiene) tertinggi.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- Misi 6 -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">06</div>
                                     <div class="misi-content">
@@ -369,6 +362,7 @@
                                         <p>Kontribusi positif bagi lingkungan sekitar.</p>
                                     </div>
                                 </div>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -387,7 +381,7 @@
     </div>
 </section>
 
-<!-- FOUNDER SECTION - SANGAT DIPERBESAR -->
+<!-- FOUNDER SECTION -->
 <section class="founder-section" style="padding: 80px 0;">
     <div class="container">
         <div class="row align-items-center">
@@ -395,7 +389,7 @@
                 <div class="founder-image-wrapper extra-large" data-aos="fade-right">
                     <div class="founder-image premium founder-premium-large">
                         <div class="image-rotator">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                            <img src="{{ $content['founder_image'] ?? 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" 
                                  class="img-fluid" alt="Dr. Siswanto - Founder JOSS GANDOS">
                             <div class="image-overlay-glow"></div>
                         </div>
@@ -424,16 +418,16 @@
                     <div class="founder-quote">
                         <i class="fas fa-quote-left quote-icon"></i>
                         <p>
-                            Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage di luar latar belakang IT.
+                            {{ $content['founder_description'] ?? 'Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage di luar latar belakang IT.' }}
                         </p>
                     </div>
                     
                     <div class="founder-story">
                         <p>
-                            Berawal dari rintisan sederhana bernama <strong>"Bebek Joss Gandos"</strong>, beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.
+                            {{ $content['founder_story_1'] ?? 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.' }}
                         </p>
                         <p>
-                            Di bawah kepemimpinan beliau dengan filosofi semangat <strong>"Joss, Mantap, dan Luar Biasa"</strong>, resto ini sukses melewati tantangan pandemi dan terus berinovasi.
+                            {{ $content['founder_story_2'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat "Joss, Mantap, dan Luar Biasa", resto ini sukses melewati tantangan pandemi dan terus berinovasi.' }}
                         </p>
                     </div>
                     
@@ -460,29 +454,67 @@
         </div>
         
         <div class="row g-4 justify-content-center">
-            @foreach([
-                ['name' => 'Ahmad Santoso', 'position' => 'Head Chef', 'image' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'desc' => '15 tahun pengalaman kuliner, spesialis masakan tradisional'],
-                ['name' => 'Sari Dewi', 'position' => 'Restaurant Manager', 'image' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'desc' => 'Ahli dalam manajemen restoran dan pelayanan pelanggan'],
-                ['name' => 'Budi Hartono', 'position' => 'F&B Director', 'image' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'desc' => 'Pengembangan menu dan kontrol kualitas bahan']
-            ] as $member)
+            @php
+                $teamMembers = $content['team_members'] ?? [];
+            @endphp
+            
+            @forelse($teamMembers as $member)
             <div class="col-lg-4 col-md-6">
                 <div class="team-card" data-aos="fade-up">
                     <div class="team-image">
-                        <img src="{{ $member['image'] }}" alt="{{ $member['name'] }}">
+                        <img src="{{ $member['image'] ?? '' }}" alt="{{ $member['name'] ?? '' }}">
                     </div>
                     <div class="team-info">
-                        <h5>{{ $member['name'] }}</h5>
-                        <span class="team-position">{{ $member['position'] }}</span>
-                        <p class="team-desc">{{ $member['desc'] }}</p>
+                        <h5>{{ $member['name'] ?? '' }}</h5>
+                        <span class="team-position">{{ $member['position'] ?? '' }}</span>
+                        <p class="team-desc">{{ $member['description'] ?? '' }}</p>
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <!-- Default team members -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ahmad Santoso">
+                    </div>
+                    <div class="team-info">
+                        <h5>Ahmad Santoso</h5>
+                        <span class="team-position">Head Chef</span>
+                        <p class="team-desc">15 tahun pengalaman kuliner, spesialis masakan tradisional</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sari Dewi">
+                    </div>
+                    <div class="team-info">
+                        <h5>Sari Dewi</h5>
+                        <span class="team-position">Restaurant Manager</span>
+                        <p class="team-desc">Ahli dalam manajemen restoran dan pelayanan pelanggan</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Budi Hartono">
+                    </div>
+                    <div class="team-info">
+                        <h5>Budi Hartono</h5>
+                        <span class="team-position">F&B Director</span>
+                        <p class="team-desc">Pengembangan menu dan kontrol kualitas bahan</p>
+                    </div>
+                </div>
+            </div>
+            @endforelse
         </div>
     </div>
 </section>
 
-<!-- CTA SECTION - RED GRADIENT (MATCH DENGAN HERO) -->
+<!-- CTA SECTION - RED GRADIENT -->
 <section class="cta-section-red-gradient" style="padding: 80px 0;">
     <div class="container">
         <div class="cta-wrapper-red">
@@ -495,12 +527,9 @@
             
             <!-- Animated Particles -->
             <div class="cta-particles">
+                @for($i = 1; $i <= 6; $i++)
                 <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
+                @endfor
             </div>
             
             <div class="row justify-content-center">
@@ -514,13 +543,12 @@
                     
                     <!-- Main Title -->
                     <h2 class="cta-title-red animate__animated animate__fadeInUp">
-                        Rasakan Cita Rasa <span class="title-highlight">Luar Biasa</span>
+                        {{ $content['cta_title'] ?? 'Rasakan Cita Rasa Luar Biasa' }}
                     </h2>
                     
                     <!-- Description -->
                     <p class="cta-description-red animate__animated animate__fadeInUp animate__delay-1s">
-                        Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan 
-                        dengan hidangan autentik dan pelayanan terbaik dari keluarga Joss Gandos.
+                        {{ $content['cta_description'] ?? 'Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan dengan hidangan autentik dan pelayanan terbaik dari keluarga Joss Gandos.' }}
                     </p>
                     
                     <!-- CTA Buttons -->
@@ -573,7 +601,7 @@
         --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
     }
 
-    /* ========== ELEGANT RED GRADIENT HERO DENGAN ANIMASI SUPER HIDUP ========== */
+    /* ========== ELEGANT RED GRADIENT HERO ========== */
     .elegant-hero {
         position: relative;
         min-height: 85vh;
@@ -816,7 +844,7 @@
         transform: translateY(-3px);
     }
 
-    /* ========== HERO IMAGE - SANGAT BESAR & IKON HILANG SAAT HOVER ========== */
+    /* Hero Image */
     .hero-image-wrapper {
         position: relative;
         width: 100%;
@@ -854,7 +882,6 @@
         aspect-ratio: 16/9;
     }
 
-    /* HOVER EFFECTS - IMAGE BESAR & IKON HILANG */
     .hero-image-frame.hero-frame-premium:hover {
         transform: translateY(-15px) scale(1.03);
         border-color: rgba(255, 215, 0, 0.6);
@@ -995,7 +1022,7 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* ========== FOUNDER IMAGE - SANGAT DIPERBESAR ========== */
+    /* Founder Image */
     .founder-section {
         padding: 80px 0;
         background: white;
@@ -1193,7 +1220,7 @@
         margin-bottom: 20px;
     }
 
-    /* ========== VISI MISI - SATU CARD ELEGAN - ICON TEGAK, HOVER STATIS ========== */
+    /* Vision Mission Card */
     .vision-mission-single-card-section {
         padding: 80px 0;
         background: linear-gradient(145deg, #fcf9f7 0%, #ffffff 100%);
@@ -1218,7 +1245,6 @@
         border-color: rgba(178, 34, 34, 0.2);
     }
 
-    /* Card Background Ornament */
     .card-bg-ornament {
         position: absolute;
         top: 0;
@@ -1264,7 +1290,6 @@
         z-index: 2;
     }
 
-    /* VISI SECTION - ICON DIAMOND TEGAK (TIDAK MIRING) */
     .visi-section {
         text-align: center;
         margin-bottom: 50px;
@@ -1291,8 +1316,8 @@
         color: white;
         font-size: 2rem;
         box-shadow: 0 15px 30px rgba(178,34,34,0.2);
-        transform: none; /* TEGAK, TIDAK MIRING */
-        transition: none; /* TIDAK ADA ANIMASI HOVER */
+        transform: none;
+        transition: none;
     }
 
     .icon-badge.misi-icon-badge {
@@ -1306,8 +1331,8 @@
         color: white;
         font-size: 2rem;
         box-shadow: 0 15px 30px rgba(212,160,23,0.2);
-        transform: none; /* TEGAK, TIDAK MIRING */
-        transition: none; /* TIDAK ADA ANIMASI HOVER */
+        transform: none;
+        transition: none;
     }
 
     .visi-title {
@@ -1335,11 +1360,6 @@
         transform: scaleX(1);
     }
 
-    .visi-text {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
     .visi-text p {
         font-size: 1.3rem;
         line-height: 1.8;
@@ -1347,15 +1367,6 @@
         font-weight: 400;
     }
 
-    .highlight-text {
-        background: linear-gradient(120deg, rgba(178,34,34,0.1), rgba(212,160,23,0.1));
-        padding: 0 8px;
-        border-radius: 8px;
-        font-weight: 600;
-        color: var(--primary-red);
-    }
-
-    /* MISI SECTION */
     .misi-section {
         position: relative;
     }
@@ -1400,7 +1411,6 @@
         margin-top: 30px;
     }
 
-    /* MISI ITEM - HOVER TIDAK BERUBAH WARNA DAN TIDAK MIRING */
     .misi-item-static {
         display: flex;
         align-items: center;
@@ -1438,7 +1448,6 @@
         opacity: 1;
     }
 
-    /* NOMOR MISI - TIDAK BERUBAH WARNA SAAT HOVER */
     .misi-number-static {
         width: 45px;
         height: 45px;
@@ -1450,14 +1459,14 @@
         border-radius: 15px;
         font-weight: 700;
         font-size: 1.1rem;
-        transition: none; /* TIDAK ADA PERUBAHAN SAAT HOVER */
+        transition: none;
         flex-shrink: 0;
         box-shadow: 0 8px 15px rgba(178,34,34,0.2);
     }
 
     .misi-item-static:hover .misi-number-static {
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark)); /* TETAP WARNA MERAH */
-        transform: none; /* TIDAK MIRING */
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        transform: none;
     }
 
     .misi-content {
@@ -1478,27 +1487,6 @@
         line-height: 1.5;
     }
 
-    /* ICON CHECK - TIDAK BERUBAH WARNA SAAT HOVER */
-    .misi-check-static {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--accent-gold);
-        font-size: 1.2rem;
-        opacity: 0.3;
-        transition: none; /* TIDAK ADA PERUBAHAN SAAT HOVER */
-        flex-shrink: 0;
-    }
-
-    .misi-item-static:hover .misi-check-static {
-        opacity: 0.3; /* TETAP 0.3, TIDAK BERUBAH */
-        transform: none; /* TIDAK MEMBESAR */
-        color: var(--accent-gold); /* TETAP WARNA EMAS */
-    }
-
-    /* Card Footer */
     .card-footer-premium {
         margin-top: 50px;
         padding-top: 30px;
@@ -1524,193 +1512,7 @@
         opacity: 0.5;
     }
 
-    .footer-year {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-gray);
-        letter-spacing: 3px;
-    }
-
-    /* ========== CTA SECTION - RED GRADIENT ========== */
-    .cta-section-red-gradient {
-        padding: 80px 0;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .cta-wrapper-red {
-        position: relative;
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark), #6B0F0F);
-        border-radius: 80px;
-        padding: 60px 60px;
-        overflow: hidden;
-        box-shadow: 0 30px 60px rgba(178, 34, 34, 0.3);
-        border: 1px solid rgba(255, 215, 0, 0.2);
-    }
-
-    .cta-shapes {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
-
-    .cta-shapes .shape {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(60px);
-    }
-
-    .cta-shapes .s1 {
-        width: 400px;
-        height: 400px;
-        background: rgba(255, 215, 0, 0.1);
-        top: -100px;
-        right: -100px;
-        animation: shapeFloat 20s ease-in-out infinite;
-    }
-
-    .cta-shapes .s2 {
-        width: 300px;
-        height: 300px;
-        background: rgba(255, 255, 255, 0.05);
-        bottom: -100px;
-        left: -50px;
-        animation: shapeFloat 25s ease-in-out infinite reverse;
-    }
-
-    .cta-shapes .s3 {
-        width: 200px;
-        height: 200px;
-        background: rgba(212, 160, 23, 0.08);
-        top: 50%;
-        left: 20%;
-        filter: blur(80px);
-        animation: shapeFloat 18s ease-in-out infinite;
-    }
-
-    .cta-particles {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
-
-    .cta-particles .particle {
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: rgba(255, 215, 0, 0.3);
-        border-radius: 50%;
-        animation: particleFloat 15s infinite linear;
-    }
-
-    .cta-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 15px;
-        padding: 12px 30px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 100px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        margin-bottom: 30px;
-    }
-
-    .cta-badge .badge-dot {
-        width: 8px;
-        height: 8px;
-        background: var(--accent-light);
-        border-radius: 50%;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        animation: pulse 2s infinite;
-    }
-
-    .cta-badge span {
-        color: white;
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 3px;
-    }
-
-    .cta-title-red {
-        font-size: 3rem;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 25px;
-        line-height: 1.2;
-    }
-
-    .cta-title-red .title-highlight {
-        background: linear-gradient(120deg, #FFE55C, #FFD700, #FFA500);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        display: inline-block;
-    }
-
-    .cta-description-red {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.9);
-        max-width: 700px;
-        margin: 0 auto 40px;
-        font-weight: 300;
-    }
-
-    .cta-buttons-red {
-        display: flex;
-        gap: 25px;
-        justify-content: center;
-        margin-bottom: 0;
-    }
-
-    .btn-cta-red {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 36px;
-        border-radius: 50px;
-        font-size: 1rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
-        overflow: hidden;
-        border: none;
-    }
-
-    .btn-primary-red {
-        background: white;
-        color: var(--primary-dark);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-primary-red:hover {
-        background: #fff5f5;
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        color: var(--primary-dark);
-    }
-
-    .btn-outline-red {
-        background: transparent;
-        color: white;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(5px);
-    }
-
-    .btn-outline-red:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: white;
-        transform: translateY(-3px);
-    }
-
-    /* ========== SECTION STYLES ========== */
+    /* Section Styles */
     .section-padding {
         padding: 80px 0;
     }
@@ -1952,7 +1754,186 @@
         font-size: 0.95rem;
     }
 
-    /* ========== RESPONSIVE ========== */
+    /* CTA Section */
+    .cta-section-red-gradient {
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-wrapper-red {
+        position: relative;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark), #6B0F0F);
+        border-radius: 80px;
+        padding: 60px 60px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(178, 34, 34, 0.3);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .cta-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .cta-shapes .shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+    }
+
+    .cta-shapes .s1 {
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 215, 0, 0.1);
+        top: -100px;
+        right: -100px;
+        animation: shapeFloat 20s ease-in-out infinite;
+    }
+
+    .cta-shapes .s2 {
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.05);
+        bottom: -100px;
+        left: -50px;
+        animation: shapeFloat 25s ease-in-out infinite reverse;
+    }
+
+    .cta-shapes .s3 {
+        width: 200px;
+        height: 200px;
+        background: rgba(212, 160, 23, 0.08);
+        top: 50%;
+        left: 20%;
+        filter: blur(80px);
+        animation: shapeFloat 18s ease-in-out infinite;
+    }
+
+    .cta-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .cta-particles .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 215, 0, 0.3);
+        border-radius: 50%;
+        animation: particleFloat 15s infinite linear;
+    }
+
+    .cta-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px 30px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 30px;
+    }
+
+    .cta-badge .badge-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-light);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        animation: pulse 2s infinite;
+    }
+
+    .cta-badge span {
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+    }
+
+    .cta-title-red {
+        font-size: 3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 25px;
+        line-height: 1.2;
+    }
+
+    .cta-title-red .title-highlight {
+        background: linear-gradient(120deg, #FFE55C, #FFD700, #FFA500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+    }
+
+    .cta-description-red {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 700px;
+        margin: 0 auto 40px;
+        font-weight: 300;
+    }
+
+    .cta-buttons-red {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    .btn-cta-red {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 36px;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+        overflow: hidden;
+        border: none;
+    }
+
+    .btn-primary-red {
+        background: white;
+        color: var(--primary-dark);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary-red:hover {
+        background: #fff5f5;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        color: var(--primary-dark);
+    }
+
+    .btn-outline-red {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .btn-outline-red:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: white;
+        transform: translateY(-3px);
+    }
+
+    /* Responsive */
     @media (max-width: 1200px) {
         .heading-line {
             font-size: 3.5rem;

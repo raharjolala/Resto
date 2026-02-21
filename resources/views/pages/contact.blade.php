@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Kontak - JOSS GANDOS')
-
-@section('meta-description', 'Hubungi JOSS GANDOS untuk reservasi, catering, atau informasi lainnya. Kami siap melayani Anda')
+@section('title', $content['meta_title'] ?? 'Kontak - JOSS GANDOS')
+@section('meta-description', $content['meta_description'] ?? 'Hubungi JOSS GANDOS untuk reservasi, catering, atau informasi lainnya. Kami siap melayani Anda')
 
 @section('content')
    <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
@@ -28,21 +27,31 @@
                 <!-- Premium Badge dengan Animasi -->
                 <div class="premium-badge animate__animated animate__fadeInUp">
                     <span class="badge-dot"></span>
-                    <span>HUBUNGI KAMI</span>
+                    <span>{{ $content['hero_subtitle'] ?? 'HUBUNGI KAMI' }}</span>
                     <span class="badge-dot"></span>
                 </div>
                 
                 <!-- Main Heading -->
                 <h1 class="elegant-heading">
-                    <span class="heading-line reveal-text">Kami Siap</span>
-                    <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">Mendengar</span>
-                    <span class="heading-line reveal-text" style="animation-delay: 0.4s">Cerita Anda</span>
+                    @php
+                        $heroTitle = $content['hero_title'] ?? 'Kami Siap Melayani Dengan Sepenuh Hati';
+                        $titleParts = explode(' ', $heroTitle, 3);
+                    @endphp
+                    
+                    @if(isset($content['hero_title_line1']) && isset($content['hero_title_line2']) && isset($content['hero_title_line3']))
+                        <span class="heading-line reveal-text">{{ $content['hero_title_line1'] }}</span>
+                        <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">{{ $content['hero_title_line2'] }}</span>
+                        <span class="heading-line reveal-text" style="animation-delay: 0.4s">{{ $content['hero_title_line3'] }}</span>
+                    @else
+                        <span class="heading-line reveal-text">{{ $titleParts[0] ?? 'Kami Siap' }}</span>
+                        <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">{{ $titleParts[1] ?? 'Melayani Dengan' }}</span>
+                        <span class="heading-line reveal-text" style="animation-delay: 0.4s">{{ $titleParts[2] ?? 'Sepenuh Hati' }}</span>
+                    @endif
                 </h1>
                 
                 <!-- Description -->
                 <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
-                    Ada pertanyaan tentang menu, reservasi, atau ingin mengadakan acara spesial? 
-                    Tim Joss Gandos siap membantu dan melayani Anda dengan sepenuh hati.
+                    {{ $content['hero_description'] ?? 'Ada pertanyaan tentang menu, reservasi, atau ingin mengadakan acara spesial? Tim Joss Gandos siap membantu dan melayani Anda dengan sepenuh hati.' }}
                 </p>
                 
                 <!-- CTA Buttons -->
@@ -63,7 +72,7 @@
                 <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
                     <div class="hero-image-container hero-image-extra-large">
                         <div class="hero-image-frame hero-frame-premium">
-                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            <img src="{{ $content['hero_image_url'] ?? 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}"
                                  alt="Hubungi Resto Joss Gandos"
                                  class="hero-image img-fluid">
                             
@@ -79,7 +88,7 @@
                             </div>
                             
                             <div class="image-premium-label animate__animated animate__pulse animate__infinite">
-                                <span>#HUBUNGI KAMI</span>
+                                <span>#{{ str_replace(' ', '', $content['hero_subtitle'] ?? 'HUBUNGI KAMI') }}</span>
                             </div>
                         </div>
                     </div>
@@ -124,7 +133,7 @@
                                             </span>
                                             <input type="text" class="form-control border-start-0" 
                                                    id="name" name="name" required 
-                                                   placeholder="">
+                                                   placeholder="Masukkan nama lengkap Anda">
                                         </div>
                                         <div class="invalid-feedback">Harap isi nama lengkap</div>
                                     </div>
@@ -139,7 +148,7 @@
                                             </span>
                                             <input type="email" class="form-control border-start-0" 
                                                    id="email" name="email" required 
-                                                   placeholder="">
+                                                   placeholder="contoh@email.com">
                                         </div>
                                         <div class="invalid-feedback">Harap isi email yang valid</div>
                                     </div>
@@ -156,7 +165,7 @@
                                             </span>
                                             <input type="tel" class="form-control border-start-0" 
                                                    id="phone" name="phone" required 
-                                                   placeholder="">
+                                                   placeholder="08123456789">
                                         </div>
                                         <div class="invalid-feedback">Harap isi nomor telepon</div>
                                     </div>
@@ -236,7 +245,7 @@
                                     <div>
                                         <h6 class="fw-bold mb-1" style="color: #333;">Lokasi Restoran</h6>
                                         <p class="mb-0 text-muted" style="font-size: 0.95rem;">
-                                            Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231
+                                            {{ $content['address'] ?? 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231' }}
                                         </p>
                                     </div>
                                 </div>
@@ -247,7 +256,7 @@
                                     <div>
                                         <h6 class="fw-bold mb-1" style="color: #333;">Jam Operasional</h6>
                                         <p class="mb-0 text-muted" style="font-size: 0.95rem;">
-                                            10:00 - 22:00 WIB (Setiap Hari)
+                                            {{ $content['hours'] ?? '10:00 - 22:00 WIB (Setiap Hari)' }}
                                         </p>
                                     </div>
                                 </div>
@@ -258,7 +267,18 @@
                                     <div>
                                         <h6 class="fw-bold mb-1" style="color: #333;">Email</h6>
                                         <p class="mb-0 text-muted" style="font-size: 0.95rem;">
-                                            info@jossgandos.com
+                                            {{ $content['email'] ?? 'info@jossgandos.com' }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="quick-contact-item d-flex align-items-center mt-3">
+                                    <div class="contact-icon me-3">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold mb-1" style="color: #333;">Telepon</h6>
+                                        <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                            {{ $content['phone'] ?? '(021) 1234-5678' }}
                                         </p>
                                     </div>
                                 </div>
@@ -273,18 +293,37 @@
                                 <i class="fas fa-share-alt me-2"></i>Ikuti Kami
                             </h4>
                             <div class="d-flex justify-content-center gap-3 mb-4">
-                                <a href="#" class="social-icon" style="background: #1877f2;">
+                                @php
+                                    $social = $content['social_media'] ?? [];
+                                    $facebook = $content['facebook_url'] ?? ($social['facebook'] ?? '#');
+                                    $instagram = $content['instagram_url'] ?? ($social['instagram'] ?? '#');
+                                    $twitter = $content['twitter_url'] ?? ($social['twitter'] ?? '#');
+                                    $linkedin = $content['linkedin_url'] ?? ($social['linkedin'] ?? '#');
+                                @endphp
+                                
+                                @if($facebook && $facebook != '#')
+                                <a href="{{ $facebook }}" class="social-icon" style="background: #1877f2;" target="_blank">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="social-icon" style="background: #e4405f;">
+                                @endif
+                                
+                                @if($instagram && $instagram != '#')
+                                <a href="{{ $instagram }}" class="social-icon" style="background: #e4405f;" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="#" class="social-icon" style="background: #1da1f2;">
+                                @endif
+                                
+                                @if($twitter && $twitter != '#')
+                                <a href="{{ $twitter }}" class="social-icon" style="background: #1da1f2;" target="_blank">
                                     <i class="fab fa-twitter"></i>
                                 </a>
-                                <a href="#" class="social-icon" style="background: #0a66c2;">
+                                @endif
+                                
+                                @if($linkedin && $linkedin != '#')
+                                <a href="{{ $linkedin }}" class="social-icon" style="background: #0a66c2;" target="_blank">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
+                                @endif
                             </div>
                             <div class="map-cta">
                                 <a href="#map" class="contact-link">
@@ -314,13 +353,13 @@
                                 <div>
                                     <h4 class="text-white mb-2 fw-bold">Lokasi Kami</h4>
                                     <p class="text-white mb-0 opacity-90" style="font-size: 1.1rem;">
-                                        Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231
+                                        {{ $content['address'] ?? 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231' }}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 text-md-end">
-                            <a href="https://maps.google.com/?q=Jl+Jetis+Seraten,+Ketintang,+Kec.+Gayungan,+Surabaya,+Jawa+Timur+60231" 
+                            <a href="https://maps.google.com/?q={{ urlencode($content['address'] ?? 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231') }}" 
                                target="_blank" 
                                class="btn btn-light btn-lg px-4 py-2">
                                 <i class="fas fa-directions me-2"></i> Petunjuk Arah
@@ -333,7 +372,7 @@
                 <div class="map-container">
                     <div class="ratio ratio-16x9">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715058999945!2d112.73278731532677!3d-7.270442994754604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa1a4d1c8b07%3A0xc79190bc5e7be85!2sJl.%20Jetis%20Seraten%2C%20Ketintang%2C%20Kec.%20Gayungan%2C%20Surabaya%2C%20Jawa%20Timur%2060231!5e0!3m2!1sid!2sid!4v1641914256999!5m2!1sid!2sid" 
+                            src="{{ $content['map_embed'] ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715058999945!2d112.73278731532677!3d-7.270442994754604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa1a4d1c8b07%3A0xc79190bc5e7be85!2sJl.%20Jetis%20Seraten%2C%20Ketintang%2C%20Kec.%20Gayungan%2C%20Surabaya%2C%20Jawa%20Timur%2060231!5e0!3m2!1sid!2sid!4v1641914256999!5m2!1sid!2sid' }}" 
                             style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy">
@@ -414,12 +453,14 @@
                             <p class="text-muted mb-3">
                                 Pesan melalui aplikasi GoFood untuk pengiriman cepat dan mudah
                             </p>
-                            <a href="https://gofood.co.id/surabaya/restaurant/bebek-joss-gandos-jemursari-8571aff2-33b6-4f54-9fd9-a132a900eb17" 
+                            @if(isset($content['delivery_gofood']) && $content['delivery_gofood'] != '#')
+                            <a href="{{ $content['delivery_gofood'] }}" 
                                target="_blank"
                                class="btn w-100 py-2 fw-bold delivery-btn"
                                style="background: linear-gradient(135deg, #b42222, #e63946); border: none; border-radius: 10px;">
                                 <i class="fas fa-external-link-alt me-2"></i> Buka di GoFood
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -438,12 +479,14 @@
                             <p class="text-muted mb-3">
                                 Pesan melalui aplikasi GrabFood dengan berbagai pilihan menu lengkap
                             </p>
-                            <a href="https://food.grab.com/id/en/restaurant/online-delivery/IDGFSTI00002n8d?sourceID=20251119_121557_7BFCA7D892634AB597F132E1189364C5_MEXMPS" 
+                            @if(isset($content['delivery_grabfood']) && $content['delivery_grabfood'] != '#')
+                            <a href="{{ $content['delivery_grabfood'] }}" 
                                target="_blank"
                                class="btn w-100 py-2 fw-bold delivery-btn"
                                style="background: linear-gradient(135deg, #b42222, #e63946); border: none; border-radius: 10px;">
                                 <i class="fas fa-external-link-alt me-2"></i> Buka di GrabFood
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -467,26 +510,26 @@
                             <div class="whatsapp-admin-buttons mb-3">
                                 <div class="row g-2">
                                     <div class="col-6">
-                                        <a href="https://wa.me/6289699071599?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                                        <a href="https://wa.me/{{ $content['whatsapp_admin_1'] ?? '6289699071599' }}?text=Halo%20{{ urlencode($content['whatsapp_admin_1_name'] ?? 'Admin') }}%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
                                            target="_blank"
                                            class="btn w-100 py-2 whatsapp-admin-btn d-flex align-items-center justify-content-center"
                                            style="background: linear-gradient(135deg, #b42222, #e63946); color: white; border: none; border-radius: 10px; font-weight: 500; transition: all 0.3s ease;">
                                             <i class="fab fa-whatsapp me-2 fs-5"></i>
                                             <div class="text-start">
-                                                <div class="fw-bold" style="font-size: 0.9rem;">Admin 1</div>
-                                                <div style="font-size: 0.75rem; opacity: 0.9;">0896-9907-1599</div>
+                                                <div class="fw-bold" style="font-size: 0.9rem;">{{ $content['whatsapp_admin_1_name'] ?? 'Admin 1' }}</div>
+                                                <div style="font-size: 0.75rem; opacity: 0.9;">{{ $content['whatsapp_admin_1'] ?? '0896-9907-1599' }}</div>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="https://wa.me/6289532682495?text=Halo%20Admin%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                                        <a href="https://wa.me/{{ $content['whatsapp_admin_2'] ?? '6289532682495' }}?text=Halo%20{{ urlencode($content['whatsapp_admin_2_name'] ?? 'Admin') }}%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
                                            target="_blank"
                                            class="btn w-100 py-2 whatsapp-admin-btn d-flex align-items-center justify-content-center"
                                            style="background: linear-gradient(135deg, #b42222, #e63946); color: white; border: none; border-radius: 10px; font-weight: 500; transition: all 0.3s ease;">
                                             <i class="fab fa-whatsapp me-2 fs-5"></i>
                                             <div class="text-start">
-                                                <div class="fw-bold" style="font-size: 0.9rem;">Admin 2</div>
-                                                <div style="font-size: 0.75rem; opacity: 0.9;">0895-3268-2495</div>
+                                                <div class="fw-bold" style="font-size: 0.9rem;">{{ $content['whatsapp_admin_2_name'] ?? 'Admin 2' }}</div>
+                                                <div style="font-size: 0.75rem; opacity: 0.9;">{{ $content['whatsapp_admin_2'] ?? '0895-3268-2495' }}</div>
                                             </div>
                                         </a>
                                     </div>

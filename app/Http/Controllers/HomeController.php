@@ -62,24 +62,25 @@ class HomeController extends Controller
             'meta_title' => 'Resto Joss Gandos - Pelopor No. 1 Resto dan Cafe di Jemursari',
             'meta_description' => 'JOSS GANDOS - Restoran dan Cafe dengan makanan lezat dan suasana nyaman',
             'content' => [
-                'hero_title_line1' => 'Selamat Datang di',
-                'hero_title_line2' => 'Resto Joss Gandos',
-                'hero_subtitle' => 'Pelopor No. 1 Resto dan Cafe di Jemursari',
-                'hero_button1_text' => 'Jelajahi',
-                'hero_button2_text' => 'Reservasi',
+                // Hero Section
+                'hero_title_line1' => 'Nikmati Kelezatan',
+                'hero_title_line2' => 'Hidangan Spesial',
+                'hero_title_line3' => 'di Joss Gandos',
+                'hero_description' => 'Rasakan sensasi kuliner terbaik dengan cita rasa autentik, bahan berkualitas, dan suasana nyaman yang cocok untuk keluarga, teman, atau acara spesial Anda.',
+                'hero_button_menu' => 'Lihat Menu',
+                'hero_button_reservation' => 'Pesan Meja',
+                'hero_image_url' => 'https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw',
+                'hero_premium_badge' => '#1 RESTO & CAFE KETINTANG',
                 
                 'welcome_title_line1' => 'Selamat Datang',
                 'welcome_title_line2' => 'Resto Joss Gandos',
                 'welcome_description' => 'Tempat di mana rasa, suasana, dan kehangatan berpadu menjadi satu. Setiap kunjungan adalah perjalanan rasa yang membuat Anda ingin kembali lagi.',
+                'welcome_image_url' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                 
                 'feature_1_text' => 'Bahan premium pilihan terbaik',
                 'feature_2_text' => 'Chef berpengalaman & profesional',
                 'feature_3_text' => 'Suasana nyaman untuk keluarga',
                 'feature_4_text' => 'Pelayanan ramah & cepat',
-                
-                'stat_menu_count' => '50',
-                'stat_customer_count' => '1000',
-                'stat_rating_count' => '5',
                 
                 'services_title_line1' => 'Fasilitas &',
                 'services_title_line2' => 'Pelayanan Premium',

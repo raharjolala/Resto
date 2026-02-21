@@ -152,10 +152,27 @@
             
             <!-- Timeline -->
             <div class="mb-4">
-                <label class="form-label">Timeline Sejarah *</label>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <label class="form-label mb-0">Timeline Sejarah *</label>
+                    <button type="button" class="btn btn-sm btn-primary" id="add-timeline">
+                        <i class="fas fa-plus"></i> Tambah Timeline
+                    </button>
+                </div>
                 <div id="timeline-container">
                     @php
                         $timeline = $content['timeline'] ?? [];
+                        if(empty($timeline)) {
+                            $timeline = [
+                                ['year' => '2017', 'title' => 'Awal Berdiri', 'items' => ['Didirikan oleh CEO Dr. Siswanto', 'Menu khas Banyuwangi (Bebek & Rujak Soto)', 'Nama awal: "Bebek Joss Gandos"', 'Fasilitas: Karaoke VIP, Wedding, Live Music', 'Tim awal: 15 orang']],
+                                ['year' => '2018-19', 'title' => 'Merintis & Inovasi', 'items' => ['Masa perjuangan mendapatkan kepercayaan customer', 'Mengembangkan variasi menu', 'Menjadi pionir kuliner di Jemursari']],
+                                ['year' => '2020', 'title' => 'Bertahan di Pandemi', 'items' => ['Tutup sementara 3 bulan & SDM terbatas', 'Beradaptasi dengan jual sembako & pesan antar', 'Bukti kekuatan dan solidaritas tim']],
+                                ['year' => '2021', 'title' => 'Bangkit & Menu Baru', 'items' => ['Renovasi area VIP & Outdoor', 'Peluncuran Gulai Kepala Ikan Salmon', 'Aneka menu nusantara autentik']],
+                                ['year' => '2022', 'title' => 'Semakin Dipercaya', 'items' => ['Peningkatan pesat customer event & gathering', 'Fasilitas Karaoke VIP menjadi daya tarik utama']],
+                                ['year' => '2023', 'title' => 'Ekspansi & Menu Ikonik', 'items' => ['Renovasi besar: 6 VIP Room', 'Gulai Kepala Ikan Salmon menjadi ikon', 'Tanpa santan, kaya rempah']],
+                                ['year' => '2024', 'title' => 'Cabang Baru', 'items' => ['Peningkatan layanan pesan antar & reservasi', 'Agustus 2024: Cabang baru di Ketintang']],
+                                ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh', 'Pengalaman yang Joss, Mantap, Luar Biasa!']],
+                            ];
+                        }
                     @endphp
                     
                     @foreach($timeline as $index => $item)
@@ -187,16 +204,13 @@
                             <div class="form-group mt-3">
                                 <label>Item Timeline * (satu per baris)</label>
                                 <textarea class="form-control timeline-items" name="timeline[{{ $index }}][items]" 
-                                          rows="3" required>@if(isset($item['items'])){{ implode("\n", $item['items']) }}@endif</textarea>
+                                          rows="3" required>@if(isset($item['items'])){{ is_array($item['items']) ? implode("\n", $item['items']) : $item['items'] }}@endif</textarea>
                                 <small class="text-muted">Masukkan satu item per baris</small>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="add-timeline">
-                    <i class="fas fa-plus me-1"></i>Tambah Tahun
-                </button>
             </div>
             
             <!-- Founder Section -->
@@ -260,10 +274,23 @@
             </div>
             
             <div class="mb-4">
-                <label class="form-label">Pilar Visi * (Minimal 4)</label>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <label class="form-label mb-0">Pilar Visi *</label>
+                    <button type="button" class="btn btn-sm btn-primary" id="add-vision-pillar">
+                        <i class="fas fa-plus"></i> Tambah Pilar Visi
+                    </button>
+                </div>
                 <div id="vision-pillars-container">
                     @php
                         $visionPillars = $content['vision_pillars'] ?? [];
+                        if(empty($visionPillars)) {
+                            $visionPillars = [
+                                ['icon' => 'fas fa-utensils', 'title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas dengan bahan segar'],
+                                ['icon' => 'fas fa-heart', 'title' => 'Pelayanan Ramah', 'description' => 'Memberikan pengalaman terbaik bagi pelanggan'],
+                                ['icon' => 'fas fa-leaf', 'title' => 'Inovasi', 'description' => 'Terus berinovasi dalam menu dan layanan'],
+                                ['icon' => 'fas fa-users', 'title' => 'Kebersamaan', 'description' => 'Menciptakan suasana nyaman untuk keluarga'],
+                            ];
+                        }
                     @endphp
                     
                     @foreach($visionPillars as $index => $pillar)
@@ -304,9 +331,6 @@
                     </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="add-vision-pillar">
-                    <i class="fas fa-plus me-1"></i>Tambah Pilar
-                </button>
             </div>
             
             <!-- Mission Section -->
@@ -318,10 +342,25 @@
             </div>
             
             <div class="mb-4">
-                <label class="form-label">Daftar Misi * (Minimal 6)</label>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <label class="form-label mb-0">Daftar Misi *</label>
+                    <button type="button" class="btn btn-sm btn-primary" id="add-mission">
+                        <i class="fas fa-plus"></i> Tambah Misi
+                    </button>
+                </div>
                 <div id="missions-container">
                     @php
                         $missions = $content['missions'] ?? [];
+                        if(empty($missions)) {
+                            $missions = [
+                                ['icon' => 'fas fa-leaf', 'title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar.'],
+                                ['icon' => 'fas fa-smile', 'title' => 'Pelayanan Prima', 'description' => 'Pelayanan cepat, ramah, dan profesional.'],
+                                ['icon' => 'fas fa-home', 'title' => 'Suasana Nyaman', 'description' => 'Suasana bersih, nyaman, dan bersahabat.'],
+                                ['icon' => 'fas fa-lightbulb', 'title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi menu dan layanan.'],
+                                ['icon' => 'fas fa-broom', 'title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi.'],
+                                ['icon' => 'fas fa-hand-holding-heart', 'title' => 'Kontribusi Sosial', 'description' => 'Kontribusi positif bagi lingkungan sekitar.'],
+                            ];
+                        }
                     @endphp
                     
                     @foreach($missions as $index => $mission)
@@ -362,9 +401,6 @@
                     </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="add-mission">
-                    <i class="fas fa-plus me-1"></i>Tambah Misi
-                </button>
             </div>
             
             <!-- Team Section -->
@@ -376,16 +412,28 @@
             </div>
             
             <div class="mb-4">
-                <label class="form-label">Anggota Tim * (Minimal 3)</label>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <label class="form-label mb-0">Anggota Tim *</label>
+                    <button type="button" class="btn btn-sm btn-primary" id="add-team-member">
+                        <i class="fas fa-plus"></i> Tambah Anggota Tim
+                    </button>
+                </div>
                 <div id="team-members-container">
                     @php
                         $teamMembers = $content['team_members'] ?? [];
+                        if(empty($teamMembers)) {
+                            $teamMembers = [
+                                ['name' => 'Ahmad Santoso', 'position' => 'Head Chef', 'image' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => '15 tahun pengalaman kuliner, spesialis masakan tradisional'],
+                                ['name' => 'Sari Dewi', 'position' => 'Restaurant Manager', 'image' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Ahli dalam manajemen restoran dan pelayanan pelanggan'],
+                                ['name' => 'Budi Hartono', 'position' => 'F&B Director', 'image' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Pengembangan menu dan kontrol kualitas bahan'],
+                            ];
+                        }
                     @endphp
                     
                     @foreach($teamMembers as $index => $member)
                     <div class="team-member-item card mb-3">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h6 class="mb-0">Anggota Tim {{ $index + 1 }}</h6>
+                            <h6 class="mb-0">{{ $member['name'] ?? 'Anggota Tim' }}</h6>
                             <button type="button" class="btn btn-sm btn-outline-danger remove-team-member" 
                                     {{ count($teamMembers) <= 3 ? 'disabled' : '' }}>
                                 <i class="fas fa-times"></i>
@@ -424,9 +472,6 @@
                     </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="add-team-member">
-                    <i class="fas fa-plus me-1"></i>Tambah Anggota
-                </button>
             </div>
             
             <!-- CTA Section -->
@@ -441,14 +486,14 @@
                 <div class="form-group">
                     <label for="cta_title">Judul CTA *</label>
                     <input type="text" class="form-control" id="cta_title" name="cta_title" 
-                           value="{{ old('cta_title', $content['cta_title'] ?? 'Rasakan Kehangatan dan Cita Rasa Kami') }}" required>
+                           value="{{ old('cta_title', $content['cta_title'] ?? 'Rasakan Cita Rasa Luar Biasa') }}" required>
                 </div>
             </div>
             
             <div class="mb-3">
                 <div class="form-group">
                     <label for="cta_description">Deskripsi CTA *</label>
-                    <textarea class="form-control" id="cta_description" name="cta_description" rows="3" required>{{ old('cta_description', $content['cta_description'] ?? 'Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan dengan filosofi JOSS GANDOS.') }}</textarea>
+                    <textarea class="form-control" id="cta_description" name="cta_description" rows="3" required>{{ old('cta_description', $content['cta_description'] ?? 'Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan dengan hidangan autentik dan pelayanan terbaik dari keluarga Joss Gandos.') }}</textarea>
                 </div>
             </div>
             
@@ -468,22 +513,10 @@
                 </div>
             </div>
         </form>
-        
-        <div class="mt-5 pt-4 border-top">
-            <h5>Informasi Penting:</h5>
-            <ul class="text-muted">
-                <li>Semua data yang diedit di sini akan langsung terupdate di halaman <strong>/about</strong></li>
-                <li>Gambar utama akan disimpan di: <code>storage/app/public/pages/</code></li>
-                <li>Untuk gambar lainnya (founder, team, hero), gunakan URL lengkap</li>
-                <li>Field dengan tanda * wajib diisi</li>
-                <li>Gunakan icon dari FontAwesome (contoh: fas fa-utensils, fas fa-users)</li>
-                <li>Data yang tidak diisi akan menggunakan nilai default dari halaman about</li>
-            </ul>
-        </div>
+
     </div>
 </div>
 
-@push('styles')
 <style>
 .section-header {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -560,187 +593,193 @@
     color: white;
 }
 </style>
-@endpush
 
-@push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Timeline Management
         const timelineContainer = document.getElementById('timeline-container');
         const addTimelineBtn = document.getElementById('add-timeline');
-        let timelineIndex = {{ count($content['timeline'] ?? []) }};
+        let timelineIndex = {{ count($content['timeline'] ?? 8) }};
         
-        addTimelineBtn.addEventListener('click', function() {
-            const newIndex = timelineIndex++;
-            const timelineDiv = document.createElement('div');
-            timelineDiv.className = 'timeline-item card mb-3';
-            timelineDiv.innerHTML = `
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Tahun Baru</h6>
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-timeline">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Tahun *</label>
-                                <input type="text" class="form-control" name="timeline[${newIndex}][year]" required>
+        if (addTimelineBtn) {
+            addTimelineBtn.addEventListener('click', function() {
+                const newIndex = timelineIndex++;
+                const timelineDiv = document.createElement('div');
+                timelineDiv.className = 'timeline-item card mb-3';
+                timelineDiv.innerHTML = `
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Tahun Baru</h6>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-timeline">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Tahun *</label>
+                                    <input type="text" class="form-control" name="timeline[${newIndex}][year]" required>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Judul *</label>
+                                    <input type="text" class="form-control" name="timeline[${newIndex}][title]" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label>Judul *</label>
-                                <input type="text" class="form-control" name="timeline[${newIndex}][title]" required>
-                            </div>
+                        <div class="form-group mt-3">
+                            <label>Item Timeline * (satu per baris)</label>
+                            <textarea class="form-control timeline-items" name="timeline[${newIndex}][items]" rows="3" required></textarea>
+                            <small class="text-muted">Masukkan satu item per baris</small>
                         </div>
                     </div>
-                    <div class="form-group mt-3">
-                        <label>Item Timeline * (satu per baris)</label>
-                        <textarea class="form-control timeline-items" name="timeline[${newIndex}][items]" rows="3" required></textarea>
-                        <small class="text-muted">Masukkan satu item per baris</small>
-                    </div>
-                </div>
-            `;
-            timelineContainer.appendChild(timelineDiv);
-            updateRemoveButtons();
-        });
+                `;
+                timelineContainer.appendChild(timelineDiv);
+                updateRemoveButtons();
+            });
+        }
         
         // Vision Pillars Management
         const visionPillarsContainer = document.getElementById('vision-pillars-container');
         const addVisionPillarBtn = document.getElementById('add-vision-pillar');
-        let visionPillarIndex = {{ count($content['vision_pillars'] ?? []) }};
+        let visionPillarIndex = {{ count($content['vision_pillars'] ?? 4) }};
         
-        addVisionPillarBtn.addEventListener('click', function() {
-            const newIndex = visionPillarIndex++;
-            const pillarDiv = document.createElement('div');
-            pillarDiv.className = 'vision-pillar-item card mb-3';
-            pillarDiv.innerHTML = `
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Pilar Baru</h6>
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-vision-pillar">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Icon *</label>
-                                <input type="text" class="form-control" name="vision_pillars[${newIndex}][icon]" placeholder="fas fa-icon" required>
-                                <small class="text-muted">Contoh: fas fa-utensils</small>
+        if (addVisionPillarBtn) {
+            addVisionPillarBtn.addEventListener('click', function() {
+                const newIndex = visionPillarIndex++;
+                const pillarDiv = document.createElement('div');
+                pillarDiv.className = 'vision-pillar-item card mb-3';
+                pillarDiv.innerHTML = `
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Pilar Baru</h6>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-vision-pillar">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Icon *</label>
+                                    <input type="text" class="form-control" name="vision_pillars[${newIndex}][icon]" placeholder="fas fa-icon" required>
+                                    <small class="text-muted">Contoh: fas fa-utensils</small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Judul *</label>
-                                <input type="text" class="form-control" name="vision_pillars[${newIndex}][title]" required>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Judul *</label>
+                                    <input type="text" class="form-control" name="vision_pillars[${newIndex}][title]" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label>Deskripsi *</label>
-                                <input type="text" class="form-control" name="vision_pillars[${newIndex}][description]" required>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Deskripsi *</label>
+                                    <input type="text" class="form-control" name="vision_pillars[${newIndex}][description]" required>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-            visionPillarsContainer.appendChild(pillarDiv);
-            updateRemoveButtons();
-        });
+                `;
+                visionPillarsContainer.appendChild(pillarDiv);
+                updateRemoveButtons();
+            });
+        }
         
         // Mission Management
         const missionsContainer = document.getElementById('missions-container');
         const addMissionBtn = document.getElementById('add-mission');
-        let missionIndex = {{ count($content['missions'] ?? []) }};
+        let missionIndex = {{ count($content['missions'] ?? 6) }};
         
-        addMissionBtn.addEventListener('click', function() {
-            const newIndex = missionIndex++;
-            const missionDiv = document.createElement('div');
-            missionDiv.className = 'mission-item card mb-3';
-            missionDiv.innerHTML = `
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Misi Baru</h6>
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-mission">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Icon *</label>
-                                <input type="text" class="form-control" name="missions[${newIndex}][icon]" placeholder="fas fa-icon" required>
-                                <small class="text-muted">Contoh: fas fa-leaf</small>
+        if (addMissionBtn) {
+            addMissionBtn.addEventListener('click', function() {
+                const newIndex = missionIndex++;
+                const missionDiv = document.createElement('div');
+                missionDiv.className = 'mission-item card mb-3';
+                missionDiv.innerHTML = `
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Misi Baru</h6>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-mission">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Icon *</label>
+                                    <input type="text" class="form-control" name="missions[${newIndex}][icon]" placeholder="fas fa-icon" required>
+                                    <small class="text-muted">Contoh: fas fa-leaf</small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Judul *</label>
-                                <input type="text" class="form-control" name="missions[${newIndex}][title]" required>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Judul *</label>
+                                    <input type="text" class="form-control" name="missions[${newIndex}][title]" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label>Deskripsi *</label>
-                                <input type="text" class="form-control" name="missions[${newIndex}][description]" required>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Deskripsi *</label>
+                                    <input type="text" class="form-control" name="missions[${newIndex}][description]" required>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-            missionsContainer.appendChild(missionDiv);
-            updateRemoveButtons();
-        });
+                `;
+                missionsContainer.appendChild(missionDiv);
+                updateRemoveButtons();
+            });
+        }
         
         // Team Members Management
         const teamMembersContainer = document.getElementById('team-members-container');
         const addTeamMemberBtn = document.getElementById('add-team-member');
-        let teamMemberIndex = {{ count($content['team_members'] ?? []) }};
+        let teamMemberIndex = {{ count($content['team_members'] ?? 3) }};
         
-        addTeamMemberBtn.addEventListener('click', function() {
-            const newIndex = teamMemberIndex++;
-            const memberDiv = document.createElement('div');
-            memberDiv.className = 'team-member-item card mb-3';
-            memberDiv.innerHTML = `
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Anggota Tim Baru</h6>
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-team-member">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Nama *</label>
-                                <input type="text" class="form-control" name="team_members[${newIndex}][name]" required>
+        if (addTeamMemberBtn) {
+            addTeamMemberBtn.addEventListener('click', function() {
+                const newIndex = teamMemberIndex++;
+                const memberDiv = document.createElement('div');
+                memberDiv.className = 'team-member-item card mb-3';
+                memberDiv.innerHTML = `
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Anggota Tim Baru</h6>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-team-member">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nama *</label>
+                                    <input type="text" class="form-control" name="team_members[${newIndex}][name]" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Posisi *</label>
+                                    <input type="text" class="form-control" name="team_members[${newIndex}][position]" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>URL Gambar *</label>
+                                    <input type="url" class="form-control" name="team_members[${newIndex}][image]" required>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Posisi *</label>
-                                <input type="text" class="form-control" name="team_members[${newIndex}][position]" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>URL Gambar *</label>
-                                <input type="url" class="form-control" name="team_members[${newIndex}][image]" required>
-                            </div>
+                        <div class="form-group mt-3">
+                            <label>Deskripsi *</label>
+                            <textarea class="form-control" name="team_members[${newIndex}][description]" rows="2" required></textarea>
                         </div>
                     </div>
-                    <div class="form-group mt-3">
-                        <label>Deskripsi *</label>
-                        <textarea class="form-control" name="team_members[${newIndex}][description]" rows="2" required></textarea>
-                    </div>
-                </div>
-            `;
-            teamMembersContainer.appendChild(memberDiv);
-            updateRemoveButtons();
-        });
+                `;
+                teamMembersContainer.appendChild(memberDiv);
+                updateRemoveButtons();
+            });
+        }
         
         // Remove buttons functionality
         function updateRemoveButtons() {
@@ -801,86 +840,51 @@
         updateRemoveButtons();
         
         // Preview Button
-        document.getElementById('previewBtn').addEventListener('click', function() {
-            // Open about page in new tab
-            window.open('{{ route("about") }}', '_blank');
-        });
+        const previewBtn = document.getElementById('previewBtn');
+        if (previewBtn) {
+            previewBtn.addEventListener('click', function() {
+                // Open about page in new tab
+                window.open('{{ route("about") }}', '_blank');
+            });
+        }
         
         // Form Validation
         const form = document.getElementById('aboutForm');
-        form.addEventListener('submit', function(e) {
-            // Validate minimum counts
-            const timelineItems = timelineContainer.querySelectorAll('.timeline-item');
-            const visionPillarItems = visionPillarsContainer.querySelectorAll('.vision-pillar-item');
-            const missionItems = missionsContainer.querySelectorAll('.mission-item');
-            const teamMemberItems = teamMembersContainer.querySelectorAll('.team-member-item');
-            
-            if (timelineItems.length < 8) {
-                e.preventDefault();
-                alert('Minimal harus ada 8 item timeline');
-                return false;
-            }
-            
-            if (visionPillarItems.length < 4) {
-                e.preventDefault();
-                alert('Minimal harus ada 4 pilar visi');
-                return false;
-            }
-            
-            if (missionItems.length < 6) {
-                e.preventDefault();
-                alert('Minimal harus ada 6 misi');
-                return false;
-            }
-            
-            if (teamMemberItems.length < 3) {
-                e.preventDefault();
-                alert('Minimal harus ada 3 anggota tim');
-                return false;
-            }
-            
-            return true;
-        });
-        
-        // Auto-save draft (optional)
-        let autoSaveTimer;
-        const formInputs = form.querySelectorAll('input, textarea, select');
-        
-        formInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                clearTimeout(autoSaveTimer);
-                autoSaveTimer = setTimeout(() => {
-                    // Save form data to localStorage
-                    const formData = new FormData(form);
-                    const data = {};
-                    formData.forEach((value, key) => {
-                        data[key] = value;
-                    });
-                    localStorage.setItem('aboutFormDraft', JSON.stringify(data));
-                    console.log('Draft disimpan');
-                }, 2000);
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Validate minimum counts
+                const timelineItems = timelineContainer.querySelectorAll('.timeline-item');
+                const visionPillarItems = visionPillarsContainer.querySelectorAll('.vision-pillar-item');
+                const missionItems = missionsContainer.querySelectorAll('.mission-item');
+                const teamMemberItems = teamMembersContainer.querySelectorAll('.team-member-item');
+                
+                if (timelineItems.length < 1) {
+                    e.preventDefault();
+                    alert('Minimal harus ada 1 item timeline');
+                    return false;
+                }
+                
+                if (visionPillarItems.length < 1) {
+                    e.preventDefault();
+                    alert('Minimal harus ada 1 pilar visi');
+                    return false;
+                }
+                
+                if (missionItems.length < 1) {
+                    e.preventDefault();
+                    alert('Minimal harus ada 1 misi');
+                    return false;
+                }
+                
+                if (teamMemberItems.length < 1) {
+                    e.preventDefault();
+                    alert('Minimal harus ada 1 anggota tim');
+                    return false;
+                }
+                
+                return true;
             });
-        });
-        
-        // Load draft if exists
-        const savedDraft = localStorage.getItem('aboutFormDraft');
-        if (savedDraft) {
-            if (confirm('Ada draft yang tersimpan. Mau dimuat?')) {
-                const data = JSON.parse(savedDraft);
-                Object.keys(data).forEach(key => {
-                    const input = form.querySelector(`[name="${key}"]`);
-                    if (input) {
-                        if (input.type === 'checkbox') {
-                            input.checked = data[key];
-                        } else {
-                            input.value = data[key];
-                        }
-                    }
-                });
-                localStorage.removeItem('aboutFormDraft');
-            }
         }
     });
 </script>
-@endpush
 @endsection

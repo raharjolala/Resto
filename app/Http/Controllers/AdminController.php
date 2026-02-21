@@ -265,14 +265,17 @@ class AdminController extends Controller
         }
         
         try {
-            $galleryItems = Gallery::latest()->get(); // UBAH: $galleries menjadi $galleryItems
+            $galleryItems = Gallery::latest()->get();
         } catch (\Exception $e) {
             $galleryItems = collect([]);
         }
         
-        return view('admin.gallery.index', compact('galleryItems')); // UBAH: $galleries menjadi $galleryItems
+        return view('admin.gallery.index', compact('galleryItems'));
     }
     
+    /**
+     * Store new gallery item
+     */
     public function galleryStore(Request $request)
     {
         if (Auth::user()->role !== 'admin') {
@@ -280,32 +283,60 @@ class AdminController extends Controller
         }
         
         $request->validate([
-            'title' => 'required|string|max:255', // TAMBAHKAN
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // UBAH
-            'description' => 'nullable|string', // TAMBAHKAN
-            'category' => 'nullable|string', // UBAH
+            'title' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+            'category' => 'nullable|string|in:makanan,minuman,fasilitas,acara,interior',
         ]);
-        
+
         try {
-            // Handle image upload
+            // Upload image
             if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->extension();
-                $request->image->storeAs('public/gallery', $imageName);
+                $image = $request->file('image');
                 
-                Gallery::create([
-                    'title' => $request->title,
-                    'image' => $imageName,
+                // Generate unique filename
+                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                
+                // Store image
+                $image->storeAs('public/gallery', $imageName);
+                
+                // Map category from form to database enum
+                $categoryMap = [
+                    'makanan' => 'food',
+                    'minuman' => 'food',
+                    'fasilitas' => 'facility',
+                    'acara' => 'event',
+                    'interior' => 'interior'
+                ];
+                
+                $dbCategory = $categoryMap[$request->category] ?? 'food';
+                
+                // Save to database - PASTIKAN SEMUA KOLOM TERISI
+                $gallery = Gallery::create([
+                    'image_path' => $imageName, // INI PENTING: kolom image_path harus diisi
+                    'caption' => $request->title,
                     'description' => $request->description,
-                    'category' => $request->category,
+                    'category' => $dbCategory,
+                    'sort_order' => 0,
                     'is_active' => true,
                 ]);
                 
-                return redirect()->route('admin.gallery.index')->with('success', 'Gambar berhasil ditambahkan');
+                // Debug: cek data yang tersimpan
+                \Log::info('Gallery item created:', $gallery->toArray());
+                
+                return redirect()->route('admin.gallery.index')
+                    ->with('success', 'Foto berhasil ditambahkan ke gallery!');
             }
             
-            return redirect()->back()->with('error', 'Gagal mengunggah gambar');
+            return redirect()->route('admin.gallery.index')
+                ->with('error', 'Tidak ada file yang diupload.');
+                
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal menambahkan gambar: ' . $e->getMessage());
+            \Log::error('Error adding gallery: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            return redirect()->route('admin.gallery.index')
+                ->with('error', 'Gagal menambahkan gambar: ' . $e->getMessage());
         }
     }
     

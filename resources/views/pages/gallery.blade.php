@@ -3,7 +3,26 @@
 @section('title', 'Galeri - JOSS GANDOS')
 
 @section('content')
- <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+@php
+    // Ambil data dari database atau gunakan data yang sudah dikirim dari controller
+    $galleryData = isset($galleryItems) && $galleryItems->count() > 0 
+        ? $galleryItems 
+        : collect([]);
+    
+    // Format data untuk JavaScript
+    $galleryItemsForJs = $galleryData->map(function($item) {
+        return [
+            'id' => $item->id,
+            'image' => asset('storage/gallery/' . $item->image_path),
+            'title' => $item->caption,
+            'category' => $item->category,
+            'date' => $item->created_at->format('d M Y'),
+            'desc' => $item->description ?? $item->caption,
+        ];
+    })->toArray();
+@endphp
+
+<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
 <section class="elegant-hero">
     <!-- Soft Gradient Background -->
     <div class="elegant-gradient"></div>
@@ -86,50 +105,108 @@
     </div>
 </section>    
 
-    <!-- Gallery Section -->
-    <section class="gallery-section position-relative" id="gallery">
-        <!-- Background Pattern -->
-        <div class="pattern-bg"></div>
+<!-- Gallery Section -->
+<section class="gallery-section position-relative" id="gallery">
+    <!-- Background Pattern -->
+    <div class="pattern-bg"></div>
+    
+    <div class="container position-relative" style="z-index: 1;">
         
-        <div class="container position-relative" style="z-index: 1;">
-            
-            <!-- Section Header -->
-            <div class="section-header text-center mb-5">
-                <h2 class="section-title">Galeri Kami</h2>
-                <div class="section-divider mx-auto"></div>
-                <p class="section-desc mx-auto">
-                    Temukan inspirasi kuliner dan suasana yang menciptakan pengalaman tak terlupakan
-                </p>
-            </div>
-            
-            <!-- Filter Navigation -->
-            <div class="text-center mb-5" id="kategori">
-                <div class="filter-wrapper">
-                    <div class="filter-nav d-inline-flex flex-wrap gap-3">
-                        <button class="filter-btn active" data-filter="all">
-                            <span class="filter-icon"><i class="fas fa-th-large"></i></span>
-                            <span class="filter-label">Semua</span>
-                        </button>
-                        <button class="filter-btn" data-filter="food">
-                            <span class="filter-icon"><i class="fas fa-utensils"></i></span>
-                            <span class="filter-label">Makanan</span>
-                        </button>
-                        <button class="filter-btn" data-filter="interior">
-                            <span class="filter-icon"><i class="fas fa-store"></i></span>
-                            <span class="filter-label">Interior</span>
-                        </button>
-                        <button class="filter-btn" data-filter="events">
-                            <span class="filter-icon"><i class="fas fa-calendar-alt"></i></span>
-                            <span class="filter-label">Acara</span>
-                        </button>
-                    </div>
+        <!-- Section Header -->
+        <div class="section-header text-center mb-5">
+            <h2 class="section-title">Galeri Kami</h2>
+            <div class="section-divider mx-auto"></div>
+            <p class="section-desc mx-auto">
+                Temukan inspirasi kuliner dan suasana yang menciptakan pengalaman tak terlupakan
+            </p>
+        </div>
+        
+        <!-- Filter Navigation -->
+        <div class="text-center mb-5" id="kategori">
+            <div class="filter-wrapper">
+                <div class="filter-nav d-inline-flex flex-wrap gap-3">
+                    <button class="filter-btn active" data-filter="all">
+                        <span class="filter-icon"><i class="fas fa-th-large"></i></span>
+                        <span class="filter-label">Semua</span>
+                        <span class="filter-badge">{{ $galleryData->count() }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="food">
+                        <span class="filter-icon"><i class="fas fa-utensils"></i></span>
+                        <span class="filter-label">Makanan</span>
+                        <span class="filter-badge">{{ $galleryData->where('category', 'food')->count() }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="facility">
+                        <span class="filter-icon"><i class="fas fa-building"></i></span>
+                        <span class="filter-label">Fasilitas</span>
+                        <span class="filter-badge">{{ $galleryData->where('category', 'facility')->count() }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="event">
+                        <span class="filter-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <span class="filter-label">Acara</span>
+                        <span class="filter-badge">{{ $galleryData->where('category', 'event')->count() }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="interior">
+                        <span class="filter-icon"><i class="fas fa-store"></i></span>
+                        <span class="filter-label">Interior</span>
+                        <span class="filter-badge">{{ $galleryData->where('category', 'interior')->count() }}</span>
+                    </button>
                 </div>
             </div>
-            
-            <!-- Gallery Grid -->
-            <div class="row g-4" id="galleryGrid">
+        </div>
+        
+        <!-- Gallery Grid -->
+        <div class="row g-4" id="galleryGrid">
+            @forelse($galleryData->take(6) as $index => $item)
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item->category }}" style="display: block;">
+                    <div class="gallery-card">
+                        <div class="gallery-image-wrapper">
+                            <img src="{{ asset('storage/gallery/' . $item->image_path) }}" 
+                                 alt="{{ $item->caption }}" 
+                                 class="gallery-image"
+                                 loading="lazy">
+                            <div class="image-overlay-gradient"></div>
+                            
+                            <!-- Category Tag -->
+                            <div class="category-tag">
+                                @php
+                                    $categoryIcons = [
+                                        'food' => 'utensils',
+                                        'facility' => 'building',
+                                        'event' => 'calendar-alt',
+                                        'interior' => 'store'
+                                    ];
+                                    $categoryLabels = [
+                                        'food' => 'Makanan',
+                                        'facility' => 'Fasilitas',
+                                        'event' => 'Acara',
+                                        'interior' => 'Interior'
+                                    ];
+                                @endphp
+                                <i class="fas fa-{{ $categoryIcons[$item->category] ?? 'image' }}"></i>
+                                {{ $categoryLabels[$item->category] ?? ucfirst($item->category) }}
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-info">
+                            <h5 class="gallery-title">{{ $item->caption }}</h5>
+                            <p class="gallery-desc">{{ $item->description ?? $item->caption }}</p>
+                            
+                            <div class="gallery-footer">
+                                <span class="gallery-date">
+                                    <i class="far fa-calendar"></i>
+                                    {{ $item->created_at->format('d M Y') }}
+                                </span>
+                                <button class="btn-view-gallery" data-index="{{ $index }}" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+                                    <i class="fas fa-expand-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <!-- Default Gallery Items jika database kosong -->
                 @php
-                    $galleryItems = [
+                    $defaultItems = [
                         [
                             'image' => 'https://restojossgandos.com/img/menu/gulaikepalaikansalmon-copy-1765340584.JPG',
                             'title' => 'Nasi Goreng Spesial JOSS',
@@ -147,7 +224,7 @@
                         [
                             'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                             'title' => 'Acara Pernikahan',
-                            'category' => 'events',
+                            'category' => 'event',
                             'date' => '5 Jan 2024',
                             'desc' => 'Paket catering pernikahan lengkap dengan dekorasi dan pelayanan terbaik'
                         ],
@@ -168,39 +245,19 @@
                         [
                             'image' => 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                             'title' => 'Catering Perusahaan',
-                            'category' => 'events',
+                            'category' => 'event',
                             'date' => '10 Des 2023',
                             'desc' => 'Layanan catering untuk acara kantor, meeting, dan seminar dengan menu variatif'
-                        ],
-                        [
-                            'image' => 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                            'title' => 'Soto Betawi Premium',
-                            'category' => 'food',
-                            'date' => '5 Des 2023',
-                            'desc' => 'Soto khas Jakarta dengan kuah santan gurih, daging sapi empuk dan jeroan pilihan'
-                        ],
-                        [
-                            'image' => 'https://images.unsplash.com/photo-1583394293214-28ded15ee548?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                            'title' => 'Chef in Action',
-                            'category' => 'interior',
-                            'date' => '30 Nov 2023',
-                            'desc' => 'Tim chef profesional kami yang berpengalaman lebih dari 15 tahun di bidang kuliner'
-                        ],
-                        [
-                            'image' => 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                            'title' => 'Tahun Baru 2024',
-                            'category' => 'events',
-                            'date' => '1 Jan 2024',
-                            'desc' => 'Perayaan malam tahun baru dengan live music dan menu spesial untuk keluarga'
                         ]
                     ];
+                    $galleryItemsForJs = $defaultItems;
                 @endphp
                 
-                @foreach($galleryItems as $index => $item)
-                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item['category'] }}" style="display: {{ $index >= 6 ? 'none' : 'block' }};">
+                @foreach($defaultItems as $index => $item)
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item['category'] }}" style="display: block;">
                         <div class="gallery-card">
                             <div class="gallery-image-wrapper">
-                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="gallery-image">
+                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="gallery-image" loading="lazy">
                                 <div class="image-overlay-gradient"></div>
                                 
                                 <!-- Category Tag -->
@@ -227,9 +284,64 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+            @endforelse
             
-            <!-- Load More -->
+            <!-- Hidden items untuk load more (hanya jika ada data lebih dari 6) -->
+            @if($galleryData->count() > 6)
+                @foreach($galleryData->slice(6) as $index => $item)
+                    @php $actualIndex = $index + 6; @endphp
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item->category }}" style="display: none;">
+                        <div class="gallery-card">
+                            <div class="gallery-image-wrapper">
+                                <img src="{{ asset('storage/gallery/' . $item->image_path) }}" 
+                                     alt="{{ $item->caption }}" 
+                                     class="gallery-image"
+                                     loading="lazy">
+                                <div class="image-overlay-gradient"></div>
+                                
+                                <!-- Category Tag -->
+                                <div class="category-tag">
+                                    @php
+                                        $categoryIcons = [
+                                            'food' => 'utensils',
+                                            'facility' => 'building',
+                                            'event' => 'calendar-alt',
+                                            'interior' => 'store'
+                                        ];
+                                        $categoryLabels = [
+                                            'food' => 'Makanan',
+                                            'facility' => 'Fasilitas',
+                                            'event' => 'Acara',
+                                            'interior' => 'Interior'
+                                        ];
+                                    @endphp
+                                    <i class="fas fa-{{ $categoryIcons[$item->category] ?? 'image' }}"></i>
+                                    {{ $categoryLabels[$item->category] ?? ucfirst($item->category) }}
+                                </div>
+                            </div>
+                            
+                            <div class="gallery-info">
+                                <h5 class="gallery-title">{{ $item->caption }}</h5>
+                                <p class="gallery-desc">{{ $item->description ?? $item->caption }}</p>
+                                
+                                <div class="gallery-footer">
+                                    <span class="gallery-date">
+                                        <i class="far fa-calendar"></i>
+                                        {{ $item->created_at->format('d M Y') }}
+                                    </span>
+                                    <button class="btn-view-gallery" data-index="{{ $actualIndex }}" data-bs-toggle="modal" data-bs-target="#lightboxModal">
+                                        <i class="fas fa-expand-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+        
+        <!-- Load More Button (tampil jika ada lebih dari 6 item) -->
+        @if($galleryData->count() > 6)
             <div class="text-center mt-5">
                 <button class="btn-load-more" id="loadMore">
                     <span class="btn-icon"><i class="fas fa-plus-circle"></i></span>
@@ -237,84 +349,84 @@
                     <span class="btn-arrow"><i class="fas fa-arrow-down"></i></span>
                 </button>
             </div>
-        </div>
-    </section>
-    
-    <!-- Lightbox Modal - Premium Design -->
-    <div class="modal fade" id="lightboxModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content bg-dark border-0">
-                <!-- Close Button -->
-                <button type="button" class="lightbox-close" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>
-                </button>
-                
-                <div class="modal-body p-0">
-                    <div class="lightbox-container">
-                        <!-- Main Image Area -->
-                        <div class="lightbox-main">
-                            <div class="image-container">
-                                <img id="modalImage" src="" alt="" class="modal-image">
-                            </div>
-                            
-                            <!-- Navigation Buttons -->
-                            <button class="lightbox-nav-btn prev-btn" id="prevImage">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="lightbox-nav-btn next-btn" id="nextImage">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                            
-                            <!-- Image Counter -->
-                            <div class="image-counter">
-                                <span id="currentImageNum">1</span> / <span id="totalImages">9</span>
-                            </div>
+        @endif
+    </div>
+</section>
+
+<!-- Lightbox Modal - Premium Design -->
+<div class="modal fade" id="lightboxModal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content bg-dark border-0">
+            <!-- Close Button -->
+            <button type="button" class="lightbox-close" data-bs-dismiss="modal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-body p-0">
+                <div class="lightbox-container">
+                    <!-- Main Image Area -->
+                    <div class="lightbox-main">
+                        <div class="image-container">
+                            <img id="modalImage" src="" alt="" class="modal-image">
                         </div>
                         
-                        <!-- Info Sidebar -->
-                        <div class="lightbox-sidebar">
-                            <div class="sidebar-content">
-                                <!-- Category Badge -->
-                                <div class="sidebar-header">
-                                    <div class="category-badge" id="modalCategory">
-                                        <i class="fas fa-store"></i>
-                                        <span>Interior</span>
+                        <!-- Navigation Buttons -->
+                        <button class="lightbox-nav-btn prev-btn" id="prevImage">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="lightbox-nav-btn next-btn" id="nextImage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <!-- Image Counter -->
+                        <div class="image-counter">
+                            <span id="currentImageNum">1</span> / <span id="totalImages">9</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Info Sidebar -->
+                    <div class="lightbox-sidebar">
+                        <div class="sidebar-content">
+                            <!-- Category Badge -->
+                            <div class="sidebar-header">
+                                <div class="category-badge" id="modalCategory">
+                                    <i class="fas fa-store"></i>
+                                    <span>Interior</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Title & Description -->
+                            <div class="sidebar-info">
+                                <h3 id="modalTitle" class="modal-title-text">Interior Restoran</h3>
+                                <p id="modalDesc" class="modal-description">
+                                    Suasana nyaman dan modern dengan kapasitas 100 orang untuk acara spesial Anda
+                                </p>
+                            </div>
+                            
+                            <!-- Meta Info -->
+                            <div class="sidebar-meta">
+                                <div class="meta-row">
+                                    <div class="meta-item">
+                                        <i class="far fa-calendar"></i>
+                                        <span id="modalDate">10 Jan 2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Photo Gallery Section -->
+                            <div class="sidebar-photos">
+                                <div class="photos-header">
+                                    <div class="photos-title">
+                                        <i class="fas fa-images"></i>
+                                        <span>GALERI FOTO</span>
+                                    </div>
+                                    <div class="photos-counter">
+                                        <span id="currentImageNum2">2</span> / <span id="totalImages2">9</span>
                                     </div>
                                 </div>
                                 
-                                <!-- Title & Description -->
-                                <div class="sidebar-info">
-                                    <h3 id="modalTitle" class="modal-title-text">Interior Restoran</h3>
-                                    <p id="modalDesc" class="modal-description">
-                                        Suasana nyaman dan modern dengan kapasitas 100 orang untuk acara spesial Anda
-                                    </p>
-                                </div>
-                                
-                                <!-- Meta Info -->
-                                <div class="sidebar-meta">
-                                    <div class="meta-row">
-                                        <div class="meta-item">
-                                            <i class="far fa-calendar"></i>
-                                            <span id="modalDate">10 Jan 2024</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Photo Gallery Section -->
-                                <div class="sidebar-photos">
-                                    <div class="photos-header">
-                                        <div class="photos-title">
-                                            <i class="fas fa-images"></i>
-                                            <span>GALERI FOTO</span>
-                                        </div>
-                                        <div class="photos-counter">
-                                            <span id="currentImageNum2">2</span> / <span id="totalImages2">9</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="thumbnails-grid" id="thumbnailsGrid">
-                                        <!-- Will be populated by JS -->
-                                    </div>
+                                <div class="thumbnails-grid" id="thumbnailsGrid">
+                                    <!-- Will be populated by JS -->
                                 </div>
                             </div>
                         </div>
@@ -323,6 +435,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('styles')
@@ -948,8 +1061,19 @@
         color: white;
     }
     
-    .filter-btn .filter-badge {
-        display: none;
+    .filter-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 3px 8px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: white;
+        margin-left: 5px;
+    }
+    
+    .filter-btn:not(.active) .filter-badge {
+        background: rgba(139, 0, 0, 0.1);
+        color: var(--red-primary);
     }
     
     /* Gallery Card */
@@ -1781,7 +1905,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadMoreBtn = document.getElementById('loadMore');
     
     let currentIndex = 0;
-    let allItems = @json($galleryItems);
+    let allItems = @json($galleryItemsForJs);
     let isExpanded = false;
     
     // Set total images
@@ -1811,55 +1935,59 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Update load more button visibility
+            // Update load more button
             updateLoadMoreButton();
         });
     });
     
     // Load More Toggle functionality
-    loadMoreBtn.addEventListener('click', function() {
-        isExpanded = !isExpanded;
-        const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-        
-        if (isExpanded) {
-            // Show all items
-            galleryItems.forEach((item, index) => {
-                if (activeFilter === 'all' || item.dataset.category === activeFilter) {
-                    item.style.display = 'block';
-                    item.style.animation = 'fadeIn 0.6s ease forwards';
-                    item.style.animationDelay = (index * 0.05) + 's';
-                }
-            });
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            isExpanded = !isExpanded;
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
             
-            // Update button
-            loadMoreBtn.classList.add('show-less');
-            loadMoreBtn.querySelector('.btn-text').textContent = 'Tampilkan Lebih Sedikit';
-            loadMoreBtn.querySelector('.btn-icon i').className = 'fas fa-minus-circle';
-        } else {
-            // Show only first 6 items
-            let visibleCount = 0;
-            galleryItems.forEach((item, index) => {
-                if (activeFilter === 'all' || item.dataset.category === activeFilter) {
-                    if (visibleCount < 6) {
+            if (isExpanded) {
+                // Show all items
+                galleryItems.forEach((item, index) => {
+                    if (activeFilter === 'all' || item.dataset.category === activeFilter) {
                         item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
+                        item.style.animation = 'fadeIn 0.6s ease forwards';
+                        item.style.animationDelay = (index * 0.05) + 's';
                     }
-                    visibleCount++;
-                }
-            });
-            
-            // Update button
-            loadMoreBtn.classList.remove('show-less');
-            loadMoreBtn.querySelector('.btn-text').textContent = 'Muat Lebih Banyak';
-            loadMoreBtn.querySelector('.btn-icon i').className = 'fas fa-plus-circle';
-            
-            // Scroll to top of gallery
-            document.querySelector('.gallery-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
+                });
+                
+                // Update button
+                loadMoreBtn.classList.add('show-less');
+                loadMoreBtn.querySelector('.btn-text').textContent = 'Tampilkan Lebih Sedikit';
+                loadMoreBtn.querySelector('.btn-icon i').className = 'fas fa-minus-circle';
+            } else {
+                // Show only first 6 items
+                let visibleCount = 0;
+                galleryItems.forEach((item, index) => {
+                    if (activeFilter === 'all' || item.dataset.category === activeFilter) {
+                        if (visibleCount < 6) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                        visibleCount++;
+                    }
+                });
+                
+                // Update button
+                loadMoreBtn.classList.remove('show-less');
+                loadMoreBtn.querySelector('.btn-text').textContent = 'Muat Lebih Banyak';
+                loadMoreBtn.querySelector('.btn-icon i').className = 'fas fa-plus-circle';
+                
+                // Scroll to top of gallery
+                document.querySelector('.gallery-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
     
     function updateLoadMoreButton() {
+        if (!loadMoreBtn) return;
+        
         const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
         let totalFilteredItems = 0;
         
@@ -1875,9 +2003,6 @@ document.addEventListener('DOMContentLoaded', function() {
             loadMoreBtn.style.display = 'inline-flex';
         }
     }
-    
-    // Initial load more button state
-    updateLoadMoreButton();
     
     // Lightbox functionality
     function generateThumbnails() {
@@ -1918,13 +2043,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update category badge
         const categoryIcons = {
             'food': 'utensils',
-            'interior': 'store',
-            'events': 'calendar-alt'
+            'facility': 'building',
+            'event': 'calendar-alt',
+            'interior': 'store'
+        };
+        const categoryLabels = {
+            'food': 'Makanan',
+            'facility': 'Fasilitas',
+            'event': 'Acara',
+            'interior': 'Interior'
         };
         const icon = categoryIcons[item.category] || 'image';
+        const label = categoryLabels[item.category] || item.category.charAt(0).toUpperCase() + item.category.slice(1);
+        
         modalCategory.innerHTML = `
             <i class="fas fa-${icon}"></i>
-            <span>${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</span>
+            <span>${label}</span>
         `;
         
         // Update counters
@@ -1937,24 +2071,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    prevBtn.addEventListener('click', function() {
-        currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
-        updateModal();
-    });
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+            updateModal();
+        });
+    }
     
-    nextBtn.addEventListener('click', function() {
-        currentIndex = (currentIndex + 1) % allItems.length;
-        updateModal();
-    });
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex + 1) % allItems.length;
+            updateModal();
+        });
+    }
     
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         const modal = document.getElementById('lightboxModal');
         if (modal && modal.classList.contains('show')) {
             if (e.key === 'ArrowLeft') {
-                prevBtn.click();
+                if (prevBtn) prevBtn.click();
             } else if (e.key === 'ArrowRight') {
-                nextBtn.click();
+                if (nextBtn) nextBtn.click();
             } else if (e.key === 'Escape') {
                 const closeBtn = modal.querySelector('.lightbox-close');
                 if (closeBtn) closeBtn.click();
