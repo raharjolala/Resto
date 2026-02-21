@@ -621,115 +621,12 @@ class AdminController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-<<<<<<< HEAD
-    
-    // =============== PERBAIKAN DI SINI ===============
-    public function galleryIndex()
-    {
-        if (Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Akses ditolak.');
-        }
-        
-        try {
-            $galleryItems = Gallery::latest()->get();
-        } catch (\Exception $e) {
-            $galleryItems = collect([]);
-        }
-        
-        return view('admin.gallery.index', compact('galleryItems'));
-    }
-    
-    /**
-     * Store new gallery item
-     */
-    public function galleryStore(Request $request)
-    {
-        if (Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Akses ditolak.');
-        }
-        
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
-            'category' => 'nullable|string|in:makanan,minuman,fasilitas,acara,interior',
-        ]);
-
-        try {
-            // Upload image
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                
-                // Generate unique filename
-                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                
-                // Store image
-                $image->storeAs('public/gallery', $imageName);
-                
-                // Map category from form to database enum
-                $categoryMap = [
-                    'makanan' => 'food',
-                    'minuman' => 'food',
-                    'fasilitas' => 'facility',
-                    'acara' => 'event',
-                    'interior' => 'interior'
-                ];
-                
-                $dbCategory = $categoryMap[$request->category] ?? 'food';
-                
-                // Save to database - PASTIKAN SEMUA KOLOM TERISI
-                $gallery = Gallery::create([
-                    'image_path' => $imageName, // INI PENTING: kolom image_path harus diisi
-                    'caption' => $request->title,
-                    'description' => $request->description,
-                    'category' => $dbCategory,
-                    'sort_order' => 0,
-                    'is_active' => true,
-                ]);
-                
-                // Debug: cek data yang tersimpan
-                \Log::info('Gallery item created:', $gallery->toArray());
-                
-                return redirect()->route('admin.gallery.index')
-                    ->with('success', 'Foto berhasil ditambahkan ke gallery!');
-            }
-            
-            return redirect()->route('admin.gallery.index')
-                ->with('error', 'Tidak ada file yang diupload.');
-                
-        } catch (\Exception $e) {
-            \Log::error('Error adding gallery: ' . $e->getMessage());
-            \Log::error('Stack trace: ' . $e->getTraceAsString());
-            
-            return redirect()->route('admin.gallery.index')
-                ->with('error', 'Gagal menambahkan gambar: ' . $e->getMessage());
-        }
-    }
-    
-    public function galleryDestroy($id)
-    {
-        if (Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Akses ditolak.');
-        }
-        
-        try {
-            $gallery = Gallery::findOrFail($id);
-            $gallery->delete();
-            return redirect()->route('admin.gallery.index')->with('success', 'Gambar berhasil dihapus');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.gallery.index')->with('error', 'Gagal menghapus gambar');
-        }
-    }
-    // =============== END PERBAIKAN ===============
-    
-=======
 
     // ==================== BRANCHES MANAGEMENT ====================
 
     /**
      * Display branches list
      */
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     public function branchesIndex()
     {
         try {
@@ -946,8 +843,6 @@ class AdminController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-<<<<<<< HEAD
-=======
 
     // ==================== SETTINGS MANAGEMENT ====================
 
@@ -1000,5 +895,4 @@ class AdminController extends Controller
                 ->withInput();
         }
     }
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
 }

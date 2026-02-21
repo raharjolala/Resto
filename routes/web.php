@@ -10,21 +10,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
 
-/*
-|--------------------------------------------------------------------------
-<<<<<<< HEAD
-| PUBLIC WEBSITE ROUTES
-|--------------------------------------------------------------------------
-*/
 
-=======
-| Web Routes
-|--------------------------------------------------------------------------
-*/
 
-// ==================== PUBLIC WEBSITE ROUTES ====================
-
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -46,15 +33,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| ADMIN LOGIN ROUTES (GUEST)
-|--------------------------------------------------------------------------
-*/
-=======
-// ==================== ADMIN LOGIN ROUTES ====================
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
 
 Route::get('/admin/login', function () {
     if (auth()->check() && auth()->user()?->role === 'admin') {
@@ -65,16 +44,6 @@ Route::get('/admin/login', function () {
 
 Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| ADMIN PROTECTED ROUTES
-|--------------------------------------------------------------------------
-*/
-=======
-// ==================== ADMIN PROTECTED ROUTES ====================
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
-
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     
     // Dashboard
@@ -84,15 +53,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Logout
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | PAGE MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== PAGE MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     
     // Home Page Edit
     Route::get('/pages/home/edit', [PageController::class, 'editHome'])->name('pages.home.edit');
@@ -102,23 +63,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/pages/about/edit', [PageController::class, 'editAbout'])->name('pages.about.edit');
     Route::post('/pages/about/update', [PageController::class, 'updateAbout'])->name('pages.about.update');
     
-<<<<<<< HEAD
-    // Contact Page Edit - GUNAKAN CONTROLLER BARU
-    Route::get('/pages/contact/edit', [App\Http\Controllers\Admin\PageContactController::class, 'edit'])->name('pages.contact.edit');
-    Route::post('/pages/contact/update', [App\Http\Controllers\Admin\PageContactController::class, 'update'])->name('pages.contact.update');
-    
-    /*
-    |--------------------------------------------------------------------------
-    | MENU MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
     // Contact Page Edit
     Route::get('/pages/contact/edit', [PageController::class, 'editContact'])->name('pages.contact.edit');
     Route::post('/pages/contact/update', [PageController::class, 'updateContact'])->name('pages.contact.update');
     
     // ===== MENU MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     Route::get('/menu', [AdminController::class, 'menuIndex'])->name('menu.index');
     Route::get('/menu/create', [AdminController::class, 'menuCreate'])->name('menu.create');
     Route::post('/menu', [AdminController::class, 'menuStore'])->name('menu.store');
@@ -126,15 +75,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/menu/{id}', [AdminController::class, 'menuUpdate'])->name('menu.update');
     Route::delete('/menu/{id}', [AdminController::class, 'menuDestroy'])->name('menu.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | PROMOTION MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== PROMOTION MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     Route::get('/promotions', [AdminController::class, 'promotionsIndex'])->name('promotions.index');
     Route::get('/promotions/create', [AdminController::class, 'promotionsCreate'])->name('promotions.create');
     Route::post('/promotions', [AdminController::class, 'promotionsStore'])->name('promotions.store');
@@ -142,93 +83,33 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/promotions/{id}', [AdminController::class, 'promotionsUpdate'])->name('promotions.update');
     Route::delete('/promotions/{id}', [AdminController::class, 'promotionsDestroy'])->name('promotions.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | GALLERY MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== GALLERY MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('gallery.index');
     Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('gallery.store');
     Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('gallery.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | RESERVATIONS MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== RESERVATIONS MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     Route::get('/reservations', [AdminController::class, 'reservationsIndex'])->name('reservations.index');
     Route::put('/reservations/{id}', [AdminController::class, 'reservationUpdate'])->name('reservations.update');
     Route::delete('/reservations/{id}', [AdminController::class, 'reservationDestroy'])->name('reservations.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | BRANCHES MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== BRANCHES MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     Route::get('/branches', [AdminController::class, 'branchesIndex'])->name('branches.index');
     Route::post('/branches', [AdminController::class, 'branchStore'])->name('branches.store');
     Route::put('/branches/{id}', [AdminController::class, 'branchUpdate'])->name('branches.update');
     Route::delete('/branches/{id}', [AdminController::class, 'branchDestroy'])->name('branches.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | USERS MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/users', [AdminController::class, 'usersIndex'])->name('users.index');
-    Route::put('/users/{id}', [AdminController::class, 'userUpdate'])->name('users.update');
-    
-    /*
-    |--------------------------------------------------------------------------
-    | REVIEWS MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== USERS MANAGEMENT =====
-    Route::get('/users', [AdminController::class, 'usersIndex'])->name('users.index');
-    Route::put('/users/{id}', [AdminController::class, 'userUpdate'])->name('users.update');
-    
-    // ===== REVIEWS MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     Route::get('/reviews', [AdminController::class, 'reviewsIndex'])->name('reviews.index');
     Route::put('/reviews/{id}', [AdminController::class, 'reviewUpdate'])->name('reviews.update');
     Route::delete('/reviews/{id}', [AdminController::class, 'reviewDestroy'])->name('reviews.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | SETTINGS
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== SETTINGS =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
     Route::get('/settings', [AdminController::class, 'editSettings'])->name('settings.edit');
     Route::post('/settings', [AdminController::class, 'updateSettings'])->name('settings.update');
 });
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| FALLBACK/COMPATIBILITY ROUTES
-|--------------------------------------------------------------------------
-*/
-=======
-// ==================== FALLBACK/COMPATIBILITY ROUTES ====================
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
 
 // Redirect /login to admin login
 Route::get('/login', function () {

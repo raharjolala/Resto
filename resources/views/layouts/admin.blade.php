@@ -807,17 +807,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-<<<<<<< HEAD
+
                 <a href="{{ route('admin.pages.contact.edit') }}" class="nav-link {{ request()->routeIs('admin.pages.contact.*') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-address-book"></i>
                     <p>Edit Contact</p>
                 </a>
-=======
                     <a class="nav-link {{ request()->is('admin/pages/contact') ? 'active' : '' }}" href="{{ route('admin.pages.contact.edit') }}">
                         <i class="fas fa-address-book"></i>
                         <span>Edit Kontak</span>
                     </a>
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/reservations*') ? 'active' : '' }}" href="{{ route('admin.reservations.index') }}">

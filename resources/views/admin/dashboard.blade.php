@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', content: 'Admin Dashboard')
+@section('title', 'Admin Dashboard')
 @section('page-title', 'Dashboard')
 
 @section('styles')
@@ -656,231 +656,231 @@
     <div class="dashboard-container">
         <!-- Stats Cards Row -->
         <div class="row g-4 mb-4">
-        <div class="col-xl-3 col-md-6">
-            <div class="modern-stat-card gradient-purple fade-in-up">
-                <div class="stat-icon-modern float-animation">
-                    <i class="fas fa-utensils"></i>
+            <div class="col-xl-3 col-md-6">
+                <div class="modern-stat-card gradient-purple fade-in-up">
+                    <div class="stat-icon-modern float-animation">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-number-modern">{{ $totalMenu ?? 0 }}</div>
+                    <div class="stat-label-modern">Total Menu</div>
                 </div>
-                <div class="stat-number-modern">{{ $totalMenu }}</div>
-                <div class="stat-label-modern">Total Menu</div>
-            </div>
-        </div>
-        
-        <div class="col-xl-3 col-md-6">
-            <div class="modern-stat-card gradient-pink fade-in-up delay-1">
-                <div class="stat-icon-modern float-animation" style="animation-delay: 0.5s;">
-                    <i class="fas fa-calendar-check"></i>
-                </div>
-                <div class="stat-number-modern">{{ $totalReservations }}</div>
-                <div class="stat-label-modern">Reservasi</div>
-            </div>
-        </div>
-        
-        <div class="col-xl-3 col-md-6">
-            <div class="modern-stat-card gradient-blue fade-in-up delay-2">
-                <div class="stat-icon-modern float-animation" style="animation-delay: 1s;">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-number-modern">{{ $totalUsers }}</div>
-                <div class="stat-label-modern">Pengguna</div>
-            </div>
-        </div>
-        
-        <div class="col-xl-3 col-md-6">
-            <div class="modern-stat-card gradient-green fade-in-up delay-3">
-                <div class="stat-icon-modern float-animation" style="animation-delay: 1.5s;">
-                    <i class="fas fa-store-alt"></i>
-                </div>
-                <div class="stat-number-modern">{{ $totalBranches }}</div>
-                <div class="stat-label-modern">Cabang</div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Main Content Row -->
-    <div class="row g-4">
-        <!-- Recent Reservations -->
-        <div class="col-lg-8">
-            <div class="enhanced-card fade-in-up delay-1">
-                <div class="card-header-modern">
-                    <h2>
-                        <i class="fas fa-calendar-alt"></i>
-                        Reservasi Terbaru
-                    </h2>
-                    <a href="{{ route('admin.reservations.index') }}" class="btn btn-modern">
-                        <i class="fas fa-eye me-2"></i> Lihat Semua
-                    </a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-modern">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-user me-2"></i>Pelanggan</th>
-                                <th><i class="fas fa-calendar me-2"></i>Tanggal</th>
-                                <th><i class="fas fa-clock me-2"></i>Waktu</th>
-                                <th><i class="fas fa-user-friends me-2"></i>Tamu</th>
-                                <th><i class="fas fa-info-circle me-2"></i>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($recentReservations as $reservation)
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center gap-3">
-                                        <div class="user-avatar-modern">
-                                            {{ strtoupper(substr($reservation->customer_name ?? $reservation->name ?? 'A', 0, 1)) }}
-                                        </div>
-                                        <div>
-                                            <div class="fw-bold text-dark">{{ $reservation->customer_name ?? $reservation->name }}</div>
-                                            <small class="text-muted">{{ $reservation->email ?? '' }}</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="date-display-modern">
-                                        <span class="date-day-modern">{{ \Carbon\Carbon::parse($reservation->date ?? $reservation->reservation_date)->format('d') }}</span>
-                                        <span class="date-month-modern">{{ \Carbon\Carbon::parse($reservation->date ?? $reservation->reservation_date)->format('M Y') }}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="time-badge-modern">
-                                        <i class="fas fa-clock me-1"></i>
-                                        {{ $reservation->time ?? '-' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="people-count-modern">
-                                        <i class="fas fa-users"></i>
-                                        <strong>{{ $reservation->people ?? $reservation->guests ?? '0' }}</strong>
-                                        <span class="text-muted">orang</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    @if($reservation->status == 'pending')
-                                        <span class="status-badge-modern status-pending">
-                                            <i class="fas fa-hourglass-half"></i>
-                                            Pending
-                                        </span>
-                                    @elseif($reservation->status == 'confirmed')
-                                        <span class="status-badge-modern status-confirmed">
-                                            <i class="fas fa-check-circle"></i>
-                                            Confirmed
-                                        </span>
-                                    @elseif($reservation->status == 'cancelled')
-                                        <span class="status-badge-modern status-cancelled">
-                                            <i class="fas fa-times-circle"></i>
-                                            Cancelled
-                                        </span>
-                                    @else
-                                        <span class="status-badge-modern" style="background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); color: #475569;">
-                                            {{ $reservation->status }}
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5">
-                                    <div class="empty-state-modern">
-                                        <div class="empty-icon">
-                                            <i class="fas fa-calendar-times"></i>
-                                        </div>
-                                        <h5>Belum Ada Reservasi</h5>
-                                        <p>Reservasi baru akan muncul di sini</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <!-- Quick Actions -->
-            <div class="quick-actions-modern fade-in-up delay-2 mb-4">
-                <h2>
-                    <i class="fas fa-bolt"></i>
-                    Aksi Cepat
-                </h2>
-                
-                <a href="{{ route('admin.menu.create') }}" class="action-btn-modern btn-gradient-1">
-                    <div class="action-icon-modern">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                    <div class="action-text">
-                        <div class="action-title">Tambah Menu</div>
-                        <div class="action-subtitle">Buat menu baru</div>
-                    </div>
-                </a>
-                
-                <a href="{{ route('admin.reservations.index') }}" class="action-btn-modern btn-gradient-2">
-                    <div class="action-icon-modern">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <div class="action-text">
-                        <div class="action-title">Kelola Reservasi</div>
-                        <div class="action-subtitle">Lihat & atur reservasi</div>
-                    </div>
-                </a>
-                
-                <a href="{{ route('admin.gallery.index') }}" class="action-btn-modern btn-gradient-3">
-                    <div class="action-icon-modern">
-                        <i class="fas fa-images"></i>
-                    </div>
-                    <div class="action-text">
-                        <div class="action-title">Kelola Galeri</div>
-                        <div class="action-subtitle">Upload foto baru</div>
-                    </div>
-                </a>
-                
-                <a href="{{ route('admin.users.index') }}" class="action-btn-modern btn-gradient-4">
-                    <div class="action-icon-modern">
-                        <i class="fas fa-user-cog"></i>
-                    </div>
-                    <div class="action-text">
-                        <div class="action-title">Kelola Pengguna</div>
-                        <div class="action-subtitle">Manajemen user</div>
-                    </div>
-                </a>
             </div>
             
-            <!-- System Info -->
-            <div class="system-info-modern fade-in-up delay-3">
-                <h2>
-                    <i class="fas fa-server"></i>
-                    Info Sistem
-                </h2>
-                
-                <div class="info-item-modern">
-                    <div class="info-label-modern">Status Website</div>
-                    <div class="info-value-modern d-flex justify-content-between align-items-center">
-                        <span>Berjalan Normal</span>
-                        <span class="status-online">
-                            <span class="status-dot"></span>
-                            Online
-                        </span>
+            <div class="col-xl-3 col-md-6">
+                <div class="modern-stat-card gradient-pink fade-in-up delay-1">
+                    <div class="stat-icon-modern float-animation" style="animation-delay: 0.5s;">
+                        <i class="fas fa-calendar-check"></i>
                     </div>
+                    <div class="stat-number-modern">{{ $totalReservations ?? 0 }}</div>
+                    <div class="stat-label-modern">Reservasi</div>
                 </div>
-                
-                <div class="info-item-modern">
-                    <div class="info-label-modern">Versi Sistem</div>
-                    <div class="info-value-modern">v1.2.0</div>
+            </div>
+            
+            <div class="col-xl-3 col-md-6">
+                <div class="modern-stat-card gradient-blue fade-in-up delay-2">
+                    <div class="stat-icon-modern float-animation" style="animation-delay: 1s;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number-modern">{{ $totalUsers ?? 0 }}</div>
+                    <div class="stat-label-modern">Pengguna</div>
                 </div>
-                
-                <div class="info-item-modern">
-                    <div class="info-label-modern">Server Time</div>
-                    <div class="info-value-modern" id="server-time">{{ now()->format('H:i:s') }}</div>
-                </div>
-                
-                <div class="info-item-modern">
-                    <div class="info-label-modern">Terakhir Diperbarui</div>
-                    <div class="info-value-modern">{{ now()->format('d F Y') }}</div>
+            </div>
+            
+            <div class="col-xl-3 col-md-6">
+                <div class="modern-stat-card gradient-green fade-in-up delay-3">
+                    <div class="stat-icon-modern float-animation" style="animation-delay: 1.5s;">
+                        <i class="fas fa-store-alt"></i>
+                    </div>
+                    <div class="stat-number-modern">{{ $totalBranches ?? 0 }}</div>
+                    <div class="stat-label-modern">Cabang</div>
                 </div>
             </div>
         </div>
+        
+        <!-- Main Content Row -->
+        <div class="row g-4">
+            <!-- Recent Reservations -->
+            <div class="col-lg-8">
+                <div class="enhanced-card fade-in-up delay-1">
+                    <div class="card-header-modern">
+                        <h2>
+                            <i class="fas fa-calendar-alt"></i>
+                            Reservasi Terbaru
+                        </h2>
+                        <a href="{{ route('admin.reservations.index') }}" class="btn btn-modern">
+                            <i class="fas fa-eye me-2"></i> Lihat Semua
+                        </a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-modern">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-user me-2"></i>Pelanggan</th>
+                                    <th><i class="fas fa-calendar me-2"></i>Tanggal</th>
+                                    <th><i class="fas fa-clock me-2"></i>Waktu</th>
+                                    <th><i class="fas fa-user-friends me-2"></i>Tamu</th>
+                                    <th><i class="fas fa-info-circle me-2"></i>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($recentReservations ?? [] as $reservation)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="user-avatar-modern">
+                                                {{ strtoupper(substr($reservation->customer_name ?? $reservation->name ?? 'A', 0, 1)) }}
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold text-dark">{{ $reservation->customer_name ?? $reservation->name ?? '-' }}</div>
+                                                <small class="text-muted">{{ $reservation->email ?? '' }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="date-display-modern">
+                                            <span class="date-day-modern">{{ \Carbon\Carbon::parse($reservation->reservation_date ?? $reservation->date ?? now())->format('d') }}</span>
+                                            <span class="date-month-modern">{{ \Carbon\Carbon::parse($reservation->reservation_date ?? $reservation->date ?? now())->format('M Y') }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="time-badge-modern">
+                                            <i class="fas fa-clock me-1"></i>
+                                            {{ $reservation->reservation_time ?? $reservation->time ?? '-' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="people-count-modern">
+                                            <i class="fas fa-users"></i>
+                                            <strong>{{ $reservation->guest_count ?? $reservation->guests ?? $reservation->people ?? '0' }}</strong>
+                                            <span class="text-muted">orang</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if(($reservation->status ?? '') == 'pending')
+                                            <span class="status-badge-modern status-pending">
+                                                <i class="fas fa-hourglass-half"></i>
+                                                Pending
+                                            </span>
+                                        @elseif(($reservation->status ?? '') == 'confirmed')
+                                            <span class="status-badge-modern status-confirmed">
+                                                <i class="fas fa-check-circle"></i>
+                                                Confirmed
+                                            </span>
+                                        @elseif(($reservation->status ?? '') == 'cancelled')
+                                            <span class="status-badge-modern status-cancelled">
+                                                <i class="fas fa-times-circle"></i>
+                                                Cancelled
+                                            </span>
+                                        @else
+                                            <span class="status-badge-modern" style="background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); color: #475569;">
+                                                {{ $reservation->status ?? '-' }}
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="empty-state-modern">
+                                            <div class="empty-icon">
+                                                <i class="fas fa-calendar-times"></i>
+                                            </div>
+                                            <h5>Belum Ada Reservasi</h5>
+                                            <p>Reservasi baru akan muncul di sini</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Quick Actions -->
+                <div class="quick-actions-modern fade-in-up delay-2 mb-4">
+                    <h2>
+                        <i class="fas fa-bolt"></i>
+                        Aksi Cepat
+                    </h2>
+                    
+                    <a href="{{ route('admin.menu.create') }}" class="action-btn-modern btn-gradient-1">
+                        <div class="action-icon-modern">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="action-text">
+                            <div class="action-title">Tambah Menu</div>
+                            <div class="action-subtitle">Buat menu baru</div>
+                        </div>
+                    </a>
+                    
+                    <a href="{{ route('admin.reservations.index') }}" class="action-btn-modern btn-gradient-2">
+                        <div class="action-icon-modern">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="action-text">
+                            <div class="action-title">Kelola Reservasi</div>
+                            <div class="action-subtitle">Lihat & atur reservasi</div>
+                        </div>
+                    </a>
+                    
+                    <a href="{{ route('admin.gallery.index') }}" class="action-btn-modern btn-gradient-3">
+                        <div class="action-icon-modern">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="action-text">
+                            <div class="action-title">Kelola Galeri</div>
+                            <div class="action-subtitle">Upload foto baru</div>
+                        </div>
+                    </a>
+                    
+                    <a href="{{ route('admin.users.index') }}" class="action-btn-modern btn-gradient-4">
+                        <div class="action-icon-modern">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <div class="action-text">
+                            <div class="action-title">Kelola Pengguna</div>
+                            <div class="action-subtitle">Manajemen user</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- System Info -->
+                <div class="system-info-modern fade-in-up delay-3">
+                    <h2>
+                        <i class="fas fa-server"></i>
+                        Info Sistem
+                    </h2>
+                    
+                    <div class="info-item-modern">
+                        <div class="info-label-modern">Status Website</div>
+                        <div class="info-value-modern d-flex justify-content-between align-items-center">
+                            <span>Berjalan Normal</span>
+                            <span class="status-online">
+                                <span class="status-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item-modern">
+                        <div class="info-label-modern">Versi Sistem</div>
+                        <div class="info-value-modern">v1.2.0</div>
+                    </div>
+                    
+                    <div class="info-item-modern">
+                        <div class="info-label-modern">Server Time</div>
+                        <div class="info-value-modern" id="server-time">{{ now()->format('H:i:s') }}</div>
+                    </div>
+                    
+                    <div class="info-item-modern">
+                        <div class="info-label-modern">Terakhir Diperbarui</div>
+                        <div class="info-value-modern">{{ now()->format('d F Y') }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -923,7 +923,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Animate stat numbers
         document.querySelectorAll('.stat-number-modern').forEach(element => {
-            const endValue = parseInt(element.textContent);
+            const endValue = parseInt(element.textContent) || 0;
             element.textContent = '0';
             animateValue(element, 0, endValue, 1500);
         });
