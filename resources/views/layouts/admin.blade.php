@@ -14,11 +14,15 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- DataTables -->
+    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
     
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     
     @stack('styles')
     
@@ -176,6 +180,7 @@
             font-size: 1.1rem;
             color: white;
             transition: all var(--transition-speed) ease;
+            z-index: 1;
         }
         
         .nav-link.active i {
@@ -185,6 +190,7 @@
         .nav-link span {
             font-weight: 500;
             font-size: 0.95rem;
+            z-index: 1;
         }
         
         /* Logout Button dengan Warna Merah Gelap */
@@ -393,6 +399,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .card-header h2 {
@@ -430,6 +438,7 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 5px 15px rgba(198, 40, 40, 0.3);
+            text-decoration: none;
         }
         
         .btn-admin:hover {
@@ -450,6 +459,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
         }
         
         .btn-admin-outline:hover {
@@ -457,6 +467,12 @@
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(198, 40, 40, 0.3);
+        }
+        
+        .btn-group-sm .btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
         }
         
         /* Alerts dengan Warna Merah */
@@ -480,10 +496,149 @@
             border-left: 4px solid var(--primary-color);
         }
         
+        .alert-info {
+            background: rgba(23, 162, 184, 0.1);
+            color: #0c5460;
+            border-left: 4px solid var(--info-color);
+        }
+        
+        /* Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .table thead th {
+            border-bottom: 2px solid rgba(198, 40, 40, 0.2);
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 15px 12px;
+        }
+        
+        .table tbody td {
+            padding: 15px 12px;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(198, 40, 40, 0.02);
+        }
+        
+        .badge {
+            padding: 6px 12px;
+            font-weight: 500;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .badge.bg-success {
+            background: linear-gradient(135deg, #28a745, #218838) !important;
+        }
+        
+        .badge.bg-danger {
+            background: linear-gradient(135deg, #dc3545, #c82333) !important;
+        }
+        
+        .badge.bg-warning {
+            background: linear-gradient(135deg, #ffc107, #e0a800) !important;
+            color: #212529;
+        }
+        
+        .badge.bg-info {
+            background: linear-gradient(135deg, #17a2b8, #138496) !important;
+        }
+        
+        .badge.bg-secondary {
+            background: linear-gradient(135deg, #6c757d, #5a6268) !important;
+        }
+        
+        /* DataTables Custom Styles */
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter {
+            margin-bottom: 20px;
+        }
+        
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid rgba(198, 40, 40, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin: 0 5px;
+            outline: none;
+        }
+        
+        .dataTables_wrapper .dataTables_length select:focus,
+        .dataTables_wrapper .dataTables_filter input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(198, 40, 40, 0.25);
+        }
+        
+        .dataTables_wrapper .dataTables_info {
+            padding-top: 15px;
+            color: var(--gray-color);
+        }
+        
+        .dataTables_wrapper .dataTables_paginate {
+            padding-top: 15px;
+        }
+        
+        .dataTables_wrapper .paginate_button {
+            padding: 8px 12px;
+            margin: 0 3px;
+            border-radius: 6px;
+            border: 1px solid rgba(198, 40, 40, 0.2);
+            background: white;
+            color: var(--primary-color) !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dataTables_wrapper .paginate_button:hover {
+            background: var(--primary-color);
+            color: white !important;
+            border-color: var(--primary-color);
+        }
+        
+        .dataTables_wrapper .paginate_button.current {
+            background: var(--primary-color);
+            color: white !important;
+            border-color: var(--primary-color);
+        }
+        
+        .dataTables_processing {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: var(--primary-color) !important;
+            border: none !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+            z-index: 999 !important;
+            border-radius: 30px !important;
+            padding: 15px 30px !important;
+            font-weight: 600 !important;
+        }
+        
         /* Responsive */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+        
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
+                width: var(--sidebar-width);
             }
             
             .sidebar.active {
@@ -524,6 +679,16 @@
             .content-card {
                 padding: 20px;
             }
+            
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .card-header .btn-admin {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         /* Animation Classes */
@@ -540,6 +705,53 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid rgba(198, 40, 40, 0.2);
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(198, 40, 40, 0.25);
+            outline: none;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .input-group-text {
+            background: linear-gradient(135deg, var(--primary-super-light), #fff);
+            border: 1px solid rgba(198, 40, 40, 0.2);
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        /* Image Preview */
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 10px;
+            border: 2px solid rgba(198, 40, 40, 0.2);
+            padding: 5px;
+            margin-top: 10px;
         }
     </style>
     
@@ -565,34 +777,47 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/pages/home*') ? 'active' : '' }}" href="{{ route('admin.pages.home.edit') }}">
+                    <a class="nav-link {{ request()->is('admin/pages/home') ? 'active' : '' }}" href="{{ route('admin.pages.home.edit') }}">
                         <i class="fas fa-home"></i>
                         <span>Edit Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/pages/about*') ? 'active' : '' }}" href="{{ route('admin.pages.about.edit') }}">
+                    <a class="nav-link {{ request()->is('admin/pages/about') ? 'active' : '' }}" href="{{ route('admin.pages.about.edit') }}">
                         <i class="fas fa-info-circle"></i>
                         <span>Edit About</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/menu*') ? 'active' : '' }}" href="{{ route('admin.menu.index') }}">
+                    <a class="nav-link {{ request()->is('admin/menu') ? 'active' : '' }}" href="{{ route('admin.menu.index') }}">
                         <i class="fas fa-utensils"></i>
                         <span>Kelola Menu</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/gallery*') ? 'active' : '' }}" href="{{ route('admin.gallery.index') }}">
+                    <a class="nav-link {{ request()->is('admin/promotions') ? 'active' : '' }}" href="{{ route('admin.promotions.index') }}">
+                        <i class="fas fa-tags"></i>
+                        <span>Kelola Promosi</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/gallery') ? 'active' : '' }}" href="{{ route('admin.gallery.index') }}">
                         <i class="fas fa-images"></i>
                         <span>Kelola Gallery</span>
                     </a>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
                 <a href="{{ route('admin.pages.contact.edit') }}" class="nav-link {{ request()->routeIs('admin.pages.contact.*') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-address-book"></i>
                     <p>Edit Contact</p>
                 </a>
+=======
+                    <a class="nav-link {{ request()->is('admin/pages/contact') ? 'active' : '' }}" href="{{ route('admin.pages.contact.edit') }}">
+                        <i class="fas fa-address-book"></i>
+                        <span>Edit Kontak</span>
+                    </a>
+>>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/reservations*') ? 'active' : '' }}" href="{{ route('admin.reservations.index') }}">
@@ -659,19 +884,32 @@
                 </div>
             @endif
             
+            @if(session('info'))
+                <div class="alert alert-info alert-dismissible fade show fade-in" role="alert">
+                    <i class="fas fa-info-circle me-2"></i> {{ session('info') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            
             @yield('content')
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <!-- Scripts -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
-    <!-- DataTables -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- DataTables JS (Loaded but NOT initialized here) -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
         // Toggle sidebar on mobile
@@ -692,35 +930,8 @@
             }
         });
         
-        // Initialize DataTables with modern settings
-        $(document).ready(function() {
-            if ($('#dataTable').length) {
-                $('#dataTable').DataTable({
-                    "language": {
-                        "search": "<i class='fas fa-search'></i> Cari:",
-                        "lengthMenu": "Tampilkan _MENU_ data",
-                        "zeroRecords": "Data tidak ditemukan",
-                        "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-                        "infoEmpty": "Tidak ada data",
-                        "infoFiltered": "(disaring dari _MAX_ total data)",
-                        "paginate": {
-                            "first": "<i class='fas fa-angle-double-left'></i>",
-                            "last": "<i class='fas fa-angle-double-right'></i>",
-                            "next": "<i class='fas fa-angle-right'></i>",
-                            "previous": "<i class='fas fa-angle-left'></i>"
-                        }
-                    },
-                    "dom": "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-                           "<'row'<'col-sm-12'tr>>" +
-                           "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                    "drawCallback": function(settings) {
-                        // Add animation to table rows
-                        $('tbody tr').addClass('fade-in');
-                    }
-                });
-            }
-            
-            // Initialize tooltips
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -728,18 +939,37 @@
             
             // Auto-dismiss alerts after 5 seconds
             setTimeout(function() {
-                $('.alert').alert('close');
+                document.querySelectorAll('.alert').forEach(function(alert) {
+                    if (alert) {
+                        bootstrap.Alert.getOrCreateInstance(alert).close();
+                    }
+                });
             }, 5000);
             
             // Add hover effect to cards
-            $('.content-card').hover(
-                function() {
-                    $(this).css('transform', 'translateY(-5px)');
-                },
-                function() {
-                    $(this).css('transform', 'translateY(0)');
-                }
-            );
+            document.querySelectorAll('.content-card').forEach(function(card) {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Logo hover effect
+            const brandLogo = document.querySelector('.sidebar-header .logo');
+            if (brandLogo) {
+                brandLogo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                brandLogo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
+            
+            // Indonesian greeting in console
+            console.log('%c✨ Selamat Datang di Admin Panel JOSS GANDOS ✨', 
+                'background: linear-gradient(135deg, #C62828, #8E0000); color: white; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold;');
         });
         
         // Add smooth scrolling
@@ -755,8 +985,25 @@
                 }
             });
         });
+        
+        // Fix for zoom 100% - prevent horizontal scroll
+        function handleZoom() {
+            const viewportWidth = window.innerWidth;
+            const bodyWidth = document.body.clientWidth;
+            
+            if (bodyWidth > viewportWidth) {
+                document.documentElement.style.overflowX = 'hidden';
+                document.body.style.overflowX = 'hidden';
+            } else {
+                document.documentElement.style.overflowX = 'auto';
+                document.body.style.overflowX = 'auto';
+            }
+        }
+        
+        window.addEventListener('load', handleZoom);
+        window.addEventListener('resize', handleZoom);
     </script>
     
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

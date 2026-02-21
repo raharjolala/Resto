@@ -3,7 +3,7 @@
 @section('title', 'Reservasi - JOSS GANDOS')
 
 @section('content')
-  <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
 <section class="elegant-hero">
     <!-- Soft Gradient Background -->
     <div class="elegant-gradient"></div>
@@ -87,363 +87,403 @@
     </div>
 </section>   
 
-    <!-- Reservation Form -->
-    <section id="reservation-form" class="form-section section-padding">
-        <div class="container">
-            <div class="row justify-content-center mb-6">
-                <div class="col-lg-8 text-center">
-                    <div class="section-header" data-aos="fade-up">
-                        <h2 class="display-4 fw-bold mb-4">Booking Meja <span class="text-gradient">Anda Sekarang</span></h2>
-                        <p class="lead text-muted">Pastikan tempat duduk terbaik untuk momen spesial Anda</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row justify-content-center">
-                <div class="col-xl-10">
-                    <div class="form-wrapper" data-aos="fade-up">
-                        <div class="form-header">
-                            <div class="header-content">
-                                <div class="header-icon">
-                                    <i class="fas fa-calendar-check"></i>
-                                </div>
-                                <div>
-                                    <h3 class="fw-bold text-white mb-2">Formulir Reservasi</h3>
-                                    <p class="text-light opacity-90 mb-0">Isi data dengan benar untuk pengalaman terbaik</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-body bg-white p-4 p-lg-5">
-                            <form id="reservationForm" class="needs-validation" novalidate>
-                                <!-- Personal Information -->
-                                <div class="form-section-title mb-5">
-                                    <h5 class="fw-bold d-flex align-items-center">
-                                        <i class="fas fa-user-circle me-3 text-primary-red"></i>
-                                        Informasi Pribadi
-                                    </h5>
-                                    <p class="text-muted mb-0 small">Lengkapi data diri Anda untuk keperluan konfirmasi</p>
-                                </div>
-                                
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label fw-semibold d-flex align-items-center">
-                                                <div class="label-icon me-2">
-                                                    <i class="fas fa-user"></i>
-                                                </div>
-                                                Nama Lengkap *
-                                            </label>
-                                            <div class="input-with-icon">
-                                                <input type="text" class="form-control" id="name" 
-                                                        required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label fw-semibold d-flex align-items-center">
-                                                <div class="label-icon me-2">
-                                                    <i class="fas fa-envelope"></i>
-                                                </div>
-                                                Email *
-                                            </label>
-                                            <div class="input-with-icon">
-                                                <input type="email" class="form-control" id="email" 
-                                                    required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label fw-semibold d-flex align-items-center">
-                                                <div class="label-icon me-2">
-                                                    <i class="fas fa-phone"></i>
-                                                </div>
-                                                Nomor WhatsApp *
-                                            </label>
-                                            <div class="input-with-icon">
-                                                <input type="tel" class="form-control" id="phone" 
-                                                     required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label fw-semibold d-flex align-items-center">
-                                                <div class="label-icon me-2">
-                                                    <i class="fas fa-users"></i>
-                                                </div>
-                                                Jumlah Tamu *
-                                            </label>
-                                            <div class="guest-selector">
-                                                <div class="input-with-icon">
-                                                    <select class="form-select" id="guests" required>
-                                                        <option value="" disabled selected>Pilih jumlah tamu</option>
-                                                        @for($i = 1; $i <= 8; $i++)
-                                                        <option value="{{ $i }}">{{ $i }} {{ $i == 1 ? 'Orang' : 'Orang' }}</option>
-                                                        @endfor
-                                                        <option value="9-12">9-12 Orang (Medium Group)</option>
-                                                        <option value="13+">13+ Orang (Large Group)</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Reservation Details -->
-                                <div class="form-section-title my-5">
-                                    <h5 class="fw-bold d-flex align-items-center">
-                                        <i class="fas fa-calendar-alt me-3 text-primary-red"></i>
-                                        Detail Reservasi
-                                    </h5>
-                                    <p class="text-muted mb-0 small">Tentukan waktu dan tanggal kunjungan Anda</p>
-                                </div>
-                                
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label fw-semibold d-flex align-items-center">
-                                                <div class="label-icon me-2">
-                                                    <i class="fas fa-calendar-day"></i>
-                                                </div>
-                                                Tanggal Reservasi *
-                                            </label>
-                                            <div class="date-picker-container">
-                                                <div class="input-with-icon">
-                                                    <input type="date" class="form-control date-picker" id="date" required 
-                                                           min="{{ date('Y-m-d') }}">
-                                                </div>
-                                                <div class="date-info mt-2">
-                                                    <small class="text-muted">
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label fw-semibold d-flex align-items-center">
-                                                <div class="label-icon me-2">
-                                                    <i class="fas fa-clock"></i>
-                                                </div>
-                                                Waktu Reservasi *
-                                            </label>
-                                            <div class="time-select-container">
-                                                <div class="input-with-icon">
-                                                    <i class="input-icon"></i>
-                                                    <select class="form-select time-select" id="time" required>
-                                                        <option value="" disabled selected>Pilih waktu reservasi</option>
-                                                        <option value="10:00">10:00 Pagi</option>
-                                                        <option value="11:00">11:00 Pagi</option>
-                                                        <option value="12:00">12:00 Siang</option>
-                                                        <option value="13:00">13:00 Siang</option>
-                                                        <option value="14:00">14:00 Siang</option>
-                                                        <option value="15:00">15:00 Sore</option>
-                                                        <option value="17:00">17:00 Sore</option>
-                                                        <option value="18:00">18:00 Malam</option>
-                                                        <option value="19:00">19:00 Malam</option>
-                                                        <option value="20:00">20:00 Malam</option>
-                                                        <option value="21:00">21:00 Malam</option>
-                                                    </select>
-                                                </div>
-                                                <div class="time-info mt-2">
-                                                    <small class="text-muted">
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Special Requests -->
-                                <div class="form-section-title my-5">
-                                    <h5 class="fw-bold d-flex align-items-center">
-                                        <i class="fas fa-star me-3 text-primary-red"></i>
-                                        Permintaan Khusus (Opsional)
-                                    </h5>
-                                    <p class="text-muted mb-0 small">Berikan informasi tambahan untuk pengalaman terbaik</p>
-                                </div>
-                                
-                                <div class="special-requests-section">
-                                    <div class="form-group">
-                                        <label class="form-label fw-semibold d-flex align-items-center mb-3">
-                                            <div class="label-icon me-2">
-                                                <i class="fas fa-comment-dots"></i>
-                                            </div>
-                                            Tulis Permintaan Khusus Anda
-                                        </label>
-                                        <div class="request-textarea">
-                                            <textarea class="form-control" id="specialRequests" rows="4"></textarea> </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Terms and Submit -->
-                                <div class="form-footer mt-5 pt-5 border-top">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-8 mb-4 mb-lg-0">
-                                            <div class="terms-agreement">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="terms" required>
-                                                    <label class="form-check-label" for="terms">
-                                                        Saya menyetujui 
-                                                        <a href="#" class="text-primary-red text-decoration-none fw-semibold">
-                                                            Syarat & Ketentuan
-                                                        </a> 
-                                                        dan memahami bahwa reservasi dapat dibatalkan maksimal 2 jam sebelumnya.
-                                                    </label>
-                                                </div>
-                                                <p class="text-muted small mt-2 mb-0">
-                                                    <i class="fas fa-shield-alt me-1"></i>
-                                                    Data Anda terlindungi dan aman bersama kami
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 text-lg-end">
-                                            <button type="submit" class="btn btn-primary-red btn-lg px-5 py-3">
-                                                <span class="btn-text">
-                                                    <i class="fas fa-paper-plane me-2"></i> Reservasi Sekarang
-                                                </span>
-                                                <span class="btn-loading d-none">
-                                                    <i class="fas fa-spinner fa-spin me-2"></i> Memproses...
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<!-- Reservation Form -->
+<section id="reservation-form" class="form-section section-padding">
+    <div class="container">
+        <div class="row justify-content-center mb-6">
+            <div class="col-lg-8 text-center">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="display-4 fw-bold mb-4">Booking Meja <span class="text-gradient">Anda Sekarang</span></h2>
+                    <p class="lead text-muted">Pastikan tempat duduk terbaik untuk momen spesial Anda</p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits-section section-padding bg-light-cream" id="benefits">
-        <div class="container">
-            <div class="row justify-content-center mb-6">
-                <div class="col-lg-8 text-center">
-                    <div class="section-header" data-aos="fade-up">
-                        <h2 class="display-4 fw-bold mb-4">Kenapa Reservasi <span class="text-gradient">Online?</span></h2>
-                        <p class="lead text-muted">Manfaat yang Anda dapatkan dengan booking meja melalui sistem kami</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                @foreach([
-                    ['icon' => 'fas fa-bolt', 'title' => 'Konfirmasi Instan', 'desc' => 'Reservasi dikonfirmasi dalam 5 menit via WhatsApp'],
-                    ['icon' => 'fas fa-gift', 'title' => 'Bonus Spesial', 'desc' => 'Dapatkan welcome drink untuk reservasi online'],
-                    ['icon' => 'fas fa-star', 'title' => 'Prioritas Meja', 'desc' => 'Meja terbaik disiapkan untuk Anda'],
-                    ['icon' => 'fas fa-clock', 'title' => 'Tidak Antri', 'desc' => 'Langsung duduk tanpa menunggu'],
-                    ['icon' => 'fas fa-calendar-check', 'title' => 'Gratis Reservasi', 'desc' => 'Tidak ada biaya booking apapun'],
-                    ['icon' => 'fas fa-headset', 'title' => 'Dukungan 24/7', 'desc' => 'Tim kami siap membantu kapan saja']
-                ] as $benefit)
-                <div class="col-lg-4 col-md-6">
-                    <div class="benefit-card card border-0 shadow-sm h-100" data-aos="fade-up">
-                        <div class="card-body p-4">
-                            <div class="benefit-icon mb-4">
-                                <i class="{{ $benefit['icon'] }}"></i>
+        
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="form-wrapper" data-aos="fade-up">
+                    <div class="form-header">
+                        <div class="header-content">
+                            <div class="header-icon">
+                                <i class="fas fa-calendar-check"></i>
                             </div>
-                            <h5 class="fw-bold mb-3">{{ $benefit['title'] }}</h5>
-                            <p class="text-muted mb-0">{{ $benefit['desc'] }}</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section section-padding">
-        <div class="container">
-            <div class="row justify-content-center mb-6">
-                <div class="col-lg-8 text-center">
-                    <div class="section-header" data-aos="fade-up">
-                        <span class="section-tag mb-3 d-inline-block">BANTUAN</span>
-                        <h2 class="display-4 fw-bold mb-4">Pertanyaan <span class="text-gradient">Yang Sering Diajukan</span></h2>
-                        <p class="lead text-muted">Temukan jawaban untuk pertanyaan umum tentang reservasi</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="accordion" id="faqAccordion">
-                        @php
-                            $faqs = [
-                                [
-                                    'q' => 'Berapa lama waktu konfirmasi reservasi?',
-                                    'a' => 'Reservasi Anda akan dikonfirmasi maksimal 5 menit setelah pengisian formulir. Konfirmasi dikirim via WhatsApp dan email yang terdaftar.',
-                                    'icon' => 'fa-clock'
-                                ],
-                                [
-                                    'q' => 'Apakah ada biaya untuk reservasi?',
-                                    'a' => 'Tidak, semua reservasi di JOSS GANDOS sepenuhnya gratis. Tidak ada biaya tambahan apapun untuk booking meja.',
-                                    'icon' => 'fa-money-bill-wave'
-                                ],
-                                [
-                                    'q' => 'Bagaimana jika saya terlambat datang?',
-                                    'a' => 'Kami menahan meja maksimal 30 menit dari waktu reservasi. Jika lebih dari itu, meja akan tersedia untuk tamu lain. Silakan hubungi kami jika mengalami keterlambatan.',
-                                    'icon' => 'fa-hourglass'
-                                ],
-                                [
-                                    'q' => 'Bisa untuk acara khusus seperti ulang tahun?',
-                                    'a' => 'Ya, kami menyediakan layanan khusus untuk ulang tahun, anniversary, meeting, dan acara lainnya. Tuliskan permintaan Anda di kolom "Permintaan Khusus".',
-                                    'icon' => 'fa-gift'
-                                ],
-                                [
-                                    'q' => 'Bagaimana cara membatalkan reservasi?',
-                                    'a' => 'Anda dapat membatalkan reservasi melalui WhatsApp di nomor 0812-3456-7890 atau email reservation@jossgandos.com minimal 2 jam sebelum waktu reservasi.',
-                                    'icon' => 'fa-calendar-xmark'
-                                ],
-                            ];
-                        @endphp
-                        
-                        @foreach($faqs as $index => $faq)
-                        <div class="accordion-item border-0 mb-3" data-aos="fade-up">
-                            <h3 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                                        data-bs-target="#faq{{ $index }}">
-                                    <div class="d-flex align-items-center w-100">
-                                        <div class="faq-icon me-3">
-                                            <i class="fas {{ $faq['icon'] }}"></i>
-                                        </div>
-                                        <span class="fw-semibold">{{ $faq['q'] }}</span>
-                                    </div>
-                                </button>
-                            </h3>
-                            <div id="faq{{ $index }}" class="accordion-collapse collapse" 
-                                 data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    {{ $faq['a'] }}
-                                </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">Formulir Reservasi</h3>
+                                <p class="text-light opacity-90 mb-0">Isi data dengan benar untuk pengalaman terbaik</p>
                             </div>
                         </div>
-                        @endforeach
                     </div>
                     
-                    <div class="text-center mt-5" data-aos="fade-up">
-                        <p class="text-muted mb-4">Masih punya pertanyaan lain?</p>
-                        <a href="{{ route('contact') }}" class="btn btn-outline-primary-red px-5 py-3">
-                            <i class="fas fa-comments me-2"></i>Hubungi Tim Kami
-                        </a>
+                    <div class="form-body bg-white p-4 p-lg-5">
+                        <!-- Success Message Container -->
+                        <div id="successMessage" class="alert alert-success d-none"></div>
+                        
+                        <!-- Error Message Container -->
+                        <div id="errorMessage" class="alert alert-danger d-none"></div>
+                        
+                        <!-- Display validation errors from session -->
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
+                        <form id="reservationForm" action="{{ route('reservation.store') }}" method="POST" class="needs-validation" novalidate>
+                            @csrf
+                            
+                            <!-- Personal Information -->
+                            <div class="form-section-title mb-5">
+                                <h5 class="fw-bold d-flex align-items-center">
+                                    <i class="fas fa-user-circle me-3 text-primary-red"></i>
+                                    Informasi Pribadi
+                                </h5>
+                                <p class="text-muted mb-0 small">Lengkapi data diri Anda untuk keperluan konfirmasi</p>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label fw-semibold d-flex align-items-center">
+                                            <div class="label-icon me-2">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            Nama Lengkap *
+                                        </label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                                            @error('name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label fw-semibold d-flex align-items-center">
+                                            <div class="label-icon me-2">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            Email *
+                                        </label>
+                                        <div class="input-with-icon">
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
+                                            @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label fw-semibold d-flex align-items-center">
+                                            <div class="label-icon me-2">
+                                                <i class="fas fa-phone"></i>
+                                            </div>
+                                            Nomor WhatsApp *
+                                        </label>
+                                        <div class="input-with-icon">
+                                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required>
+                                            @error('phone')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label fw-semibold d-flex align-items-center">
+                                            <div class="label-icon me-2">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            Jumlah Tamu *
+                                        </label>
+                                        <div class="guest-selector">
+                                            <div class="input-with-icon">
+                                                <select class="form-select @error('guests') is-invalid @enderror" id="guests" name="guests" required>
+                                                    <option value="" disabled {{ old('guests') ? '' : 'selected' }}>Pilih jumlah tamu</option>
+                                                    @for($i = 1; $i <= 8; $i++)
+                                                    <option value="{{ $i }}" {{ old('guests') == $i ? 'selected' : '' }}>{{ $i }} {{ $i == 1 ? 'Orang' : 'Orang' }}</option>
+                                                    @endfor
+                                                    <option value="9-12" {{ old('guests') == '9-12' ? 'selected' : '' }}>9-12 Orang (Medium Group)</option>
+                                                    <option value="13+" {{ old('guests') == '13+' ? 'selected' : '' }}>13+ Orang (Large Group)</option>
+                                                </select>
+                                                @error('guests')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Reservation Details -->
+                            <div class="form-section-title my-5">
+                                <h5 class="fw-bold d-flex align-items-center">
+                                    <i class="fas fa-calendar-alt me-3 text-primary-red"></i>
+                                    Detail Reservasi
+                                </h5>
+                                <p class="text-muted mb-0 small">Tentukan waktu dan tanggal kunjungan Anda</p>
+                            </div>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label fw-semibold d-flex align-items-center">
+                                            <div class="label-icon me-2">
+                                                <i class="fas fa-calendar-day"></i>
+                                            </div>
+                                            Tanggal Reservasi *
+                                        </label>
+                                        <div class="date-picker-container">
+                                            <div class="input-with-icon">
+                                                <input type="date" class="form-control date-picker @error('date') is-invalid @enderror" id="date" name="date" required 
+                                                       min="{{ date('Y-m-d') }}" value="{{ old('date', date('Y-m-d')) }}">
+                                                @error('date')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="date-info mt-2">
+                                                <small class="text-muted">
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label fw-semibold d-flex align-items-center">
+                                            <div class="label-icon me-2">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            Waktu Reservasi *
+                                        </label>
+                                        <div class="time-select-container">
+                                            <div class="input-with-icon">
+                                                <select class="form-select time-select @error('time') is-invalid @enderror" id="time" name="time" required>
+                                                    <option value="" disabled {{ old('time') ? '' : 'selected' }}>Pilih waktu reservasi</option>
+                                                    <option value="10:00" {{ old('time') == '10:00' ? 'selected' : '' }}>10:00 Pagi</option>
+                                                    <option value="11:00" {{ old('time') == '11:00' ? 'selected' : '' }}>11:00 Pagi</option>
+                                                    <option value="12:00" {{ old('time') == '12:00' ? 'selected' : '' }}>12:00 Siang</option>
+                                                    <option value="13:00" {{ old('time') == '13:00' ? 'selected' : '' }}>13:00 Siang</option>
+                                                    <option value="14:00" {{ old('time') == '14:00' ? 'selected' : '' }}>14:00 Siang</option>
+                                                    <option value="15:00" {{ old('time') == '15:00' ? 'selected' : '' }}>15:00 Sore</option>
+                                                    <option value="17:00" {{ old('time') == '17:00' ? 'selected' : '' }}>17:00 Sore</option>
+                                                    <option value="18:00" {{ old('time') == '18:00' ? 'selected' : '' }}>18:00 Malam</option>
+                                                    <option value="19:00" {{ old('time') == '19:00' ? 'selected' : '' }}>19:00 Malam</option>
+                                                    <option value="20:00" {{ old('time') == '20:00' ? 'selected' : '' }}>20:00 Malam</option>
+                                                    <option value="21:00" {{ old('time') == '21:00' ? 'selected' : '' }}>21:00 Malam</option>
+                                                </select>
+                                                @error('time')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="time-info mt-2">
+                                                <small class="text-muted">
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Special Requests -->
+                            <div class="form-section-title my-5">
+                                <h5 class="fw-bold d-flex align-items-center">
+                                    <i class="fas fa-star me-3 text-primary-red"></i>
+                                    Permintaan Khusus (Opsional)
+                                </h5>
+                                <p class="text-muted mb-0 small">Berikan informasi tambahan untuk pengalaman terbaik</p>
+                            </div>
+                            
+                            <div class="special-requests-section">
+                                <div class="form-group">
+                                    <label class="form-label fw-semibold d-flex align-items-center mb-3">
+                                        <div class="label-icon me-2">
+                                            <i class="fas fa-comment-dots"></i>
+                                        </div>
+                                        Tulis Permintaan Khusus Anda
+                                    </label>
+                                    <div class="request-textarea">
+                                        <textarea class="form-control @error('specialRequests') is-invalid @enderror" id="specialRequests" name="specialRequests" rows="4">{{ old('specialRequests') }}</textarea>
+                                        @error('specialRequests')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Terms and Submit -->
+                            <div class="form-footer mt-5 pt-5 border-top">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-8 mb-4 mb-lg-0">
+                                        <div class="terms-agreement">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                                <label class="form-check-label" for="terms">
+                                                    Saya menyetujui 
+                                                    <a href="#" class="text-primary-red text-decoration-none fw-semibold">
+                                                        Syarat & Ketentuan
+                                                    </a> 
+                                                    dan memahami bahwa reservasi dapat dibatalkan maksimal 2 jam sebelumnya.
+                                                </label>
+                                                <div class="invalid-feedback d-block" id="termsError" style="display: none !important;">
+                                                    Anda harus menyetujui syarat & ketentuan
+                                                </div>
+                                            </div>
+                                            <p class="text-muted small mt-2 mb-0">
+                                                <i class="fas fa-shield-alt me-1"></i>
+                                                Data Anda terlindungi dan aman bersama kami
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 text-lg-end">
+                                        <button type="submit" class="btn btn-primary-red btn-lg px-5 py-3" id="submitBtn">
+                                            <span class="btn-text">
+                                                <i class="fas fa-paper-plane me-2"></i> Reservasi Sekarang
+                                            </span>
+                                            <span class="btn-loading d-none">
+                                                <i class="fas fa-spinner fa-spin me-2"></i> Memproses...
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="benefits-section section-padding bg-light-cream" id="benefits">
+    <div class="container">
+        <div class="row justify-content-center mb-6">
+            <div class="col-lg-8 text-center">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="display-4 fw-bold mb-4">Kenapa Reservasi <span class="text-gradient">Online?</span></h2>
+                    <p class="lead text-muted">Manfaat yang Anda dapatkan dengan booking meja melalui sistem kami</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            @foreach([
+                ['icon' => 'fas fa-bolt', 'title' => 'Konfirmasi Instan', 'desc' => 'Reservasi dikonfirmasi dalam 5 menit via WhatsApp'],
+                ['icon' => 'fas fa-gift', 'title' => 'Bonus Spesial', 'desc' => 'Dapatkan welcome drink untuk reservasi online'],
+                ['icon' => 'fas fa-star', 'title' => 'Prioritas Meja', 'desc' => 'Meja terbaik disiapkan untuk Anda'],
+                ['icon' => 'fas fa-clock', 'title' => 'Tidak Antri', 'desc' => 'Langsung duduk tanpa menunggu'],
+                ['icon' => 'fas fa-calendar-check', 'title' => 'Gratis Reservasi', 'desc' => 'Tidak ada biaya booking apapun'],
+                ['icon' => 'fas fa-headset', 'title' => 'Dukungan 24/7', 'desc' => 'Tim kami siap membantu kapan saja']
+            ] as $benefit)
+            <div class="col-lg-4 col-md-6">
+                <div class="benefit-card card border-0 shadow-sm h-100" data-aos="fade-up">
+                    <div class="card-body p-4">
+                        <div class="benefit-icon mb-4">
+                            <i class="{{ $benefit['icon'] }}"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">{{ $benefit['title'] }}</h5>
+                        <p class="text-muted mb-0">{{ $benefit['desc'] }}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section section-padding">
+    <div class="container">
+        <div class="row justify-content-center mb-6">
+            <div class="col-lg-8 text-center">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-tag mb-3 d-inline-block">BANTUAN</span>
+                    <h2 class="display-4 fw-bold mb-4">Pertanyaan <span class="text-gradient">Yang Sering Diajukan</span></h2>
+                    <p class="lead text-muted">Temukan jawaban untuk pertanyaan umum tentang reservasi</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="accordion" id="faqAccordion">
+                    @php
+                        $faqs = [
+                            [
+                                'q' => 'Berapa lama waktu konfirmasi reservasi?',
+                                'a' => 'Reservasi Anda akan dikonfirmasi maksimal 5 menit setelah pengisian formulir. Konfirmasi dikirim via WhatsApp dan email yang terdaftar.',
+                                'icon' => 'fa-clock'
+                            ],
+                            [
+                                'q' => 'Apakah ada biaya untuk reservasi?',
+                                'a' => 'Tidak, semua reservasi di JOSS GANDOS sepenuhnya gratis. Tidak ada biaya tambahan apapun untuk booking meja.',
+                                'icon' => 'fa-money-bill-wave'
+                            ],
+                            [
+                                'q' => 'Bagaimana jika saya terlambat datang?',
+                                'a' => 'Kami menahan meja maksimal 30 menit dari waktu reservasi. Jika lebih dari itu, meja akan tersedia untuk tamu lain. Silakan hubungi kami jika mengalami keterlambatan.',
+                                'icon' => 'fa-hourglass'
+                            ],
+                            [
+                                'q' => 'Bisa untuk acara khusus seperti ulang tahun?',
+                                'a' => 'Ya, kami menyediakan layanan khusus untuk ulang tahun, anniversary, meeting, dan acara lainnya. Tuliskan permintaan Anda di kolom "Permintaan Khusus".',
+                                'icon' => 'fa-gift'
+                            ],
+                            [
+                                'q' => 'Bagaimana cara membatalkan reservasi?',
+                                'a' => 'Anda dapat membatalkan reservasi melalui WhatsApp di nomor 0812-3456-7890 atau email reservation@jossgandos.com minimal 2 jam sebelum waktu reservasi.',
+                                'icon' => 'fa-calendar-xmark'
+                            ],
+                        ];
+                    @endphp
+                    
+                    @foreach($faqs as $index => $faq)
+                    <div class="accordion-item border-0 mb-3" data-aos="fade-up">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#faq{{ $index }}">
+                                <div class="d-flex align-items-center w-100">
+                                    <div class="faq-icon me-3">
+                                        <i class="fas {{ $faq['icon'] }}"></i>
+                                    </div>
+                                    <span class="fw-semibold">{{ $faq['q'] }}</span>
+                                </div>
+                            </button>
+                        </h3>
+                        <div id="faq{{ $index }}" class="accordion-collapse collapse" 
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {{ $faq['a'] }}
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                
+                <div class="text-center mt-5" data-aos="fade-up">
+                    <p class="text-muted mb-4">Masih punya pertanyaan lain?</p>
+                    <a href="{{ route('contact') }}" class="btn btn-outline-primary-red px-5 py-3">
+                        <i class="fas fa-comments me-2"></i>Hubungi Tim Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
 
 @section('styles')
+<!-- Keep all your existing CSS styles exactly as they were -->
 <style>
     :root {
         --primary-red: #B22222;
@@ -1474,8 +1514,6 @@
         
         // Enhanced Date Picker
         const dateInput = document.getElementById('date');
-        const selectedDateText = document.getElementById('selectedDateText');
-        const selectedDateBadge = document.querySelector('.selected-date');
         const today = new Date();
         const maxDate = new Date();
         maxDate.setMonth(today.getMonth() + 3);
@@ -1484,34 +1522,14 @@
         dateInput.min = today.toISOString().split('T')[0];
         dateInput.max = maxDate.toISOString().split('T')[0];
         
-        // Set default to today
-        dateInput.value = today.toISOString().split('T')[0];
-        updateDateDisplay(today);
-        
         // Date change handler with enhanced display
         dateInput.addEventListener('change', function() {
-            const selectedDate = new Date(this.value);
-            updateDateDisplay(selectedDate);
-            
             // Add animation effect
             this.style.borderColor = 'var(--primary-red)';
             setTimeout(() => {
                 this.style.borderColor = '';
             }, 1000);
         });
-        
-        // Function to update date display
-        function updateDateDisplay(date) {
-            const dayOfWeek = date.toLocaleDateString('id-ID', { weekday: 'long' });
-            const formattedDate = date.toLocaleDateString('id-ID', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-            
-            selectedDateText.textContent = `${dayOfWeek}, ${formattedDate}`;
-            selectedDateBadge.classList.remove('d-none');
-        }
         
         // Time select enhancement
         const timeSelect = document.getElementById('time');
@@ -1521,28 +1539,16 @@
             setTimeout(() => {
                 this.style.borderColor = '';
             }, 1000);
-            
-            // Show selected time info
-            const selectedOption = this.options[this.selectedIndex];
-            if (selectedOption.value) {
-                console.log('Waktu dipilih:', selectedOption.text);
-            }
         });
-        
-        // Set default time to 18:00 if available
-        const defaultTimeOption = Array.from(timeSelect.options).find(option => option.value === '18:00');
-        if (defaultTimeOption) {
-            defaultTimeOption.selected = true;
-        }
         
         // Special requests textarea enhancement
         const specialRequestsTextarea = document.getElementById('specialRequests');
         specialRequestsTextarea.addEventListener('focus', function() {
-            this.parentElement.style.borderColor = 'var(--primary-red)';
+            this.style.borderColor = 'var(--primary-red)';
         });
         
         specialRequestsTextarea.addEventListener('blur', function() {
-            this.parentElement.style.borderColor = '';
+            this.style.borderColor = '';
         });
         
         // Auto-expand textarea based on content
@@ -1550,55 +1556,6 @@
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
         });
-        
-        // Form validation
-        const form = document.getElementById('reservationForm');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!this.checkValidity()) {
-                e.stopPropagation();
-                this.classList.add('was-validated');
-                
-                // Scroll to first invalid field
-                const firstInvalid = this.querySelector(':invalid');
-                if (firstInvalid) {
-                    firstInvalid.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center' 
-                    });
-                    firstInvalid.focus();
-                }
-                return;
-            }
-            
-            // Form is valid, proceed with submission
-            submitReservation();
-        });
-        
-        // Real-time form validation
-        document.querySelectorAll('[required]').forEach(field => {
-            field.addEventListener('input', function() {
-                validateField(this);
-            });
-            
-            field.addEventListener('blur', function() {
-                if (!this.value.trim()) {
-                    this.classList.remove('is-valid');
-                    this.classList.add('is-invalid');
-                }
-            });
-        });
-        
-        function validateField(field) {
-            if (field.checkValidity()) {
-                field.classList.remove('is-invalid');
-                field.classList.add('is-valid');
-            } else {
-                field.classList.remove('is-valid');
-                field.classList.add('is-invalid');
-            }
-        }
         
         // Phone number formatting
         const phoneInput = document.getElementById('phone');
@@ -1618,12 +1575,38 @@
             
             this.value = value;
         });
-        
-        // Form submission function
-        function submitReservation() {
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
+
+        // Get CSRF token from meta tag or form
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || 
+                          document.querySelector('input[name="_token"]')?.value;
+
+        // Form submission with AJAX
+        const form = document.getElementById('reservationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check terms checkbox
+            const termsCheckbox = document.getElementById('terms');
+            const termsError = document.getElementById('termsError');
+            
+            if (!termsCheckbox.checked) {
+                termsError.style.display = 'block';
+                termsCheckbox.classList.add('is-invalid');
+                return;
+            } else {
+                termsError.style.display = 'none';
+                termsCheckbox.classList.remove('is-invalid');
+            }
+            
+            // Hide any previous messages
+            successMessage.classList.add('d-none');
+            errorMessage.classList.add('d-none');
             
             // Show loading state
             btnText.classList.add('d-none');
@@ -1631,299 +1614,98 @@
             submitBtn.disabled = true;
             
             // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                date: document.getElementById('date').value,
-                time: document.getElementById('time').value,
-                guests: document.getElementById('guests').value,
-                specialRequests: document.getElementById('specialRequests').value
-            };
+            const formData = new FormData(form);
             
-            // Validate date is not in the past
-            const selectedDate = new Date(formData.date);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            if (selectedDate < today) {
-                alert('Tanggal reservasi tidak boleh di masa lalu');
+            // Send AJAX request with CSRF token in headers
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.message || 'Server error');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    successMessage.textContent = data.message;
+                    successMessage.classList.remove('d-none');
+                    
+                    // Scroll to top to show message
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Reset form
+                    form.reset();
+                    
+                    // Reset date to today
+                    dateInput.value = today.toISOString().split('T')[0];
+                    
+                    // Show reservation code if available
+                    if (data.data && data.data.reservation_code) {
+                        successMessage.innerHTML += `<br><strong>Kode Reservasi: ${data.data.reservation_code}</strong>`;
+                    }
+                    
+                    // Auto hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.add('d-none');
+                    }, 5000);
+                } else {
+                    // Show error message
+                    errorMessage.textContent = data.message || 'Terjadi kesalahan. Silakan coba lagi.';
+                    errorMessage.classList.remove('d-none');
+                    
+                    // Scroll to top to show message
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                errorMessage.textContent = error.message || 'Terjadi kesalahan koneksi. Silakan coba lagi.';
+                errorMessage.classList.remove('d-none');
+                
+                // Scroll to top to show message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            })
+            .finally(() => {
+                // Hide loading state
                 btnText.classList.remove('d-none');
                 btnLoading.classList.add('d-none');
                 submitBtn.disabled = false;
-                return;
-            }
-            
-            // Simulate API call
-            setTimeout(() => {
-                // Show success animation
-                showSuccessConfetti();
-                
-                // Show success message
-                showSuccessModal(formData);
-                
-                // Reset loading state
-                setTimeout(() => {
-                    btnText.classList.remove('d-none');
-                    btnLoading.classList.add('d-none');
-                    submitBtn.disabled = false;
-                }, 2000);
-                
-            }, 1500);
-        }
-        
-        // Success confetti effect
-        function showSuccessConfetti() {
-            const colors = ['#B22222', '#D4A017', '#FFC145', '#FFFFFF'];
-            
-            for (let i = 0; i < 80; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.cssText = `
-                        position: fixed;
-                        width: ${Math.random() * 10 + 5}px;
-                        height: ${Math.random() * 10 + 5}px;
-                        background: ${colors[Math.floor(Math.random() * colors.length)]};
-                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                        top: -20px;
-                        left: ${Math.random() * 100}vw;
-                        z-index: 9999;
-                        animation: confetti-fall ${Math.random() * 1 + 1}s linear forwards;
-                        transform: rotate(${Math.random() * 360}deg);
-                    `;
-                    
-                    document.body.appendChild(confetti);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => confetti.remove(), 2000);
-                }, i * 20);
-            }
-            
-            // Add animation keyframes
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes confetti-fall {
-                    0% {
-                        transform: translateY(-20px) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(100vh) rotate(${Math.random() * 360}deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        // Success modal
-        function showSuccessModal(data) {
-            // Format the date for display
-            const date = new Date(data.date);
-            const formattedDate = date.toLocaleDateString('id-ID', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
             });
-            
-            const modalHTML = `
-                <div class="modal fade show d-block" style="background: rgba(0,0,0,0.8)" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
-                            <div class="modal-header border-0 position-relative pt-5">
-                                <div class="success-icon mx-auto mb-4">
-                                    <div class="icon-circle">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn-close position-absolute top-0 end-0 m-4" 
-                                        onclick="this.closest('.modal').remove()"></button>
-                            </div>
-                            <div class="modal-body text-center py-4 px-5">
-                                <h3 class="fw-bold mb-3" style="color: var(--primary-red)">Reservasi Berhasil!</h3>
-                                <p class="text-muted mb-4">
-                                    Terima kasih atas reservasi Anda. Detail reservasi telah dikirim ke 
-                                    <strong>${data.email}</strong> dan WhatsApp Anda.
-                                </p>
-                                
-                                <div class="reservation-card bg-light-cream rounded-3 p-4 mb-4">
-                                    <h5 class="fw-bold mb-4 text-dark">Detail Reservasi</h5>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="detail-item">
-                                                <small class="text-muted d-block mb-1">Nama</small>
-                                                <strong>${data.name}</strong>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="detail-item">
-                                                <small class="text-muted d-block mb-1">Tanggal</small>
-                                                <strong>${formattedDate}</strong>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="detail-item">
-                                                <small class="text-muted d-block mb-1">Waktu</small>
-                                                <strong>${data.time}</strong>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="detail-item">
-                                                <small class="text-muted d-block mb-1">Jumlah Tamu</small>
-                                                <strong>${data.guests} orang</strong>
-                                            </div>
-                                        </div>
-                                        ${data.specialRequests ? `
-                                        <div class="col-12">
-                                            <div class="detail-item">
-                                                <small class="text-muted d-block mb-1">Permintaan Khusus</small>
-                                                <strong>${data.specialRequests}</strong>
-                                            </div>
-                                        </div>
-                                        ` : ''}
-                                    </div>
-                                </div>
-                                
-                                <div class="reservation-code bg-gradient-primary text-white rounded-3 p-4 mb-4">
-                                    <small class="d-block opacity-75 mb-2">Kode Reservasi</small>
-                                    <h4 class="fw-bold mb-0">JOSS-${Math.random().toString(36).substr(2, 6).toUpperCase()}</h4>
-                                </div>
-                                
-                                <div class="reservation-instructions">
-                                    <div class="alert alert-warning rounded-3 mb-3">
-                                        <i class="fas fa-info-circle me-2"></i>
-                                        Silakan tunjukkan kode reservasi ini saat tiba di restoran
-                                    </div>
-                                    <p class="text-muted small mb-0">
-                                        <i class="fas fa-clock me-1"></i>
-                                        Reservasi berlaku hingga 30 menit setelah waktu yang ditentukan
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="modal-footer border-0 justify-content-center pb-5">
-                                <button type="button" class="btn btn-outline-primary-red px-4" 
-                                        onclick="window.print()">
-                                    <i class="fas fa-print me-2"></i>Cetak Reservasi
-                                </button>
-                                <button type="button" class="btn btn-primary-red px-4" 
-                                        onclick="this.closest('.modal').remove()">
-                                    <i class="fas fa-check me-2"></i>Mengerti
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            const modal = document.createElement('div');
-            modal.innerHTML = modalHTML;
-            document.body.appendChild(modal);
-            
-            // Add modal styles
-            const modalStyle = document.createElement('style');
-            modalStyle.textContent = `
-                .icon-circle {
-                    width: 100px;
-                    height: 100px;
-                    background: linear-gradient(135deg, #28A745, #20C997);
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-size: 2.5rem;
-                    margin: 0 auto;
-                    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
-                    animation: iconPulse 0.6s ease-out;
-                }
-                .reservation-card {
-                    border: 2px solid rgba(178, 34, 34, 0.1);
-                }
-                .detail-item {
-                    text-align: left;
-                    padding: 10px 0;
-                }
-                .modal-content {
-                    animation: modalSlideIn 0.3s ease-out;
-                }
-                @keyframes modalSlideIn {
-                    from {
-                        opacity: 0;
-                        transform: translateY(-50px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                @keyframes iconPulse {
-                    0% {
-                        transform: scale(0.5);
-                        opacity: 0;
-                    }
-                    70% {
-                        transform: scale(1.1);
-                    }
-                    100% {
-                        transform: scale(1);
-                        opacity: 1;
-                    }
-                }
-            `;
-            document.head.appendChild(modalStyle);
-            
-            // Reset form after modal shows
+        });
+
+        // Reset terms validation on checkbox change
+        document.getElementById('terms').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('termsError').style.display = 'none';
+                this.classList.remove('is-invalid');
+            }
+        });
+
+        // Display any flash messages from session
+        @if(session('success'))
+            successMessage.textContent = "{{ session('success') }}";
+            successMessage.classList.remove('d-none');
             setTimeout(() => {
-                form.reset();
-                form.classList.remove('was-validated');
-                
-                // Reset date to today
-                const today = new Date();
-                dateInput.value = today.toISOString().split('T')[0];
-                updateDateDisplay(today);
-                
-                // Reset time to default
-                if (defaultTimeOption) {
-                    defaultTimeOption.selected = true;
-                }
-                
-                // Reset special requests
-                specialRequestsTextarea.value = '';
-                specialRequestsTextarea.style.height = 'auto';
-                
-                // Reset validation states
-                document.querySelectorAll('.form-control, .form-select').forEach(field => {
-                    field.classList.remove('is-valid', 'is-invalid');
-                });
-                
-            }, 3000);
-        }
-        
-        // Add some example text for special requests
-        const examples = [
-            "Meja dekat jendela untuk pemandangan terbaik",
-            "Perayaan ulang tahun dengan kue khusus",
-            "Meja romantis untuk anniversary",
-            "Area khusus untuk anak-anak",
-            "Aksesibilitas kursi roda",
-            "Menu khusus untuk alergi makanan"
-        ];
-        
-        // Add click to insert example
-        const examplesElement = document.querySelector('.request-examples');
-        if (examplesElement) {
-            examplesElement.addEventListener('click', function() {
-                const randomExample = examples[Math.floor(Math.random() * examples.length)];
-                specialRequestsTextarea.value = randomExample;
-                specialRequestsTextarea.dispatchEvent(new Event('input'));
-                specialRequestsTextarea.focus();
-            });
-            
-            examplesElement.style.cursor = 'pointer';
-            examplesElement.title = 'Klik untuk contoh permintaan';
-        }
+                successMessage.classList.add('d-none');
+            }, 5000);
+        @endif
+
+        @if(session('error'))
+            errorMessage.textContent = "{{ session('error') }}";
+            errorMessage.classList.remove('d-none');
+            setTimeout(() => {
+                errorMessage.classList.add('d-none');
+            }, 5000);
+        @endif
     });
 </script>
 @endsection

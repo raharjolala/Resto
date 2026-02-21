@@ -1,7 +1,8 @@
+{{-- resources/views/admin/menu/edit.blade.php --}}
 @extends('layouts.admin')
 
-@section('title', 'Tambah Menu Baru')
-@section('page-title', 'Tambah Menu Baru')
+@section('title', 'Edit Menu')
+@section('page-title', 'Edit Menu')
 
 @section('styles')
 <style>
@@ -12,7 +13,6 @@
         border-radius: 10px;
         border: 1px dashed #dee2e6;
         text-align: center;
-        display: none;
     }
     
     .image-preview {
@@ -153,8 +153,8 @@
 <div class="container-fluid">
     <div class="content-card">
         <div class="card-header">
-            <h2>Tambah Menu Baru</h2>
-            <p class="text-muted">Admin / Tambah Menu Baru</p>
+            <h2>Edit Menu: {{ $menuItem->name }}</h2>
+            <p class="text-muted">Admin / Edit Menu</p>
         </div>
         
         @if($errors->any())
@@ -167,8 +167,9 @@
             </div>
         @endif
         
-        <form action="{{ route('admin.menu.store') }}" method="POST">
+        <form action="{{ route('admin.menu.update', $menuItem->id) }}" method="POST">
             @csrf
+            @method('PUT')
             
             <div class="row">
                 <div class="col-md-6">
@@ -178,7 +179,7 @@
                                class="form-control @error('name') is-invalid @enderror" 
                                id="name" 
                                name="name" 
-                               value="{{ old('name') }}" 
+                               value="{{ old('name', $menuItem->name) }}" 
                                required>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -195,7 +196,8 @@
                                 required>
                             <option value="">Pilih Kategori</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}" 
+                                    {{ old('category_id', $menuItem->category_id) == $category->id ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -212,7 +214,7 @@
                 <textarea class="form-control @error('description') is-invalid @enderror" 
                           id="description" 
                           name="description" 
-                          rows="3">{{ old('description') }}</textarea>
+                          rows="3">{{ old('description', $menuItem->description) }}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -227,7 +229,7 @@
                                id="price" 
                                name="price" 
                                min="0" 
-                               value="{{ old('price') }}" 
+                               value="{{ old('price', $menuItem->price) }}" 
                                required>
                         @error('price')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -243,9 +245,9 @@
                                    class="form-control @error('image') is-invalid @enderror" 
                                    id="image" 
                                    name="image" 
-                                   value="{{ old('image') }}" 
+                                   value="{{ old('image', $menuItem->image) }}" 
                                    placeholder="https://example.com/image.jpg"
-                                   onchange="showPreview(this.value)">
+                                   onchange="updatePreview(this.value)">
                             <i class="fas fa-eye url-preview-icon" onclick="previewUrl()" title="Preview Gambar"></i>
                         </div>
                         <small class="text-muted">Masukkan URL gambar (contoh: https://images.unsplash.com/...)</small>
@@ -271,9 +273,14 @@
             </div>
             
             <!-- Image Preview -->
-            <div class="image-preview-container" id="previewContainer">
+            <div class="image-preview-container" id="previewContainer" 
+                 style="{{ $menuItem->image ? 'display: block;' : 'display: none;' }}">
                 <h6>Preview Gambar:</h6>
-                <img src="" class="image-preview" id="imagePreview" alt="Preview" onerror="this.src='https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                <img src="{{ $menuItem->image_url }}" 
+                     class="image-preview" 
+                     id="imagePreview" 
+                     alt="Preview"
+                     onerror="this.src='https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
             </div>
             
             <div class="row mt-3">
@@ -284,7 +291,7 @@
                                id="is_available" 
                                name="is_available" 
                                value="1" 
-                               {{ old('is_available', true) ? 'checked' : '' }}>
+                               {{ old('is_available', $menuItem->is_available) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_available">Tersedia</label>
                     </div>
                 </div>
@@ -296,7 +303,7 @@
                                id="is_featured" 
                                name="is_featured" 
                                value="1" 
-                               {{ old('is_featured') ? 'checked' : '' }}>
+                               {{ old('is_featured', $menuItem->is_featured) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_featured">Tampilkan sebagai Fitur</label>
                     </div>
                 </div>
@@ -309,7 +316,7 @@
                                id="sort_order" 
                                name="sort_order" 
                                min="0" 
-                               value="{{ old('sort_order', 0) }}">
+                               value="{{ old('sort_order', $menuItem->sort_order ?? 0) }}">
                         @error('sort_order')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -326,7 +333,7 @@
                         <i class="fas fa-undo"></i> Reset
                     </button>
                     <button type="submit" class="btn btn-admin">
-                        <i class="fas fa-save"></i> Simpan Menu
+                        <i class="fas fa-save"></i> Update Menu
                     </button>
                 </div>
             </div>
@@ -337,7 +344,16 @@
 
 @section('scripts')
 <script>
-    function showPreview(url) {
+    // Show preview on page load if image exists
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.getElementById('image');
+        if (imageInput.value) {
+            document.getElementById('previewContainer').style.display = 'block';
+            document.getElementById('imagePreview').src = imageInput.value;
+        }
+    });
+
+    function updatePreview(url) {
         const previewContainer = document.getElementById('previewContainer');
         const preview = document.getElementById('imagePreview');
         
@@ -352,7 +368,7 @@
     function previewUrl() {
         const urlInput = document.getElementById('image');
         if (urlInput.value) {
-            showPreview(urlInput.value);
+            updatePreview(urlInput.value);
         } else {
             alert('Masukkan URL gambar terlebih dahulu!');
         }
@@ -360,21 +376,13 @@
     
     function useSampleUrl(url) {
         document.getElementById('image').value = url;
-        showPreview(url);
+        updatePreview(url);
     }
     
     // Handle image load error
     document.getElementById('imagePreview').onerror = function() {
         this.src = 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';
     };
-    
-    // Show preview if there's old input value
-    document.addEventListener('DOMContentLoaded', function() {
-        const imageInput = document.getElementById('image');
-        if (imageInput.value) {
-            showPreview(imageInput.value);
-        }
-    });
     
     // Validate URL before form submit
     document.querySelector('form').addEventListener('submit', function(e) {

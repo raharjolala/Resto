@@ -1,4 +1,5 @@
 <?php
+// app/Http/Controllers/MenuController.php
 
 namespace App\Http\Controllers;
 
@@ -20,7 +21,10 @@ class MenuController extends Controller
            ->get();
 
         // Get active promotions for carousel
-        $promotions = Promotion::active()
+        $promotions = Promotion::where('is_active', true)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->orderBy('sort_order')
             ->limit(3)
             ->get();
 
@@ -36,7 +40,24 @@ class MenuController extends Controller
                     'button_text' => 'Pesan Sekarang',
                     'image_url' => 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
                 ],
-                // ... other static promotions
+                (object) [
+                    'title' => 'Paket Hemat 4 Orang',
+                    'description' => 'Nikmati 4 menu utama plus minuman spesial dengan harga hemat hingga 30%.',
+                    'current_price' => 150000,
+                    'old_price' => 210000,
+                    'badge_text' => 'PAKET KELUARGA',
+                    'button_text' => 'Lihat Paket',
+                    'image_url' => 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+                ],
+                (object) [
+                    'title' => 'Minuman Segar Double',
+                    'description' => 'Setiap pembelian 1 es teh manis atau jus alpukat dapat 1 gratis. Setiap hari pukul 14-16 WIB.',
+                    'current_price' => 0,
+                    'old_price' => null,
+                    'badge_text' => 'BUY 1 GET 1',
+                    'button_text' => 'Lihat Menu',
+                    'image_url' => 'https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+                ]
             ]);
         }
 

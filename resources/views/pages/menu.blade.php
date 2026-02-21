@@ -4,6 +4,7 @@
 
 @section('styles')
 <style>
+    /* All your existing CSS styles remain exactly the same */
     :root {
         --primary-red: #DC143C;
         --secondary-red: #B22222;
@@ -30,13 +31,13 @@
     /* ==================== HERO CAROUSEL SECTION - ALL SIDES ROUNDED ==================== */
     .hero-carousel-section {
         position: relative;
-        margin-top: 100px; /* Space from navbar */
+        margin-top: 100px;
         height: 85vh;
         min-height: 600px;
         overflow: hidden;
         background: #0a0a0a;
-        border-radius: 40px; /* All sides rounded */
-        margin: 100px 20px 0; /* Top, horizontal, bottom */
+        border-radius: 40px;
+        margin: 100px 20px 0;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
@@ -51,7 +52,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        border-radius: 40px; /* All sides rounded */
+        border-radius: 40px;
         overflow: hidden;
     }
 
@@ -74,7 +75,7 @@
             rgba(0, 0, 0, 0.95) 100%
         );
         z-index: 1;
-        border-radius: 40px; /* All sides rounded */
+        border-radius: 40px;
     }
 
     .hero-content {
@@ -743,87 +744,43 @@
             <i class="fas fa-chevron-right"></i>
         </div>
 
-        <!-- Slide 1 -->
-        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <!-- Dynamic Promotions Slides -->
+        @foreach($promotions as $index => $promo)
+        <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" style="background-image: url('{{ $promo->image_url }}');">
             <div class="hero-content">
                 <div class="hero-label">
                     <i class="fas fa-fire"></i>
-                    <span>Promo Spesial</span>
+                    <span>{{ $promo->badge_text }}</span>
                 </div>
-                <h1 class="hero-title">Nasi Goreng Premium</h1>
-                <p class="hero-subtitle">Dengan udang jumbo & ayam kampung pilihan, disajikan dengan kerupuk renyah dan acar segar</p>
+                <h1 class="hero-title">{{ $promo->title }}</h1>
+                <p class="hero-subtitle">{{ $promo->description }}</p>
                 <div class="hero-price-container">
+                    @if($promo->old_price)
                     <div class="discount-badge">
-                        <span>25%</span>
+                        <span>{{ round((($promo->old_price - $promo->current_price) / $promo->old_price) * 100) }}%</span>
                         <span>OFF</span>
                     </div>
+                    @endif
                     <div class="price-display">
                         <div class="current-price">
                             <span class="price-currency">Rp</span>
-                            45.000
+                            {{ number_format($promo->current_price, 0, ',', '.') }}
                         </div>
-                        <div class="old-price">Rp 60.000</div>
+                        @if($promo->old_price)
+                        <div class="old-price">Rp {{ number_format($promo->old_price, 0, ',', '.') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
-            <div class="hero-content">
-                <div class="hero-label">
-                    <i class="fas fa-crown"></i>
-                    <span>Signature Dish</span>
-                </div>
-                <h1 class="hero-title">Rendang Sapi Padang</h1>
-                <p class="hero-subtitle">Dimasak 8 jam dengan 27 rempah-rempah pilihan khas Minangkabau yang autentik</p>
-                <div class="hero-price-container">
-                    <div class="discount-badge">
-                        <span>30%</span>
-                        <span>OFF</span>
-                    </div>
-                    <div class="price-display">
-                        <div class="current-price">
-                            <span class="price-currency">Rp</span>
-                            55.000
-                        </div>
-                        <div class="old-price">Rp 78.000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
-            <div class="hero-content">
-                <div class="hero-label">
-                    <i class="fas fa-users"></i>
-                    <span>Paket Keluarga</span>
-                </div>
-                <h1 class="hero-title">Paket Hemat 4 Orang</h1>
-                <p class="hero-subtitle">4 Menu utama pilihan + 4 Minuman segar dengan harga spesial untuk keluarga Indonesia</p>
-                <div class="hero-price-container">
-                    <div class="discount-badge">
-                        <span>35%</span>
-                        <span>OFF</span>
-                    </div>
-                    <div class="price-display">
-                        <div class="current-price">
-                            <span class="price-currency">Rp</span>
-                            150.000
-                        </div>
-                        <div class="old-price">Rp 230.000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
         <!-- Carousel Navigation -->
         <div class="carousel-nav">
             <div class="carousel-dots">
-                <div class="carousel-dot active" data-slide="0"></div>
-                <div class="carousel-dot" data-slide="1"></div>
-                <div class="carousel-dot" data-slide="2"></div>
+                @foreach($promotions as $index => $promo)
+                <div class="carousel-dot {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}"></div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -836,183 +793,44 @@
                 <button class="filter-btn active" data-category="all">
                     <i class="fas fa-th-large"></i> Semua
                 </button>
-                <button class="filter-btn" data-category="main">
-                    <i class="fas fa-utensils"></i> Utama
+                @foreach($categories as $category)
+                <button class="filter-btn" data-category="{{ $category->id }}">
+                    <i class="fas fa-utensils"></i> {{ $category->name }}
                 </button>
-                <button class="filter-btn" data-category="appetizer">
-                    <i class="fas fa-seedling"></i> Pembuka
-                </button>
-                <button class="filter-btn" data-category="drink">
-                    <i class="fas fa-glass-whiskey"></i> Minuman
-                </button>
-                <button class="filter-btn" data-category="dessert">
-                    <i class="fas fa-ice-cream"></i> Dessert
-                </button>
+                @endforeach
             </div>
 
             <!-- Menu Grid -->
             <div class="menu-grid">
-                <!-- Card 1 -->
-                <div class="menu-card" data-category="main" style="animation-delay: 0.1s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nasi Goreng Spesial">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Nasi Goreng Spesial</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                45.000
-                            </div>
+                @forelse($categories as $category)
+                    @foreach($category->menuItems as $index => $item)
+                    <div class="menu-card" data-category="{{ $category->id }}" style="animation-delay: {{ $index * 0.1 }}s">
+                        <div class="card-image-container">
+                            <img src="{{ $item->image_url }}" 
+                                 alt="{{ $item->name }}"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                            @if($item->is_featured)
+                            <div class="card-badge">Favorit</div>
+                            @endif
                         </div>
-                        <p class="card-description">Dengan ayam suwir & udang segar, telur kampung, sayuran organik</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="menu-card" data-category="main" style="animation-delay: 0.2s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rendang Sapi">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Rendang Sapi Padang</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                55.000
+                        <div class="card-content">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ $item->name }}</h3>
+                                <div class="card-price">
+                                    <span class="price-currency-small">Rp</span>
+                                    {{ number_format($item->price, 0, ',', '.') }}
+                                </div>
                             </div>
+                            <p class="card-description">{{ $item->description ?: 'Tidak ada deskripsi' }}</p>
+                            <div class="card-footer"></div>
                         </div>
-                        <p class="card-description">Dimasak 8 jam dengan 27 rempah pilihan khas Minang</p>
-                        <div class="card-footer"></div>
                     </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="menu-card" data-category="appetizer" style="animation-delay: 0.3s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sate Ayam">
+                    @endforeach
+                @empty
+                    <div class="col-12 text-center py-5">
+                        <h3>Belum ada menu tersedia</h3>
                     </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Sate Ayam Madura</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                35.000
-                            </div>
-                        </div>
-                        <p class="card-description">12 tusuk dengan bumbu kacang khas Madura yang legendaris</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="menu-card" data-category="appetizer" style="animation-delay: 0.4s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Lumpia">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Lumpia Sayur Segar</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                28.000
-                            </div>
-                        </div>
-                        <p class="card-description">Renyah dengan isian sayuran organik dan saus spesial</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="menu-card" data-category="drink" style="animation-delay: 0.5s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Es Cincau">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Es Cincau Hitam</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                15.000
-                            </div>
-                        </div>
-                        <p class="card-description">Dengan gula merah aren dan santan segar yang menyegarkan</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="menu-card" data-category="drink" style="animation-delay: 0.6s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1569760142069-bc6838de16c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wedang Jahe">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Wedang Jahe Madu</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                18.000
-                            </div>
-                        </div>
-                        <p class="card-description">Hangat & menyehatkan dengan madu hutan asli</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="menu-card" data-category="dessert" style="animation-delay: 0.7s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Es Campur">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Es Campur Spesial</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                22.000
-                            </div>
-                        </div>
-                        <p class="card-description">Buah segar, cincau, nata de coco dengan sirup merah</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="menu-card" data-category="dessert" style="animation-delay: 0.8s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Klepon">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Klepon Gula Merah</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                18.000
-                            </div>
-                        </div>
-                        <p class="card-description">Tradisional & autentik dengan kelapa parut segar</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
-
-                <!-- Card 9 -->
-                <div class="menu-card" data-category="main" style="animation-delay: 0.9s">
-                    <div class="card-image-container">
-                        <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gado-gado">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3 class="card-title">Gado-Gado Jakarta</h3>
-                            <div class="card-price">
-                                <span class="price-currency-small">Rp</span>
-                                32.000
-                            </div>
-                        </div>
-                        <p class="card-description">Sayur segar dengan bumbu kacang khas Jakarta</p>
-                        <div class="card-footer"></div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -1054,19 +872,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize
-    showSlide(currentSlide);
-    startAutoSlide();
+    if (slides.length > 0) {
+        showSlide(currentSlide);
+        startAutoSlide();
+    }
 
     // Button controls
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        startAutoSlide();
-    });
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            startAutoSlide();
+        });
 
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        startAutoSlide();
-    });
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            startAutoSlide();
+        });
+    }
 
     // Dot controls
     dots.forEach((dot, index) => {
@@ -1078,13 +900,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Pause on hover
     const heroSection = document.querySelector('.hero-carousel-section');
-    heroSection.addEventListener('mouseenter', () => {
-        clearInterval(slideInterval);
-    });
-    
-    heroSection.addEventListener('mouseleave', () => {
-        startAutoSlide();
-    });
+    if (heroSection) {
+        heroSection.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        heroSection.addEventListener('mouseleave', () => {
+            startAutoSlide();
+        });
+    }
 
     // ========== CATEGORY FILTER ==========
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1119,10 +943,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========== REMOVE CONFLICTING HOVER EFFECTS ==========
-    // The hover effects are now handled entirely by CSS
-    // This removes the JavaScript hover effects to prevent conflicts
-    
     // ========== INITIAL CARD ANIMATION ==========
     setTimeout(() => {
         menuCards.forEach((card, index) => {

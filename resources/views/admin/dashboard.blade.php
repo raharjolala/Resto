@@ -661,7 +661,7 @@
                 <div class="stat-icon-modern float-animation">
                     <i class="fas fa-utensils"></i>
                 </div>
-                <div class="stat-number-modern">{{ $menuCount }}</div>
+                <div class="stat-number-modern">{{ $totalMenu }}</div>
                 <div class="stat-label-modern">Total Menu</div>
             </div>
         </div>
@@ -671,7 +671,7 @@
                 <div class="stat-icon-modern float-animation" style="animation-delay: 0.5s;">
                     <i class="fas fa-calendar-check"></i>
                 </div>
-                <div class="stat-number-modern">{{ $reservationCount }}</div>
+                <div class="stat-number-modern">{{ $totalReservations }}</div>
                 <div class="stat-label-modern">Reservasi</div>
             </div>
         </div>
@@ -681,7 +681,7 @@
                 <div class="stat-icon-modern float-animation" style="animation-delay: 1s;">
                     <i class="fas fa-users"></i>
                 </div>
-                <div class="stat-number-modern">{{ $userCount }}</div>
+                <div class="stat-number-modern">{{ $totalUsers }}</div>
                 <div class="stat-label-modern">Pengguna</div>
             </div>
         </div>
@@ -691,7 +691,7 @@
                 <div class="stat-icon-modern float-animation" style="animation-delay: 1.5s;">
                     <i class="fas fa-store-alt"></i>
                 </div>
-                <div class="stat-number-modern">{{ $branchCount }}</div>
+                <div class="stat-number-modern">{{ $totalBranches }}</div>
                 <div class="stat-label-modern">Cabang</div>
             </div>
         </div>
