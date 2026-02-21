@@ -15,8 +15,9 @@ return new class extends Migration
             $table->string('customer_name');
             $table->string('email');
             $table->string('phone');
+            $table->foreignId('branch_id')->nullable()->constrained()->nullOnDelete();
             $table->date('reservation_date');
-            $table->time('reservation_time');
+            $table->string('reservation_time');
             $table->string('guest_count');
             $table->text('special_request')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'cancelled', 'completed'])->default('pending');

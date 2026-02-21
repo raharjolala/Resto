@@ -1,4 +1,5 @@
 <?php
+// app/Models/Reservation.php
 
 namespace App\Models;
 
@@ -24,7 +25,8 @@ class Reservation extends Model
 
     protected $casts = [
         'reservation_date' => 'date',
-        'guest_count' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user()

@@ -1134,15 +1134,11 @@
                             Galeri
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">
-                            Kontak
-                        </a>
-                    </li>
-                    <!-- Reservasi dengan Gradient Merah -->
+                    <!-- CONTACT LINK REMOVED - Now using Reservasi page for contact information -->
+                    <!-- Reservasi dengan Gradient Merah - This now serves both reservation and contact purposes -->
                     <li class="nav-item">
                         <a href="{{ route('reservation.create') }}" class="nav-link reservasi-btn {{ request()->routeIs('reservation.create') ? 'active' : '' }}">
-                            Reservasi
+                            Reservasi & Kontak
                         </a>
                     </li>
                 </ul>
@@ -1198,8 +1194,8 @@
                         <li><a href="{{ route('menu') }}">Menu</a></li>
                         <li><a href="{{ route('about') }}">About</a></li>
                         <li><a href="{{ route('gallery') }}">Galeri</a></li>
-                        <li><a href="{{ route('contact') }}">Kontak</a></li>
-                        <li><a href="{{ route('reservation.create') }}">Reservasi</a></li>
+                        <!-- Contact link removed from footer navigation -->
+                        <li><a href="{{ route('reservation.create') }}">Reservasi & Kontak</a></li>
                     </ul>
                 </div>
                 

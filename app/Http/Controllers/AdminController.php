@@ -68,7 +68,6 @@ class AdminController extends Controller
                 ->limit(5)
                 ->get()
                 ->map(function($reservation) {
-                    // Transform to match the expected format in the dashboard
                     return (object)[
                         'customer_name' => $reservation->customer_name,
                         'name' => $reservation->customer_name,
@@ -106,7 +105,6 @@ class AdminController extends Controller
                 'recentReservations',
                 'recentMenuItems',
                 'activePromotions',
-                // Add the aliases
                 'menuCount',
                 'promotionCount',
                 'reservationCount',
@@ -119,7 +117,6 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             Log::error('Error in dashboard: ' . $e->getMessage());
             
-            // Return empty data in case of error
             return view('admin.dashboard', [
                 'totalMenu' => 0,
                 'totalPromotions' => 0,
@@ -131,7 +128,6 @@ class AdminController extends Controller
                 'recentReservations' => collect([]),
                 'recentMenuItems' => collect([]),
                 'activePromotions' => 0,
-                // Add the aliases in error case too
                 'menuCount' => 0,
                 'promotionCount' => 0,
                 'reservationCount' => 0,
@@ -158,7 +154,7 @@ class AdminController extends Controller
     // ==================== MENU MANAGEMENT ====================
 
     /**
-     * Display menu items list
+     * Display list of menu items
      */
     public function menuIndex()
     {
@@ -239,10 +235,7 @@ class AdminController extends Controller
     public function menuEdit($id)
     {
         try {
-            // Find the menu item or fail
             $menuItem = MenuItem::with('category')->findOrFail($id);
-            
-            // Get categories for dropdown
             $categories = MenuCategory::where('is_active', true)
                 ->orderBy('sort_order')
                 ->orderBy('name')
@@ -322,7 +315,7 @@ class AdminController extends Controller
     // ==================== PROMOTION MANAGEMENT ====================
 
     /**
-     * Display promotions list
+     * Display list of promotions
      */
     public function promotionsIndex()
     {
@@ -458,7 +451,7 @@ class AdminController extends Controller
     // ==================== GALLERY MANAGEMENT ====================
 
     /**
-     * Display gallery list
+     * Display list of gallery images
      */
     public function galleryIndex()
     {
@@ -472,7 +465,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Store new gallery item
+     * Store new gallery image
      */
     public function galleryStore(Request $request)
     {
@@ -509,7 +502,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Delete gallery item
+     * Delete gallery image
      */
     public function galleryDestroy($id)
     {
@@ -535,7 +528,7 @@ class AdminController extends Controller
     // ==================== RESERVATIONS MANAGEMENT ====================
 
     /**
-     * Display reservations list with counts
+     * Display list of reservations
      */
     public function reservationsIndex()
     {
@@ -544,14 +537,12 @@ class AdminController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
             
-            // Calculate counts by status
             $pendingCount = Reservation::where('status', 'pending')->count();
             $confirmedCount = Reservation::where('status', 'confirmed')->count();
             $completedCount = Reservation::where('status', 'completed')->count();
             $cancelledCount = Reservation::where('status', 'cancelled')->count();
             $totalCount = Reservation::count();
             
-            // Debug: Log the data to check if reservations exist
             Log::info('Reservations count: ' . $reservations->count());
             
             return view('admin.reservations.index', compact(
@@ -625,7 +616,7 @@ class AdminController extends Controller
     // ==================== BRANCHES MANAGEMENT ====================
 
     /**
-     * Display branches list
+     * Display list of branches
      */
     public function branchesIndex()
     {
@@ -733,7 +724,7 @@ class AdminController extends Controller
     // ==================== USERS MANAGEMENT ====================
 
     /**
-     * Display users list
+     * Display list of users
      */
     public function usersIndex()
     {
@@ -782,7 +773,7 @@ class AdminController extends Controller
     // ==================== REVIEWS MANAGEMENT ====================
 
     /**
-     * Display reviews list
+     * Display list of reviews
      */
     public function reviewsIndex()
     {
@@ -844,10 +835,221 @@ class AdminController extends Controller
         }
     }
 
+    // ==================== PAGE MANAGEMENT ====================
+
+    /**
+     * Edit contact page content
+     */
+    public function editContactPage()
+    {
+        try {
+            $page = Page::where('slug', 'contact')->first();
+            return view('admin.pages.contact', compact('page'));
+        } catch (\Exception $e) {
+            Log::error('Error in editContactPage: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Update contact page content
+     */
+    public function updateContactPage(Request $request)
+    {
+        try {
+            $request->validate([
+                // Hero Section
+                'hero_subtitle' => 'required|string|max:255',
+                'hero_title_line1' => 'required|string|max:255',
+                'hero_title_line2' => 'required|string|max:255',
+                'hero_title_line3' => 'required|string|max:255',
+                'hero_description' => 'required|string',
+                'hero_image_url' => 'required|url',
+                
+                // Contact Information
+                'address' => 'required|string',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|email|max:255',
+                'hours' => 'required|string|max:255',
+                'map_embed' => 'required|string',
+                
+                // WhatsApp Admins
+                'whatsapp_admin_1' => 'required|string|max:20',
+                'whatsapp_admin_1_name' => 'required|string|max:255',
+                'whatsapp_admin_2' => 'required|string|max:20',
+                'whatsapp_admin_2_name' => 'required|string|max:255',
+                
+                // Delivery Links
+                'delivery_gofood' => 'nullable|url',
+                'delivery_grabfood' => 'nullable|url',
+                
+                // Social Media
+                'facebook_url' => 'nullable|url',
+                'instagram_url' => 'nullable|url',
+                'twitter_url' => 'nullable|url',
+                'linkedin_url' => 'nullable|url',
+            ]);
+
+            // Prepare content array
+            $content = [
+                'hero_subtitle' => $request->hero_subtitle,
+                'hero_title_line1' => $request->hero_title_line1,
+                'hero_title_line2' => $request->hero_title_line2,
+                'hero_title_line3' => $request->hero_title_line3,
+                'hero_description' => $request->hero_description,
+                'hero_image_url' => $request->hero_image_url,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'hours' => $request->hours,
+                'map_embed' => $request->map_embed,
+                'whatsapp_admin_1' => $request->whatsapp_admin_1,
+                'whatsapp_admin_1_name' => $request->whatsapp_admin_1_name,
+                'whatsapp_admin_2' => $request->whatsapp_admin_2,
+                'whatsapp_admin_2_name' => $request->whatsapp_admin_2_name,
+                'delivery_gofood' => $request->delivery_gofood,
+                'delivery_grabfood' => $request->delivery_grabfood,
+                'facebook_url' => $request->facebook_url,
+                'instagram_url' => $request->instagram_url,
+                'twitter_url' => $request->twitter_url,
+                'linkedin_url' => $request->linkedin_url,
+                'social_media' => [
+                    'facebook' => $request->facebook_url ?? '#',
+                    'instagram' => $request->instagram_url ?? '#',
+                    'twitter' => $request->twitter_url ?? '#',
+                    'linkedin' => $request->linkedin_url ?? '#',
+                ],
+            ];
+
+            // Update or create the page
+            Page::updateOrCreate(
+                ['slug' => 'contact'],
+                [
+                    'title' => 'Kontak Kami',
+                    'content' => $content
+                ]
+            );
+
+            return redirect()->route('admin.pages.contact.edit')
+                ->with('success', 'Halaman kontak berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            Log::error('Error updating contact page: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Edit reservation page content
+     */
+    public function editReservationPage()
+    {
+        try {
+            $page = Page::where('slug', 'reservation')->first();
+            $branches = Branch::where('is_active', true)->get();
+            return view('admin.pages.reservation', compact('page', 'branches'));
+        } catch (\Exception $e) {
+            Log::error('Error in editReservationPage: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Update reservation page content
+     */
+    public function updateReservationPage(Request $request)
+    {
+        try {
+            $request->validate([
+                // Hero Section
+                'hero_subtitle' => 'required|string|max:255',
+                'hero_title_line1' => 'required|string|max:255',
+                'hero_title_line2' => 'required|string|max:255',
+                'hero_title_line3' => 'required|string|max:255',
+                'hero_description' => 'required|string',
+                'hero_image_url' => 'required|url',
+                
+                // Contact Information
+                'address' => 'required|string',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|email|max:255',
+                'hours' => 'required|string|max:255',
+                'map_embed' => 'required|string',
+                
+                // WhatsApp Admins
+                'whatsapp_admin_1' => 'required|string|max:20',
+                'whatsapp_admin_1_name' => 'required|string|max:255',
+                'whatsapp_admin_2' => 'required|string|max:20',
+                'whatsapp_admin_2_name' => 'required|string|max:255',
+                
+                // Delivery Links
+                'delivery_gofood' => 'nullable|url',
+                'delivery_grabfood' => 'nullable|url',
+                
+                // Social Media
+                'facebook_url' => 'nullable|url',
+                'instagram_url' => 'nullable|url',
+                'twitter_url' => 'nullable|url',
+                'linkedin_url' => 'nullable|url',
+            ]);
+
+            // Prepare content array
+            $content = [
+                'hero_subtitle' => $request->hero_subtitle,
+                'hero_title_line1' => $request->hero_title_line1,
+                'hero_title_line2' => $request->hero_title_line2,
+                'hero_title_line3' => $request->hero_title_line3,
+                'hero_description' => $request->hero_description,
+                'hero_image_url' => $request->hero_image_url,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'hours' => $request->hours,
+                'map_embed' => $request->map_embed,
+                'whatsapp_admin_1' => $request->whatsapp_admin_1,
+                'whatsapp_admin_1_name' => $request->whatsapp_admin_1_name,
+                'whatsapp_admin_2' => $request->whatsapp_admin_2,
+                'whatsapp_admin_2_name' => $request->whatsapp_admin_2_name,
+                'delivery_gofood' => $request->delivery_gofood,
+                'delivery_grabfood' => $request->delivery_grabfood,
+                'facebook_url' => $request->facebook_url,
+                'instagram_url' => $request->instagram_url,
+                'twitter_url' => $request->twitter_url,
+                'linkedin_url' => $request->linkedin_url,
+                'social_media' => [
+                    'facebook' => $request->facebook_url ?? '#',
+                    'instagram' => $request->instagram_url ?? '#',
+                    'twitter' => $request->twitter_url ?? '#',
+                    'linkedin' => $request->linkedin_url ?? '#',
+                ],
+            ];
+
+            // Update or create the page
+            Page::updateOrCreate(
+                ['slug' => 'reservation'],
+                [
+                    'title' => 'Reservasi & Kontak',
+                    'content' => $content
+                ]
+            );
+
+            return redirect()->route('admin.pages.reservation.edit')
+                ->with('success', 'Halaman reservasi berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            Log::error('Error updating reservation page: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
     // ==================== SETTINGS MANAGEMENT ====================
 
     /**
-     * Show settings edit form
+     * Edit settings
      */
     public function editSettings()
     {
