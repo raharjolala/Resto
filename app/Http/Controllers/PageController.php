@@ -443,32 +443,38 @@ class PageController extends Controller
     }
 
     /**
-     * Update contact page
+     * Update contact page - FIXED VERSION dengan struktur data yang sesuai dengan view
      */
     public function updateContact(Request $request)
     {
         try {
             $request->validate([
+                'title' => 'nullable|string|max:255',
                 'meta_title' => 'nullable|string|max:255',
                 'meta_description' => 'nullable|string|max:500',
                 
-                // Sesuaikan dengan field yang ada di form admin
+                // Hero Section - SESUAIKAN DENGAN FORM DI CONTACT.BLADE.PHP
                 'hero_subtitle' => 'required|string|max:255',
-                'hero_title' => 'required|string',
+                'hero_title_line1' => 'required|string|max:255',
+                'hero_title_line2' => 'required|string|max:255',
+                'hero_title_line3' => 'required|string|max:255',
                 'hero_description' => 'required|string',
+                'hero_image_url' => 'required|url',
+                
+                // Contact Information
                 'address' => 'required|string',
-                'phone' => 'required|string',
-                'email' => 'required|email',
-                'hours' => 'required|string',
-                'map_embed' => 'nullable|string',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|email|max:255',
+                'hours' => 'required|string|max:255',
+                'map_embed' => 'required|string',
                 
-                // WhatsApp Admin
-                'whatsapp_admin_1' => 'required|string',
-                'whatsapp_admin_1_name' => 'required|string',
-                'whatsapp_admin_2' => 'required|string',
-                'whatsapp_admin_2_name' => 'required|string',
+                // WhatsApp Admins
+                'whatsapp_admin_1' => 'required|string|max:20',
+                'whatsapp_admin_1_name' => 'required|string|max:255',
+                'whatsapp_admin_2' => 'required|string|max:20',
+                'whatsapp_admin_2_name' => 'required|string|max:255',
                 
-                // Delivery
+                // Delivery Links
                 'delivery_gofood' => 'nullable|url',
                 'delivery_grabfood' => 'nullable|url',
                 
@@ -482,31 +488,45 @@ class PageController extends Controller
             // Gunakan default title jika tidak ada
             $title = $request->title ?? 'Kontak Kami';
 
-            // Sesuaikan struktur content dengan yang ada di form
+            // Prepare content array dengan FLAT structure (sesuai dengan yang digunakan di view)
             $content = [
+                // Hero Section
                 'hero_subtitle' => $request->hero_subtitle,
-                'hero_title' => $request->hero_title,
+                'hero_title_line1' => $request->hero_title_line1,
+                'hero_title_line2' => $request->hero_title_line2,
+                'hero_title_line3' => $request->hero_title_line3,
                 'hero_description' => $request->hero_description,
+                'hero_image_url' => $request->hero_image_url,
+                
+                // Contact Information
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'hours' => $request->hours,
                 'map_embed' => $request->map_embed,
+                
+                // WhatsApp Admins
                 'whatsapp_admin_1' => $request->whatsapp_admin_1,
                 'whatsapp_admin_1_name' => $request->whatsapp_admin_1_name,
                 'whatsapp_admin_2' => $request->whatsapp_admin_2,
                 'whatsapp_admin_2_name' => $request->whatsapp_admin_2_name,
+                
+                // Delivery Links
                 'delivery_gofood' => $request->delivery_gofood,
                 'delivery_grabfood' => $request->delivery_grabfood,
-                'facebook_url' => $request->facebook_url,
-                'instagram_url' => $request->instagram_url,
-                'twitter_url' => $request->twitter_url,
-                'linkedin_url' => $request->linkedin_url,
+                
+                // Social Media - FLAT structure
+                'facebook_url' => $request->facebook_url ?? '#',
+                'instagram_url' => $request->instagram_url ?? '#',
+                'twitter_url' => $request->twitter_url ?? '#',
+                'linkedin_url' => $request->linkedin_url ?? '#',
+                
+                // Also keep social_media array for backward compatibility
                 'social_media' => [
-                    'facebook' => $request->facebook_url,
-                    'instagram' => $request->instagram_url,
-                    'twitter' => $request->twitter_url,
-                    'tiktok' => $request->tiktok_url ?? '#',
+                    'facebook' => $request->facebook_url ?? '#',
+                    'instagram' => $request->instagram_url ?? '#',
+                    'twitter' => $request->twitter_url ?? '#',
+                    'linkedin' => $request->linkedin_url ?? '#',
                 ],
             ];
 
@@ -1012,34 +1032,48 @@ class PageController extends Controller
     }
 
     /**
-     * Get default contact content
+     * Get default contact content - SESUAIKAN DENGAN FORM DI CONTACT.BLADE.PHP
      */
     private function getDefaultContactContent()
     {
         return [
-            'hero_title' => 'Kami Siap Melayani Dengan Sepenuh Hati',
-            'hero_subtitle' => 'Hubungi Kami',
+            // Hero Section
+            'hero_subtitle' => 'HUBUNGI KAMI',
+            'hero_title_line1' => 'Kami Siap',
+            'hero_title_line2' => 'Melayani Dengan',
+            'hero_title_line3' => 'Sepenuh Hati',
             'hero_description' => 'Ada pertanyaan tentang menu, reservasi, atau ingin mengadakan acara spesial? Tim Joss Gandos siap membantu dan melayani Anda dengan sepenuh hati.',
+            'hero_image_url' => 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            
+            // Contact Information
             'address' => 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231',
-            'phone' => '+62 812 3456 7890',
+            'phone' => '(021) 1234-5678',
             'email' => 'info@jossgandos.com',
             'hours' => '10:00 - 22:00 WIB (Setiap Hari)',
             'map_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715058999945!2d112.73278731532677!3d-7.270442994754604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa1a4d1c8b07%3A0xc79190bc5e7be85!2sJl.%20Jetis%20Seraten%2C%20Ketintang%2C%20Kec.%20Gayungan%2C%20Surabaya%2C%20Jawa%20Timur%2060231!5e0!3m2!1sid!2sid!4v1641914256999!5m2!1sid!2sid',
+            
+            // WhatsApp Admins
             'whatsapp_admin_1' => '6289699071599',
             'whatsapp_admin_1_name' => 'Admin 1',
             'whatsapp_admin_2' => '6289532682495',
             'whatsapp_admin_2_name' => 'Admin 2',
+            
+            // Delivery Links
             'delivery_gofood' => 'https://gofood.co.id/surabaya/restaurant/bebek-joss-gandos-jemursari-8571aff2-33b6-4f54-9fd9-a132a900eb17',
             'delivery_grabfood' => 'https://food.grab.com/id/en/restaurant/online-delivery/IDGFSTI00002n8d',
+            
+            // Social Media
             'facebook_url' => '#',
             'instagram_url' => '#',
             'twitter_url' => '#',
             'linkedin_url' => '#',
+            
+            // Backward compatibility
             'social_media' => [
                 'facebook' => '#',
                 'instagram' => '#',
                 'twitter' => '#',
-                'tiktok' => '#',
+                'linkedin' => '#',
             ],
         ];
     }

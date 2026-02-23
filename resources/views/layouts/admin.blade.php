@@ -813,7 +813,7 @@
                 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.pages.contact.*') ? 'active' : '' }}" href="{{ route('admin.pages.contact.edit') }}">
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-address-book"></i>
                         <span>Edit Kontak</span>
                     </a>
                 </li>

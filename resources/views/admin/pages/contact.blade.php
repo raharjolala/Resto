@@ -1,13 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Halaman Kontak')
-@section('page-title', 'Edit Halaman Kontak')
+@section('title', 'Edit Kontak')
+@section('page-title', 'Edit Informasi Kontak')
 
 @section('content')
 <div class="container-fluid px-4">
     <div class="card mb-4">
         <div class="card-header">
-            <h5 class="mb-0">Edit Konten Halaman Kontak</h5>
+            <h5 class="mb-0">Edit Konten Halaman Kontak (Yang Muncul di Halaman Reservasi)</h5>
+            <p class="text-muted mb-0">Data ini akan muncul di bagian informasi kontak halaman reservasi</p>
         </div>
         <div class="card-body">
             @if(session('success'))
@@ -26,89 +27,12 @@
 
             <form action="{{ route('admin.pages.contact.update') }}" method="POST">
                 @csrf
-                @method('PUT')
 
-                <!-- Hero Section -->
+                <!-- Informasi Kontak -->
                 <div class="form-section mb-4">
-                    <h5 class="fw-bold" style="color: #b42222;">Hero Section</h5>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label fw-semibold">Hero Subtitle</label>
-                                <input type="text" name="hero_subtitle" class="form-control @error('hero_subtitle') is-invalid @enderror" 
-                                       value="{{ old('hero_subtitle', $page->content['hero_subtitle'] ?? 'HUBUNGI KAMI') }}">
-                                @error('hero_subtitle')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label fw-semibold">Hero Title Line 1</label>
-                                <input type="text" name="hero_title_line1" class="form-control @error('hero_title_line1') is-invalid @enderror" 
-                                       value="{{ old('hero_title_line1', $page->content['hero_title_line1'] ?? 'Kami Siap') }}">
-                                @error('hero_title_line1')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label fw-semibold">Hero Title Line 2</label>
-                                <input type="text" name="hero_title_line2" class="form-control @error('hero_title_line2') is-invalid @enderror" 
-                                       value="{{ old('hero_title_line2', $page->content['hero_title_line2'] ?? 'Melayani Dengan') }}">
-                                @error('hero_title_line2')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label fw-semibold">Hero Title Line 3</label>
-                                <input type="text" name="hero_title_line3" class="form-control @error('hero_title_line3') is-invalid @enderror" 
-                                       value="{{ old('hero_title_line3', $page->content['hero_title_line3'] ?? 'Sepenuh Hati') }}">
-                                @error('hero_title_line3')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-label fw-semibold">Hero Description</label>
-                                <textarea name="hero_description" rows="3" class="form-control @error('hero_description') is-invalid @enderror">{{ old('hero_description', $page->content['hero_description'] ?? 'Ada pertanyaan tentang menu, reservasi, atau ingin mengadakan acara spesial? Tim Joss Gandos siap membantu dan melayani Anda dengan sepenuh hati.') }}</textarea>
-                                @error('hero_description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-label fw-semibold">Hero Image URL</label>
-                                <input type="url" name="hero_image_url" class="form-control @error('hero_image_url') is-invalid @enderror" 
-                                       value="{{ old('hero_image_url', $page->content['hero_image_url'] ?? 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') }}">
-                                @error('hero_image_url')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                @if(($page->content['hero_image_url'] ?? null) || old('hero_image_url'))
-                                    <div class="mt-2">
-                                        <img src="{{ old('hero_image_url', $page->content['hero_image_url'] ?? '') }}" 
-                                             alt="Hero Preview" class="image-preview">
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="form-section mb-4">
-                    <h5 class="fw-bold" style="color: #b42222;">Informasi Kontak</h5>
+                    <h5 class="fw-bold" style="color: #b42222;">
+                        <i class="fas fa-info-circle me-2"></i>Informasi Kontak
+                    </h5>
                     <hr>
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -169,7 +93,9 @@
 
                 <!-- WhatsApp Admins -->
                 <div class="form-section mb-4">
-                    <h5 class="fw-bold" style="color: #b42222;">Admin WhatsApp</h5>
+                    <h5 class="fw-bold" style="color: #b42222;">
+                        <i class="fab fa-whatsapp me-2"></i>Admin WhatsApp
+                    </h5>
                     <hr>
                     <div class="row g-3">
                         <div class="col-md-3">
@@ -222,7 +148,9 @@
 
                 <!-- Delivery Services -->
                 <div class="form-section mb-4">
-                    <h5 class="fw-bold" style="color: #b42222;">Layanan Delivery</h5>
+                    <h5 class="fw-bold" style="color: #b42222;">
+                        <i class="fas fa-motorcycle me-2"></i>Layanan Delivery
+                    </h5>
                     <hr>
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -251,7 +179,9 @@
 
                 <!-- Social Media -->
                 <div class="form-section mb-4">
-                    <h5 class="fw-bold" style="color: #b42222;">Media Sosial</h5>
+                    <h5 class="fw-bold" style="color: #b42222;">
+                        <i class="fas fa-share-alt me-2"></i>Media Sosial
+                    </h5>
                     <hr>
                     <div class="row g-3">
                         <div class="col-md-3">
@@ -301,11 +231,11 @@
                 </div>
 
                 <div class="form-group mt-4">
-                    <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, #b42222, #e63946); border: none;">
+                    <button type="submit" class="btn btn-primary px-5 py-2" style="background: linear-gradient(135deg, #b42222, #e63946); border: none;">
                         <i class="fas fa-save me-2"></i> Simpan Perubahan
                     </button>
-                    <a href="{{ route('contact.index') }}" class="btn btn-outline-secondary px-5 py-2 ms-2" target="_blank">
-                        <i class="fas fa-eye me-2"></i> Lihat Halaman
+                    <a href="{{ route('reservation.create') }}" class="btn btn-outline-secondary px-5 py-2 ms-2" target="_blank">
+                        <i class="fas fa-eye me-2"></i> Lihat Halaman Reservasi
                     </a>
                 </div>
             </form>
@@ -321,6 +251,7 @@
         padding: 20px;
         border-radius: 10px;
         border-left: 4px solid #b42222;
+        margin-bottom: 25px;
     }
     .image-preview {
         max-width: 200px;

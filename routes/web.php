@@ -8,7 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactController; // Keep this for admin edit contact functionality
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,14 +31,14 @@ Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.s
 // About Page
 Route::get('/about', [PageController::class, 'indexAbout'])->name('about');
 
-// Reservation Page (Merged with Contact - this replaces the contact page)
+// Reservation Page (merged with contact)
 Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
-// Contact form submission
+// Contact form submission (if still needed)
 Route::post('/contact/submit', [ContactController::class, 'store'])->name('contact.submit');
 
-// Optional: Redirect /contact to reservation page (if you want to keep the URL)
+// Redirect /contact to reservation page
 Route::get('/contact', function () {
     return redirect()->route('reservation.create');
 })->name('contact.index');
@@ -61,7 +61,7 @@ Route::get('/login', function () {
     return redirect()->route('admin.login');
 })->name('login');
 
-// Logout route (for compatibility)
+// Logout route
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
 // ==================== ADMIN PROTECTED ROUTES ====================
@@ -76,17 +76,18 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     
     // ===== PAGE MANAGEMENT =====
     
-    // Home Page Edit
+    // Home Page Edit - menggunakan PUT untuk update
     Route::get('/pages/home/edit', [PageController::class, 'editHome'])->name('pages.home.edit');
-    Route::post('/pages/home/update', [PageController::class, 'updateHome'])->name('pages.home.update');
+    Route::put('/pages/home/update', [PageController::class, 'updateHome'])->name('pages.home.update');
     
-    // About Page Edit
+    // About Page Edit - menggunakan PUT untuk update
     Route::get('/pages/about/edit', [PageController::class, 'editAbout'])->name('pages.about.edit');
-    Route::post('/pages/about/update', [PageController::class, 'updateAbout'])->name('pages.about.update');
+    Route::put('/pages/about/update', [PageController::class, 'updateAbout'])->name('pages.about.update');
     
-    // Contact Page Edit (Keep this for admin to edit contact information that appears on reservation page)
-    Route::get('/pages/contact/edit', [PageController::class, 'editContact'])->name('pages.contact.edit');
-    Route::post('/pages/contact/update', [PageController::class, 'updateContact'])->name('pages.contact.update');
+    // Contact Page Edit - menggunakan PUT untuk update
+    // Contact Page Edit
+Route::get('/pages/contact/edit', [PageController::class, 'editContact'])->name('pages.contact.edit');
+Route::post('/pages/contact/update', [PageController::class, 'updateContact'])->name('pages.contact.update');
     
     // ===== MENU MANAGEMENT =====
     Route::get('/menu', [AdminController::class, 'menuIndex'])->name('menu.index');
@@ -114,7 +115,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/reservations/{id}', [AdminController::class, 'reservationUpdate'])->name('reservations.update');
     Route::delete('/reservations/{id}', [AdminController::class, 'reservationDestroy'])->name('reservations.destroy');
 
-        // ===== USERS MANAGEMENT =====
+    // ===== USERS MANAGEMENT =====
     Route::get('/users', [AdminController::class, 'usersIndex'])->name('users.index');
     Route::put('/users/{id}', [AdminController::class, 'userUpdate'])->name('users.update');
     
@@ -135,7 +136,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 });
 
 // ==================== FALLBACK ROUTE ====================
-// Catch all undefined routes and redirect to home
 Route::fallback(function () {
     return redirect()->route('home');
 });
