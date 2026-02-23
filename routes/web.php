@@ -31,17 +31,15 @@ Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.s
 // About Page
 Route::get('/about', [PageController::class, 'indexAbout'])->name('about');
 
+// Contact Page - TAMBAHKAN ROUTE INI
+Route::get('/contact', [PageController::class, 'indexContact'])->name('contact');
+
 // Reservation Page (merged with contact)
 Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
 // Contact form submission (if still needed)
 Route::post('/contact/submit', [ContactController::class, 'store'])->name('contact.submit');
-
-// Redirect /contact to reservation page
-Route::get('/contact', function () {
-    return redirect()->route('reservation.create');
-})->name('contact.index');
 
 // ==================== AUTHENTICATION ROUTES ====================
 
@@ -85,9 +83,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('/pages/about/update', [PageController::class, 'updateAbout'])->name('pages.about.update');
     
     // Contact Page Edit - menggunakan PUT untuk update
-    // Contact Page Edit
-Route::get('/pages/contact/edit', [PageController::class, 'editContact'])->name('pages.contact.edit');
-Route::post('/pages/contact/update', [PageController::class, 'updateContact'])->name('pages.contact.update');
+    Route::get('/pages/contact/edit', [PageController::class, 'editContact'])->name('pages.contact.edit');
+    Route::put('/pages/contact/update', [PageController::class, 'updateContact'])->name('pages.contact.update');
     
     // ===== MENU MANAGEMENT =====
     Route::get('/menu', [AdminController::class, 'menuIndex'])->name('menu.index');
