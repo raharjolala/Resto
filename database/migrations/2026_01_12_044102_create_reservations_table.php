@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('customer_name');
             $table->string('email');
             $table->string('phone');
+            $table->foreignId('branch_id')->nullable()->constrained()->nullOnDelete();
             $table->date('reservation_date');
             $table->string('reservation_time');
             $table->string('guest_count');
