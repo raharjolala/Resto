@@ -508,7 +508,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="rounded-cta-buttons">
-                        <a href="{{ route('menu') }}" class="btn-rounded-cta btn-rounded-cta-primary">
+                        <a href="{{ route('reservation.create') }}#delivery-services" class="btn-rounded-cta btn-rounded-cta-primary">
                             <i class="fas fa-shopping-bag"></i>
                             <span>{{ $content['cta_button1_text'] ?? 'Pesan Sekarang' }}</span>
                         </a>

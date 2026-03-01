@@ -771,11 +771,12 @@
         <div class="sidebar-menu">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin') || request()->is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/pages/home') ? 'active' : '' }}" href="{{ route('admin.pages.home.edit') }}">
                         <i class="fas fa-home"></i>
@@ -788,40 +789,40 @@
                         <span>Edit About</span>
                     </a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/menu') ? 'active' : '' }}" href="{{ route('admin.menu.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.menu.*') ? 'active' : '' }}" href="{{ route('admin.menu.index') }}">
                         <i class="fas fa-utensils"></i>
                         <span>Kelola Menu</span>
                     </a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/promotions') ? 'active' : '' }}" href="{{ route('admin.promotions.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.promotions.*') ? 'active' : '' }}" href="{{ route('admin.promotions.index') }}">
                         <i class="fas fa-tags"></i>
                         <span>Kelola Promosi</span>
                     </a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/gallery') ? 'active' : '' }}" href="{{ route('admin.gallery.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}" href="{{ route('admin.gallery.index') }}">
                         <i class="fas fa-images"></i>
                         <span>Kelola Gallery</span>
                     </a>
                 </li>
+                
                 <li class="nav-item">
-<<<<<<< HEAD
-                <a href="{{ route('admin.pages.contact.edit') }}" class="nav-link {{ request()->routeIs('admin.pages.contact.*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-address-book"></i>
-                    <p>Edit Contact</p>
-                </a>
-=======
-                    <a class="nav-link {{ request()->is('admin/pages/contact') ? 'active' : '' }}" href="{{ route('admin.pages.contact.edit') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.pages.contact.*') ? 'active' : '' }}" href="{{ route('admin.pages.contact.edit') }}">
                         <i class="fas fa-address-book"></i>
                         <span>Edit Kontak</span>
                     </a>
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
                 </li>
+
+                
+                <!-- Edit Halaman Reservasi -->
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/reservations*') ? 'active' : '' }}" href="{{ route('admin.reservations.index') }}">
-                        <i class="fas fa-calendar-alt"></i>
+                    <a class="nav-link {{ request()->routeIs('admin.reservation.*') ? 'active' : '' }}" href="{{ route('admin.reservations.index') }}">
+                        <i class="fas fa-calendar-check"></i>
                         <span>Reservasi</span>
                     </a>
                 </li>

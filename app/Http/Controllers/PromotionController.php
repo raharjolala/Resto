@@ -60,13 +60,32 @@ class PromotionController extends Controller
             $data = $request->all();
             $data['is_active'] = $request->has('is_active') ? true : false;
             
-            Promotion::create($data);
+            // Log untuk debugging
+            Log::info('Creating new promotion:', [
+                'title' => $data['title'],
+                'start_date_input' => $request->start_date,
+                'end_date_input' => $request->end_date,
+                'timezone' => 'Asia/Jakarta (input akan dikonversi ke UTC oleh model)'
+            ]);
+            
+            $promotion = Promotion::create($data);
+            
+            Log::info('Promotion created successfully:', [
+                'id' => $promotion->id,
+                'title' => $promotion->title,
+                'start_date_db' => $promotion->getRawStartDateAttribute(),
+                'end_date_db' => $promotion->getRawEndDateAttribute(),
+                'start_date_accessor' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'end_date_accessor' => $promotion->end_date->format('Y-m-d H:i:s')
+            ]);
 
             return redirect()->route('admin.promotions.index')
-                ->with('success', 'Promosi berhasil ditambahkan!');
+                ->with('success', 'Promosi "' . $promotion->title . '" berhasil ditambahkan!');
 
         } catch (\Exception $e) {
             Log::error('Error creating promotion: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            
             return redirect()->back()
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
                 ->withInput();
@@ -76,17 +95,36 @@ class PromotionController extends Controller
     /**
      * Show the form for editing the specified promotion.
      */
-    public function edit(Promotion $promotion)
+    public function edit($id)
     {
-        return view('admin.promotions.edit', compact('promotion'));
+        try {
+            $promotion = Promotion::findOrFail($id);
+            
+            Log::info('Editing promotion:', [
+                'id' => $promotion->id,
+                'title' => $promotion->title,
+                'start_date' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'end_date' => $promotion->end_date->format('Y-m-d H:i:s'),
+                'is_active' => $promotion->is_active
+            ]);
+            
+            return view('admin.promotions.edit', compact('promotion'));
+            
+        } catch (\Exception $e) {
+            Log::error('Error editing promotion: ' . $e->getMessage());
+            return redirect()->route('admin.promotions.index')
+                ->with('error', 'Promosi tidak ditemukan!');
+        }
     }
 
     /**
      * Update the specified promotion in storage.
      */
-    public function update(Request $request, Promotion $promotion)
+    public function update(Request $request, $id)
     {
         try {
+            $promotion = Promotion::findOrFail($id);
+            
             $request->validate([
                 'title' => 'required|string|max:255',
                 'description' => 'required|string',
@@ -104,13 +142,35 @@ class PromotionController extends Controller
             $data = $request->all();
             $data['is_active'] = $request->has('is_active') ? true : false;
             
+            Log::info('Updating promotion:', [
+                'id' => $id,
+                'old_title' => $promotion->title,
+                'new_title' => $data['title'],
+                'start_date_input' => $request->start_date,
+                'end_date_input' => $request->end_date
+            ]);
+            
             $promotion->update($data);
+            
+            // Refresh untuk mendapatkan data terbaru
+            $promotion->refresh();
+            
+            Log::info('Promotion updated successfully:', [
+                'id' => $promotion->id,
+                'title' => $promotion->title,
+                'start_date_db' => $promotion->getRawStartDateAttribute(),
+                'end_date_db' => $promotion->getRawEndDateAttribute(),
+                'start_date_accessor' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'end_date_accessor' => $promotion->end_date->format('Y-m-d H:i:s')
+            ]);
 
             return redirect()->route('admin.promotions.index')
-                ->with('success', 'Promosi berhasil diperbarui!');
+                ->with('success', 'Promosi "' . $promotion->title . '" berhasil diperbarui!');
 
         } catch (\Exception $e) {
             Log::error('Error updating promotion: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            
             return redirect()->back()
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
                 ->withInput();
@@ -120,13 +180,23 @@ class PromotionController extends Controller
     /**
      * Remove the specified promotion from storage.
      */
-    public function destroy(Promotion $promotion)
+    public function destroy($id)
     {
         try {
+            $promotion = Promotion::findOrFail($id);
+            $title = $promotion->title;
+            
+            Log::info('Deleting promotion:', [
+                'id' => $id,
+                'title' => $title
+            ]);
+            
             $promotion->delete();
             
+            Log::info('Promotion deleted successfully');
+            
             return redirect()->route('admin.promotions.index')
-                ->with('success', 'Promosi berhasil dihapus!');
+                ->with('success', 'Promosi "' . $title . '" berhasil dihapus!');
                 
         } catch (\Exception $e) {
             Log::error('Error deleting promotion: ' . $e->getMessage());

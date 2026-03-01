@@ -1,5 +1,4 @@
 <?php
-// app/Models/Gallery.php
 
 namespace App\Models;
 
@@ -10,9 +9,12 @@ class Gallery extends Model
 {
     use HasFactory;
 
+    protected $table = 'galleries';
+
     protected $fillable = [
         'image_path',
         'caption',
+        'description',
         'category',
         'sort_order',
         'is_active',
@@ -20,6 +22,8 @@ class Gallery extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -53,5 +57,43 @@ class Gallery extends Model
         }
         
         return $query->get();
+    }
+
+    /**
+     * Get formatted date
+     */
+    public function getFormattedDateAttribute()
+    {
+        return $this->created_at->format('d M Y');
+    }
+
+    /**
+     * Get category label
+     */
+    public function getCategoryLabelAttribute()
+    {
+        $labels = [
+            'food' => 'Makanan',
+            'facility' => 'Fasilitas',
+            'event' => 'Acara',
+            'interior' => 'Interior'
+        ];
+        
+        return $labels[$this->category] ?? ucfirst($this->category);
+    }
+
+    /**
+     * Get category icon
+     */
+    public function getCategoryIconAttribute()
+    {
+        $icons = [
+            'food' => 'utensils',
+            'facility' => 'building',
+            'event' => 'calendar-alt',
+            'interior' => 'store'
+        ];
+        
+        return $icons[$this->category] ?? 'image';
     }
 }

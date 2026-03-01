@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 
 class AdminController extends Controller
 {
@@ -68,7 +70,6 @@ class AdminController extends Controller
                 ->limit(5)
                 ->get()
                 ->map(function($reservation) {
-                    // Transform to match the expected format in the dashboard
                     return (object)[
                         'customer_name' => $reservation->customer_name,
                         'name' => $reservation->customer_name,
@@ -106,7 +107,6 @@ class AdminController extends Controller
                 'recentReservations',
                 'recentMenuItems',
                 'activePromotions',
-                // Add the aliases
                 'menuCount',
                 'promotionCount',
                 'reservationCount',
@@ -119,7 +119,6 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             Log::error('Error in dashboard: ' . $e->getMessage());
             
-            // Return empty data in case of error
             return view('admin.dashboard', [
                 'totalMenu' => 0,
                 'totalPromotions' => 0,
@@ -131,7 +130,6 @@ class AdminController extends Controller
                 'recentReservations' => collect([]),
                 'recentMenuItems' => collect([]),
                 'activePromotions' => 0,
-                // Add the aliases in error case too
                 'menuCount' => 0,
                 'promotionCount' => 0,
                 'reservationCount' => 0,
@@ -158,7 +156,7 @@ class AdminController extends Controller
     // ==================== MENU MANAGEMENT ====================
 
     /**
-     * Display menu items list
+     * Display list of menu items
      */
     public function menuIndex()
     {
@@ -239,10 +237,7 @@ class AdminController extends Controller
     public function menuEdit($id)
     {
         try {
-            // Find the menu item or fail
             $menuItem = MenuItem::with('category')->findOrFail($id);
-            
-            // Get categories for dropdown
             $categories = MenuCategory::where('is_active', true)
                 ->orderBy('sort_order')
                 ->orderBy('name')
@@ -301,28 +296,129 @@ class AdminController extends Controller
     }
 
     /**
-     * Delete menu item
+     * Delete menu item - ENHANCED VERSION WITH DETAILED LOGGING
      */
     public function menuDestroy($id)
     {
         try {
-            $menuItem = MenuItem::findOrFail($id);
+            // Log awal untuk debugging
+            Log::info('========== MENU DELETE ATTEMPT ==========');
+            Log::info('Attempting to delete menu item with ID: ' . $id);
+            Log::info('Request method: ' . request()->method());
+            Log::info('Request URL: ' . request()->fullUrl());
+            Log::info('Session ID: ' . session()->getId());
+            Log::info('User ID: ' . (Auth::check() ? Auth::id() : 'Not authenticated'));
+            
+            // Cari menu item
+            $menuItem = MenuItem::with('category')->find($id);
+            
+            if (!$menuItem) {
+                Log::error('Menu item not found with ID: ' . $id);
+                
+                if (request()->wantsJson() || request()->ajax()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Menu tidak ditemukan!'
+                    ], 404);
+                }
+                
+                return redirect()->route('admin.menu.index')
+                    ->with('error', 'Menu tidak ditemukan!');
+            }
+            
+            $menuName = $menuItem->name;
+            $categoryName = $menuItem->category ? $menuItem->category->name : 'No Category';
+            
+            Log::info('Found menu item:', [
+                'id' => $menuItem->id,
+                'name' => $menuName,
+                'category' => $categoryName,
+                'price' => $menuItem->price,
+                'is_available' => $menuItem->is_available
+            ]);
+            
+            // Hapus file gambar jika ada (bukan URL external)
+            if ($menuItem->image && !filter_var($menuItem->image, FILTER_VALIDATE_URL)) {
+                $imagePath = public_path('storage/menu/' . $menuItem->image);
+                Log::info('Checking image path: ' . $imagePath);
+                
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                    Log::info('Successfully deleted image file: ' . $imagePath);
+                } else {
+                    Log::warning('Image file not found: ' . $imagePath);
+                }
+            }
+            
+            // Simpan nama untuk flash message sebelum delete
+            $menuNameForMessage = $menuName;
+            
+            // Lakukan delete
             $menuItem->delete();
-
+            
+            Log::info('Successfully deleted menu item from database. ID: ' . $id . ', Name: ' . $menuNameForMessage);
+            
+            // Verifikasi bahwa item benar-benar terhapus
+            $checkDeleted = MenuItem::find($id);
+            if ($checkDeleted) {
+                Log::error('Menu item STILL EXISTS after delete! ID: ' . $id);
+            } else {
+                Log::info('Verified: Menu item no longer exists in database.');
+            }
+            
+            Log::info('========== MENU DELETE SUCCESS ==========');
+            
+            // Untuk request AJAX
+            if (request()->wantsJson() || request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Menu "' . $menuNameForMessage . '" berhasil dihapus!',
+                    'id' => $id
+                ]);
+            }
+            
+            // Untuk request biasa
             return redirect()->route('admin.menu.index')
-                ->with('success', 'Menu berhasil dihapus!');
-
+                ->with('success', 'Menu "' . $menuNameForMessage . '" berhasil dihapus!');
+                
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error('ModelNotFoundException: Menu item not found - ID: ' . $id);
+            Log::error('Error message: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            if (request()->wantsJson() || request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Menu tidak ditemukan!'
+                ], 404);
+            }
+            
+            return redirect()->route('admin.menu.index')
+                ->with('error', 'Menu tidak ditemukan!');
+                
         } catch (\Exception $e) {
-            Log::error('Error deleting menu item: ' . $e->getMessage());
+            Log::error('Exception occurred while deleting menu item:');
+            Log::error('Message: ' . $e->getMessage());
+            Log::error('File: ' . $e->getFile());
+            Log::error('Line: ' . $e->getLine());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+            
+            if (request()->wantsJson() || request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal menghapus menu: ' . $e->getMessage()
+                ], 500);
+            }
+            
             return redirect()->back()
-                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+                ->with('error', 'Gagal menghapus menu: ' . $e->getMessage());
         }
     }
 
-    // ==================== PROMOTION MANAGEMENT ====================
+     // ==================== PROMOTION MANAGEMENT ====================
 
     /**
-     * Display promotions list
+     * Display list of promotions
      */
     public function promotionsIndex()
     {
@@ -330,8 +426,20 @@ class AdminController extends Controller
             $promotions = Promotion::orderBy('sort_order')
                 ->orderBy('created_at', 'desc')
                 ->get();
-                
-            return view('admin.promotions.index', compact('promotions'));
+            
+            // Hitung statistik
+            $activeCount = Promotion::active()->count();
+            $upcomingCount = Promotion::upcoming()->count();
+            $expiredCount = Promotion::expired()->count();
+            $inactiveCount = Promotion::where('is_active', false)->count();
+            
+            return view('admin.promotions.index', compact(
+                'promotions', 
+                'activeCount', 
+                'upcomingCount', 
+                'expiredCount', 
+                'inactiveCount'
+            ));
             
         } catch (\Exception $e) {
             Log::error('Error in promotionsIndex: ' . $e->getMessage());
@@ -370,13 +478,37 @@ class AdminController extends Controller
             $data = $request->all();
             $data['is_active'] = $request->has('is_active') ? true : false;
             
-            Promotion::create($data);
+            // Log untuk debugging
+            Log::info('========== PROMOTION CREATE ATTEMPT ==========');
+            Log::info('Input data:', [
+                'title' => $data['title'],
+                'start_date_input' => $request->start_date,
+                'end_date_input' => $request->end_date,
+                'current_time_local' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'timezone' => config('app.timezone')
+            ]);
+            
+            $promotion = Promotion::create($data);
+            
+            Log::info('Promotion created:', [
+                'id' => $promotion->id,
+                'title' => $promotion->title,
+                'start_date_local' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'end_date_local' => $promotion->end_date->format('Y-m-d H:i:s'),
+                'start_date_raw' => $promotion->raw_start_date,
+                'end_date_raw' => $promotion->raw_end_date,
+                'is_active' => $promotion->is_active,
+                'status' => $promotion->status['label']
+            ]);
+            Log::info('========== PROMOTION CREATE SUCCESS ==========');
 
             return redirect()->route('admin.promotions.index')
-                ->with('success', 'Promosi berhasil ditambahkan!');
+                ->with('success', 'Promosi "' . $promotion->title . '" berhasil ditambahkan!');
 
         } catch (\Exception $e) {
             Log::error('Error creating promotion: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            
             return redirect()->back()
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
                 ->withInput();
@@ -390,7 +522,24 @@ class AdminController extends Controller
     {
         try {
             $promotion = Promotion::findOrFail($id);
+            
+            // Log untuk debugging
+            Log::info('========== PROMOTION EDIT VIEW ==========');
+            Log::info('Editing promotion:', [
+                'id' => $promotion->id,
+                'title' => $promotion->title,
+                'start_date_local' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'end_date_local' => $promotion->end_date->format('Y-m-d H:i:s'),
+                'start_date_raw' => $promotion->raw_start_date,
+                'end_date_raw' => $promotion->raw_end_date,
+                'now_local' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'now_utc' => Carbon::now('UTC')->format('Y-m-d H:i:s'),
+                'is_currently_active' => $promotion->isCurrentlyActive(),
+                'status' => $promotion->status['label']
+            ]);
+            
             return view('admin.promotions.edit', compact('promotion'));
+            
         } catch (\Exception $e) {
             Log::error('Error editing promotion: ' . $e->getMessage());
             return redirect()->route('admin.promotions.index')
@@ -399,12 +548,30 @@ class AdminController extends Controller
     }
 
     /**
-     * Update promotion
+     * Update promotion - VERSI LENGKAP DENGAN DEBUGGING
      */
     public function promotionsUpdate(Request $request, $id)
     {
         try {
+            Log::info('========== PROMOTION UPDATE ATTEMPT ==========');
+            Log::info('Promotion ID: ' . $id);
+            Log::info('Request data:', $request->all());
+            Log::info('Current time local: ' . Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'));
+            Log::info('Current time UTC: ' . Carbon::now('UTC')->format('Y-m-d H:i:s'));
+            Log::info('Timezone config: ' . config('app.timezone'));
+            
             $promotion = Promotion::findOrFail($id);
+            
+            Log::info('Existing promotion data:', [
+                'id' => $promotion->id,
+                'title' => $promotion->title,
+                'old_start_date_local' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'old_end_date_local' => $promotion->end_date->format('Y-m-d H:i:s'),
+                'old_start_date_raw' => $promotion->raw_start_date,
+                'old_end_date_raw' => $promotion->raw_end_date,
+                'old_is_active' => $promotion->is_active,
+                'old_status' => $promotion->status['label']
+            ]);
             
             $request->validate([
                 'title' => 'required|string|max:255',
@@ -423,13 +590,60 @@ class AdminController extends Controller
             $data = $request->all();
             $data['is_active'] = $request->has('is_active') ? true : false;
             
+            // Parse tanggal untuk verifikasi
+            $startDateLocal = Carbon::parse($request->start_date, 'Asia/Jakarta');
+            $endDateLocal = Carbon::parse($request->end_date, 'Asia/Jakarta');
+            
+            Log::info('Parsed dates:', [
+                'start_date_input' => $request->start_date,
+                'end_date_input' => $request->end_date,
+                'start_date_local' => $startDateLocal->format('Y-m-d H:i:s'),
+                'end_date_local' => $endDateLocal->format('Y-m-d H:i:s'),
+                'start_date_utc' => $startDateLocal->copy()->setTimezone('UTC')->format('Y-m-d H:i:s'),
+                'end_date_utc' => $endDateLocal->copy()->setTimezone('UTC')->format('Y-m-d H:i:s'),
+            ]);
+            
+            // Simpan data lama untuk perbandingan
+            $oldData = [
+                'title' => $promotion->title,
+                'start_date' => $promotion->start_date->format('Y-m-d H:i:s'),
+                'end_date' => $promotion->end_date->format('Y-m-d H:i:s'),
+                'is_active' => $promotion->is_active,
+                'status' => $promotion->status['label']
+            ];
+            
+            // Update data
             $promotion->update($data);
+            
+            // Refresh model untuk mendapatkan data terbaru
+            $promotion->refresh();
+            
+            Log::info('Update result:', [
+                'old_data' => $oldData,
+                'new_data' => [
+                    'title' => $promotion->title,
+                    'start_date_local' => $promotion->start_date->format('Y-m-d H:i:s'),
+                    'end_date_local' => $promotion->end_date->format('Y-m-d H:i:s'),
+                    'is_active' => $promotion->is_active,
+                ],
+                'raw_dates' => [
+                    'start_date_db' => $promotion->raw_start_date,
+                    'end_date_db' => $promotion->raw_end_date,
+                ],
+                'now_local' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'is_currently_active' => $promotion->isCurrentlyActive(),
+                'status' => $promotion->status['label']
+            ]);
+
+            Log::info('========== PROMOTION UPDATE SUCCESS ==========');
 
             return redirect()->route('admin.promotions.index')
-                ->with('success', 'Promosi berhasil diperbarui!');
+                ->with('success', 'Promosi "' . $promotion->title . '" berhasil diperbarui!');
 
         } catch (\Exception $e) {
             Log::error('Error updating promotion: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            
             return redirect()->back()
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
                 ->withInput();
@@ -443,22 +657,30 @@ class AdminController extends Controller
     {
         try {
             $promotion = Promotion::findOrFail($id);
+            
+            Log::info('========== PROMOTION DELETE ATTEMPT ==========');
+            Log::info('Attempting to delete promotion ID: ' . $id . ' Title: ' . $promotion->title);
+            
+            $title = $promotion->title;
             $promotion->delete();
             
+            Log::info('Successfully deleted promotion ID: ' . $id);
+            Log::info('========== PROMOTION DELETE SUCCESS ==========');
+            
             return redirect()->route('admin.promotions.index')
-                ->with('success', 'Promosi berhasil dihapus!');
+                ->with('success', 'Promosi "' . $title . '" berhasil dihapus!');
                 
         } catch (\Exception $e) {
-            Log::error('Error deleting promotion: ' . $e->getMessage());
+            Log::error('Error deleting promotion ID ' . $id . ': ' . $e->getMessage());
             return redirect()->back()
-                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+                ->with('error', 'Gagal menghapus promosi: ' . $e->getMessage());
         }
     }
 
     // ==================== GALLERY MANAGEMENT ====================
 
     /**
-     * Display gallery list
+     * Display list of gallery images
      */
     public function galleryIndex()
     {
@@ -472,7 +694,15 @@ class AdminController extends Controller
     }
 
     /**
-     * Store new gallery item
+     * Show form to create new gallery item
+     */
+    public function galleryCreate()
+    {
+        return view('admin.gallery.create');
+    }
+
+    /**
+     * Store new gallery image
      */
     public function galleryStore(Request $request)
     {
@@ -480,21 +710,20 @@ class AdminController extends Controller
             $request->validate([
                 'title' => 'required|string|max:255',
                 'description' => 'nullable|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+                'category' => 'required|in:food,facility,event,interior',
+                'image_url' => 'required|url',
                 'is_active' => 'boolean',
             ]);
 
-            $data = $request->except('image');
-            
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '_' . Str::slug($request->title) . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/gallery', $imageName);
-                $data['image'] = $imageName;
-            }
+            $data = [
+                'caption' => $request->title,
+                'description' => $request->description,
+                'category' => $request->category,
+                'is_active' => $request->has('is_active'),
+                'sort_order' => 0,
+                'image_path' => $request->image_url,
+            ];
 
-            $data['is_active'] = $request->has('is_active');
-            
             Gallery::create($data);
 
             return redirect()->route('admin.gallery.index')
@@ -509,17 +738,67 @@ class AdminController extends Controller
     }
 
     /**
-     * Delete gallery item
+     * Show form to edit gallery item
+     */
+    public function galleryEdit($id)
+    {
+        try {
+            $gallery = Gallery::findOrFail($id);
+            return view('admin.gallery.edit', compact('gallery'));
+        } catch (\Exception $e) {
+            Log::error('Error in galleryEdit: ' . $e->getMessage());
+            return redirect()->route('admin.gallery.index')
+                ->with('error', 'Gambar tidak ditemukan!');
+        }
+    }
+
+    /**
+     * Update gallery item
+     */
+    public function galleryUpdate(Request $request, $id)
+    {
+        try {
+            $gallery = Gallery::findOrFail($id);
+            
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'category' => 'required|in:food,facility,event,interior',
+                'image_url' => 'nullable|url',
+                'is_active' => 'boolean',
+            ]);
+
+            $data = [
+                'caption' => $request->title,
+                'description' => $request->description,
+                'category' => $request->category,
+                'is_active' => $request->has('is_active'),
+            ];
+            
+            if ($request->filled('image_url')) {
+                $data['image_path'] = $request->image_url;
+            }
+
+            $gallery->update($data);
+
+            return redirect()->route('admin.gallery.index')
+                ->with('success', 'Gambar berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            Log::error('Error updating gallery: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Delete gallery image
      */
     public function galleryDestroy($id)
     {
         try {
             $gallery = Gallery::findOrFail($id);
-            
-            if ($gallery->image) {
-                Storage::delete('public/gallery/' . $gallery->image);
-            }
-            
             $gallery->delete();
 
             return redirect()->route('admin.gallery.index')
@@ -532,10 +811,11 @@ class AdminController extends Controller
         }
     }
 
+    
     // ==================== RESERVATIONS MANAGEMENT ====================
 
     /**
-     * Display reservations list with counts
+     * Display list of reservations
      */
     public function reservationsIndex()
     {
@@ -544,15 +824,11 @@ class AdminController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
             
-            // Calculate counts by status
             $pendingCount = Reservation::where('status', 'pending')->count();
             $confirmedCount = Reservation::where('status', 'confirmed')->count();
             $completedCount = Reservation::where('status', 'completed')->count();
             $cancelledCount = Reservation::where('status', 'cancelled')->count();
             $totalCount = Reservation::count();
-            
-            // Debug: Log the data to check if reservations exist
-            Log::info('Reservations count: ' . $reservations->count());
             
             return view('admin.reservations.index', compact(
                 'reservations', 
@@ -569,11 +845,14 @@ class AdminController extends Controller
     }
 
     /**
-     * Update reservation status
+     * Update reservation status - MENGGUNAKAN POST
      */
     public function reservationUpdate(Request $request, $id)
     {
         try {
+            Log::info('Updating reservation ID: ' . $id);
+            Log::info('Request data: ', $request->all());
+            
             $reservation = Reservation::findOrFail($id);
             
             $request->validate([
@@ -583,6 +862,8 @@ class AdminController extends Controller
             $reservation->update([
                 'status' => $request->status,
             ]);
+
+            Log::info('Reservation updated successfully. New status: ' . $request->status);
 
             $statusMessages = [
                 'pending' => 'dikembalikan ke status Pending',
@@ -598,6 +879,8 @@ class AdminController extends Controller
 
         } catch (\Exception $e) {
             Log::error('Error updating reservation: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            
             return redirect()->back()
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
@@ -621,115 +904,12 @@ class AdminController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-<<<<<<< HEAD
-    
-    // =============== PERBAIKAN DI SINI ===============
-    public function galleryIndex()
-    {
-        if (Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Akses ditolak.');
-        }
-        
-        try {
-            $galleryItems = Gallery::latest()->get();
-        } catch (\Exception $e) {
-            $galleryItems = collect([]);
-        }
-        
-        return view('admin.gallery.index', compact('galleryItems'));
-    }
-    
-    /**
-     * Store new gallery item
-     */
-    public function galleryStore(Request $request)
-    {
-        if (Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Akses ditolak.');
-        }
-        
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
-            'category' => 'nullable|string|in:makanan,minuman,fasilitas,acara,interior',
-        ]);
-
-        try {
-            // Upload image
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                
-                // Generate unique filename
-                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                
-                // Store image
-                $image->storeAs('public/gallery', $imageName);
-                
-                // Map category from form to database enum
-                $categoryMap = [
-                    'makanan' => 'food',
-                    'minuman' => 'food',
-                    'fasilitas' => 'facility',
-                    'acara' => 'event',
-                    'interior' => 'interior'
-                ];
-                
-                $dbCategory = $categoryMap[$request->category] ?? 'food';
-                
-                // Save to database - PASTIKAN SEMUA KOLOM TERISI
-                $gallery = Gallery::create([
-                    'image_path' => $imageName, // INI PENTING: kolom image_path harus diisi
-                    'caption' => $request->title,
-                    'description' => $request->description,
-                    'category' => $dbCategory,
-                    'sort_order' => 0,
-                    'is_active' => true,
-                ]);
-                
-                // Debug: cek data yang tersimpan
-                \Log::info('Gallery item created:', $gallery->toArray());
-                
-                return redirect()->route('admin.gallery.index')
-                    ->with('success', 'Foto berhasil ditambahkan ke gallery!');
-            }
-            
-            return redirect()->route('admin.gallery.index')
-                ->with('error', 'Tidak ada file yang diupload.');
-                
-        } catch (\Exception $e) {
-            \Log::error('Error adding gallery: ' . $e->getMessage());
-            \Log::error('Stack trace: ' . $e->getTraceAsString());
-            
-            return redirect()->route('admin.gallery.index')
-                ->with('error', 'Gagal menambahkan gambar: ' . $e->getMessage());
-        }
-    }
-    
-    public function galleryDestroy($id)
-    {
-        if (Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Akses ditolak.');
-        }
-        
-        try {
-            $gallery = Gallery::findOrFail($id);
-            $gallery->delete();
-            return redirect()->route('admin.gallery.index')->with('success', 'Gambar berhasil dihapus');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.gallery.index')->with('error', 'Gagal menghapus gambar');
-        }
-    }
-    // =============== END PERBAIKAN ===============
-    
-=======
 
     // ==================== BRANCHES MANAGEMENT ====================
 
     /**
-     * Display branches list
+     * Display list of branches
      */
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     public function branchesIndex()
     {
         try {
@@ -815,7 +995,6 @@ class AdminController extends Controller
         try {
             $branch = Branch::findOrFail($id);
             
-            // Check if branch has reservations
             if ($branch->reservations()->count() > 0) {
                 return redirect()->back()
                     ->with('error', 'Cabang tidak dapat dihapus karena masih memiliki data reservasi!');
@@ -836,7 +1015,7 @@ class AdminController extends Controller
     // ==================== USERS MANAGEMENT ====================
 
     /**
-     * Display users list
+     * Display list of users
      */
     public function usersIndex()
     {
@@ -885,7 +1064,7 @@ class AdminController extends Controller
     // ==================== REVIEWS MANAGEMENT ====================
 
     /**
-     * Display reviews list
+     * Display list of reviews
      */
     public function reviewsIndex()
     {
@@ -946,13 +1125,206 @@ class AdminController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-<<<<<<< HEAD
-=======
+
+    // ==================== PAGE MANAGEMENT ====================
+
+    /**
+     * Edit contact page content
+     */
+    public function editContactPage()
+    {
+        try {
+            $page = Page::where('slug', 'contact')->first();
+            return view('admin.pages.contact', compact('page'));
+        } catch (\Exception $e) {
+            Log::error('Error in editContactPage: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Update contact page content - DIPERBAIKI DENGAN VALIDASI YANG SESUAI FORM
+     */
+    public function updateContactPage(Request $request)
+    {
+        try {
+            $rules = [
+                'address' => 'required|string',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|email|max:255',
+                'hours' => 'required|string|max:255',
+                'map_embed' => 'required|string',
+                'whatsapp_admin_1' => 'required|string|max:20',
+                'whatsapp_admin_1_name' => 'required|string|max:255',
+                'whatsapp_admin_2' => 'required|string|max:20',
+                'whatsapp_admin_2_name' => 'required|string|max:255',
+                'delivery_gofood' => 'nullable|url',
+                'delivery_grabfood' => 'nullable|url',
+                'facebook_url' => 'nullable|url',
+                'instagram_url' => 'nullable|url',
+                'twitter_url' => 'nullable|url',
+                'linkedin_url' => 'nullable|url',
+                'tiktok_url' => 'nullable|url',
+                'youtube_url' => 'nullable|url',
+            ];
+
+            $request->validate($rules);
+
+            $page = Page::where('slug', 'contact')->first();
+            $existingContent = $page ? $page->content : [];
+
+            $content = [
+                'hero_subtitle' => $request->has('hero_subtitle') ? $request->hero_subtitle : ($existingContent['hero_subtitle'] ?? 'HUBUNGI KAMI'),
+                'hero_title_line1' => $request->has('hero_title_line1') ? $request->hero_title_line1 : ($existingContent['hero_title_line1'] ?? 'Kami Siap'),
+                'hero_title_line2' => $request->has('hero_title_line2') ? $request->hero_title_line2 : ($existingContent['hero_title_line2'] ?? 'Melayani Dengan'),
+                'hero_title_line3' => $request->has('hero_title_line3') ? $request->hero_title_line3 : ($existingContent['hero_title_line3'] ?? 'Sepenuh Hati'),
+                'hero_description' => $request->has('hero_description') ? $request->hero_description : ($existingContent['hero_description'] ?? 'Ada pertanyaan tentang menu, reservasi, atau ingin mengadakan acara spesial? Tim Joss Gandos siap membantu dan melayani Anda dengan sepenuh hati.'),
+                'hero_image_url' => $request->has('hero_image_url') ? $request->hero_image_url : ($existingContent['hero_image_url'] ?? 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'),
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'hours' => $request->hours,
+                'map_embed' => $request->map_embed,
+                'whatsapp_admin_1' => $request->whatsapp_admin_1,
+                'whatsapp_admin_1_name' => $request->whatsapp_admin_1_name,
+                'whatsapp_admin_2' => $request->whatsapp_admin_2,
+                'whatsapp_admin_2_name' => $request->whatsapp_admin_2_name,
+                'delivery_gofood' => $request->delivery_gofood,
+                'delivery_grabfood' => $request->delivery_grabfood,
+                'facebook_url' => $request->facebook_url,
+                'instagram_url' => $request->instagram_url,
+                'twitter_url' => $request->twitter_url,
+                'linkedin_url' => $request->linkedin_url,
+                'tiktok_url' => $request->tiktok_url,
+                'youtube_url' => $request->youtube_url,
+                'social_media' => [
+                    'facebook' => $request->facebook_url ?? ($existingContent['facebook_url'] ?? '#'),
+                    'instagram' => $request->instagram_url ?? ($existingContent['instagram_url'] ?? '#'),
+                    'twitter' => $request->twitter_url ?? ($existingContent['twitter_url'] ?? '#'),
+                    'linkedin' => $request->linkedin_url ?? ($existingContent['linkedin_url'] ?? '#'),
+                    'tiktok' => $request->tiktok_url ?? ($existingContent['tiktok_url'] ?? '#'),
+                    'youtube' => $request->youtube_url ?? ($existingContent['youtube_url'] ?? '#'),
+                ],
+            ];
+
+            Page::updateOrCreate(
+                ['slug' => 'contact'],
+                [
+                    'title' => 'Kontak Kami',
+                    'content' => $content
+                ]
+            );
+
+            return redirect()->route('admin.pages.contact.edit')
+                ->with('success', 'Halaman kontak berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            Log::error('Error updating contact page: ' . $e->getMessage());
+            
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    /**
+     * Edit reservation page content
+     */
+    public function editReservationPage()
+    {
+        try {
+            $page = Page::where('slug', 'reservation')->first();
+            $branches = Branch::where('is_active', true)->get();
+            return view('admin.pages.reservation', compact('page', 'branches'));
+        } catch (\Exception $e) {
+            Log::error('Error in editReservationPage: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Update reservation page content
+     */
+    public function updateReservationPage(Request $request)
+    {
+        try {
+            $request->validate([
+                'hero_subtitle' => 'required|string|max:255',
+                'hero_title_line1' => 'required|string|max:255',
+                'hero_title_line2' => 'required|string|max:255',
+                'hero_title_line3' => 'required|string|max:255',
+                'hero_description' => 'required|string',
+                'hero_image_url' => 'required|url',
+                'address' => 'required|string',
+                'phone' => 'required|string|max:20',
+                'email' => 'required|email|max:255',
+                'hours' => 'required|string|max:255',
+                'map_embed' => 'required|string',
+                'whatsapp_admin_1' => 'required|string|max:20',
+                'whatsapp_admin_1_name' => 'required|string|max:255',
+                'whatsapp_admin_2' => 'required|string|max:20',
+                'whatsapp_admin_2_name' => 'required|string|max:255',
+                'delivery_gofood' => 'nullable|url',
+                'delivery_grabfood' => 'nullable|url',
+                'facebook_url' => 'nullable|url',
+                'instagram_url' => 'nullable|url',
+                'twitter_url' => 'nullable|url',
+                'linkedin_url' => 'nullable|url',
+            ]);
+
+            $content = [
+                'hero_subtitle' => $request->hero_subtitle,
+                'hero_title_line1' => $request->hero_title_line1,
+                'hero_title_line2' => $request->hero_title_line2,
+                'hero_title_line3' => $request->hero_title_line3,
+                'hero_description' => $request->hero_description,
+                'hero_image_url' => $request->hero_image_url,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'hours' => $request->hours,
+                'map_embed' => $request->map_embed,
+                'whatsapp_admin_1' => $request->whatsapp_admin_1,
+                'whatsapp_admin_1_name' => $request->whatsapp_admin_1_name,
+                'whatsapp_admin_2' => $request->whatsapp_admin_2,
+                'whatsapp_admin_2_name' => $request->whatsapp_admin_2_name,
+                'delivery_gofood' => $request->delivery_gofood,
+                'delivery_grabfood' => $request->delivery_grabfood,
+                'facebook_url' => $request->facebook_url,
+                'instagram_url' => $request->instagram_url,
+                'twitter_url' => $request->twitter_url,
+                'linkedin_url' => $request->linkedin_url,
+                'social_media' => [
+                    'facebook' => $request->facebook_url ?? '#',
+                    'instagram' => $request->instagram_url ?? '#',
+                    'twitter' => $request->twitter_url ?? '#',
+                    'linkedin' => $request->linkedin_url ?? '#',
+                ],
+            ];
+
+            Page::updateOrCreate(
+                ['slug' => 'reservation'],
+                [
+                    'title' => 'Reservasi & Kontak',
+                    'content' => $content
+                ]
+            );
+
+            return redirect()->route('admin.pages.reservation.edit')
+                ->with('success', 'Halaman reservasi berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            Log::error('Error updating reservation page: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
 
     // ==================== SETTINGS MANAGEMENT ====================
 
     /**
-     * Show settings edit form
+     * Edit settings
      */
     public function editSettings()
     {
@@ -1000,5 +1372,4 @@ class AdminController extends Controller
                 ->withInput();
         }
     }
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
 }

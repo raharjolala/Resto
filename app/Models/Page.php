@@ -14,7 +14,7 @@ class Page extends Model
         'meta_title',
         'meta_description',
         'content',
-        'image' // Tambahkan kolom image di sini
+        'image'
     ];
 
     protected $casts = [

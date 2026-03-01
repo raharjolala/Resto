@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Reservasi - JOSS GANDOS')
+@section('title', 'Reservasi & Kontak - JOSS GANDOS')
 
 @section('content')
-<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP - ORIGINAL PRESERVED -->
 <section class="elegant-hero">
     <!-- Soft Gradient Background -->
     <div class="elegant-gradient"></div>
@@ -30,14 +30,14 @@
                     <span class="badge-dot"></span>
                 </div>
                 
-                <!-- Main Heading -->
+                <!-- Main Heading - ORIGINAL PRESERVED -->
                 <h1 class="elegant-heading">
                     <span class="heading-line reveal-text">Pesan Meja</span>
                     <span class="heading-line gradient-highlight reveal-text" style="animation-delay: 0.2s">Untuk Momen</span>
                     <span class="heading-line reveal-text" style="animation-delay: 0.4s">Spesial Anda</span>
                 </h1>
                 
-                <!-- Description -->
+                <!-- Description - ORIGINAL PRESERVED -->
                 <p class="elegant-desc animate__animated animate__fadeInUp animate__delay-1s">
                     Pastikan tempat duduk terbaik untuk acara keluarga, pertemuan bisnis, 
                     atau momen romantis bersama orang tersayang di Joss Gandos.
@@ -49,14 +49,14 @@
                         <span>Reservasi Sekarang</span>
                         <i class="fas fa-calendar-check"></i>
                     </a>
-                    <a href="#benefits" class="btn-elegant btn-outline-elegant animate__animated animate__fadeInUp animate__delay-1s">
-                        <span>Info & Manfaat</span>
+                    <a href="#contact-info" class="btn-elegant btn-outline-elegant animate__animated animate__fadeInUp animate__delay-1s">
+                        <span>Info Kontak</span>
                         <i class="fas fa-info-circle"></i>
                     </a>
                 </div>
             </div>
             
-            <!-- HERO IMAGE -->
+            <!-- HERO IMAGE - ORIGINAL PRESERVED -->
             <div class="col-lg-6 col-xl-6">
                 <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
                     <div class="hero-image-container hero-image-extra-large">
@@ -87,7 +87,7 @@
     </div>
 </section>   
 
-<!-- Reservation Form -->
+<!-- Reservation Form Section -->
 <section id="reservation-form" class="form-section section-padding">
     <div class="container">
         <div class="row justify-content-center mb-6">
@@ -154,7 +154,7 @@
                                             Nama Lengkap *
                                         </label>
                                         <div class="input-with-icon">
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Masukkan nama lengkap" required>
                                             @error('name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -171,7 +171,7 @@
                                             Email *
                                         </label>
                                         <div class="input-with-icon">
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="contoh@email.com" required>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -188,7 +188,7 @@
                                             Nomor WhatsApp *
                                         </label>
                                         <div class="input-with-icon">
-                                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required>
+                                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" placeholder="081234567890" required>
                                             @error('phone')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -249,10 +249,6 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="date-info mt-2">
-                                                <small class="text-muted">
-                                                </small>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -285,10 +281,6 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="time-info mt-2">
-                                                <small class="text-muted">
-                                                </small>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -312,7 +304,7 @@
                                         Tulis Permintaan Khusus Anda
                                     </label>
                                     <div class="request-textarea">
-                                        <textarea class="form-control @error('specialRequests') is-invalid @enderror" id="specialRequests" name="specialRequests" rows="4">{{ old('specialRequests') }}</textarea>
+                                        <textarea class="form-control @error('specialRequests') is-invalid @enderror" id="specialRequests" name="specialRequests" rows="4" placeholder="Contoh: Meja dekat jendela, kursi bayi, request menu khusus, dll.">{{ old('specialRequests') }}</textarea>
                                         @error('specialRequests')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -364,117 +356,415 @@
     </div>
 </section>
 
-<!-- Benefits Section -->
-<section class="benefits-section section-padding bg-light-cream" id="benefits">
+<!-- Contact Info & Map Section -->
+<section class="section-padding bg-light" id="contact-info">
     <div class="container">
         <div class="row justify-content-center mb-6">
             <div class="col-lg-8 text-center">
                 <div class="section-header" data-aos="fade-up">
-                    <h2 class="display-4 fw-bold mb-4">Kenapa Reservasi <span class="text-gradient">Online?</span></h2>
-                    <p class="lead text-muted">Manfaat yang Anda dapatkan dengan booking meja melalui sistem kami</p>
+                    <h2 class="display-4 fw-bold mb-4">Informasi <span class="text-gradient">Kontak</span></h2>
+                    <p class="lead text-muted">Hubungi kami untuk pertanyaan, reservasi, atau informasi lainnya</p>
+                    <div class="divider"></div>
                 </div>
             </div>
         </div>
-        
+
         <div class="row g-4">
-            @foreach([
-                ['icon' => 'fas fa-bolt', 'title' => 'Konfirmasi Instan', 'desc' => 'Reservasi dikonfirmasi dalam 5 menit via WhatsApp'],
-                ['icon' => 'fas fa-gift', 'title' => 'Bonus Spesial', 'desc' => 'Dapatkan welcome drink untuk reservasi online'],
-                ['icon' => 'fas fa-star', 'title' => 'Prioritas Meja', 'desc' => 'Meja terbaik disiapkan untuk Anda'],
-                ['icon' => 'fas fa-clock', 'title' => 'Tidak Antri', 'desc' => 'Langsung duduk tanpa menunggu'],
-                ['icon' => 'fas fa-calendar-check', 'title' => 'Gratis Reservasi', 'desc' => 'Tidak ada biaya booking apapun'],
-                ['icon' => 'fas fa-headset', 'title' => 'Dukungan 24/7', 'desc' => 'Tim kami siap membantu kapan saja']
-            ] as $benefit)
-            <div class="col-lg-4 col-md-6">
-                <div class="benefit-card card border-0 shadow-sm h-100" data-aos="fade-up">
-                    <div class="card-body p-4">
-                        <div class="benefit-icon mb-4">
-                            <i class="{{ $benefit['icon'] }}"></i>
+            <!-- Quick Contact Info Cards -->
+            <div class="col-lg-4">
+                <div class="contact-info-card h-100 animate-fade-in">
+                    <div class="p-4">
+                        <h4 class="fw-bold mb-4 text-center" style="color: #b42222;">
+                            <i class="fas fa-info-circle me-2"></i>Info Kontak
+                        </h4>
+                        <div class="quick-contact-list">
+                            <div class="quick-contact-item d-flex align-items-center mb-3">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1" style="color: #333;">Lokasi Restoran</h6>
+                                    <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                        {{ $settings['address'] ?? 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="quick-contact-item d-flex align-items-center mb-3">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1" style="color: #333;">Jam Operasional</h6>
+                                    <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                        {{ $settings['hours'] ?? '10:00 - 22:00 WIB (Setiap Hari)' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="quick-contact-item d-flex align-items-center mb-3">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1" style="color: #333;">Email</h6>
+                                    <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                        {{ $settings['email'] ?? 'info@jossgandos.com' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="quick-contact-item d-flex align-items-center">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1" style="color: #333;">Telepon</h6>
+                                    <p class="mb-0 text-muted" style="font-size: 0.95rem;">
+                                        {{ $settings['phone'] ?? '0896-9907-1599' }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <h5 class="fw-bold mb-3">{{ $benefit['title'] }}</h5>
-                        <p class="text-muted mb-0">{{ $benefit['desc'] }}</p>
                     </div>
                 </div>
             </div>
-            @endforeach
+
+            <!-- Social Media & Quick Actions - FIXED dengan Icon Facebook, Instagram, TikTok -->
+            <div class="col-lg-4">
+                <div class="social-media-card h-100 animate-fade-in">
+                    <div class="p-4 text-center">
+                        <h4 class="fw-bold mb-4" style="color: #333;">
+                            <i class="fas fa-share-alt me-2"></i>Ikuti Kami
+                        </h4>
+                        
+                        <!-- Social Media Icons dengan styling yang lebih baik -->
+                        <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+                            @php
+                                // Ambil data dari settings
+                                $social = $settings['social_media'] ?? [];
+                                $facebook = $settings['facebook_url'] ?? ($social['facebook'] ?? '#');
+                                $instagram = $settings['instagram_url'] ?? ($social['instagram'] ?? '#');
+                                $tiktok = $settings['tiktok_url'] ?? ($social['tiktok'] ?? '#');
+                            @endphp
+                            
+                            <!-- Facebook Icon -->
+                            @if($facebook && $facebook != '#')
+                            <a href="{{ $facebook }}" class="social-icon" style="background: #1877f2; box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            @else
+                            <a href="#" class="social-icon" style="background: #1877f2; opacity: 0.5; cursor: not-allowed;" onclick="return false;">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            @endif
+                            
+                            <!-- Instagram Icon dengan gradient background -->
+                            @if($instagram && $instagram != '#')
+                            <a href="{{ $instagram }}" class="social-icon" style="background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285AEB); box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            @else
+                            <a href="#" class="social-icon" style="background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285AEB); opacity: 0.5; cursor: not-allowed;" onclick="return false;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            @endif
+                            
+                            <!-- TikTok Icon -->
+                            @if($tiktok && $tiktok != '#')
+                            <a href="{{ $tiktok }}" class="social-icon" style="background: #000000; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            @else
+                            <a href="#" class="social-icon" style="background: #000000; opacity: 0.5; cursor: not-allowed;" onclick="return false;">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            @endif
+                        </div>
+                        
+                        <!-- Informasi jika tidak ada social media yang aktif -->
+                        @if(($facebook == '#' || !$facebook) && ($instagram == '#' || !$instagram) && ($tiktok == '#' || !$tiktok))
+                            <p class="text-muted mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Belum ada tautan media sosial
+                            </p>
+                        @endif
+                        
+                        <!-- Quick Actions -->
+                        <div class="quick-actions mt-4">
+                            <a href="#map-section" class="contact-link d-block mb-2">
+                                <i class="fas fa-map-marked-alt me-1"></i> Lihat Peta Lokasi
+                            </a>
+                            <a href="https://wa.me/{{ $settings['whatsapp_admin_1'] ?? '6289699071599' }}?text=Halo%20JOSS%20GANDOS,%20saya%20ingin%20bertanya" 
+                               target="_blank" class="contact-link d-block">
+                                <i class="fab fa-whatsapp me-1"></i> Chat via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opening Hours & Additional Info -->
+            <div class="col-lg-4">
+                <div class="contact-info-card h-100 animate-fade-in">
+                    <div class="p-4">
+                        <h4 class="fw-bold mb-4 text-center" style="color: #b42222;">
+                            <i class="fas fa-clock me-2"></i>Jam Operasional
+                        </h4>
+                        
+                        <div class="opening-hours-list">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Senin - Kamis</span>
+                                <span class="fw-semibold">10:00 - 22:00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Jumat - Sabtu</span>
+                                <span class="fw-semibold">10:00 - 23:00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Minggu</span>
+                                <span class="fw-semibold">10:00 - 22:00</span>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="text-center mt-3">
+                                <p class="text-muted mb-2">
+                                    <i class="fas fa-utensils me-2"></i>Kitchen terakhir order 1 jam sebelum tutup
+                                </p>
+                                <p class="text-success mb-0">
+                                    <i class="fas fa-check-circle me-1"></i>Buka setiap hari
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="faq-section section-padding">
+<!-- Map Section -->
+<section class="section-padding bg-white" id="map-section">
     <div class="container">
-        <div class="row justify-content-center mb-6">
-            <div class="col-lg-8 text-center">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag mb-3 d-inline-block">BANTUAN</span>
-                    <h2 class="display-4 fw-bold mb-4">Pertanyaan <span class="text-gradient">Yang Sering Diajukan</span></h2>
-                    <p class="lead text-muted">Temukan jawaban untuk pertanyaan umum tentang reservasi</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="accordion" id="faqAccordion">
-                    @php
-                        $faqs = [
-                            [
-                                'q' => 'Berapa lama waktu konfirmasi reservasi?',
-                                'a' => 'Reservasi Anda akan dikonfirmasi maksimal 5 menit setelah pengisian formulir. Konfirmasi dikirim via WhatsApp dan email yang terdaftar.',
-                                'icon' => 'fa-clock'
-                            ],
-                            [
-                                'q' => 'Apakah ada biaya untuk reservasi?',
-                                'a' => 'Tidak, semua reservasi di JOSS GANDOS sepenuhnya gratis. Tidak ada biaya tambahan apapun untuk booking meja.',
-                                'icon' => 'fa-money-bill-wave'
-                            ],
-                            [
-                                'q' => 'Bagaimana jika saya terlambat datang?',
-                                'a' => 'Kami menahan meja maksimal 30 menit dari waktu reservasi. Jika lebih dari itu, meja akan tersedia untuk tamu lain. Silakan hubungi kami jika mengalami keterlambatan.',
-                                'icon' => 'fa-hourglass'
-                            ],
-                            [
-                                'q' => 'Bisa untuk acara khusus seperti ulang tahun?',
-                                'a' => 'Ya, kami menyediakan layanan khusus untuk ulang tahun, anniversary, meeting, dan acara lainnya. Tuliskan permintaan Anda di kolom "Permintaan Khusus".',
-                                'icon' => 'fa-gift'
-                            ],
-                            [
-                                'q' => 'Bagaimana cara membatalkan reservasi?',
-                                'a' => 'Anda dapat membatalkan reservasi melalui WhatsApp di nomor 0812-3456-7890 atau email reservation@jossgandos.com minimal 2 jam sebelum waktu reservasi.',
-                                'icon' => 'fa-calendar-xmark'
-                            ],
-                        ];
-                    @endphp
-                    
-                    @foreach($faqs as $index => $faq)
-                    <div class="accordion-item border-0 mb-3" data-aos="fade-up">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                                    data-bs-target="#faq{{ $index }}">
-                                <div class="d-flex align-items-center w-100">
-                                    <div class="faq-icon me-3">
-                                        <i class="fas {{ $faq['icon'] }}"></i>
-                                    </div>
-                                    <span class="fw-semibold">{{ $faq['q'] }}</span>
-                                </div>
-                            </button>
-                        </h3>
-                        <div id="faq{{ $index }}" class="accordion-collapse collapse" 
-                             data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                {{ $faq['a'] }}
+        <div class="map-card shadow-lg animate-fade-in" style="border-radius: 20px; overflow: hidden;">
+            <!-- Map Header -->
+            <div class="map-header p-4 p-md-5" 
+                 style="background: linear-gradient(135deg, #b42222, #e63946);">
+                <div class="row align-items-center">
+                    <div class="col-md-8 mb-4 mb-md-0">
+                        <div class="d-flex align-items-center">
+                            <div class="map-icon me-4">
+                                <i class="fas fa-map-marked-alt fa-3x text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white mb-2 fw-bold">Lokasi Kami</h4>
+                                <p class="text-white mb-0 opacity-90" style="font-size: 1.1rem;">
+                                    {{ $settings['address'] ?? 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231' }}
+                                </p>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    <div class="col-md-4 text-md-end">
+                        <a href="https://maps.google.com/?q={{ urlencode($settings['address'] ?? 'Jl. Jetis Seraten, Ketintang, Kec. Gayungan, Surabaya, Jawa Timur 60231') }}" 
+                           target="_blank" 
+                           class="btn btn-light btn-lg px-4 py-2">
+                            <i class="fas fa-directions me-2"></i> Petunjuk Arah
+                        </a>
+                    </div>
                 </div>
-                
-                <div class="text-center mt-5" data-aos="fade-up">
-                    <p class="text-muted mb-4">Masih punya pertanyaan lain?</p>
-                    <a href="{{ route('contact') }}" class="btn btn-outline-primary-red px-5 py-3">
-                        <i class="fas fa-comments me-2"></i>Hubungi Tim Kami
-                    </a>
+            </div>
+            
+            <!-- Map -->
+            <div class="map-container">
+                <div class="ratio ratio-16x9">
+                    <iframe 
+                        src="{{ $settings['map_embed'] ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.715058999945!2d112.73278731532677!3d-7.270442994754604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa1a4d1c8b07%3A0xc79190bc5e7be85!2sJl.%20Jetis%20Seraten%2C%20Ketintang%2C%20Kec.%20Gayungan%2C%20Surabaya%2C%20Jawa%20Timur%2060231!5e0!3m2!1sid!2sid!4v1641914256999!5m2!1sid!2sid' }}" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            
+            <!-- Map Features -->
+            <div class="map-features p-4" style="background: #f8f9fa;">
+                <div class="row text-center">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="feature-icon me-3">
+                                <i class="fas fa-car fa-2x" style="color: #b42222;"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 fw-semibold">Parkir Luas</p>
+                                <small class="text-muted">Tersedia parkir luas</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="feature-icon me-3">
+                                <i class="fas fa-wheelchair fa-2x" style="color: #b42222;"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 fw-semibold">Aksesibilitas</p>
+                                <small class="text-muted">Ramah difabel</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="feature-icon me-3">
+                                <i class="fas fa-train fa-2x" style="color: #b42222;"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 fw-semibold">Transportasi</p>
+                                <small class="text-muted">Akses mudah</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Delivery Services Section - FIXED dengan Button GoFood & GrabFood -->
+<section id="delivery-services" class="section-padding bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-3" style="color: #b42222;">
+                    Pesan <span class="text-warning">Delivery</span>
+                </h2>
+                <p class="lead text-muted mb-4">
+                    Nikmati menu favorit JOSS GANDOS langsung di rumah Anda melalui layanan delivery kami
+                </p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <!-- Delivery Apps -->
+        <div class="row g-4">
+            <!-- GoFood -->
+            <div class="col-md-4">
+                <div class="delivery-app-card text-center animate-fade-in">
+                    <div class="delivery-app-logo mb-3">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnA6euTxY_3bBbvCPE1E_j98O3fWg1WF2IbWmr4cNbt9VsFiY_Fwq7j9TnutdF8KDblPyno9HNOidxExb_pwbQtuMOT8Cdyc7KD01WhRtDlA82X4JybUimnGfUFdoBV9jsTN_eZEzbj37RlpPfXW2InMsaNsEf8bwd4ePUCRclJX9pRf11C-tHNTiZ/w380/GKL20_GoFood%20-%20Koleksilogo.com.jpg" 
+                             alt="GoFood" 
+                             class="img-fluid" 
+                             style="max-height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="delivery-app-content">
+                        <h4 class="fw-bold mb-3" style="color: #333;">GoFood</h4>
+                        <p class="text-muted mb-3">
+                            Pesan melalui aplikasi GoFood untuk pengiriman cepat dan mudah
+                        </p>
+                        
+                        <!-- GoFood Button - FIXED -->
+                        @if(isset($settings['delivery_gofood']) && $settings['delivery_gofood'] != '' && $settings['delivery_gofood'] != '#')
+                        <a href="{{ $settings['delivery_gofood'] }}" 
+                           target="_blank"
+                           class="btn w-100 py-3 fw-bold delivery-btn d-flex align-items-center justify-content-center gap-2">
+                            <i class="fas fa-external-link-alt"></i> 
+                            <span>Buka di GoFood</span>
+                        </a>
+                        @else
+                        <button class="btn w-100 py-3 fw-bold delivery-btn d-flex align-items-center justify-content-center gap-2" 
+                                style="opacity: 0.6; cursor: not-allowed;" 
+                                disabled>
+                            <i class="fas fa-external-link-alt"></i> 
+                            <span>Buka di GoFood</span>
+                        </button>
+                        <p class="text-muted small mt-2">
+                            <i class="fas fa-info-circle me-1"></i> Link belum tersedia
+                        </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- GrabFood -->
+            <div class="col-md-4">
+                <div class="delivery-app-card text-center animate-fade-in">
+                    <div class="delivery-app-logo mb-3">
+                        <img src="https://seduhteh.wordpress.com/wp-content/uploads/2019/11/grabfood-vector-logo.png" 
+                             alt="GrabFood" 
+                             class="img-fluid" 
+                             style="max-height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="delivery-app-content">
+                        <h4 class="fw-bold mb-3" style="color: #333;">GrabFood</h4>
+                        <p class="text-muted mb-3">
+                            Pesan melalui aplikasi GrabFood dengan berbagai pilihan menu lengkap
+                        </p>
+                        
+                        <!-- GrabFood Button - FIXED -->
+                        @if(isset($settings['delivery_grabfood']) && $settings['delivery_grabfood'] != '' && $settings['delivery_grabfood'] != '#')
+                        <a href="{{ $settings['delivery_grabfood'] }}" 
+                           target="_blank"
+                           class="btn w-100 py-3 fw-bold delivery-btn d-flex align-items-center justify-content-center gap-2">
+                            <i class="fas fa-external-link-alt"></i> 
+                            <span>Buka di GrabFood</span>
+                        </a>
+                        @else
+                        <button class="btn w-100 py-3 fw-bold delivery-btn d-flex align-items-center justify-content-center gap-2" 
+                                style="opacity: 0.6; cursor: not-allowed;" 
+                                disabled>
+                            <i class="fas fa-external-link-alt"></i> 
+                            <span>Buka di GrabFood</span>
+                        </button>
+                        <p class="text-muted small mt-2">
+                            <i class="fas fa-info-circle me-1"></i> Link belum tersedia
+                        </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- WhatsApp Order dengan Admin - BUTTON MERAH SEPERTI GRABFOOD -->
+            <div class="col-md-4">
+                <div class="delivery-app-card text-center animate-fade-in">
+                    <div class="delivery-app-logo mb-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2048px-WhatsApp.svg.png" 
+                             alt="WhatsApp" 
+                             class="img-fluid" 
+                             style="max-height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="delivery-app-content">
+                        <h4 class="fw-bold mb-3" style="color: #333;">WhatsApp Order</h4>
+                        <p class="text-muted mb-3">
+                            Pesan langsung via WhatsApp untuk konsultasi menu khusus
+                        </p>
+                        
+                        <!-- WhatsApp Admin Contacts - DUA BUTTON MERAH SEJAJAR (SEPERTI GRABFOOD) -->
+                        <div class="whatsapp-admin-buttons mb-3">
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <a href="https://wa.me/{{ $settings['whatsapp_admin_1'] ?? '6289699071599' }}?text=Halo%20{{ urlencode($settings['whatsapp_admin_1_name'] ?? 'Admin 1') }}%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                                       target="_blank"
+                                       class="btn w-100 py-2 whatsapp-admin-btn-red d-flex align-items-center justify-content-center">
+                                        <i class="fab fa-whatsapp me-2 fs-5"></i>
+                                        <div class="text-start">
+                                            <div class="fw-bold" style="font-size: 0.9rem;">{{ $settings['whatsapp_admin_1_name'] ?? 'Admin 1' }}</div>
+                                            <div style="font-size: 0.75rem; opacity: 0.9;">{{ $settings['whatsapp_admin_1'] ?? '0896-9907-1599' }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="https://wa.me/{{ $settings['whatsapp_admin_2'] ?? '6289532682495' }}?text=Halo%20{{ urlencode($settings['whatsapp_admin_2_name'] ?? 'Admin 2') }}%20JOSS%20GANDOS,%20saya%20ingin%20memesan%20delivery" 
+                                       target="_blank"
+                                       class="btn w-100 py-2 whatsapp-admin-btn-red d-flex align-items-center justify-content-center">
+                                        <i class="fab fa-whatsapp me-2 fs-5"></i>
+                                        <div class="text-start">
+                                            <div class="fw-bold" style="font-size: 0.9rem;">{{ $settings['whatsapp_admin_2_name'] ?? 'Admin 2' }}</div>
+                                            <div style="font-size: 0.75rem; opacity: 0.9;">{{ $settings['whatsapp_admin_2'] ?? '0895-3268-2495' }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="whatsapp-info small text-muted mt-2">
+                            <i class="fas fa-clock me-1"></i> Respon cepat 5-10 menit
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -483,7 +773,7 @@
 @endsection
 
 @section('styles')
-<!-- Keep all your existing CSS styles exactly as they were -->
+<!-- All the CSS styles remain exactly the same, ditambah styling untuk button merah -->
 <style>
     :root {
         --primary-red: #B22222;
@@ -1326,37 +1616,216 @@
         padding: 25px;
     }
     
-    /* CTA Section */
-    .cta-wrapper {
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
-        box-shadow: var(--box-shadow-lg);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .cta-wrapper::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        width: 100%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
-        opacity: 0.1;
-    }
-    
-    .btn-light {
+    /* Contact Info Card */
+    .contact-info-card {
         background: white;
-        color: var(--primary-red);
-        border-radius: 50px;
-        font-weight: 600;
+        border-radius: 15px;
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        border-color: #b42222;
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        background: rgba(180, 34, 34, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b42222;
+        font-size: 18px;
+    }
+    
+    .quick-contact-item {
         transition: all 0.3s ease;
     }
     
-    .btn-light:hover {
+    .quick-contact-item:hover {
+        transform: translateX(5px);
+    }
+    
+    .social-media-card {
+        background: white;
+        border-radius: 15px;
+        border: 1px solid rgba(0,0,0,0.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        height: 100%;
+    }
+    
+    .social-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    .contact-link {
+        color: #b42222;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-link:hover {
+        color: #8a1a1a;
+        text-decoration: underline;
+    }
+    
+    .map-card {
+        background: white;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .map-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .delivery-app-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .delivery-app-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(180, 34, 34, 0.1);
+        border-color: #b42222;
+    }
+    
+    .delivery-app-logo img {
+        transition: transform 0.3s ease;
+        max-height: 50px;
+        object-fit: contain;
+    }
+    
+    .delivery-app-card:hover .delivery-app-logo img {
+        transform: scale(1.1);
+    }
+    
+    .delivery-btn {
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        margin-top: auto;
+        font-weight: 600;
+        padding: 12px;
+        background: linear-gradient(135deg, #b42222, #e63946) !important;
+    }
+    
+    .delivery-btn:hover:not(:disabled) {
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 20px rgba(180, 34, 34, 0.3);
+        color: white;
+    }
+    
+    .delivery-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    /* Style untuk button admin merah seperti GrabFood - BARU */
+    .whatsapp-admin-btn-red {
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        padding: 10px 12px;
+        text-align: left;
+        background: linear-gradient(135deg, #b42222, #e63946) !important;
+        height: 100%;
+        box-shadow: 0 4px 10px rgba(180, 34, 34, 0.3);
+    }
+    
+    .whatsapp-admin-btn-red:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(180, 34, 34, 0.4);
+        color: white;
+        background: linear-gradient(135deg, #c53030, #ff4757) !important;
+    }
+    
+    .whatsapp-admin-btn-red i {
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .whatsapp-admin-btn-red .fw-bold,
+    .whatsapp-admin-btn-red div {
+        color: white !important;
+    }
+    
+    .divider {
+        width: 100px;
+        height: 4px;
+        background: #b42222;
+        margin: 20px auto;
+        border-radius: 2px;
+    }
+    
+    .opening-hours-list {
+        padding: 10px;
+    }
+    
+    .quick-actions {
+        border-top: 1px solid rgba(0,0,0,0.1);
+        padding-top: 20px;
+    }
+    
+    /* Animation */
+    .animate-fade-in {
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
     /* Responsive Design */
@@ -1445,6 +1914,24 @@
             width: 100%;
             margin-bottom: 10px;
         }
+        
+        .contact-info-card,
+        .social-media-card {
+            margin-bottom: 20px;
+        }
+        
+        .map-icon {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .map-icon i {
+            font-size: 2rem !important;
+        }
+        
+        .delivery-app-card {
+            padding: 15px;
+        }
     }
     
     @media (max-width: 576px) {
@@ -1479,6 +1966,88 @@
             width: 16px;
             height: 16px;
         }
+    }
+
+    /* CSS Tambahan untuk Timer dan Kode Reservasi */
+    .reservation-code-container {
+        animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    #reservationTimer {
+        transition: all 0.3s ease;
+    }
+
+    #timerDisplay {
+        font-family: 'Courier New', monospace;
+        background: white;
+        padding: 3px 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+            background: #f8f9fa;
+        }
+    }
+
+    /* Styling untuk alert success yang lebih baik */
+    .alert-success {
+        border-left: 4px solid #28a745;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    /* Styling untuk kode reservasi */
+    .reservation-code-container {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 15px;
+        border-left: 4px solid #28a745;
+    }
+
+    .reservation-code-container .code-box {
+        background: #b42222;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .reservation-code-container .code-box span {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-family: monospace;
+    }
+
+    /* CSS tambahan untuk social icons */
+    .social-icon i {
+        font-size: 1.2rem;
+    }
+    
+    .whatsapp-admin-btn-red .fab {
+        font-size: 1.2rem;
     }
 </style>
 @endsection
@@ -1524,8 +2093,7 @@
         
         // Date change handler with enhanced display
         dateInput.addEventListener('change', function() {
-            // Add animation effect
-            this.style.borderColor = 'var(--primary-red)';
+            this.style.borderColor = '#b42222';
             setTimeout(() => {
                 this.style.borderColor = '';
             }, 1000);
@@ -1534,8 +2102,7 @@
         // Time select enhancement
         const timeSelect = document.getElementById('time');
         timeSelect.addEventListener('change', function() {
-            // Add visual feedback
-            this.style.borderColor = 'var(--primary-red)';
+            this.style.borderColor = '#b42222';
             setTimeout(() => {
                 this.style.borderColor = '';
             }, 1000);
@@ -1544,7 +2111,7 @@
         // Special requests textarea enhancement
         const specialRequestsTextarea = document.getElementById('specialRequests');
         specialRequestsTextarea.addEventListener('focus', function() {
-            this.style.borderColor = 'var(--primary-red)';
+            this.style.borderColor = '#b42222';
         });
         
         specialRequestsTextarea.addEventListener('blur', function() {
@@ -1563,7 +2130,6 @@
             let value = this.value.replace(/\D/g, '');
             
             if (value.length > 0) {
-                // Format: 0812 3456 7890
                 if (value.length <= 4) {
                     value = value;
                 } else if (value.length <= 8) {
@@ -1576,17 +2142,20 @@
             this.value = value;
         });
 
-        // Get CSRF token from meta tag or form
+        // Get CSRF token
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || 
                           document.querySelector('input[name="_token"]')?.value;
 
-        // Form submission with AJAX
+        // Form submission with AJAX dan timer 5 menit untuk kode reservasi
         const form = document.getElementById('reservationForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoading = submitBtn.querySelector('.btn-loading');
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
+
+        // Variable untuk menyimpan timer
+        let reservationCodeTimer = null;
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1604,6 +2173,12 @@
                 termsCheckbox.classList.remove('is-invalid');
             }
             
+            // Cancel previous timer jika ada
+            if (reservationCodeTimer) {
+                clearInterval(reservationCodeTimer);
+                reservationCodeTimer = null;
+            }
+            
             // Hide any previous messages
             successMessage.classList.add('d-none');
             errorMessage.classList.add('d-none');
@@ -1616,7 +2191,7 @@
             // Collect form data
             const formData = new FormData(form);
             
-            // Send AJAX request with CSRF token in headers
+            // Send AJAX request
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -1635,28 +2210,95 @@
             })
             .then(data => {
                 if (data.success) {
-                    // Show success message
-                    successMessage.textContent = data.message;
+                    // Set waktu timer 5 menit (300 detik)
+                    let timeLeft = 300; // 5 menit dalam detik
+                    
+                    // Format waktu ke menit:detik
+                    const formatTime = (seconds) => {
+                        const mins = Math.floor(seconds / 60);
+                        const secs = seconds % 60;
+                        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                    };
+                    
+                    // Buat HTML untuk menampilkan kode reservasi dengan timer
+                    const reservationHTML = `
+                        <div class="reservation-code-container">
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <i class="fas fa-check-circle" style="color: #28a745; font-size: 24px; margin-right: 10px;"></i>
+                                <h5 style="margin: 0; color: #155724; font-weight: 600;">Reservasi Berhasil!</h5>
+                            </div>
+                            
+                            <!-- Tampilan persis seperti di image -->
+                            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                                <p style="font-size: 1.1rem; margin-bottom: 10px; color: #333;">
+                                    <strong>Reservasi berhasil! Kode reservasi Anda:</strong>
+                                </p>
+                                <div class="code-box">
+                                    <span>${data.data?.reservation_code || 'JOSS-MR6QII'}</span>
+                                </div>
+                                
+                                <!-- Timer countdown -->
+                                <div id="reservationTimer" style="text-align: center; padding: 10px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 8px; margin-top: 10px;">
+                                    <i class="fas fa-hourglass-half" style="color: #856404; margin-right: 5px;"></i>
+                                    <span style="color: #856404; font-weight: 600;">
+                                        Waktu untuk menyimpan kode: <span id="timerDisplay" style="font-size: 20px; font-weight: bold; background: white; padding: 3px 10px; border-radius: 5px; margin-left: 5px;">5:00</span>
+                                    </span>
+                                </div>
+                                
+                                <p style="margin-top: 15px; margin-bottom: 5px; color: #666; font-size: 0.9rem;">
+                                    <i class="fas fa-camera me-1"></i> Screenshot atau foto kode ini sebelum timer habis
+                                </p>
+                            </div>
+                            
+                            <p style="margin-bottom: 5px;"><strong>🔍 Informasi Pribadi</strong></p>
+                            <p style="color: #666; font-size: 0.9rem;">Lengkapi data diri Anda untuk keperluan konfirmasi</p>
+                        </div>
+                    `;
+                    
+                    // Tampilkan pesan sukses dengan kode reservasi
+                    successMessage.innerHTML = reservationHTML;
                     successMessage.classList.remove('d-none');
                     
-                    // Scroll to top to show message
+                    // Scroll ke atas untuk menampilkan pesan
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Jalankan timer
+                    reservationCodeTimer = setInterval(() => {
+                        timeLeft--;
+                        
+                        // Update tampilan timer
+                        const timerDisplay = document.getElementById('timerDisplay');
+                        if (timerDisplay) {
+                            timerDisplay.textContent = formatTime(timeLeft);
+                        }
+                        
+                        // Jika waktu habis
+                        if (timeLeft <= 0) {
+                            clearInterval(reservationCodeTimer);
+                            reservationCodeTimer = null;
+                            
+                            // Update tampilan timer menjadi expired
+                            const reservationTimer = document.getElementById('reservationTimer');
+                            if (reservationTimer) {
+                                reservationTimer.innerHTML = `
+                                    <i class="fas fa-exclamation-triangle" style="color: #721c24; margin-right: 5px;"></i>
+                                    <span style="color: #721c24; font-weight: 600;">
+                                        Waktu penyimpanan kode telah habis. Silakan reservasi ulang jika diperlukan.
+                                    </span>
+                                `;
+                                reservationTimer.style.background = '#f8d7da';
+                                reservationTimer.style.borderColor = '#f5c6cb';
+                            }
+                        }
+                    }, 1000);
                     
                     // Reset form
                     form.reset();
                     
                     // Reset date to today
+                    const today = new Date();
                     dateInput.value = today.toISOString().split('T')[0];
                     
-                    // Show reservation code if available
-                    if (data.data && data.data.reservation_code) {
-                        successMessage.innerHTML += `<br><strong>Kode Reservasi: ${data.data.reservation_code}</strong>`;
-                    }
-                    
-                    // Auto hide success message after 5 seconds
-                    setTimeout(() => {
-                        successMessage.classList.add('d-none');
-                    }, 5000);
                 } else {
                     // Show error message
                     errorMessage.textContent = data.message || 'Terjadi kesalahan. Silakan coba lagi.';
@@ -1706,6 +2348,30 @@
                 errorMessage.classList.add('d-none');
             }, 5000);
         @endif
+
+        // WhatsApp click tracking
+        document.querySelectorAll('a[href*="whatsapp"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('WhatsApp link clicked:', this.href);
+            });
+        });
+
+        // Delivery app cards hover effect
+        document.querySelectorAll('.delivery-app-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const logo = this.querySelector('.delivery-app-logo img');
+                if (logo) {
+                    logo.style.transform = 'scale(1.1)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const logo = this.querySelector('.delivery-app-logo img');
+                if (logo) {
+                    logo.style.transform = 'scale(1)';
+                }
+            });
+        });
     });
 </script>
 @endsection

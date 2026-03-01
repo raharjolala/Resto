@@ -1,30 +1,23 @@
 <?php
-// routes/web.php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\ContactController;
+use App\Models\Promotion;
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
-<<<<<<< HEAD
-| PUBLIC WEBSITE ROUTES
-|--------------------------------------------------------------------------
-*/
-
-=======
 | Web Routes
 |--------------------------------------------------------------------------
 */
 
-// ==================== PUBLIC WEBSITE ROUTES ====================
+// ==================== PUBLIC ROUTES ====================
 
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
 // Home Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -38,24 +31,19 @@ Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.s
 // About Page
 Route::get('/about', [PageController::class, 'indexAbout'])->name('about');
 
-// Contact Pages
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+// Contact Page
+Route::get('/contact', [PageController::class, 'indexContact'])->name('contact');
 
-// Reservation Pages
+// Reservation Page
 Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| ADMIN LOGIN ROUTES (GUEST)
-|--------------------------------------------------------------------------
-*/
-=======
-// ==================== ADMIN LOGIN ROUTES ====================
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+// Contact form submission
+Route::post('/contact/submit', [ContactController::class, 'store'])->name('contact.submit');
 
+// ==================== AUTHENTICATION ROUTES ====================
+
+// Admin Login Page
 Route::get('/admin/login', function () {
     if (auth()->check() && auth()->user()?->role === 'admin') {
         return redirect()->route('admin.dashboard');
@@ -63,18 +51,18 @@ Route::get('/admin/login', function () {
     return view('auth.login');
 })->name('admin.login')->middleware('guest');
 
+// Admin Login Submit
 Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| ADMIN PROTECTED ROUTES
-|--------------------------------------------------------------------------
-*/
-=======
-// ==================== ADMIN PROTECTED ROUTES ====================
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+// Redirect /login to admin login
+Route::get('/login', function () {
+    return redirect()->route('admin.login');
+})->name('login');
 
+// Logout route
+Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+// ==================== ADMIN PROTECTED ROUTES ====================
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     
     // Dashboard
@@ -84,161 +72,136 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Logout
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | PAGE MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
     // ===== PAGE MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     
-    // Home Page Edit
+    // Home Page Edit & Update
     Route::get('/pages/home/edit', [PageController::class, 'editHome'])->name('pages.home.edit');
     Route::post('/pages/home/update', [PageController::class, 'updateHome'])->name('pages.home.update');
     
-    // About Page Edit
+    // About Page Edit & Update
     Route::get('/pages/about/edit', [PageController::class, 'editAbout'])->name('pages.about.edit');
     Route::post('/pages/about/update', [PageController::class, 'updateAbout'])->name('pages.about.update');
     
-<<<<<<< HEAD
-    // Contact Page Edit - GUNAKAN CONTROLLER BARU
-    Route::get('/pages/contact/edit', [App\Http\Controllers\Admin\PageContactController::class, 'edit'])->name('pages.contact.edit');
-    Route::post('/pages/contact/update', [App\Http\Controllers\Admin\PageContactController::class, 'update'])->name('pages.contact.update');
-    
-    /*
-    |--------------------------------------------------------------------------
-    | MENU MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // Contact Page Edit
+    // Contact Page Edit & Update
     Route::get('/pages/contact/edit', [PageController::class, 'editContact'])->name('pages.contact.edit');
     Route::post('/pages/contact/update', [PageController::class, 'updateContact'])->name('pages.contact.update');
     
     // ===== MENU MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     Route::get('/menu', [AdminController::class, 'menuIndex'])->name('menu.index');
     Route::get('/menu/create', [AdminController::class, 'menuCreate'])->name('menu.create');
     Route::post('/menu', [AdminController::class, 'menuStore'])->name('menu.store');
     Route::get('/menu/{id}/edit', [AdminController::class, 'menuEdit'])->name('menu.edit');
-    Route::put('/menu/{id}', [AdminController::class, 'menuUpdate'])->name('menu.update');
+    Route::post('/menu/{id}/update', [AdminController::class, 'menuUpdate'])->name('menu.update'); // ← Ini sudah POST
     Route::delete('/menu/{id}', [AdminController::class, 'menuDestroy'])->name('menu.destroy');
-    
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | PROMOTION MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== PROMOTION MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+
+       // ===== PROMOTIONS MANAGEMENT =====
     Route::get('/promotions', [AdminController::class, 'promotionsIndex'])->name('promotions.index');
     Route::get('/promotions/create', [AdminController::class, 'promotionsCreate'])->name('promotions.create');
     Route::post('/promotions', [AdminController::class, 'promotionsStore'])->name('promotions.store');
     Route::get('/promotions/{id}/edit', [AdminController::class, 'promotionsEdit'])->name('promotions.edit');
     Route::put('/promotions/{id}', [AdminController::class, 'promotionsUpdate'])->name('promotions.update');
     Route::delete('/promotions/{id}', [AdminController::class, 'promotionsDestroy'])->name('promotions.destroy');
+    // PASTIKAN TIDAK ADA DUPLIKASI ROUTE UNTUK UPDATE
+    Route::put('/promotions/{id}', [AdminController::class, 'promotionsUpdate'])->name('promotions.update'); // ← Gunakan PUT
+    // ATAU
+    // Route::post('/promotions/{id}/update', [AdminController::class, 'promotionsUpdate'])->name('promotions.update'); // ← Alternatif
+    Route::get('/debug-promotions', function() {
+    $nowUTC = Carbon::now('UTC');
+    $nowJakarta = Carbon::now('Asia/Jakarta');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | GALLERY MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
+    $promotions = Promotion::all();
+    
+    $data = [
+        'server_info' => [
+            'timezone_config' => config('app.timezone'),
+            'php_timezone' => date_default_timezone_get(),
+            'current_time_utc' => $nowUTC->format('Y-m-d H:i:s'),
+            'current_time_jakarta' => $nowJakarta->format('Y-m-d H:i:s'),
+        ],
+        'database_stats' => [
+            'total_promotions' => Promotion::count(),
+            'active_flag_true' => Promotion::where('is_active', true)->count(),
+            'using_scope_active' => Promotion::active()->count(),
+        ],
+        'promotions' => []
+    ];
+    
+    foreach ($promotions as $promo) {
+        $data['promotions'][] = [
+            'id' => $promo->id,
+            'title' => $promo->title,
+            'is_active' => $promo->is_active,
+            'sort_order' => $promo->sort_order,
+            'start_date' => [
+                'raw_db' => $promo->getRawStartDateAttribute(),
+                'accessor' => $promo->start_date ? $promo->start_date->format('Y-m-d H:i:s') : null,
+                'timezone' => $promo->start_date ? $promo->start_date->timezoneName : null,
+            ],
+            'end_date' => [
+                'raw_db' => $promo->getRawEndDateAttribute(),
+                'accessor' => $promo->end_date ? $promo->end_date->format('Y-m-d H:i:s') : null,
+                'timezone' => $promo->end_date ? $promo->end_date->timezoneName : null,
+            ],
+            'status' => [
+                'label' => $promo->status['label'],
+                'class' => $promo->status['class'],
+            ],
+            'is_currently_active' => $promo->isCurrentlyActive(),
+            'comparison_with_jakarta' => [
+                'start <= now' => $promo->start_date ? ($promo->start_date <= $nowJakarta) : false,
+                'end >= now' => $promo->end_date ? ($promo->end_date >= $nowJakarta) : false,
+                'result' => $promo->isCurrentlyActive()
+            ]
+        ];
+    }
+    
+    return response()->json($data);
+});
+
+    Route::delete('/promotions/{id}', [AdminController::class, 'promotionsDestroy'])->name('promotions.destroy');
     // ===== GALLERY MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('gallery.index');
+    Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('gallery.create');
     Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('gallery.store');
+    Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('gallery.edit');
+    Route::post('/gallery/{id}', [AdminController::class, 'galleryUpdate'])->name('gallery.update');
     Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('gallery.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | RESERVATIONS MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
     // ===== RESERVATIONS MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     Route::get('/reservations', [AdminController::class, 'reservationsIndex'])->name('reservations.index');
-    Route::put('/reservations/{id}', [AdminController::class, 'reservationUpdate'])->name('reservations.update');
+    Route::post('/reservations/{id}', [AdminController::class, 'reservationUpdate'])->name('reservations.update');
     Route::delete('/reservations/{id}', [AdminController::class, 'reservationDestroy'])->name('reservations.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | BRANCHES MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== BRANCHES MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
-    Route::get('/branches', [AdminController::class, 'branchesIndex'])->name('branches.index');
-    Route::post('/branches', [AdminController::class, 'branchStore'])->name('branches.store');
-    Route::put('/branches/{id}', [AdminController::class, 'branchUpdate'])->name('branches.update');
-    Route::delete('/branches/{id}', [AdminController::class, 'branchDestroy'])->name('branches.destroy');
-    
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | USERS MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/users', [AdminController::class, 'usersIndex'])->name('users.index');
-    Route::put('/users/{id}', [AdminController::class, 'userUpdate'])->name('users.update');
-    
-    /*
-    |--------------------------------------------------------------------------
-    | REVIEWS MANAGEMENT
-    |--------------------------------------------------------------------------
-    */
-=======
+    // ===== RESERVATIONS CHECK (DEBUGGING) =====
+    Route::get('/reservations/check', function() {
+        $reservations = App\Models\Reservation::with('branch')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        return view('admin.reservations.check', compact('reservations'));
+    })->name('reservations.check');
+
     // ===== USERS MANAGEMENT =====
     Route::get('/users', [AdminController::class, 'usersIndex'])->name('users.index');
-    Route::put('/users/{id}', [AdminController::class, 'userUpdate'])->name('users.update');
+    Route::post('/users/{id}', [AdminController::class, 'userUpdate'])->name('users.update');
+    
+    // ===== BRANCHES MANAGEMENT =====
+    Route::get('/branches', [AdminController::class, 'branchesIndex'])->name('branches.index');
+    Route::post('/branches', [AdminController::class, 'branchStore'])->name('branches.store');
+    Route::post('/branches/{id}', [AdminController::class, 'branchUpdate'])->name('branches.update');
+    Route::delete('/branches/{id}', [AdminController::class, 'branchDestroy'])->name('branches.destroy');
     
     // ===== REVIEWS MANAGEMENT =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
     Route::get('/reviews', [AdminController::class, 'reviewsIndex'])->name('reviews.index');
-    Route::put('/reviews/{id}', [AdminController::class, 'reviewUpdate'])->name('reviews.update');
+    Route::post('/reviews/{id}', [AdminController::class, 'reviewUpdate'])->name('reviews.update');
     Route::delete('/reviews/{id}', [AdminController::class, 'reviewDestroy'])->name('reviews.destroy');
     
-<<<<<<< HEAD
-    /*
-    |--------------------------------------------------------------------------
-    | SETTINGS
-    |--------------------------------------------------------------------------
-    */
-=======
-    // ===== SETTINGS =====
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
+    // ===== SETTINGS MANAGEMENT =====
     Route::get('/settings', [AdminController::class, 'editSettings'])->name('settings.edit');
     Route::post('/settings', [AdminController::class, 'updateSettings'])->name('settings.update');
 });
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| FALLBACK/COMPATIBILITY ROUTES
-|--------------------------------------------------------------------------
-*/
-=======
-// ==================== FALLBACK/COMPATIBILITY ROUTES ====================
->>>>>>> 4445d268fcdd7b7393d5e1904f8d75382898a400
-
-// Redirect /login to admin login
-Route::get('/login', function () {
-    return redirect()->route('admin.login');
-})->name('login');
-
-// Logout route (for compatibility)
-Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
-
-// Fallback route - catch all undefined routes and redirect to home
+// ==================== FALLBACK ROUTE ====================
 Route::fallback(function () {
     return redirect()->route('home');
 });

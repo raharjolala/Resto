@@ -8,7 +8,7 @@
 @endphp
 
 @section('content')
-<!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
+<!-- ========== HERO SECTION ========== -->
 <section class="elegant-hero">
     <!-- Soft Gradient Background -->
     <div class="elegant-gradient"></div>
@@ -97,75 +97,79 @@
     </div>
 </section>
 
-<!-- SEJARAH SECTION -->
-<section id="sejarah" class="section-padding" style="padding: 80px 0;">
+<!-- ========== SEJARAH SECTION DENGAN FONT MODERN ========== -->
+<section id="sejarah" class="section-padding sejarah-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <div class="section-header mb-5" data-aos="fade-right">
-                    <span class="section-tag mb-3 d-inline-block">SEJARAH KAMI</span>
+                <div class="section-header mb-5" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="section-tag-wrapper">
+                        <span class="section-tag-glow"></span>
+                        <span class="section-tag">SEJARAH KAMI</span>
+                    </div>
                     <h2 class="display-4 fw-bold mb-4">
                         Delapan Tahun<br>
                         <span class="text-gradient-red">Dedikasi & Inovasi</span>
                     </h2>
                     
-                    <div class="history-card">
+                    <div class="history-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="history-card-inner">
-                            <div class="history-icon">
-                                <i class="fas fa-calendar-check"></i>
+                            <div class="history-icon-wrapper">
+                                <div class="history-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="history-icon-pulse"></div>
                             </div>
                             <div class="history-text">
                                 <h5>Berdiri: 28 Oktober 2017</h5>
                                 <p>Pionir restoran di kawasan Jalan Jemursari</p>
+                                <div class="history-decoration"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="history-content" data-aos="fade-up">
-                    <p class="lead">
-                        {{ $content['history_description_1'] ?? 'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.' }}
+                <!-- HISTORY CONTENT - SEMUA TEKS DISAMAKAN DENGAN PARAGRAF TERAKHIR -->
+                <div class="history-content modern-text" data-aos="fade-up" data-aos-delay="400">
+                    <p class="history-paragraph history-paragraph-bold">
+                        Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.
                     </p>
-                    <p>
-                        {{ $content['history_description_2'] ?? 'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.' }}
+                    
+                    <p class="history-paragraph history-paragraph-bold">
+                        Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah <span class="text-gradient-red fw-bold">Bebek Joss Gandos</span> — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.
                     </p>
-                    <p class="mb-0">
-                        {{ $content['history_description_3'] ?? 'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.' }}
+                    
+                    <p class="history-paragraph history-paragraph-bold">
+                        Nama <span class="text-gradient-red fw-bold">'Joss Gandos'</span> dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.
+                    </p>
+                    
+                    <p class="history-paragraph history-last">
+                        Berdiri pada <span class="fw-bold text-gradient-red">28 Oktober 2017</span>, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.
                     </p>
                 </div>
             </div>
             
             <div class="col-lg-6">
-                <div class="journey-card" data-aos="fade-left">
+                <!-- ========== PERJALANAN RESTO DENGAN FONT MODERN ========== -->
+                <div class="journey-card premium-card" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="card-bg-pattern"></div>
                     <div class="journey-header">
-                        <h3>Perjalanan Resto Joss Gandos</h3>
-                        <p>Dari langkah kecil hingga menjadi resto kebanggaan bersama</p>
+                        <h3 class="journey-main-title">PERJALANAN RESTO JOSS GANDOS</h3>
+                        <p class="journey-quote">"Dari langkah kecil hingga menjadi resto kebanggaan bersama"</p>
+                        <div class="header-decoration">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
                     
-                    <div class="timeline-wrapper">
-                        @php
-                            $timeline = $content['timeline'] ?? [];
-                        @endphp
-                        
-                        @forelse($timeline as $item)
-                        <div class="timeline-item">
-                            <div class="timeline-year">{{ $item['year'] ?? '' }}</div>
-                            <div class="timeline-content">
-                                <h5>{{ $item['title'] ?? '' }}</h5>
-                                <ul>
-                                    @foreach(($item['items'] ?? []) as $listItem)
-                                    <li>{{ $listItem }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        @empty
-                        <!-- Default timeline jika tidak ada data -->
-                        <div class="timeline-item">
-                            <div class="timeline-year">2017</div>
-                            <div class="timeline-content">
-                                <h5>Awal Berdiri</h5>
-                                <ul>
+                    <div class="timeline-wrapper modern-timeline">
+                        <!-- 2017 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                            <div class="timeline-year-badge">2017</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Awal Berdiri</h5>
+                                <ul class="timeline-list">
                                     <li>Didirikan oleh CEO Dr. Siswanto</li>
                                     <li>Menu khas Banyuwangi (Bebek & Rujak Soto)</li>
                                     <li>Nama awal: "Bebek Joss Gandos"</li>
@@ -175,11 +179,12 @@
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2018-19</div>
-                            <div class="timeline-content">
-                                <h5>Merintis & Inovasi</h5>
-                                <ul>
+                        <!-- 2018-19 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                            <div class="timeline-year-badge">2018-2019</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Merintis & Inovasi</h5>
+                                <ul class="timeline-list">
                                     <li>Masa perjuangan mendapatkan kepercayaan customer</li>
                                     <li>Mengembangkan variasi menu</li>
                                     <li>Menjadi pionir kuliner di Jemursari</li>
@@ -187,11 +192,12 @@
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2020</div>
-                            <div class="timeline-content">
-                                <h5>Bertahan di Pandemi</h5>
-                                <ul>
+                        <!-- 2020 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                            <div class="timeline-year-badge">2020</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Bertahan di Pandemi</h5>
+                                <ul class="timeline-list">
                                     <li>Tutup sementara 3 bulan & SDM terbatas</li>
                                     <li>Beradaptasi dengan jual sembako & pesan antar</li>
                                     <li>Bukti kekuatan dan solidaritas tim</li>
@@ -199,11 +205,12 @@
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2021</div>
-                            <div class="timeline-content">
-                                <h5>Bangkit & Menu Baru</h5>
-                                <ul>
+                        <!-- 2021 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                            <div class="timeline-year-badge">2021</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Bangkit & Menu Baru</h5>
+                                <ul class="timeline-list">
                                     <li>Renovasi area VIP & Outdoor</li>
                                     <li>Peluncuran Gulai Kepala Ikan Salmon</li>
                                     <li>Aneka menu nusantara autentik</li>
@@ -211,22 +218,24 @@
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2022</div>
-                            <div class="timeline-content">
-                                <h5>Semakin Dipercaya</h5>
-                                <ul>
+                        <!-- 2022 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="500">
+                            <div class="timeline-year-badge">2022</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Semakin Dipercaya</h5>
+                                <ul class="timeline-list">
                                     <li>Peningkatan pesat customer event & gathering</li>
                                     <li>Fasilitas Karaoke VIP menjadi daya tarik utama</li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2023</div>
-                            <div class="timeline-content">
-                                <h5>Ekspansi & Menu Ikonik</h5>
-                                <ul>
+                        <!-- 2023 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="600">
+                            <div class="timeline-year-badge">2023</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Ekspansi & Menu Ikonik</h5>
+                                <ul class="timeline-list">
                                     <li>Renovasi besar: 6 VIP Room</li>
                                     <li>Gulai Kepala Ikan Salmon menjadi ikon</li>
                                     <li>Tanpa santan, kaya rempah</li>
@@ -234,29 +243,29 @@
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2024</div>
-                            <div class="timeline-content">
-                                <h5>Cabang Baru</h5>
-                                <ul>
+                        <!-- 2024 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="700">
+                            <div class="timeline-year-badge">2024</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Cabang Baru</h5>
+                                <ul class="timeline-list">
                                     <li>Peningkatan layanan pesan antar & reservasi</li>
                                     <li>Agustus 2024: Cabang baru di Ketintang</li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <div class="timeline-item">
-                            <div class="timeline-year">2025</div>
-                            <div class="timeline-content">
-                                <h5>Sewindu Joss Gandos!</h5>
-                                <ul>
+                        <!-- 2025 -->
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="800">
+                            <div class="timeline-year-badge">2025</div>
+                            <div class="timeline-content-card">
+                                <h5 class="timeline-year-title">Sewindu Joss Gandos!</h5>
+                                <ul class="timeline-list">
                                     <li>8 tahun perjalanan penuh perjuangan</li>
                                     <li>Siap melangkah lebih jauh</li>
-                                    <li>Pengalaman yang Joss, Mantap, Luar Biasa!</li>
                                 </ul>
                             </div>
                         </div>
-                        @endforelse
                     </div>
                 </div>
             </div>
@@ -264,7 +273,7 @@
     </div>
 </section>
 
-<!-- VISI MISI - SATU CARD ELEGAN -->
+<!-- ========== VISI MISI SECTION DENGAN FONT MODERN ========== -->
 <section class="vision-mission-single-card-section" style="padding: 80px 0;">
     <div class="container">
         <div class="row justify-content-center">
@@ -280,7 +289,7 @@
                     </div>
                     
                     <div class="card-content-wrapper">
-                        <!-- VISI SECTION -->
+                        <!-- VISI SECTION DENGAN FONT SAMA SEPERTI "KUALITAS PREMIUM" -->
                         <div class="visi-section">
                             <div class="visi-header">
                                 <div class="icon-badge visi-icon-badge">
@@ -290,8 +299,8 @@
                             </div>
                             
                             <div class="visi-text">
-                                <p>
-                                    {{ $content['vision_quote'] ?? 'Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.' }}
+                                <p class="visi-full-text visi-bold-text">
+                                    Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.
                                 </p>
                             </div>
                         </div>
@@ -319,47 +328,47 @@
                                     </div>
                                 </div>
                                 @empty
-                                <!-- Default missions -->
+                                <!-- Default missions dengan teks yang lebih deskriptif -->
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">01</div>
                                     <div class="misi-content">
                                         <h4>Kualitas Premium</h4>
-                                        <p>Menyajikan hidangan berkualitas tinggi dengan bahan segar.</p>
+                                        <p>Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.</p>
                                     </div>
                                 </div>
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">02</div>
                                     <div class="misi-content">
                                         <h4>Pelayanan Prima</h4>
-                                        <p>Pelayanan cepat, ramah, dan profesional.</p>
+                                        <p>Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.</p>
                                     </div>
                                 </div>
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">03</div>
                                     <div class="misi-content">
                                         <h4>Suasana Nyaman</h4>
-                                        <p>Suasana bersih, nyaman, dan bersahabat.</p>
+                                        <p>Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.</p>
                                     </div>
                                 </div>
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">04</div>
                                     <div class="misi-content">
                                         <h4>Inovasi Berkelanjutan</h4>
-                                        <p>Terus berinovasi menu dan layanan.</p>
+                                        <p>Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.</p>
                                     </div>
                                 </div>
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">05</div>
                                     <div class="misi-content">
                                         <h4>Standar Kebersihan</h4>
-                                        <p>Menjaga standar kebersihan (hygiene) tertinggi.</p>
+                                        <p>Menjaga standar kebersihan (hygiene) tertinggi di setiap area.</p>
                                     </div>
                                 </div>
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">06</div>
                                     <div class="misi-content">
                                         <h4>Kontribusi Sosial</h4>
-                                        <p>Kontribusi positif bagi lingkungan sekitar.</p>
+                                        <p>Memberikan kontribusi positif bagi lingkungan sekitar.</p>
                                     </div>
                                 </div>
                                 @endforelse
@@ -367,9 +376,9 @@
                         </div>
                     </div>
                     
-                    <!-- Card Footer -->
-                    <div class="card-footer-premium">
-                        <div class="footer-quote">
+                    <!-- Card Footer - DIPOSISIKAN DI TENGAH -->
+                    <div class="card-footer-premium text-center">
+                        <div class="footer-quote d-flex justify-content-center align-items-center">
                             <i class="fas fa-quote-left"></i>
                             <span>JOSS, MANTAP, LUAR BIASA</span>
                             <i class="fas fa-quote-right"></i>
@@ -381,7 +390,7 @@
     </div>
 </section>
 
-<!-- FOUNDER SECTION -->
+<!-- ========== FOUNDER SECTION ========== -->
 <section class="founder-section" style="padding: 80px 0;">
     <div class="container">
         <div class="row align-items-center">
@@ -418,16 +427,16 @@
                     <div class="founder-quote">
                         <i class="fas fa-quote-left quote-icon"></i>
                         <p>
-                            {{ $content['founder_description'] ?? 'Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage di luar latar belakang IT.' }}
+                            Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage (F&B) di luar latar belakang IT.
                         </p>
                     </div>
                     
                     <div class="founder-story">
                         <p>
-                            {{ $content['founder_story_1'] ?? 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.' }}
+                            Berawal dari rintisan sederhana bernama <strong>"Bebek Joss Gandos"</strong>, beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.
                         </p>
                         <p>
-                            {{ $content['founder_story_2'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat "Joss, Mantap, dan Luar Biasa", resto ini sukses melewati tantangan pandemi dan terus berinovasi.' }}
+                            Di bawah kepemimpinan beliau dengan filosofi semangat <strong>"Joss, Mantap, dan Luar Biasa"</strong>, resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik <span class="text-primary">Gulai Kepala Ikan Salmon</span>. Dedikasi beliau adalah memastikan setiap tamu merasakan kehangatan pelayanan dan cita rasa yang tak terlupakan.
                         </p>
                     </div>
                     
@@ -437,7 +446,7 @@
     </div>
 </section>
 
-<!-- TEAM SECTION -->
+<!-- ========== TIM KAMI SECTION ========== -->
 <section id="tim" class="team-section" style="padding: 80px 0;">
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
@@ -514,7 +523,7 @@
     </div>
 </section>
 
-<!-- CTA SECTION - RED GRADIENT -->
+<!-- ========== CTA SECTION ========== -->
 <section class="cta-section-red-gradient" style="padding: 80px 0;">
     <div class="container">
         <div class="cta-wrapper-red">
@@ -537,7 +546,7 @@
                     <!-- Premium Badge -->
                     <div class="cta-badge animate__animated animate__fadeInDown">
                         <span class="badge-dot"></span>
-                        <span>#JOSSGANDOSEXPERIENCE</span>
+                        <span>#JOSS GANDOS EXPERIENCE</span>
                         <span class="badge-dot"></span>
                     </div>
                     
@@ -551,13 +560,13 @@
                         {{ $content['cta_description'] ?? 'Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan dengan hidangan autentik dan pelayanan terbaik dari keluarga Joss Gandos.' }}
                     </p>
                     
-                    <!-- CTA Buttons -->
+                    <!-- CTA Buttons - BUTTON KUNJUNGI KAMI DIHUBUNGKAN KE RESERVATION PAGE SECTION LOKASI -->
                     <div class="cta-buttons-red animate__animated animate__fadeInUp animate__delay-2s">
                         <a href="{{ route('reservation.create') }}" class="btn-cta-red btn-primary-red">
                             <span>Reservasi Sekarang</span>
                             <i class="fas fa-calendar-check"></i>
                         </a>
-                        <a href="{{ route('contact') }}" class="btn-cta-red btn-outline-red">
+                        <a href="{{ route('reservation.create') }}#map-section" class="btn-cta-red btn-outline-red">
                             <span>Kunjungi Kami</span>
                             <i class="fas fa-map-marker-alt"></i>
                         </a>
@@ -568,11 +577,17 @@
         </div>
     </div>
 </section>
+
+<!-- BACK TO TOP BUTTON -->
+<div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</div>
 @endsection
 
 @section('styles')
 <style>
-    /* ========== IMPORT ANIMATE.CSS ========== */
+    /* ========== IMPORT FONT MODERN ========== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
 
     /* ========== VARIABLES ========== */
@@ -586,6 +601,7 @@
         --bg-light: #FFF9F0;
         --text-dark: #1E2A36;
         --text-gray: #5A6A72;
+        --text-elegant: #2C3E50;
         --shadow-sm: 0 5px 20px rgba(0,0,0,0.02);
         --shadow-md: 0 10px 30px rgba(0,0,0,0.05);
         --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
@@ -595,10 +611,42 @@
         --border-radius-md: 20px;
         --border-radius-lg: 30px;
         --border-radius-xl: 50px;
-        --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         --glass-bg: rgba(255, 255, 255, 0.7);
         --glass-border: rgba(255, 255, 255, 0.2);
         --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ========== TYPOGRAPHY MODERN ========== */
+    body {
+        font-family: var(--font-primary);
+        color: var(--text-elegant);
+        line-height: 1.6;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 16px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-primary);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+    }
+
+    p {
+        font-family: var(--font-primary);
+        font-weight: 400;
+        line-height: 1.7;
+    }
+
+    .fw-semibold {
+        font-weight: 600;
+    }
+    
+    .fw-bold {
+        font-weight: 700;
     }
 
     /* ========== ELEGANT RED GRADIENT HERO ========== */
@@ -769,6 +817,7 @@
         line-height: 1.2;
         color: white;
         text-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        font-family: var(--font-primary);
     }
 
     .gradient-highlight {
@@ -787,6 +836,7 @@
         margin-bottom: 30px;
         font-weight: 300;
         letter-spacing: 0.3px;
+        font-family: var(--font-primary);
     }
 
     .elegant-cta {
@@ -808,6 +858,7 @@
         transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
         overflow: hidden;
         border: none;
+        font-family: var(--font-primary);
     }
 
     .btn-primary-elegant {
@@ -1022,7 +1073,671 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Founder Image */
+    /* ========== SEJARAH SECTION DENGAN FONT MODERN ========== */
+    .sejarah-section {
+        padding: 80px 0;
+        background: white;
+    }
+    
+    .section-tag-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+    
+    .section-tag-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(178,34,34,0.2) 0%, transparent 70%);
+        filter: blur(10px);
+        z-index: 0;
+    }
+    
+    .section-tag {
+        background: var(--primary-red);
+        color: white;
+        padding: 8px 24px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        box-shadow: var(--shadow-red);
+        position: relative;
+        z-index: 1;
+        font-family: var(--font-primary);
+    }
+
+    .text-gradient-red {
+        background: linear-gradient(135deg, var(--primary-red), var(--accent-gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* History Card Modern */
+    .history-card {
+        background: linear-gradient(145deg, #ffffff, #f8f8f8);
+        border-radius: 25px;
+        padding: 25px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        border-left: 5px solid var(--primary-red);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .history-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(178,34,34,0.03) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .history-card:hover {
+        transform: translateX(10px) translateY(-5px);
+        box-shadow: 0 25px 45px rgba(178, 34, 34, 0.15);
+    }
+
+    .history-card-inner {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .history-icon-wrapper {
+        position: relative;
+    }
+    
+    .history-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: white;
+        box-shadow: 0 10px 20px rgba(178, 34, 34, 0.2);
+        position: relative;
+        z-index: 2;
+    }
+    
+    .history-icon-pulse {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        background: rgba(178, 34, 34, 0.2);
+        border-radius: 20px;
+        animation: pulse-ring 2s infinite;
+        z-index: 1;
+    }
+    
+    @keyframes pulse-ring {
+        0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+        70% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
+        100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    }
+
+    .history-text {
+        flex: 1;
+    }
+
+    .history-text h5 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: var(--text-dark);
+        font-family: var(--font-primary);
+    }
+
+    .history-text p {
+        color: var(--text-gray);
+        margin-bottom: 0;
+        font-size: 0.95rem;
+        font-family: var(--font-primary);
+    }
+    
+    .history-decoration {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, rgba(212,160,23,0.05) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    /* Modern Text Styles - SEMUA PARAGRAF DISAMAKAN */
+    .modern-text {
+        color: var(--text-elegant);
+    }
+    
+    .history-paragraph {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        color: var(--text-gray);
+        font-family: var(--font-primary);
+        line-height: 1.8;
+    }
+    
+    .history-paragraph-bold {
+        font-weight: 400 !important;
+        color: var(--text-dark) !important;
+    }
+    
+    .history-last {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        font-weight: 400;
+        color: var(--text-dark);
+    }
+
+    /* Journey Card Premium */
+    .journey-card.premium-card {
+        background: linear-gradient(145deg, #ffffff, #f9f9f9);
+        border-radius: 40px;
+        padding: 35px;
+        box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+    
+    .card-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(var(--primary-red) 1px, transparent 1px);
+        background-size: 30px 30px;
+        opacity: 0.02;
+        pointer-events: none;
+    }
+
+    .journey-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba(178, 34, 34, 0.1);
+    }
+
+    .journey-main-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        font-family: var(--font-primary);
+    }
+    
+    .journey-quote {
+        color: var(--primary-red);
+        font-style: italic;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        font-family: var(--font-primary);
+        font-weight: 400;
+    }
+    
+    .header-decoration {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .header-decoration span {
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-red), var(--accent-gold));
+        border-radius: 3px;
+    }
+    
+    .header-decoration span:nth-child(2) {
+        width: 20px;
+        opacity: 0.5;
+    }
+    
+    .header-decoration span:nth-child(3) {
+        width: 10px;
+        opacity: 0.3;
+    }
+
+    /* Modern Timeline */
+    .timeline-wrapper.modern-timeline {
+        max-height: 650px;
+        overflow-y: auto;
+        padding-right: 15px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-red) #f1f1f1;
+    }
+
+    .timeline-wrapper.modern-timeline::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .timeline-wrapper.modern-timeline::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .timeline-wrapper.modern-timeline::-webkit-scrollbar-thumb {
+        background: var(--primary-red);
+        border-radius: 4px;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 25px;
+        padding-left: 110px;
+        transition: transform 0.3s ease;
+    }
+    
+    .timeline-item:hover {
+        transform: translateX(5px);
+    }
+
+    .timeline-year-badge {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        color: white;
+        padding: 10px 20px;
+        border-radius: 40px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        min-width: 95px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3);
+        z-index: 2;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        font-family: var(--font-primary);
+    }
+    
+    .timeline-content-card {
+        background: white;
+        padding: 25px;
+        border-radius: 24px;
+        border-left: 4px solid var(--accent-gold);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .timeline-content-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, rgba(178,34,34,0.02) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+    
+    .timeline-item:hover .timeline-content-card {
+        box-shadow: 0 15px 35px rgba(178, 34, 34, 0.1);
+        border-left-color: var(--primary-red);
+    }
+
+    .timeline-year-title {
+        color: var(--primary-red);
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        position: relative;
+        z-index: 2;
+        font-family: var(--font-primary);
+    }
+    
+    .timeline-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .timeline-list li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        color: var(--text-gray);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        font-family: var(--font-primary);
+    }
+    
+    .timeline-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent-gold);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    /* ========== VISI MISI SECTION DENGAN FONT MODERN ========== */
+    .vision-mission-single-card-section {
+        padding: 80px 0;
+        background: linear-gradient(145deg, #fcf9f7 0%, #ffffff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .vision-mission-premium-card {
+        background: white;
+        border-radius: 60px;
+        padding: 50px;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
+    }
+
+    .vision-mission-premium-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 40px 80px -20px rgba(178, 34, 34, 0.2);
+        border-color: rgba(178, 34, 34, 0.2);
+    }
+
+    .card-bg-ornament {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .ornament-circle {
+        position: absolute;
+        border-radius: 50%;
+    }
+
+    .ornament-circle.circle-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(178,34,34,0.02) 0%, transparent 70%);
+        top: -150px;
+        right: -150px;
+    }
+
+    .ornament-circle.circle-2 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(212,160,23,0.02) 0%, transparent 70%);
+        bottom: -100px;
+        left: -100px;
+    }
+
+    .ornament-line {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(178,34,34,0.1), transparent);
+        transform: rotate(10deg);
+    }
+
+    .card-content-wrapper {
+        position: relative;
+        z-index: 2;
+    }
+
+    .visi-section {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-bottom: 40px;
+        border-bottom: 2px solid rgba(178,34,34,0.1);
+    }
+
+    .visi-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .icon-badge.visi-icon-badge {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        box-shadow: 0 15px 30px rgba(178,34,34,0.2);
+    }
+
+    .icon-badge.misi-icon-badge {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--accent-gold), #B8860B);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        box-shadow: 0 15px 30px rgba(212,160,23,0.2);
+    }
+
+    .visi-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+        position: relative;
+        font-family: var(--font-primary);
+    }
+
+    .visi-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-red), var(--accent-gold));
+        border-radius: 4px;
+        transform: scaleX(0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .visi-section:hover .visi-title::after {
+        transform: scaleX(1);
+    }
+
+    /* VISI TEXT - DISAMAKAN DENGAN "KUALITAS PREMIUM" */
+    .visi-full-text {
+        font-size: 1.3rem;
+        line-height: 1.8;
+        color: var(--text-dark);
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: var(--font-primary);
+    }
+    
+    .visi-bold-text {
+        font-weight: 490 !important;
+    }
+
+    .misi-section {
+        position: relative;
+    }
+
+    .misi-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .misi-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+        position: relative;
+        font-family: var(--font-primary);
+    }
+
+    .misi-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent-gold), var(--primary-red));
+        border-radius: 4px;
+        transform: scaleX(0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .misi-section:hover .misi-title::after {
+        transform: scaleX(1);
+    }
+
+    .misi-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .misi-item-static {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .misi-item-static::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--primary-red), var(--accent-gold));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .misi-item-static:hover {
+        transform: translateX(10px) translateY(-5px);
+        background: white;
+        box-shadow: 0 15px 30px rgba(178,34,34,0.1);
+        border-color: rgba(178,34,34,0.2);
+    }
+
+    .misi-item-static:hover::before {
+        opacity: 1;
+    }
+
+    .misi-number-static {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        color: white;
+        border-radius: 15px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        box-shadow: 0 8px 15px rgba(178,34,34,0.2);
+        font-family: var(--font-primary);
+    }
+
+    .misi-content {
+        flex: 1;
+    }
+
+    .misi-content h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 5px;
+        font-family: var(--font-primary);
+    }
+
+    .misi-content p {
+        font-size: 0.9rem;
+        color: var(--text-gray);
+        margin-bottom: 0;
+        line-height: 1.6;
+        font-family: var(--font-primary);
+    }
+
+    .card-footer-premium {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 2px solid rgba(178,34,34,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .footer-quote {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: var(--primary-red);
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin: 0 auto;
+    }
+
+    .footer-quote i {
+        color: var(--accent-gold);
+        font-size: 1.1rem;
+        opacity: 0.5;
+    }
+
+    .footer-quote span {
+        font-family: var(--font-primary);
+        font-weight: 600;
+    }
+
+    /* ========== FOUNDER SECTION ========== */
     .founder-section {
         padding: 80px 0;
         background: white;
@@ -1177,6 +1892,7 @@
         border: 2px solid rgba(255, 255, 255, 0.4);
         backdrop-filter: blur(5px);
         animation: badgeFloat 3s ease-in-out infinite;
+        font-family: var(--font-primary);
     }
 
     @keyframes badgeFloat {
@@ -1190,6 +1906,7 @@
         color: var(--text-dark);
         margin-bottom: 30px;
         line-height: 1.2;
+        font-family: var(--font-primary);
     }
 
     .founder-quote {
@@ -1212,480 +1929,26 @@
         color: var(--text-gray);
         font-style: italic;
         margin-bottom: 0;
+        font-family: var(--font-primary);
     }
 
     .founder-story p {
         color: var(--text-gray);
         line-height: 1.8;
         margin-bottom: 20px;
+        font-family: var(--font-primary);
     }
-
-    /* Vision Mission Card */
-    .vision-mission-single-card-section {
-        padding: 80px 0;
-        background: linear-gradient(145deg, #fcf9f7 0%, #ffffff 100%);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .vision-mission-premium-card {
-        background: white;
-        border-radius: 60px;
-        padding: 50px;
-        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.1);
-        position: relative;
-        overflow: hidden;
-        border: 1px solid rgba(255, 215, 0, 0.2);
-        transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
-    }
-
-    .vision-mission-premium-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 40px 80px -20px rgba(178, 34, 34, 0.2);
-        border-color: rgba(178, 34, 34, 0.2);
-    }
-
-    .card-bg-ornament {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
-
-    .ornament-circle {
-        position: absolute;
-        border-radius: 50%;
-    }
-
-    .ornament-circle.circle-1 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(178,34,34,0.02) 0%, transparent 70%);
-        top: -150px;
-        right: -150px;
-    }
-
-    .ornament-circle.circle-2 {
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, rgba(212,160,23,0.02) 0%, transparent 70%);
-        bottom: -100px;
-        left: -100px;
-    }
-
-    .ornament-line {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(178,34,34,0.1), transparent);
-        transform: rotate(10deg);
-    }
-
-    .card-content-wrapper {
-        position: relative;
-        z-index: 2;
-    }
-
-    .visi-section {
-        text-align: center;
-        margin-bottom: 50px;
-        padding-bottom: 40px;
-        border-bottom: 2px solid rgba(178,34,34,0.1);
-    }
-
-    .visi-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-
-    .icon-badge.visi-icon-badge {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 2rem;
-        box-shadow: 0 15px 30px rgba(178,34,34,0.2);
-        transform: none;
-        transition: none;
-    }
-
-    .icon-badge.misi-icon-badge {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, var(--accent-gold), #B8860B);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 2rem;
-        box-shadow: 0 15px 30px rgba(212,160,23,0.2);
-        transform: none;
-        transition: none;
-    }
-
-    .visi-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0;
-        position: relative;
-    }
-
-    .visi-title::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary-red), var(--accent-gold));
-        border-radius: 4px;
-        transform: scaleX(0.3);
-        transition: transform 0.3s ease;
-    }
-
-    .visi-section:hover .visi-title::after {
-        transform: scaleX(1);
-    }
-
-    .visi-text p {
-        font-size: 1.3rem;
-        line-height: 1.8;
-        color: var(--text-dark);
-        font-weight: 400;
-    }
-
-    .misi-section {
-        position: relative;
-    }
-
-    .misi-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
-    .misi-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0;
-        position: relative;
-    }
-
-    .misi-title::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(90deg, var(--accent-gold), var(--primary-red));
-        border-radius: 4px;
-        transform: scaleX(0.3);
-        transition: transform 0.3s ease;
-    }
-
-    .misi-section:hover .misi-title::after {
-        transform: scaleX(1);
-    }
-
-    .misi-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    .misi-item-static {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        transition: box-shadow 0.3s ease, transform 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .misi-item-static::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(to bottom, var(--primary-red), var(--accent-gold));
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .misi-item-static:hover {
-        transform: translateX(10px) translateY(-5px);
-        background: white;
-        box-shadow: 0 15px 30px rgba(178,34,34,0.1);
-        border-color: rgba(178,34,34,0.2);
-    }
-
-    .misi-item-static:hover::before {
-        opacity: 1;
-    }
-
-    .misi-number-static {
-        width: 45px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
-        color: white;
-        border-radius: 15px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        transition: none;
-        flex-shrink: 0;
-        box-shadow: 0 8px 15px rgba(178,34,34,0.2);
-    }
-
-    .misi-item-static:hover .misi-number-static {
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
-        transform: none;
-    }
-
-    .misi-content {
-        flex: 1;
-    }
-
-    .misi-content h4 {
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 5px;
-    }
-
-    .misi-content p {
-        font-size: 0.85rem;
-        color: var(--text-gray);
-        margin-bottom: 0;
-        line-height: 1.5;
-    }
-
-    .card-footer-premium {
-        margin-top: 50px;
-        padding-top: 30px;
-        border-top: 2px solid rgba(178,34,34,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .footer-quote {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        color: var(--primary-red);
-        font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-    }
-
-    .footer-quote i {
-        color: var(--accent-gold);
-        font-size: 1.1rem;
-        opacity: 0.5;
-    }
-
-    /* Section Styles */
-    .section-padding {
-        padding: 80px 0;
-    }
-
-    .section-tag {
-        background: var(--primary-red);
-        color: white;
-        padding: 8px 24px;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        box-shadow: var(--shadow-red);
-    }
-
-    .text-gradient-red {
-        background: linear-gradient(135deg, var(--primary-red), var(--accent-gold));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .history-card {
-        background: white;
-        border-radius: 20px;
-        padding: 25px;
-        box-shadow: var(--shadow-md);
-        border-left: 5px solid var(--primary-red);
-        transition: all 0.3s ease;
-    }
-
-    .history-card:hover {
-        transform: translateX(10px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .history-card-inner {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .history-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(178, 34, 34, 0.1);
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
+    
+    .founder-story strong {
         color: var(--primary-red);
     }
-
-    .history-text h5 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 5px;
-        color: var(--text-dark);
-    }
-
-    .history-text p {
-        color: var(--text-gray);
-        margin-bottom: 0;
-        font-size: 0.95rem;
-    }
-
-    .journey-card {
-        background: white;
-        border-radius: 30px;
-        padding: 35px;
-        box-shadow: var(--shadow-lg);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .journey-header {
-        text-align: center;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid rgba(178, 34, 34, 0.1);
-    }
-
-    .journey-header h3 {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 10px;
-    }
-
-    .journey-header p {
-        color: var(--text-gray);
-        margin-bottom: 0;
-    }
-
-    .timeline-wrapper {
-        max-height: 600px;
-        overflow-y: auto;
-        padding-right: 10px;
-    }
-
-    .timeline-wrapper::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    .timeline-wrapper::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-    }
-
-    .timeline-wrapper::-webkit-scrollbar-thumb {
-        background: var(--primary-red);
-        border-radius: 4px;
-    }
-
-    .timeline-item {
-        position: relative;
-        margin-bottom: 30px;
-        padding-left: 100px;
-    }
-
-    .timeline-year {
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
-        color: white;
-        padding: 8px 20px;
-        border-radius: 30px;
+    
+    .text-primary {
+        color: var(--primary-red) !important;
         font-weight: 600;
-        font-size: 0.9rem;
-        min-width: 85px;
-        text-align: center;
-        box-shadow: var(--shadow-red);
     }
 
-    .timeline-content {
-        background: rgba(178, 34, 34, 0.02);
-        padding: 20px;
-        border-radius: 16px;
-        border-left: 4px solid var(--accent-gold);
-    }
-
-    .timeline-content h5 {
-        color: var(--primary-red);
-        font-weight: 600;
-        margin-bottom: 12px;
-        font-size: 1.1rem;
-    }
-
-    .timeline-content ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .timeline-content ul li {
-        position: relative;
-        padding-left: 20px;
-        margin-bottom: 8px;
-        color: var(--text-gray);
-        font-size: 0.95rem;
-    }
-
-    .timeline-content ul li::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        color: var(--accent-gold);
-        font-weight: bold;
-    }
-
+    /* ========== TIM KAMI SECTION ========== */
     .team-section {
         padding: 80px 0;
         background: #fafafa;
@@ -1733,6 +1996,7 @@
         font-weight: 700;
         color: var(--text-dark);
         margin-bottom: 5px;
+        font-family: var(--font-primary);
     }
 
     .team-position {
@@ -1745,6 +2009,7 @@
         font-weight: 600;
         letter-spacing: 1px;
         margin-bottom: 15px;
+        font-family: var(--font-primary);
     }
 
     .team-desc {
@@ -1752,9 +2017,10 @@
         line-height: 1.6;
         margin-bottom: 0;
         font-size: 0.95rem;
+        font-family: var(--font-primary);
     }
 
-    /* CTA Section */
+    /* ========== CTA SECTION ========== */
     .cta-section-red-gradient {
         padding: 80px 0;
         position: relative;
@@ -1858,6 +2124,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         letter-spacing: 3px;
+        font-family: var(--font-primary);
     }
 
     .cta-title-red {
@@ -1866,14 +2133,7 @@
         color: white;
         margin-bottom: 25px;
         line-height: 1.2;
-    }
-
-    .cta-title-red .title-highlight {
-        background: linear-gradient(120deg, #FFE55C, #FFD700, #FFA500);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        display: inline-block;
+        font-family: var(--font-primary);
     }
 
     .cta-description-red {
@@ -1883,6 +2143,7 @@
         max-width: 700px;
         margin: 0 auto 40px;
         font-weight: 300;
+        font-family: var(--font-primary);
     }
 
     .cta-buttons-red {
@@ -1905,6 +2166,7 @@
         transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
         overflow: hidden;
         border: none;
+        font-family: var(--font-primary);
     }
 
     .btn-primary-red {
@@ -1933,6 +2195,40 @@
         transform: translateY(-3px);
     }
 
+    /* Back to Top Button */
+    .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-red), var(--primary-dark));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(178, 34, 34, 0.3);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .back-to-top:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-red));
+        box-shadow: 0 15px 30px rgba(178, 34, 34, 0.4);
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
         .heading-line {
@@ -1949,6 +2245,14 @@
         
         .cta-title-red {
             font-size: 2.8rem;
+        }
+        
+        .founder-title {
+            font-size: 2.2rem;
+        }
+        
+        .visi-title, .misi-title {
+            font-size: 2.2rem;
         }
     }
 
@@ -1993,8 +2297,8 @@
             font-size: 2rem;
         }
         
-        .visi-text p {
-            font-size: 1.1rem;
+        .visi-full-text {
+            font-size: 1.2rem;
         }
         
         .misi-list {
@@ -2024,9 +2328,10 @@
             padding-top: 60px;
         }
         
-        .timeline-year {
+        .timeline-year-badge {
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
     }
 
@@ -2057,8 +2362,8 @@
             font-size: 1.8rem;
         }
         
-        .visi-text p {
-            font-size: 1rem;
+        .visi-full-text {
+            font-size: 1.1rem;
         }
         
         .vision-mission-premium-card {
@@ -2122,21 +2427,17 @@
         }
         
         .misi-content h4 {
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
         
         .misi-content p {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
         
         .footer-quote {
             font-size: 0.9rem;
             flex-wrap: wrap;
             justify-content: center;
-        }
-        
-        .footer-year {
-            font-size: 1rem;
         }
         
         .cta-wrapper-red {
@@ -2160,14 +2461,31 @@
             font-size: 1.8rem;
         }
         
-        .journey-card {
+        .journey-card.premium-card {
             padding: 25px;
+        }
+        
+        .journey-main-title {
+            font-size: 1.5rem;
+        }
+        
+        .timeline-content-card {
+            padding: 20px;
+        }
+        
+        .timeline-year-title {
+            font-size: 1.1rem;
+        }
+        
+        .timeline-list li {
+            font-size: 0.9rem;
         }
     }
 </style>
 @endsection
 
 @section('scripts')
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize AOS
@@ -2211,6 +2529,24 @@
         // Random animation delays for particles
         document.querySelectorAll('.particle').forEach((el, index) => {
             el.style.animationDelay = `${index * 0.3}s`;
+        });
+        
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 </script>

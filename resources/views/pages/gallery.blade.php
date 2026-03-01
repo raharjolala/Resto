@@ -10,16 +10,23 @@
         : collect([]);
     
     // Format data untuk JavaScript
-    $galleryItemsForJs = $galleryData->map(function($item) {
-        return [
-            'id' => $item->id,
-            'image' => asset('storage/gallery/' . $item->image_path),
-            'title' => $item->caption,
-            'category' => $item->category,
-            'date' => $item->created_at->format('d M Y'),
-            'desc' => $item->description ?? $item->caption,
-        ];
-    })->toArray();
+    $galleryItemsForJs = [];
+    
+    if ($galleryData->count() > 0) {
+        foreach ($galleryData as $item) {
+            // Tentukan URL gambar - LANGSUNG GUNAKAN image_path karena sudah berupa URL
+            $imageUrl = $item->image_path ?? 'https://via.placeholder.com/800x600?text=No+Image';
+            
+            $galleryItemsForJs[] = [
+                'id' => $item->id,
+                'image' => $imageUrl,
+                'title' => $item->caption ?? 'Tanpa Judul',
+                'category' => $item->category ?? 'food',
+                'date' => isset($item->created_at) ? $item->created_at->format('d M Y') : now()->format('d M Y'),
+                'desc' => $item->description ?? $item->caption ?? 'Deskripsi tidak tersedia',
+            ];
+        }
+    }
 @endphp
 
 <!-- ELEGANT RED GRADIENT HERO SECTION DENGAN ANIMASI SUPER HIDUP -->
@@ -114,6 +121,7 @@
         
         <!-- Section Header -->
         <div class="section-header text-center mb-5">
+            <span class="section-tag">GALERI FOTO</span>
             <h2 class="section-title">Galeri Kami</h2>
             <div class="section-divider mx-auto"></div>
             <p class="section-desc mx-auto">
@@ -125,30 +133,38 @@
         <div class="text-center mb-5" id="kategori">
             <div class="filter-wrapper">
                 <div class="filter-nav d-inline-flex flex-wrap gap-3">
+                    @php
+                        $totalCount = $galleryData->count();
+                        $foodCount = $galleryData->where('category', 'food')->count();
+                        $facilityCount = $galleryData->where('category', 'facility')->count();
+                        $eventCount = $galleryData->where('category', 'event')->count();
+                        $interiorCount = $galleryData->where('category', 'interior')->count();
+                    @endphp
+                    
                     <button class="filter-btn active" data-filter="all">
                         <span class="filter-icon"><i class="fas fa-th-large"></i></span>
                         <span class="filter-label">Semua</span>
-                        <span class="filter-badge">{{ $galleryData->count() }}</span>
+                        <span class="filter-badge">{{ $totalCount ?:0  }}</span>
                     </button>
                     <button class="filter-btn" data-filter="food">
                         <span class="filter-icon"><i class="fas fa-utensils"></i></span>
                         <span class="filter-label">Makanan</span>
-                        <span class="filter-badge">{{ $galleryData->where('category', 'food')->count() }}</span>
+                        <span class="filter-badge">{{ $foodCount ?: 0 }}</span>
                     </button>
                     <button class="filter-btn" data-filter="facility">
                         <span class="filter-icon"><i class="fas fa-building"></i></span>
                         <span class="filter-label">Fasilitas</span>
-                        <span class="filter-badge">{{ $galleryData->where('category', 'facility')->count() }}</span>
+                        <span class="filter-badge">{{ $facilityCount ?: 0 }}</span>
                     </button>
                     <button class="filter-btn" data-filter="event">
                         <span class="filter-icon"><i class="fas fa-calendar-alt"></i></span>
                         <span class="filter-label">Acara</span>
-                        <span class="filter-badge">{{ $galleryData->where('category', 'event')->count() }}</span>
+                        <span class="filter-badge">{{ $eventCount ?: 0 }}</span>
                     </button>
                     <button class="filter-btn" data-filter="interior">
                         <span class="filter-icon"><i class="fas fa-store"></i></span>
                         <span class="filter-label">Interior</span>
-                        <span class="filter-badge">{{ $galleryData->where('category', 'interior')->count() }}</span>
+                        <span class="filter-badge">{{ $interiorCount ?: 0 }}</span>
                     </button>
                 </div>
             </div>
@@ -156,34 +172,46 @@
         
         <!-- Gallery Grid -->
         <div class="row g-4" id="galleryGrid">
-            @forelse($galleryData->take(6) as $index => $item)
-                <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item->category }}" style="display: block;">
+            @forelse($galleryItems as $index => $item)
+                @php
+                    // Tentukan URL gambar - LANGSUNG GUNAKAN image_path
+                    $imageUrl = $item->image_path ?? 'https://via.placeholder.com/800x600?text=No+Image';
+                    
+                    // Tentukan icon dan label kategori
+                    $categoryIcons = [
+                        'food' => 'utensils',
+                        'facility' => 'building',
+                        'event' => 'calendar-alt',
+                        'interior' => 'store'
+                    ];
+                    $categoryLabels = [
+                        'food' => 'Makanan',
+                        'facility' => 'Fasilitas',
+                        'event' => 'Acara',
+                        'interior' => 'Interior'
+                    ];
+                    $categoryIcon = $categoryIcons[$item->category] ?? 'image';
+                    $categoryLabel = $categoryLabels[$item->category] ?? ucfirst($item->category);
+                    
+                    // Format tanggal
+                    $formattedDate = $item->created_at ? $item->created_at->format('d M Y') : now()->format('d M Y');
+                @endphp
+                
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item->category }}" data-index="{{ $index }}" style="display: block;">
                     <div class="gallery-card">
                         <div class="gallery-image-wrapper">
-                            <img src="{{ asset('storage/gallery/' . $item->image_path) }}" 
+                            <img src="{{ $imageUrl }}" 
                                  alt="{{ $item->caption }}" 
                                  class="gallery-image"
-                                 loading="lazy">
+                                 loading="lazy"
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Image+Not+Found';">
+                            
                             <div class="image-overlay-gradient"></div>
                             
                             <!-- Category Tag -->
                             <div class="category-tag">
-                                @php
-                                    $categoryIcons = [
-                                        'food' => 'utensils',
-                                        'facility' => 'building',
-                                        'event' => 'calendar-alt',
-                                        'interior' => 'store'
-                                    ];
-                                    $categoryLabels = [
-                                        'food' => 'Makanan',
-                                        'facility' => 'Fasilitas',
-                                        'event' => 'Acara',
-                                        'interior' => 'Interior'
-                                    ];
-                                @endphp
-                                <i class="fas fa-{{ $categoryIcons[$item->category] ?? 'image' }}"></i>
-                                {{ $categoryLabels[$item->category] ?? ucfirst($item->category) }}
+                                <i class="fas fa-{{ $categoryIcon }}"></i>
+                                {{ $categoryLabel }}
                             </div>
                         </div>
                         
@@ -194,7 +222,7 @@
                             <div class="gallery-footer">
                                 <span class="gallery-date">
                                     <i class="far fa-calendar"></i>
-                                    {{ $item->created_at->format('d M Y') }}
+                                    {{ $formattedDate }}
                                 </span>
                                 <button class="btn-view-gallery" data-index="{{ $index }}" data-bs-toggle="modal" data-bs-target="#lightboxModal">
                                     <i class="fas fa-expand-alt"></i>
@@ -209,61 +237,76 @@
                     $defaultItems = [
                         [
                             'image' => 'https://restojossgandos.com/img/menu/gulaikepalaikansalmon-copy-1765340584.JPG',
-                            'title' => 'Nasi Goreng Spesial JOSS',
+                            'title' => 'Gulai Kepala Ikan Salmon',
                             'category' => 'food',
-                            'date' => '15 Jan 2024',
-                            'desc' => 'Nasi goreng signature kami dengan bumbu rahasia, telur mata sapi, dan taburan bawang goreng'
+                            'date' => now()->format('d M Y'),
+                            'desc' => 'Menu ikonik Joss Gandos, gulai kepala ikan salmon tanpa santan, kaya rempah'
                         ],
                         [
                             'image' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                            'title' => 'Interior Restoran',
+                            'title' => 'Suasana Interior Restoran',
                             'category' => 'interior',
-                            'date' => '10 Jan 2024',
+                            'date' => now()->format('d M Y'),
                             'desc' => 'Suasana nyaman dan modern dengan kapasitas 100 orang untuk acara spesial Anda'
                         ],
                         [
                             'image' => 'https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                             'title' => 'Acara Pernikahan',
                             'category' => 'event',
-                            'date' => '5 Jan 2024',
+                            'date' => now()->format('d M Y'),
                             'desc' => 'Paket catering pernikahan lengkap dengan dekorasi dan pelayanan terbaik'
                         ],
                         [
                             'image' => 'https://restojossgandos.com/img/menu/bebekgorengjoss-copy-1765340669.JPG',
-                            'title' => 'Rendang Sapi Padang',
+                            'title' => 'Bebek Goreng Joss',
                             'category' => 'food',
-                            'date' => '20 Des 2023',
-                            'desc' => 'Rendang daging sapi premium dimasak selama 8 jam dengan rempah pilihan'
+                            'date' => now()->format('d M Y'),
+                            'desc' => 'Bebek goreng khas dengan bumbu rempah pilihan'
                         ],
                         [
                             'image' => 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                             'title' => 'Area Makan VIP',
-                            'category' => 'interior',
-                            'date' => '15 Des 2023',
+                            'category' => 'facility',
+                            'date' => now()->format('d M Y'),
                             'desc' => 'Ruang VIP eksklusif dengan AC dan TV untuk rapat atau gathering keluarga'
                         ],
                         [
                             'image' => 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                             'title' => 'Catering Perusahaan',
                             'category' => 'event',
-                            'date' => '10 Des 2023',
+                            'date' => now()->format('d M Y'),
                             'desc' => 'Layanan catering untuk acara kantor, meeting, dan seminar dengan menu variatif'
                         ]
                     ];
+                    
                     $galleryItemsForJs = $defaultItems;
                 @endphp
                 
                 @foreach($defaultItems as $index => $item)
-                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item['category'] }}" style="display: block;">
+                    @php
+                        $icon = $item['category'] == 'food' ? 'utensils' : 
+                               ($item['category'] == 'facility' ? 'building' : 
+                               ($item['category'] == 'event' ? 'calendar-alt' : 'store'));
+                        $label = $item['category'] == 'food' ? 'Makanan' : 
+                                ($item['category'] == 'facility' ? 'Fasilitas' : 
+                                ($item['category'] == 'event' ? 'Acara' : 'Interior'));
+                    @endphp
+                    
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item['category'] }}" data-index="{{ $index }}" style="display: block;">
                         <div class="gallery-card">
                             <div class="gallery-image-wrapper">
-                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="gallery-image" loading="lazy">
+                                <img src="{{ $item['image'] }}" 
+                                     alt="{{ $item['title'] }}" 
+                                     class="gallery-image" 
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Image+Error';">
+                                
                                 <div class="image-overlay-gradient"></div>
                                 
                                 <!-- Category Tag -->
                                 <div class="category-tag">
-                                    <i class="fas fa-{{ $item['category'] == 'food' ? 'utensils' : ($item['category'] == 'interior' ? 'store' : 'calendar-alt') }}"></i>
-                                    {{ ucfirst($item['category']) }}
+                                    <i class="fas fa-{{ $icon }}"></i>
+                                    {{ $label }}
                                 </div>
                             </div>
                             
@@ -289,34 +332,45 @@
             <!-- Hidden items untuk load more (hanya jika ada data lebih dari 6) -->
             @if($galleryData->count() > 6)
                 @foreach($galleryData->slice(6) as $index => $item)
-                    @php $actualIndex = $index + 6; @endphp
-                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item->category }}" style="display: none;">
+                    @php 
+                        $actualIndex = $index + 6;
+                        
+                        // Tentukan URL gambar
+                        $imageUrl = $item->image_path ?? 'https://via.placeholder.com/800x600?text=No+Image';
+                        
+                        $categoryIcons = [
+                            'food' => 'utensils',
+                            'facility' => 'building',
+                            'event' => 'calendar-alt',
+                            'interior' => 'store'
+                        ];
+                        $categoryLabels = [
+                            'food' => 'Makanan',
+                            'facility' => 'Fasilitas',
+                            'event' => 'Acara',
+                            'interior' => 'Interior'
+                        ];
+                        $categoryIcon = $categoryIcons[$item->category] ?? 'image';
+                        $categoryLabel = $categoryLabels[$item->category] ?? ucfirst($item->category);
+                        
+                        $formattedDate = $item->created_at ? $item->created_at->format('d M Y') : now()->format('d M Y');
+                    @endphp
+                    
+                    <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $item->category }}" data-index="{{ $actualIndex }}" style="display: none;">
                         <div class="gallery-card">
                             <div class="gallery-image-wrapper">
-                                <img src="{{ asset('storage/gallery/' . $item->image_path) }}" 
+                                <img src="{{ $imageUrl }}" 
                                      alt="{{ $item->caption }}" 
                                      class="gallery-image"
-                                     loading="lazy">
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Image+Not+Found';">
+                                
                                 <div class="image-overlay-gradient"></div>
                                 
                                 <!-- Category Tag -->
                                 <div class="category-tag">
-                                    @php
-                                        $categoryIcons = [
-                                            'food' => 'utensils',
-                                            'facility' => 'building',
-                                            'event' => 'calendar-alt',
-                                            'interior' => 'store'
-                                        ];
-                                        $categoryLabels = [
-                                            'food' => 'Makanan',
-                                            'facility' => 'Fasilitas',
-                                            'event' => 'Acara',
-                                            'interior' => 'Interior'
-                                        ];
-                                    @endphp
-                                    <i class="fas fa-{{ $categoryIcons[$item->category] ?? 'image' }}"></i>
-                                    {{ $categoryLabels[$item->category] ?? ucfirst($item->category) }}
+                                    <i class="fas fa-{{ $categoryIcon }}"></i>
+                                    {{ $categoryLabel }}
                                 </div>
                             </div>
                             
@@ -327,7 +381,7 @@
                                 <div class="gallery-footer">
                                     <span class="gallery-date">
                                         <i class="far fa-calendar"></i>
-                                        {{ $item->created_at->format('d M Y') }}
+                                        {{ $formattedDate }}
                                     </span>
                                     <button class="btn-view-gallery" data-index="{{ $actualIndex }}" data-bs-toggle="modal" data-bs-target="#lightboxModal">
                                         <i class="fas fa-expand-alt"></i>
@@ -354,11 +408,11 @@
 </section>
 
 <!-- Lightbox Modal - Premium Design -->
-<div class="modal fade" id="lightboxModal" tabindex="-1">
+<div class="modal fade" id="lightboxModal" tabindex="-1" aria-labelledby="lightboxModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content bg-dark border-0">
             <!-- Close Button -->
-            <button type="button" class="lightbox-close" data-bs-dismiss="modal">
+            <button type="button" class="lightbox-close" data-bs-dismiss="modal" aria-label="Close">
                 <i class="fas fa-times"></i>
             </button>
             
@@ -371,10 +425,10 @@
                         </div>
                         
                         <!-- Navigation Buttons -->
-                        <button class="lightbox-nav-btn prev-btn" id="prevImage">
+                        <button class="lightbox-nav-btn prev-btn" id="prevImage" type="button">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="lightbox-nav-btn next-btn" id="nextImage">
+                        <button class="lightbox-nav-btn next-btn" id="nextImage" type="button">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                         
@@ -421,7 +475,7 @@
                                         <span>GALERI FOTO</span>
                                     </div>
                                     <div class="photos-counter">
-                                        <span id="currentImageNum2">2</span> / <span id="totalImages2">9</span>
+                                        <span id="currentImageNum2">1</span> / <span id="totalImages2">9</span>
                                     </div>
                                 </div>
                                 
@@ -1642,8 +1696,8 @@
     }
     
     @media (max-width: 992px) {
-        .hero-title {
-            font-size: 3rem;
+        .heading-line {
+            font-size: 3.2rem;
         }
         
         .section-title {
@@ -1702,21 +1756,13 @@
     }
     
     @media (max-width: 768px) {
-        .hero-gallery {
+        .elegant-hero {
             min-height: auto;
             padding: 80px 0 40px;
         }
         
-        .hero-title {
-            font-size: 2.5rem;
-        }
-        
-        .hero-stats {
-            gap: 15px;
-        }
-        
-        .stat-item {
-            padding: 15px 20px;
+        .heading-line {
+            font-size: 2.8rem;
         }
         
         .section-title {
@@ -1797,12 +1843,12 @@
     }
     
     @media (max-width: 576px) {
-        .hero-title {
-            font-size: 2rem;
+        .heading-line {
+            font-size: 2.2rem;
         }
         
-        .stat-item {
-            width: 100%;
+        .elegant-cta {
+            flex-direction: column;
         }
         
         .btn-load-more {
@@ -1856,6 +1902,10 @@
     }
     
     @media (max-width: 400px) {
+        .heading-line {
+            font-size: 1.8rem;
+        }
+        
         .thumbnails-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 8px;
@@ -1908,9 +1958,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let allItems = @json($galleryItemsForJs);
     let isExpanded = false;
     
+    console.log('Gallery items loaded:', allItems.length);
+    
     // Set total images
-    totalImages.textContent = allItems.length;
-    totalImages2.textContent = allItems.length;
+    if (totalImages) totalImages.textContent = allItems.length;
+    if (totalImages2) totalImages2.textContent = allItems.length;
     
     // Filter functionality
     filterBtns.forEach(btn => {
@@ -1948,18 +2000,22 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (isExpanded) {
                 // Show all items
+                let visibleCount = 0;
                 galleryItems.forEach((item, index) => {
                     if (activeFilter === 'all' || item.dataset.category === activeFilter) {
                         item.style.display = 'block';
                         item.style.animation = 'fadeIn 0.6s ease forwards';
-                        item.style.animationDelay = (index * 0.05) + 's';
+                        item.style.animationDelay = (visibleCount * 0.05) + 's';
+                        visibleCount++;
                     }
                 });
                 
                 // Update button
                 loadMoreBtn.classList.add('show-less');
-                loadMoreBtn.querySelector('.btn-text').textContent = 'Tampilkan Lebih Sedikit';
-                loadMoreBtn.querySelector('.btn-icon i').className = 'fas fa-minus-circle';
+                const btnText = loadMoreBtn.querySelector('.btn-text');
+                const btnIcon = loadMoreBtn.querySelector('.btn-icon i');
+                if (btnText) btnText.textContent = 'Tampilkan Lebih Sedikit';
+                if (btnIcon) btnIcon.className = 'fas fa-minus-circle';
             } else {
                 // Show only first 6 items
                 let visibleCount = 0;
@@ -1976,8 +2032,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Update button
                 loadMoreBtn.classList.remove('show-less');
-                loadMoreBtn.querySelector('.btn-text').textContent = 'Muat Lebih Banyak';
-                loadMoreBtn.querySelector('.btn-icon i').className = 'fas fa-plus-circle';
+                const btnText = loadMoreBtn.querySelector('.btn-text');
+                const btnIcon = loadMoreBtn.querySelector('.btn-icon i');
+                if (btnText) btnText.textContent = 'Muat Lebih Banyak';
+                if (btnIcon) btnIcon.className = 'fas fa-plus-circle';
                 
                 // Scroll to top of gallery
                 document.querySelector('.gallery-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2006,82 +2064,105 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Lightbox functionality
     function generateThumbnails() {
+        if (!thumbnailsGrid) return;
+        
         thumbnailsGrid.innerHTML = '';
         allItems.forEach((item, index) => {
             const thumb = document.createElement('div');
             thumb.className = 'thumbnail-item';
             if (index === currentIndex) thumb.classList.add('active');
-            thumb.innerHTML = `<img src="${item.image}" alt="${item.title}">`;
+            thumb.innerHTML = `<img src="${item.image}" alt="${item.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Error';">`;
             thumb.addEventListener('click', () => {
                 currentIndex = index;
                 updateModal();
+                updateThumbnailsActive();
             });
             thumbnailsGrid.appendChild(thumb);
         });
     }
     
-    viewBtns.forEach((btn) => {
-        btn.addEventListener('click', function() {
-            currentIndex = parseInt(this.dataset.index);
-            updateModal();
-            generateThumbnails();
-        });
-    });
-    
-    function updateModal() {
-        const item = allItems[currentIndex];
-        
-        // Update image
-        modalImage.src = item.image;
-        modalImage.style.animation = 'fadeIn 0.5s ease';
-        
-        // Update info
-        modalTitle.textContent = item.title;
-        modalDate.textContent = item.date;
-        modalDesc.textContent = item.desc;
-        
-        // Update category badge
-        const categoryIcons = {
-            'food': 'utensils',
-            'facility': 'building',
-            'event': 'calendar-alt',
-            'interior': 'store'
-        };
-        const categoryLabels = {
-            'food': 'Makanan',
-            'facility': 'Fasilitas',
-            'event': 'Acara',
-            'interior': 'Interior'
-        };
-        const icon = categoryIcons[item.category] || 'image';
-        const label = categoryLabels[item.category] || item.category.charAt(0).toUpperCase() + item.category.slice(1);
-        
-        modalCategory.innerHTML = `
-            <i class="fas fa-${icon}"></i>
-            <span>${label}</span>
-        `;
-        
-        // Update counters
-        currentImageNum.textContent = currentIndex + 1;
-        currentImageNum2.textContent = currentIndex + 1;
-        
-        // Update thumbnails
+    function updateThumbnailsActive() {
         document.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
             thumb.classList.toggle('active', index === currentIndex);
         });
     }
     
+    viewBtns.forEach((btn) => {
+        btn.addEventListener('click', function() {
+            const index = parseInt(this.dataset.index);
+            if (!isNaN(index) && index >= 0 && index < allItems.length) {
+                currentIndex = index;
+                updateModal();
+                generateThumbnails();
+            }
+        });
+    });
+    
+    function updateModal() {
+        if (!allItems.length || currentIndex >= allItems.length) return;
+        
+        const item = allItems[currentIndex];
+        
+        // Update image
+        if (modalImage) {
+            modalImage.src = item.image;
+            modalImage.style.animation = 'fadeIn 0.5s ease';
+            modalImage.onerror = function() {
+                this.onerror=null;
+                this.src='https://via.placeholder.com/800x600?text=Image+Error';
+            };
+        }
+        
+        // Update info
+        if (modalTitle) modalTitle.textContent = item.title;
+        if (modalDate) modalDate.textContent = item.date;
+        if (modalDesc) modalDesc.textContent = item.desc;
+        
+        // Update category badge
+        if (modalCategory) {
+            const categoryIcons = {
+                'food': 'utensils',
+                'facility': 'building',
+                'event': 'calendar-alt',
+                'interior': 'store'
+            };
+            const categoryLabels = {
+                'food': 'Makanan',
+                'facility': 'Fasilitas',
+                'event': 'Acara',
+                'interior': 'Interior'
+            };
+            const icon = categoryIcons[item.category] || 'image';
+            const label = categoryLabels[item.category] || (item.category ? item.category.charAt(0).toUpperCase() + item.category.slice(1) : 'Galeri');
+            
+            modalCategory.innerHTML = `
+                <i class="fas fa-${icon}"></i>
+                <span>${label}</span>
+            `;
+        }
+        
+        // Update counters
+        if (currentImageNum) currentImageNum.textContent = currentIndex + 1;
+        if (currentImageNum2) currentImageNum2.textContent = currentIndex + 1;
+    }
+    
     if (prevBtn) {
         prevBtn.addEventListener('click', function() {
-            currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
-            updateModal();
+            if (allItems.length > 0) {
+                currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+                updateModal();
+                updateThumbnailsActive();
+            }
         });
     }
     
     if (nextBtn) {
         nextBtn.addEventListener('click', function() {
-            currentIndex = (currentIndex + 1) % allItems.length;
-            updateModal();
+            if (allItems.length > 0) {
+                currentIndex = (currentIndex + 1) % allItems.length;
+                updateModal();
+                updateThumbnailsActive();
+            }
         });
     }
     
@@ -2090,8 +2171,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById('lightboxModal');
         if (modal && modal.classList.contains('show')) {
             if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 if (prevBtn) prevBtn.click();
             } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
                 if (nextBtn) nextBtn.click();
             } else if (e.key === 'Escape') {
                 const closeBtn = modal.querySelector('.lightbox-close');
@@ -2110,6 +2193,9 @@ document.addEventListener('DOMContentLoaded', function() {
             shape.style.transform = `translateY(${scrolled * speed}px)`;
         });
     });
+    
+    // Initial load more button state
+    updateLoadMoreButton();
 });
 </script>
 @endsection
