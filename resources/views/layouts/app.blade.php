@@ -1100,7 +1100,7 @@
         <div class="container">
             <!-- Logo dan Teks di Header -->
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="https://restojossgandos.com/public/img/logojossgandos.png" 
+                <img src="https://image2url.com/r2/default/images/1772507915575-893cf187-2305-4535-8818-cb83425b6fab.png" 
                      alt="JOSS GANDOS - Restoran Indonesia" 
                      class="brand-logo">
                 <div class="brand-text">
@@ -1159,7 +1159,7 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <div class="footer-logo-container">
                         <div class="footer-logo-wrapper">
-                            <img src="https://restojossgandos.com/public/img/logojossgandos.png" 
+                            <img src="https://image2url.com/r2/default/images/1772507915575-893cf187-2305-4535-8818-cb83425b6fab.png" 
                                  alt="JOSS GANDOS - Restoran Indonesia" 
                                  class="footer-logo">
                             <div class="footer-brand-text">

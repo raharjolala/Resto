@@ -296,95 +296,24 @@ class AdminController extends Controller
     }
 
     /**
-     * Delete menu item - ENHANCED VERSION WITH DETAILED LOGGING
-     */
-    public function menuDestroy($id)
-    {
-        try {
-            // Log awal untuk debugging
-            Log::info('========== MENU DELETE ATTEMPT ==========');
-            Log::info('Attempting to delete menu item with ID: ' . $id);
-            Log::info('Request method: ' . request()->method());
-            Log::info('Request URL: ' . request()->fullUrl());
-            Log::info('Session ID: ' . session()->getId());
-            Log::info('User ID: ' . (Auth::check() ? Auth::id() : 'Not authenticated'));
-            
-            // Cari menu item
-            $menuItem = MenuItem::with('category')->find($id);
-            
-            if (!$menuItem) {
-                Log::error('Menu item not found with ID: ' . $id);
-                
-                if (request()->wantsJson() || request()->ajax()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Menu tidak ditemukan!'
-                    ], 404);
-                }
-                
-                return redirect()->route('admin.menu.index')
-                    ->with('error', 'Menu tidak ditemukan!');
-            }
-            
-            $menuName = $menuItem->name;
-            $categoryName = $menuItem->category ? $menuItem->category->name : 'No Category';
-            
-            Log::info('Found menu item:', [
-                'id' => $menuItem->id,
-                'name' => $menuName,
-                'category' => $categoryName,
-                'price' => $menuItem->price,
-                'is_available' => $menuItem->is_available
-            ]);
-            
-            // Hapus file gambar jika ada (bukan URL external)
-            if ($menuItem->image && !filter_var($menuItem->image, FILTER_VALIDATE_URL)) {
-                $imagePath = public_path('storage/menu/' . $menuItem->image);
-                Log::info('Checking image path: ' . $imagePath);
-                
-                if (file_exists($imagePath)) {
-                    unlink($imagePath);
-                    Log::info('Successfully deleted image file: ' . $imagePath);
-                } else {
-                    Log::warning('Image file not found: ' . $imagePath);
-                }
-            }
-            
-            // Simpan nama untuk flash message sebelum delete
-            $menuNameForMessage = $menuName;
-            
-            // Lakukan delete
-            $menuItem->delete();
-            
-            Log::info('Successfully deleted menu item from database. ID: ' . $id . ', Name: ' . $menuNameForMessage);
-            
-            // Verifikasi bahwa item benar-benar terhapus
-            $checkDeleted = MenuItem::find($id);
-            if ($checkDeleted) {
-                Log::error('Menu item STILL EXISTS after delete! ID: ' . $id);
-            } else {
-                Log::info('Verified: Menu item no longer exists in database.');
-            }
-            
-            Log::info('========== MENU DELETE SUCCESS ==========');
-            
-            // Untuk request AJAX
-            if (request()->wantsJson() || request()->ajax()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Menu "' . $menuNameForMessage . '" berhasil dihapus!',
-                    'id' => $id
-                ]);
-            }
-            
-            // Untuk request biasa
-            return redirect()->route('admin.menu.index')
-                ->with('success', 'Menu "' . $menuNameForMessage . '" berhasil dihapus!');
-                
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            Log::error('ModelNotFoundException: Menu item not found - ID: ' . $id);
-            Log::error('Error message: ' . $e->getMessage());
-            Log::error('Stack trace: ' . $e->getTraceAsString());
+ * Delete menu item - ENHANCED VERSION WITH DETAILED LOGGING
+ */
+public function menuDestroy($id)
+{
+    try {
+        // Log awal untuk debugging
+        Log::info('========== MENU DELETE ATTEMPT ==========');
+        Log::info('Attempting to delete menu item with ID: ' . $id);
+        Log::info('Request method: ' . request()->method());
+        Log::info('Request URL: ' . request()->fullUrl());
+        Log::info('Session ID: ' . session()->getId());
+        Log::info('User ID: ' . (Auth::check() ? Auth::id() : 'Not authenticated'));
+        
+        // Cari menu item
+        $menuItem = MenuItem::with('category')->find($id);
+        
+        if (!$menuItem) {
+            Log::error('Menu item not found with ID: ' . $id);
             
             if (request()->wantsJson() || request()->ajax()) {
                 return response()->json([
@@ -395,27 +324,98 @@ class AdminController extends Controller
             
             return redirect()->route('admin.menu.index')
                 ->with('error', 'Menu tidak ditemukan!');
-                
-        } catch (\Exception $e) {
-            Log::error('Exception occurred while deleting menu item:');
-            Log::error('Message: ' . $e->getMessage());
-            Log::error('File: ' . $e->getFile());
-            Log::error('Line: ' . $e->getLine());
-            Log::error('Stack trace: ' . $e->getTraceAsString());
-            
-            if (request()->wantsJson() || request()->ajax()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal menghapus menu: ' . $e->getMessage()
-                ], 500);
-            }
-            
-            return redirect()->back()
-                ->with('error', 'Gagal menghapus menu: ' . $e->getMessage());
         }
+        
+        $menuName = $menuItem->name;
+        $categoryName = $menuItem->category ? $menuItem->category->name : 'No Category';
+        
+        Log::info('Found menu item:', [
+            'id' => $menuItem->id,
+            'name' => $menuName,
+            'category' => $categoryName,
+            'price' => $menuItem->price,
+            'is_available' => $menuItem->is_available
+        ]);
+        
+        // Hapus file gambar jika ada (bukan URL external)
+        if ($menuItem->image && !filter_var($menuItem->image, FILTER_VALIDATE_URL)) {
+            $imagePath = public_path('storage/menu/' . $menuItem->image);
+            Log::info('Checking image path: ' . $imagePath);
+            
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+                Log::info('Successfully deleted image file: ' . $imagePath);
+            } else {
+                Log::warning('Image file not found: ' . $imagePath);
+            }
+        }
+        
+        // Simpan nama untuk flash message sebelum delete
+        $menuNameForMessage = $menuName;
+        
+        // Lakukan delete
+        $menuItem->delete();
+        
+        Log::info('Successfully deleted menu item from database. ID: ' . $id . ', Name: ' . $menuNameForMessage);
+        
+        // Verifikasi bahwa item benar-benar terhapus
+        $checkDeleted = MenuItem::find($id);
+        if ($checkDeleted) {
+            Log::error('Menu item STILL EXISTS after delete! ID: ' . $id);
+        } else {
+            Log::info('Verified: Menu item no longer exists in database.');
+        }
+        
+        Log::info('========== MENU DELETE SUCCESS ==========');
+        
+        // Untuk request AJAX
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Menu "' . $menuNameForMessage . '" berhasil dihapus!',
+                'id' => $id
+            ]);
+        }
+        
+        // Untuk request biasa
+        return redirect()->route('admin.menu.index')
+            ->with('success', 'Menu "' . $menuNameForMessage . '" berhasil dihapus!');
+            
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        Log::error('ModelNotFoundException: Menu item not found - ID: ' . $id);
+        Log::error('Error message: ' . $e->getMessage());
+        Log::error('Stack trace: ' . $e->getTraceAsString());
+        
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Menu tidak ditemukan!'
+            ], 404);
+        }
+        
+        return redirect()->route('admin.menu.index')
+            ->with('error', 'Menu tidak ditemukan!');
+            
+    } catch (\Exception $e) {
+        Log::error('Exception occurred while deleting menu item:');
+        Log::error('Message: ' . $e->getMessage());
+        Log::error('File: ' . $e->getFile());
+        Log::error('Line: ' . $e->getLine());
+        Log::error('Stack trace: ' . $e->getTraceAsString());
+        
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus menu: ' . $e->getMessage()
+            ], 500);
+        }
+        
+        return redirect()->back()
+            ->with('error', 'Gagal menghapus menu: ' . $e->getMessage());
     }
+}
 
-     // ==================== PROMOTION MANAGEMENT ====================
+    // ==================== PROMOTION MANAGEMENT ====================
 
     /**
      * Display list of promotions

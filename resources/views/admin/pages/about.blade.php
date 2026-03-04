@@ -70,12 +70,6 @@
                 $timelineData = [];
             }
             
-            // PERBAIKAN: Pastikan vision_pillars adalah array
-            $visionPillarsData = $content['vision_pillars'] ?? [];
-            if (!is_array($visionPillarsData)) {
-                $visionPillarsData = [];
-            }
-            
             // PERBAIKAN: Pastikan missions adalah array
             $missionsData = $content['missions'] ?? [];
             if (!is_array($missionsData)) {
@@ -87,6 +81,14 @@
             if (!is_array($teamMembersData)) {
                 $teamMembersData = [];
             }
+            
+            // PERBAIKAN: Pastikan history_paragraphs adalah array
+            $historyParagraphsData = $content['history_paragraphs'] ?? [
+                'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.',
+                'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.',
+                'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.',
+                'Berdiri pada 28 Oktober 2017, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.'
+            ];
         @endphp
         
         <!-- SEO & Basic Info -->
@@ -214,7 +216,7 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label class="form-label">Subtitle Hero *</label>
-                        <textarea class="form-control custom-input" id="hero_subtitle" name="hero_subtitle" rows="3" required>{{ old('hero_subtitle', $content['hero_subtitle'] ?? 'Delapan tahun silam, dari semangat untuk mengembangkan usaha di luar dunia IT, lahirlah Bebek Joss Gandos — dengan satu menu andalan yang terus menginspirasi.') }}</textarea>
+                        <textarea class="form-control custom-input" id="hero_subtitle" name="hero_subtitle" rows="3" required>{{ old('hero_subtitle', $content['hero_subtitle'] ?? 'Delapan tahun perjalanan dari semangat IT hingga menjadi pionir kuliner di Jemursari dengan menu andalan yang menginspirasi.') }}</textarea>
                         <small class="text-muted">Teks yang muncul di bawah judul utama</small>
                     </div>
                 </div>
@@ -227,7 +229,7 @@
                         </label>
                         <div class="url-input-group">
                             <input type="url" class="form-control custom-input" id="hero_image" name="hero_image" 
-                                   value="{{ old('hero_image', $content['hero_image'] ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') }}" 
+                                   value="{{ old('hero_image', $content['hero_image'] ?? 'https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw') }}" 
                                    required
                                    onchange="previewHeroImage(this.value)">
                             <i class="fas fa-eye url-preview-icon" onclick="previewHeroImage(document.getElementById('hero_image').value)" title="Preview Gambar"></i>
@@ -245,7 +247,7 @@
             </div>
         </div>
 
-        <!-- History Section -->
+        <!-- History Section dengan Paragraf yang Bisa Ditambah -->
         <div class="card main-card mb-4 fade-in-up" style="animation-delay: 0.3s;">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
@@ -255,30 +257,35 @@
                         </span>
                         Sejarah Restoran
                     </h5>
-                    <span class="badge-status">Sejarah</span>
+                    <button type="button" class="btn btn-add" id="add-history-paragraph">
+                        <i class="fas fa-plus me-1"></i> Tambah Paragraf Sejarah
+                    </button>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <div class="form-group">
-                        <label class="form-label">Paragraf Sejarah 1 *</label>
-                        <textarea class="form-control custom-input" id="history_description_1" name="history_description_1" rows="2" required>{{ old('history_description_1', $content['history_description_1'] ?? 'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.') }}</textarea>
+            <div class="card-body" id="history-paragraphs-container">
+                @foreach($historyParagraphsData as $index => $paragraph)
+                <div class="history-paragraph-item card mb-3" data-index="{{ $index }}">
+                    <div class="history-paragraph-header" data-bs-toggle="collapse" href="#historyParagraph{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="historyParagraph{{ $index }}Collapse">
+                        <div>
+                            <i class="fas fa-paragraph me-2" style="color: #DC143C;"></i>
+                            Paragraf Sejarah {{ $index + 1 }}
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-history-paragraph" 
+                                onclick="event.stopPropagation()"
+                                {{ count($historyParagraphsData) <= 1 ? 'disabled' : '' }}>
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="collapse {{ $loop->first ? 'show' : '' }}" id="historyParagraph{{ $index }}Collapse">
+                        <div class="history-paragraph-body">
+                            <div class="form-group">
+                                <label class="form-label small">Isi Paragraf *</label>
+                                <textarea class="form-control custom-input" name="history_paragraphs[]" rows="3" required>{{ $paragraph }}</textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="mb-3">
-                    <div class="form-group">
-                        <label class="form-label">Paragraf Sejarah 2 *</label>
-                        <textarea class="form-control custom-input" id="history_description_2" name="history_description_2" rows="2" required>{{ old('history_description_2', $content['history_description_2'] ?? 'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.') }}</textarea>
-                    </div>
-                </div>
-                
-                <div class="mb-3">
-                    <div class="form-group">
-                        <label class="form-label">Paragraf Sejarah 3 *</label>
-                        <textarea class="form-control custom-input" id="history_description_3" name="history_description_3" rows="2" required>{{ old('history_description_3', $content['history_description_3'] ?? 'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.') }}</textarea>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -309,7 +316,7 @@
                             ['year' => '2022', 'title' => 'Semakin Dipercaya', 'items' => ['Peningkatan pesat customer event & gathering', 'Fasilitas Karaoke VIP menjadi daya tarik utama']],
                             ['year' => '2023', 'title' => 'Ekspansi & Menu Ikonik', 'items' => ['Renovasi besar: 6 VIP Room', 'Gulai Kepala Ikan Salmon menjadi ikon', 'Tanpa santan, kaya rempah']],
                             ['year' => '2024', 'title' => 'Cabang Baru', 'items' => ['Peningkatan layanan pesan antar & reservasi', 'Agustus 2024: Cabang baru di Ketintang']],
-                            ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh', 'Pengalaman yang Joss, Mantap, Luar Biasa!']],
+                            ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh']],
                         ];
                     }
                 @endphp
@@ -387,15 +394,15 @@
                 
                 <div class="mb-3">
                     <div class="form-group">
-                        <label class="form-label">Cerita Founder 1 *</label>
-                        <textarea class="form-control custom-input" id="founder_story_1" name="founder_story_1" rows="2" required>{{ old('founder_story_1', $content['founder_story_1'] ?? 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.') }}</textarea>
+                        <label class="form-label">Cerita Founder (Awal Berdiri) *</label>
+                        <textarea class="form-control custom-input" id="founder_story" name="founder_story" rows="2" required>{{ old('founder_story', $content['founder_story'] ?? 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.') }}</textarea>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <div class="form-group">
-                        <label class="form-label">Cerita Founder 2 *</label>
-                        <textarea class="form-control custom-input" id="founder_story_2" name="founder_story_2" rows="2" required>{{ old('founder_story_2', $content['founder_story_2'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat "Joss, Mantap, dan Luar Biasa", resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik Gulai Kepala Ikan Salmon.') }}</textarea>
+                        <label class="form-label">Filosofi Founder *</label>
+                        <textarea class="form-control custom-input" id="founder_philosophy" name="founder_philosophy" rows="2" required>{{ old('founder_philosophy', $content['founder_philosophy'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat "Joss, Mantap, dan Luar Biasa", resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik Gulai Kepala Ikan Salmon.') }}</textarea>
                     </div>
                 </div>
                 
@@ -442,75 +449,15 @@
                         </span>
                         Visi Perusahaan
                     </h5>
-                    <button type="button" class="btn btn-add" id="add-vision-pillar">
-                        <i class="fas fa-plus me-1"></i> Tambah Pilar Visi
-                    </button>
+                    <span class="badge-status">Visi</span>
                 </div>
             </div>
             <div class="card-body">
                 <div class="mb-4">
                     <div class="form-group">
-                        <label class="form-label">Quote Visi *</label>
+                        <label class="form-label">Visi Perusahaan *</label>
                         <textarea class="form-control custom-input" id="vision_quote" name="vision_quote" rows="3" required>{{ old('vision_quote', $content['vision_quote'] ?? 'Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.') }}</textarea>
                     </div>
-                </div>
-                
-                <div id="vision-pillars-container">
-                    @php
-                        $visionPillars = $visionPillarsData;
-                        if(empty($visionPillars)) {
-                            $visionPillars = [
-                                ['icon' => 'fas fa-utensils', 'title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas dengan bahan segar'],
-                                ['icon' => 'fas fa-heart', 'title' => 'Pelayanan Ramah', 'description' => 'Memberikan pengalaman terbaik bagi pelanggan'],
-                                ['icon' => 'fas fa-leaf', 'title' => 'Inovasi', 'description' => 'Terus berinovasi dalam menu dan layanan'],
-                                ['icon' => 'fas fa-users', 'title' => 'Kebersamaan', 'description' => 'Menciptakan suasana nyaman untuk keluarga'],
-                            ];
-                        }
-                    @endphp
-                    
-                    @foreach($visionPillars as $index => $pillar)
-                    <div class="vision-pillar-item card mb-3" data-index="{{ $index }}">
-                        <div class="vision-pillar-header" data-bs-toggle="collapse" href="#visionPillar{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="visionPillar{{ $index }}Collapse">
-                            <div>
-                                <i class="{{ $pillar['icon'] ?? 'fas fa-circle' }} me-2" style="color: #DC143C;"></i>
-                                {{ $pillar['title'] ?? 'Pilar Visi' }}
-                            </div>
-                            <button type="button" class="btn btn-sm btn-outline-danger remove-vision-pillar" 
-                                    onclick="event.stopPropagation()"
-                                    {{ count($visionPillars) <= 4 ? 'disabled' : '' }}>
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="collapse {{ $loop->first ? 'show' : '' }}" id="visionPillar{{ $index }}Collapse">
-                            <div class="vision-pillar-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="form-label small">Icon *</label>
-                                            <input type="text" class="form-control custom-input" name="vision_pillars[{{ $index }}][icon]" 
-                                                   value="{{ $pillar['icon'] ?? '' }}" placeholder="fas fa-icon" required>
-                                            <small class="text-muted">Contoh: fas fa-utensils</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label small">Judul *</label>
-                                            <input type="text" class="form-control custom-input" name="vision_pillars[{{ $index }}][title]" 
-                                                   value="{{ $pillar['title'] ?? '' }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label class="form-label small">Deskripsi *</label>
-                                            <input type="text" class="form-control custom-input" name="vision_pillars[{{ $index }}][description]" 
-                                                   value="{{ $pillar['description'] ?? '' }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -535,12 +482,12 @@
                     $missions = $missionsData;
                     if(empty($missions)) {
                         $missions = [
-                            ['icon' => 'fas fa-leaf', 'title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar.'],
-                            ['icon' => 'fas fa-smile', 'title' => 'Pelayanan Prima', 'description' => 'Pelayanan cepat, ramah, dan profesional.'],
-                            ['icon' => 'fas fa-home', 'title' => 'Suasana Nyaman', 'description' => 'Suasana bersih, nyaman, dan bersahabat.'],
-                            ['icon' => 'fas fa-lightbulb', 'title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi menu dan layanan.'],
-                            ['icon' => 'fas fa-broom', 'title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi.'],
-                            ['icon' => 'fas fa-hand-holding-heart', 'title' => 'Kontribusi Sosial', 'description' => 'Kontribusi positif bagi lingkungan sekitar.'],
+                            ['title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.'],
+                            ['title' => 'Pelayanan Prima', 'description' => 'Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.'],
+                            ['title' => 'Suasana Nyaman', 'description' => 'Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.'],
+                            ['title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.'],
+                            ['title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi di setiap area.'],
+                            ['title' => 'Kontribusi Sosial', 'description' => 'Memberikan kontribusi positif bagi lingkungan sekitar.'],
                         ];
                     }
                 @endphp
@@ -549,26 +496,18 @@
                 <div class="mission-item card mb-3" data-index="{{ $index }}">
                     <div class="mission-header" data-bs-toggle="collapse" href="#mission{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="mission{{ $index }}Collapse">
                         <div>
-                            <i class="{{ $mission['icon'] ?? 'fas fa-circle' }} me-2" style="color: #DC143C;"></i>
+                            <i class="fas fa-bullseye me-2" style="color: #DC143C;"></i>
                             {{ $mission['title'] ?? 'Misi' }}
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-mission" 
                                 onclick="event.stopPropagation()"
-                                {{ count($missions) <= 6 ? 'disabled' : '' }}>
+                                {{ count($missions) <= 1 ? 'disabled' : '' }}>
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                     <div class="collapse {{ $loop->first ? 'show' : '' }}" id="mission{{ $index }}Collapse">
                         <div class="mission-body">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="form-label small">Icon *</label>
-                                        <input type="text" class="form-control custom-input" name="missions[{{ $index }}][icon]" 
-                                               value="{{ $mission['icon'] ?? '' }}" placeholder="fas fa-icon" required>
-                                        <small class="text-muted">Contoh: fas fa-leaf</small>
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label small">Judul *</label>
@@ -576,7 +515,7 @@
                                                value="{{ $mission['title'] ?? '' }}" required>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label class="form-label small">Deskripsi *</label>
                                         <input type="text" class="form-control custom-input" name="missions[{{ $index }}][description]" 
@@ -627,7 +566,7 @@
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-team-member" 
                                 onclick="event.stopPropagation()"
-                                {{ count($teamMembers) <= 3 ? 'disabled' : '' }}>
+                                {{ count($teamMembers) <= 1 ? 'disabled' : '' }}>
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -1002,7 +941,7 @@
     }
 
     /* ===== TIMELINE, VISION, MISSION, TEAM ITEMS ===== */
-    .timeline-item, .vision-pillar-item, .mission-item, .team-member-item {
+    .timeline-item, .mission-item, .team-member-item, .history-paragraph-item {
         border: 2px solid var(--red-100);
         border-radius: var(--radius-md);
         overflow: hidden;
@@ -1010,12 +949,12 @@
         background: white;
     }
 
-    .timeline-item:hover, .vision-pillar-item:hover, .mission-item:hover, .team-member-item:hover {
+    .timeline-item:hover, .mission-item:hover, .team-member-item:hover, .history-paragraph-item:hover {
         border-color: var(--red-500);
         box-shadow: var(--shadow-md);
     }
 
-    .timeline-header, .vision-pillar-header, .mission-header, .team-member-header {
+    .timeline-header, .mission-header, .team-member-header, .history-paragraph-header {
         background: linear-gradient(145deg, #fff5f5, #ffffff);
         padding: 1rem 1.2rem;
         cursor: pointer;
@@ -1027,11 +966,11 @@
         transition: all 0.3s ease;
     }
 
-    .timeline-header:hover, .vision-pillar-header:hover, .mission-header:hover, .team-member-header:hover {
+    .timeline-header:hover, .mission-header:hover, .team-member-header:hover, .history-paragraph-header:hover {
         background: linear-gradient(145deg, #ffe4e8, #fff5f5);
     }
 
-    .timeline-body, .vision-pillar-body, .mission-body, .team-member-body {
+    .timeline-body, .mission-body, .team-member-body, .history-paragraph-body {
         padding: 1.2rem;
         background: white;
         border-top: 2px solid var(--red-100);
@@ -1312,7 +1251,7 @@
             width: 100%;
         }
 
-        .timeline-header, .vision-pillar-header, .mission-header, .team-member-header {
+        .timeline-header, .mission-header, .team-member-header, .history-paragraph-header {
             flex-direction: column;
             gap: 0.5rem;
             text-align: center;
@@ -1395,7 +1334,57 @@
             previewFounderImage(founderImage.value);
         }
 
-        // Timeline Management
+        // ========== HISTORY PARAGRAPHS MANAGEMENT ==========
+        const historyContainer = document.getElementById('history-paragraphs-container');
+        const addHistoryBtn = document.getElementById('add-history-paragraph');
+        let historyIndex = {{ count($historyParagraphsData) }};
+
+        if (addHistoryBtn) {
+            addHistoryBtn.addEventListener('click', function() {
+                const newIndex = historyIndex++;
+                const paragraphDiv = document.createElement('div');
+                paragraphDiv.className = 'history-paragraph-item card mb-3';
+                paragraphDiv.setAttribute('data-index', newIndex);
+                paragraphDiv.innerHTML = `
+                    <div class="history-paragraph-header" data-bs-toggle="collapse" href="#historyParagraph${newIndex}Collapse" role="button" aria-expanded="true">
+                        <div>
+                            <i class="fas fa-paragraph me-2" style="color: #DC143C;"></i>
+                            Paragraf Sejarah Baru
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-history-paragraph" onclick="event.stopPropagation()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="collapse show" id="historyParagraph${newIndex}Collapse">
+                        <div class="history-paragraph-body">
+                            <div class="form-group">
+                                <label class="form-label small">Isi Paragraf *</label>
+                                <textarea class="form-control custom-input" name="history_paragraphs[]" rows="3" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                historyContainer.appendChild(paragraphDiv);
+                updateHistoryRemoveButtons();
+            });
+        }
+
+        function updateHistoryRemoveButtons() {
+            const historyItems = historyContainer.querySelectorAll('.history-paragraph-item');
+            const removeBtns = historyContainer.querySelectorAll('.remove-history-paragraph');
+            removeBtns.forEach((btn) => {
+                btn.disabled = historyItems.length <= 1;
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    if (historyItems.length > 1) {
+                        this.closest('.history-paragraph-item').remove();
+                        updateHistoryRemoveButtons();
+                    }
+                };
+            });
+        }
+
+        // ========== TIMELINE MANAGEMENT ==========
         const timelineContainer = document.getElementById('timeline-container');
         const addTimelineBtn = document.getElementById('add-timeline');
         
@@ -1451,64 +1440,8 @@
                 updateRemoveButtons();
             });
         }
-        
-        // Vision Pillars Management
-        const visionPillarsContainer = document.getElementById('vision-pillars-container');
-        const addVisionPillarBtn = document.getElementById('add-vision-pillar');
-        
-        @php
-            $visionPillarCount = is_array($content['vision_pillars'] ?? []) ? count($content['vision_pillars'] ?? []) : 4;
-        @endphp
-        let visionPillarIndex = {{ $visionPillarCount }};
-        
-        if (addVisionPillarBtn) {
-            addVisionPillarBtn.addEventListener('click', function() {
-                const newIndex = visionPillarIndex++;
-                const pillarDiv = document.createElement('div');
-                pillarDiv.className = 'vision-pillar-item card mb-3';
-                pillarDiv.setAttribute('data-index', newIndex);
-                pillarDiv.innerHTML = `
-                    <div class="vision-pillar-header" data-bs-toggle="collapse" href="#visionPillar${newIndex}Collapse" role="button" aria-expanded="true">
-                        <div>
-                            <i class="fas fa-circle me-2" style="color: #DC143C;"></i>
-                            Pilar Visi Baru
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-danger remove-vision-pillar" onclick="event.stopPropagation()">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="collapse show" id="visionPillar${newIndex}Collapse">
-                        <div class="vision-pillar-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="form-label small">Icon *</label>
-                                        <input type="text" class="form-control custom-input" name="vision_pillars[${newIndex}][icon]" placeholder="fas fa-icon" required>
-                                        <small class="text-muted">Contoh: fas fa-utensils</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label small">Judul *</label>
-                                        <input type="text" class="form-control custom-input" name="vision_pillars[${newIndex}][title]" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <label class="form-label small">Deskripsi *</label>
-                                        <input type="text" class="form-control custom-input" name="vision_pillars[${newIndex}][description]" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                visionPillarsContainer.appendChild(pillarDiv);
-                updateRemoveButtons();
-            });
-        }
-        
-        // Mission Management
+
+        // ========== MISSIONS MANAGEMENT ==========
         const missionsContainer = document.getElementById('missions-container');
         const addMissionBtn = document.getElementById('add-mission');
         
@@ -1526,7 +1459,7 @@
                 missionDiv.innerHTML = `
                     <div class="mission-header" data-bs-toggle="collapse" href="#mission${newIndex}Collapse" role="button" aria-expanded="true">
                         <div>
-                            <i class="fas fa-circle me-2" style="color: #DC143C;"></i>
+                            <i class="fas fa-bullseye me-2" style="color: #DC143C;"></i>
                             Misi Baru
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-mission" onclick="event.stopPropagation()">
@@ -1536,20 +1469,13 @@
                     <div class="collapse show" id="mission${newIndex}Collapse">
                         <div class="mission-body">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="form-label small">Icon *</label>
-                                        <input type="text" class="form-control custom-input" name="missions[${newIndex}][icon]" placeholder="fas fa-icon" required>
-                                        <small class="text-muted">Contoh: fas fa-leaf</small>
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label small">Judul *</label>
                                         <input type="text" class="form-control custom-input" name="missions[${newIndex}][title]" required>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label class="form-label small">Deskripsi *</label>
                                         <input type="text" class="form-control custom-input" name="missions[${newIndex}][description]" required>
@@ -1563,8 +1489,8 @@
                 updateRemoveButtons();
             });
         }
-        
-        // Team Members Management
+
+        // ========== TEAM MEMBERS MANAGEMENT ==========
         const teamMembersContainer = document.getElementById('team-members-container');
         const addTeamMemberBtn = document.getElementById('add-team-member');
         
@@ -1622,9 +1548,12 @@
                 updateRemoveButtons();
             });
         }
-        
-        // Remove buttons functionality
+
+        // ========== REMOVE BUTTONS FUNCTIONALITY ==========
         function updateRemoveButtons() {
+            // History Paragraphs
+            updateHistoryRemoveButtons();
+            
             // Timeline
             const timelineItems = timelineContainer.querySelectorAll('.timeline-item');
             const timelineRemoveBtns = timelineContainer.querySelectorAll('.remove-timeline');
@@ -1639,28 +1568,14 @@
                 };
             });
             
-            // Vision Pillars
-            const visionPillarItems = visionPillarsContainer.querySelectorAll('.vision-pillar-item');
-            const visionPillarRemoveBtns = visionPillarsContainer.querySelectorAll('.remove-vision-pillar');
-            visionPillarRemoveBtns.forEach((btn, index) => {
-                btn.disabled = visionPillarItems.length <= 4;
-                btn.onclick = function(e) {
-                    e.stopPropagation();
-                    if (visionPillarItems.length > 4) {
-                        this.closest('.vision-pillar-item').remove();
-                        updateRemoveButtons();
-                    }
-                };
-            });
-            
             // Missions
             const missionItems = missionsContainer.querySelectorAll('.mission-item');
             const missionRemoveBtns = missionsContainer.querySelectorAll('.remove-mission');
             missionRemoveBtns.forEach((btn, index) => {
-                btn.disabled = missionItems.length <= 6;
+                btn.disabled = missionItems.length <= 1;
                 btn.onclick = function(e) {
                     e.stopPropagation();
-                    if (missionItems.length > 6) {
+                    if (missionItems.length > 1) {
                         this.closest('.mission-item').remove();
                         updateRemoveButtons();
                     }
@@ -1671,10 +1586,10 @@
             const teamMemberItems = teamMembersContainer.querySelectorAll('.team-member-item');
             const teamMemberRemoveBtns = teamMembersContainer.querySelectorAll('.remove-team-member');
             teamMemberRemoveBtns.forEach((btn, index) => {
-                btn.disabled = teamMemberItems.length <= 3;
+                btn.disabled = teamMemberItems.length <= 1;
                 btn.onclick = function(e) {
                     e.stopPropagation();
-                    if (teamMemberItems.length > 3) {
+                    if (teamMemberItems.length > 1) {
                         this.closest('.team-member-item').remove();
                         updateRemoveButtons();
                     }
@@ -1697,20 +1612,20 @@
         const form = document.getElementById('aboutForm');
         if (form) {
             form.addEventListener('submit', function(e) {
+                const historyItems = historyContainer.querySelectorAll('.history-paragraph-item');
                 const timelineItems = timelineContainer.querySelectorAll('.timeline-item');
-                const visionPillarItems = visionPillarsContainer.querySelectorAll('.vision-pillar-item');
                 const missionItems = missionsContainer.querySelectorAll('.mission-item');
                 const teamMemberItems = teamMembersContainer.querySelectorAll('.team-member-item');
+                
+                if (historyItems.length < 1) {
+                    e.preventDefault();
+                    alert('Minimal harus ada 1 paragraf sejarah');
+                    return false;
+                }
                 
                 if (timelineItems.length < 1) {
                     e.preventDefault();
                     alert('Minimal harus ada 1 item timeline');
-                    return false;
-                }
-                
-                if (visionPillarItems.length < 1) {
-                    e.preventDefault();
-                    alert('Minimal harus ada 1 pilar visi');
                     return false;
                 }
                 

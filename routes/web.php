@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Models\Promotion;
 use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,82 +92,81 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/menu/create', [AdminController::class, 'menuCreate'])->name('menu.create');
     Route::post('/menu', [AdminController::class, 'menuStore'])->name('menu.store');
     Route::get('/menu/{id}/edit', [AdminController::class, 'menuEdit'])->name('menu.edit');
-    Route::post('/menu/{id}/update', [AdminController::class, 'menuUpdate'])->name('menu.update'); // ← Ini sudah POST
+    Route::post('/menu/{id}/update', [AdminController::class, 'menuUpdate'])->name('menu.update');
+    
+    // PERBAIKAN: Gunakan Route::delete untuk method DELETE
     Route::delete('/menu/{id}', [AdminController::class, 'menuDestroy'])->name('menu.destroy');
-
-       // ===== PROMOTIONS MANAGEMENT =====
+    
+    // ===== PROMOTIONS MANAGEMENT =====
     Route::get('/promotions', [AdminController::class, 'promotionsIndex'])->name('promotions.index');
     Route::get('/promotions/create', [AdminController::class, 'promotionsCreate'])->name('promotions.create');
     Route::post('/promotions', [AdminController::class, 'promotionsStore'])->name('promotions.store');
     Route::get('/promotions/{id}/edit', [AdminController::class, 'promotionsEdit'])->name('promotions.edit');
     Route::put('/promotions/{id}', [AdminController::class, 'promotionsUpdate'])->name('promotions.update');
     Route::delete('/promotions/{id}', [AdminController::class, 'promotionsDestroy'])->name('promotions.destroy');
-    // PASTIKAN TIDAK ADA DUPLIKASI ROUTE UNTUK UPDATE
-    Route::put('/promotions/{id}', [AdminController::class, 'promotionsUpdate'])->name('promotions.update'); // ← Gunakan PUT
-    // ATAU
-    // Route::post('/promotions/{id}/update', [AdminController::class, 'promotionsUpdate'])->name('promotions.update'); // ← Alternatif
-    Route::get('/debug-promotions', function() {
-    $nowUTC = Carbon::now('UTC');
-    $nowJakarta = Carbon::now('Asia/Jakarta');
-    
-    $promotions = Promotion::all();
-    
-    $data = [
-        'server_info' => [
-            'timezone_config' => config('app.timezone'),
-            'php_timezone' => date_default_timezone_get(),
-            'current_time_utc' => $nowUTC->format('Y-m-d H:i:s'),
-            'current_time_jakarta' => $nowJakarta->format('Y-m-d H:i:s'),
-        ],
-        'database_stats' => [
-            'total_promotions' => Promotion::count(),
-            'active_flag_true' => Promotion::where('is_active', true)->count(),
-            'using_scope_active' => Promotion::active()->count(),
-        ],
-        'promotions' => []
-    ];
-    
-    foreach ($promotions as $promo) {
-        $data['promotions'][] = [
-            'id' => $promo->id,
-            'title' => $promo->title,
-            'is_active' => $promo->is_active,
-            'sort_order' => $promo->sort_order,
-            'start_date' => [
-                'raw_db' => $promo->getRawStartDateAttribute(),
-                'accessor' => $promo->start_date ? $promo->start_date->format('Y-m-d H:i:s') : null,
-                'timezone' => $promo->start_date ? $promo->start_date->timezoneName : null,
-            ],
-            'end_date' => [
-                'raw_db' => $promo->getRawEndDateAttribute(),
-                'accessor' => $promo->end_date ? $promo->end_date->format('Y-m-d H:i:s') : null,
-                'timezone' => $promo->end_date ? $promo->end_date->timezoneName : null,
-            ],
-            'status' => [
-                'label' => $promo->status['label'],
-                'class' => $promo->status['class'],
-            ],
-            'is_currently_active' => $promo->isCurrentlyActive(),
-            'comparison_with_jakarta' => [
-                'start <= now' => $promo->start_date ? ($promo->start_date <= $nowJakarta) : false,
-                'end >= now' => $promo->end_date ? ($promo->end_date >= $nowJakarta) : false,
-                'result' => $promo->isCurrentlyActive()
-            ]
-        ];
-    }
-    
-    return response()->json($data);
-});
 
-    Route::delete('/promotions/{id}', [AdminController::class, 'promotionsDestroy'])->name('promotions.destroy');
-    // ===== GALLERY MANAGEMENT =====
-    Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('gallery.index');
-    Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('gallery.create');
-    Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('gallery.store');
-    Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('gallery.edit');
-    Route::post('/gallery/{id}', [AdminController::class, 'galleryUpdate'])->name('gallery.update');
-    Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('gallery.destroy');
-    
+    // Debug route
+    Route::get('/debug-promotions', function() {
+        $nowUTC = Carbon::now('UTC');
+        $nowJakarta = Carbon::now('Asia/Jakarta');
+        
+        $promotions = Promotion::all();
+        
+        $data = [
+            'server_info' => [
+                'timezone_config' => config('app.timezone'),
+                'php_timezone' => date_default_timezone_get(),
+                'current_time_utc' => $nowUTC->format('Y-m-d H:i:s'),
+                'current_time_jakarta' => $nowJakarta->format('Y-m-d H:i:s'),
+            ],
+            'database_stats' => [
+                'total_promotions' => Promotion::count(),
+                'active_flag_true' => Promotion::where('is_active', true)->count(),
+                'using_scope_active' => Promotion::active()->count(),
+            ],
+            'promotions' => []
+        ];
+        
+        foreach ($promotions as $promo) {
+            $data['promotions'][] = [
+                'id' => $promo->id,
+                'title' => $promo->title,
+                'is_active' => $promo->is_active,
+                'sort_order' => $promo->sort_order,
+                'start_date' => [
+                    'raw_db' => $promo->getRawStartDateAttribute(),
+                    'accessor' => $promo->start_date ? $promo->start_date->format('Y-m-d H:i:s') : null,
+                    'timezone' => $promo->start_date ? $promo->start_date->timezoneName : null,
+                ],
+                'end_date' => [
+                    'raw_db' => $promo->getRawEndDateAttribute(),
+                    'accessor' => $promo->end_date ? $promo->end_date->format('Y-m-d H:i:s') : null,
+                    'timezone' => $promo->end_date ? $promo->end_date->timezoneName : null,
+                ],
+                'status' => [
+                    'label' => $promo->status['label'],
+                    'class' => $promo->status['class'],
+                ],
+                'is_currently_active' => $promo->isCurrentlyActive(),
+                'comparison_with_jakarta' => [
+                    'start <= now' => $promo->start_date ? ($promo->start_date <= $nowJakarta) : false,
+                    'end >= now' => $promo->end_date ? ($promo->end_date >= $nowJakarta) : false,
+                    'result' => $promo->isCurrentlyActive()
+                ]
+            ];
+        }
+        
+        return response()->json($data);
+    });
+
+   // Gallery routes - konsisten dengan menu
+Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('gallery.index');
+Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('gallery.create');
+Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('gallery.store');
+Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('gallery.edit');
+Route::post('/gallery/{id}/update', [AdminController::class, 'galleryUpdate'])->name('gallery.update'); // URL dengan /update
+Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('gallery.destroy');
+
     // ===== RESERVATIONS MANAGEMENT =====
     Route::get('/reservations', [AdminController::class, 'reservationsIndex'])->name('reservations.index');
     Route::post('/reservations/{id}', [AdminController::class, 'reservationUpdate'])->name('reservations.update');
