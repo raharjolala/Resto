@@ -64,31 +64,59 @@
         @php
             $content = $page->content ?? [];
             
-            // PERBAIKAN: Pastikan timeline adalah array
+            // Ambil history paragraphs
+            $historyParagraphs = [];
+            for ($i = 1; $i <= 10; $i++) {
+                if (isset($content['history_description_' . $i])) {
+                    $historyParagraphs[] = $content['history_description_' . $i];
+                }
+            }
+            if (empty($historyParagraphs)) {
+                $historyParagraphs = [
+                    'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.',
+                    'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.',
+                    'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.',
+                    'Berdiri pada 28 Oktober 2017, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.'
+                ];
+            }
+            
+            // Timeline
             $timelineData = $content['timeline'] ?? [];
-            if (!is_array($timelineData)) {
-                $timelineData = [];
+            if (!is_array($timelineData) || empty($timelineData)) {
+                $timelineData = [
+                    ['year' => '2017', 'title' => 'Awal Berdiri', 'items' => ['Didirikan oleh CEO Dr. Siswanto', 'Menu khas Banyuwangi (Bebek & Rujak Soto)', 'Nama awal: "Bebek Joss Gandos"', 'Fasilitas: Karaoke VIP, Wedding, Live Music', 'Tim awal: 15 orang']],
+                    ['year' => '2018-19', 'title' => 'Merintis & Inovasi', 'items' => ['Masa perjuangan mendapatkan kepercayaan customer', 'Mengembangkan variasi menu', 'Menjadi pionir kuliner di Jemursari']],
+                    ['year' => '2020', 'title' => 'Bertahan di Pandemi', 'items' => ['Tutup sementara 3 bulan & SDM terbatas', 'Beradaptasi dengan jual sembako & pesan antar', 'Bukti kekuatan dan solidaritas tim']],
+                    ['year' => '2021', 'title' => 'Bangkit & Menu Baru', 'items' => ['Renovasi area VIP & Outdoor', 'Peluncuran Gulai Kepala Ikan Salmon', 'Aneka menu nusantara autentik']],
+                    ['year' => '2022', 'title' => 'Semakin Dipercaya', 'items' => ['Peningkatan pesat customer event & gathering', 'Fasilitas Karaoke VIP menjadi daya tarik utama']],
+                    ['year' => '2023', 'title' => 'Ekspansi & Menu Ikonik', 'items' => ['Renovasi besar: 6 VIP Room', 'Gulai Kepala Ikan Salmon menjadi ikon', 'Tanpa santan, kaya rempah']],
+                    ['year' => '2024', 'title' => 'Cabang Baru', 'items' => ['Peningkatan layanan pesan antar & reservasi', 'Agustus 2024: Cabang baru di Ketintang']],
+                    ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh']],
+                ];
             }
             
-            // PERBAIKAN: Pastikan missions adalah array
+            // Missions
             $missionsData = $content['missions'] ?? [];
-            if (!is_array($missionsData)) {
-                $missionsData = [];
+            if (!is_array($missionsData) || empty($missionsData)) {
+                $missionsData = [
+                    ['title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.'],
+                    ['title' => 'Pelayanan Prima', 'description' => 'Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.'],
+                    ['title' => 'Suasana Nyaman', 'description' => 'Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.'],
+                    ['title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.'],
+                    ['title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi di setiap area.'],
+                    ['title' => 'Kontribusi Sosial', 'description' => 'Memberikan kontribusi positif bagi lingkungan sekitar.'],
+                ];
             }
             
-            // PERBAIKAN: Pastikan team_members adalah array
+            // Team Members
             $teamMembersData = $content['team_members'] ?? [];
-            if (!is_array($teamMembersData)) {
-                $teamMembersData = [];
+            if (!is_array($teamMembersData) || empty($teamMembersData)) {
+                $teamMembersData = [
+                    ['name' => 'Ahmad Santoso', 'position' => 'Head Chef', 'image' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => '15 tahun pengalaman kuliner, spesialis masakan tradisional'],
+                    ['name' => 'Sari Dewi', 'position' => 'Restaurant Manager', 'image' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Ahli dalam manajemen restoran dan pelayanan pelanggan'],
+                    ['name' => 'Budi Hartono', 'position' => 'F&B Director', 'image' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Pengembangan menu dan kontrol kualitas bahan'],
+                ];
             }
-            
-            // PERBAIKAN: Pastikan history_paragraphs adalah array
-            $historyParagraphsData = $content['history_paragraphs'] ?? [
-                'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.',
-                'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.',
-                'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.',
-                'Berdiri pada 28 Oktober 2017, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.'
-            ];
         @endphp
         
         <!-- SEO & Basic Info -->
@@ -149,45 +177,6 @@
                                 <i class="fas fa-info-circle me-1" style="color: #DC143C;"></i>
                                 Deskripsi untuk SEO (maks 500 karakter)
                             </small>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">
-                                <i class="fas fa-image me-1" style="color: #DC143C;"></i>
-                                Gambar Utama Halaman
-                            </label>
-                            <div class="file-input-wrapper">
-                                <input type="file" class="form-control custom-input" id="image" name="image" accept="image/*">
-                                <i class="fas fa-upload file-input-icon"></i>
-                            </div>
-                            <small class="text-muted mt-1 d-block">
-                                <i class="fas fa-info-circle me-1" style="color: #DC143C;"></i>
-                                Ukuran maksimal: 5MB. Format: JPG, PNG, GIF, WebP
-                            </small>
-                            
-                            @if(isset($content['image']) && $content['image'])
-                                <div class="image-preview-container mt-3">
-                                    <label class="form-label small">Preview Gambar Saat Ini:</label>
-                                    <div class="image-preview-wrapper">
-                                        <img src="{{ asset('storage/pages/' . $content['image']) }}" 
-                                             class="image-preview" 
-                                             alt="About Image">
-                                    </div>
-                                    <small class="text-muted mt-2 d-block">
-                                        <i class="fas fa-file-image me-1" style="color: #DC143C;"></i>
-                                        File: {{ $content['image'] }}
-                                    </small>
-                                </div>
-                            @else
-                                <div class="mt-2">
-                                    <span class="badge bg-warning">
-                                        <i class="fas fa-exclamation-triangle me-1"></i>
-                                        Belum ada gambar yang diupload
-                                    </span>
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -263,7 +252,7 @@
                 </div>
             </div>
             <div class="card-body" id="history-paragraphs-container">
-                @foreach($historyParagraphsData as $index => $paragraph)
+                @foreach($historyParagraphs as $index => $paragraph)
                 <div class="history-paragraph-item card mb-3" data-index="{{ $index }}">
                     <div class="history-paragraph-header" data-bs-toggle="collapse" href="#historyParagraph{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="historyParagraph{{ $index }}Collapse">
                         <div>
@@ -272,7 +261,7 @@
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-history-paragraph" 
                                 onclick="event.stopPropagation()"
-                                {{ count($historyParagraphsData) <= 1 ? 'disabled' : '' }}>
+                                {{ count($historyParagraphs) <= 1 ? 'disabled' : '' }}>
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -305,23 +294,7 @@
                 </div>
             </div>
             <div class="card-body" id="timeline-container">
-                @php
-                    $timeline = $timelineData;
-                    if(empty($timeline)) {
-                        $timeline = [
-                            ['year' => '2017', 'title' => 'Awal Berdiri', 'items' => ['Didirikan oleh CEO Dr. Siswanto', 'Menu khas Banyuwangi (Bebek & Rujak Soto)', 'Nama awal: "Bebek Joss Gandos"', 'Fasilitas: Karaoke VIP, Wedding, Live Music', 'Tim awal: 15 orang']],
-                            ['year' => '2018-19', 'title' => 'Merintis & Inovasi', 'items' => ['Masa perjuangan mendapatkan kepercayaan customer', 'Mengembangkan variasi menu', 'Menjadi pionir kuliner di Jemursari']],
-                            ['year' => '2020', 'title' => 'Bertahan di Pandemi', 'items' => ['Tutup sementara 3 bulan & SDM terbatas', 'Beradaptasi dengan jual sembako & pesan antar', 'Bukti kekuatan dan solidaritas tim']],
-                            ['year' => '2021', 'title' => 'Bangkit & Menu Baru', 'items' => ['Renovasi area VIP & Outdoor', 'Peluncuran Gulai Kepala Ikan Salmon', 'Aneka menu nusantara autentik']],
-                            ['year' => '2022', 'title' => 'Semakin Dipercaya', 'items' => ['Peningkatan pesat customer event & gathering', 'Fasilitas Karaoke VIP menjadi daya tarik utama']],
-                            ['year' => '2023', 'title' => 'Ekspansi & Menu Ikonik', 'items' => ['Renovasi besar: 6 VIP Room', 'Gulai Kepala Ikan Salmon menjadi ikon', 'Tanpa santan, kaya rempah']],
-                            ['year' => '2024', 'title' => 'Cabang Baru', 'items' => ['Peningkatan layanan pesan antar & reservasi', 'Agustus 2024: Cabang baru di Ketintang']],
-                            ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh']],
-                        ];
-                    }
-                @endphp
-                
-                @foreach($timeline as $index => $item)
+                @foreach($timelineData as $index => $item)
                 <div class="timeline-item card mb-3" data-index="{{ $index }}">
                     <div class="timeline-header" data-bs-toggle="collapse" href="#timeline{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="timeline{{ $index }}Collapse">
                         <div>
@@ -332,7 +305,7 @@
                             <span class="badge bg-light text-dark me-2">{{ count($item['items'] ?? []) }} item</span>
                             <button type="button" class="btn btn-sm btn-outline-danger remove-timeline" 
                                     onclick="event.stopPropagation()"
-                                    {{ count($timeline) <= 1 ? 'disabled' : '' }}>
+                                    {{ count($timelineData) <= 1 ? 'disabled' : '' }}>
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -358,7 +331,7 @@
                             <div class="form-group mt-3">
                                 <label class="form-label small">Item Timeline * (satu per baris)</label>
                                 <textarea class="form-control custom-input timeline-items" name="timeline[{{ $index }}][items]" 
-                                          rows="3" required>@if(isset($item['items'])){{ is_array($item['items']) ? implode("\n", $item['items']) : $item['items'] }}@endif</textarea>
+                                          rows="4" required>@if(isset($item['items'])){{ is_array($item['items']) ? implode("\n", $item['items']) : $item['items'] }}@endif</textarea>
                                 <small class="text-muted">
                                     <i class="fas fa-info-circle me-1" style="color: #DC143C;"></i>
                                     Masukkan satu item per baris
@@ -395,14 +368,14 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label class="form-label">Cerita Founder (Awal Berdiri) *</label>
-                        <textarea class="form-control custom-input" id="founder_story" name="founder_story" rows="2" required>{{ old('founder_story', $content['founder_story'] ?? 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.') }}</textarea>
+                        <textarea class="form-control custom-input" id="founder_story" name="founder_story" rows="2" required>{{ old('founder_story', $content['founder_story_1'] ?? 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.') }}</textarea>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <div class="form-group">
                         <label class="form-label">Filosofi Founder *</label>
-                        <textarea class="form-control custom-input" id="founder_philosophy" name="founder_philosophy" rows="2" required>{{ old('founder_philosophy', $content['founder_philosophy'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat "Joss, Mantap, dan Luar Biasa", resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik Gulai Kepala Ikan Salmon.') }}</textarea>
+                        <textarea class="form-control custom-input" id="founder_philosophy" name="founder_philosophy" rows="2" required>{{ old('founder_philosophy', $content['founder_story_2'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat "Joss, Mantap, dan Luar Biasa", resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik Gulai Kepala Ikan Salmon.') }}</textarea>
                     </div>
                 </div>
                 
@@ -478,21 +451,7 @@
                 </div>
             </div>
             <div class="card-body" id="missions-container">
-                @php
-                    $missions = $missionsData;
-                    if(empty($missions)) {
-                        $missions = [
-                            ['title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.'],
-                            ['title' => 'Pelayanan Prima', 'description' => 'Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.'],
-                            ['title' => 'Suasana Nyaman', 'description' => 'Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.'],
-                            ['title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.'],
-                            ['title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi di setiap area.'],
-                            ['title' => 'Kontribusi Sosial', 'description' => 'Memberikan kontribusi positif bagi lingkungan sekitar.'],
-                        ];
-                    }
-                @endphp
-                
-                @foreach($missions as $index => $mission)
+                @foreach($missionsData as $index => $mission)
                 <div class="mission-item card mb-3" data-index="{{ $index }}">
                     <div class="mission-header" data-bs-toggle="collapse" href="#mission{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="mission{{ $index }}Collapse">
                         <div>
@@ -501,7 +460,7 @@
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-mission" 
                                 onclick="event.stopPropagation()"
-                                {{ count($missions) <= 1 ? 'disabled' : '' }}>
+                                {{ count($missionsData) <= 1 ? 'disabled' : '' }}>
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -546,18 +505,7 @@
                 </div>
             </div>
             <div class="card-body" id="team-members-container">
-                @php
-                    $teamMembers = $teamMembersData;
-                    if(empty($teamMembers)) {
-                        $teamMembers = [
-                            ['name' => 'Ahmad Santoso', 'position' => 'Head Chef', 'image' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => '15 tahun pengalaman kuliner, spesialis masakan tradisional'],
-                            ['name' => 'Sari Dewi', 'position' => 'Restaurant Manager', 'image' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Ahli dalam manajemen restoran dan pelayanan pelanggan'],
-                            ['name' => 'Budi Hartono', 'position' => 'F&B Director', 'image' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Pengembangan menu dan kontrol kualitas bahan'],
-                        ];
-                    }
-                @endphp
-                
-                @foreach($teamMembers as $index => $member)
+                @foreach($teamMembersData as $index => $member)
                 <div class="team-member-item card mb-3" data-index="{{ $index }}">
                     <div class="team-member-header" data-bs-toggle="collapse" href="#teamMember{{ $index }}Collapse" role="button" aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="teamMember{{ $index }}Collapse">
                         <div>
@@ -566,7 +514,7 @@
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-team-member" 
                                 onclick="event.stopPropagation()"
-                                {{ count($teamMembers) <= 1 ? 'disabled' : '' }}>
+                                {{ count($teamMembersData) <= 1 ? 'disabled' : '' }}>
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -1337,7 +1285,7 @@
         // ========== HISTORY PARAGRAPHS MANAGEMENT ==========
         const historyContainer = document.getElementById('history-paragraphs-container');
         const addHistoryBtn = document.getElementById('add-history-paragraph');
-        let historyIndex = {{ count($historyParagraphsData) }};
+        let historyIndex = {{ count($historyParagraphs) }};
 
         if (addHistoryBtn) {
             addHistoryBtn.addEventListener('click', function() {
@@ -1387,11 +1335,7 @@
         // ========== TIMELINE MANAGEMENT ==========
         const timelineContainer = document.getElementById('timeline-container');
         const addTimelineBtn = document.getElementById('add-timeline');
-        
-        @php
-            $timelineCount = is_array($content['timeline'] ?? []) ? count($content['timeline'] ?? []) : 8;
-        @endphp
-        let timelineIndex = {{ $timelineCount }};
+        let timelineIndex = {{ count($timelineData) }};
         
         if (addTimelineBtn) {
             addTimelineBtn.addEventListener('click', function() {
@@ -1427,7 +1371,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label class="form-label small">Item Timeline * (satu per baris)</label>
-                                <textarea class="form-control custom-input timeline-items" name="timeline[${newIndex}][items]" rows="3" required></textarea>
+                                <textarea class="form-control custom-input timeline-items" name="timeline[${newIndex}][items]" rows="4" required></textarea>
                                 <small class="text-muted">
                                     <i class="fas fa-info-circle me-1" style="color: #DC143C;"></i>
                                     Masukkan satu item per baris
@@ -1444,11 +1388,7 @@
         // ========== MISSIONS MANAGEMENT ==========
         const missionsContainer = document.getElementById('missions-container');
         const addMissionBtn = document.getElementById('add-mission');
-        
-        @php
-            $missionCount = is_array($content['missions'] ?? []) ? count($content['missions'] ?? []) : 6;
-        @endphp
-        let missionIndex = {{ $missionCount }};
+        let missionIndex = {{ count($missionsData) }};
         
         if (addMissionBtn) {
             addMissionBtn.addEventListener('click', function() {
@@ -1493,11 +1433,7 @@
         // ========== TEAM MEMBERS MANAGEMENT ==========
         const teamMembersContainer = document.getElementById('team-members-container');
         const addTeamMemberBtn = document.getElementById('add-team-member');
-        
-        @php
-            $teamMemberCount = is_array($content['team_members'] ?? []) ? count($content['team_members'] ?? []) : 3;
-        @endphp
-        let teamMemberIndex = {{ $teamMemberCount }};
+        let teamMemberIndex = {{ count($teamMembersData) }};
         
         if (addTeamMemberBtn) {
             addTeamMemberBtn.addEventListener('click', function() {

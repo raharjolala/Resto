@@ -260,16 +260,6 @@
         }
     }
 
-    .alert-info ul {
-        list-style: none;
-        padding-left: 0;
-        margin-bottom: 0;
-    }
-
-    .alert-info li {
-        padding: 2px 0;
-    }
-
     .btn-close {
         filter: brightness(0.5);
         transition: all 0.3s ease;
@@ -303,14 +293,6 @@
             transform: translateY(0);
         }
     }
-
-    /* Stagger animation for cards */
-    .col-lg-4:nth-child(1) .card { animation-delay: 0.1s; }
-    .col-lg-4:nth-child(2) .card { animation-delay: 0.2s; }
-    .col-lg-4:nth-child(3) .card { animation-delay: 0.3s; }
-    .col-lg-4:nth-child(4) .card { animation-delay: 0.4s; }
-    .col-lg-4:nth-child(5) .card { animation-delay: 0.5s; }
-    .col-lg-4:nth-child(6) .card { animation-delay: 0.6s; }
 
     .card:hover {
         transform: translateY(-8px);
@@ -353,7 +335,6 @@
         transform: scale(1.1);
     }
 
-    /* ===== BADGE STYLES ===== */
     .position-absolute.top-0.start-0 {
         background: linear-gradient(145deg, #ffc107, #fd7e14) !important;
         color: #212529 !important;
@@ -361,20 +342,7 @@
         border-radius: var(--radius-full) !important;
         font-size: 0.75rem;
         font-weight: 600;
-        letter-spacing: 0.3px;
-        box-shadow: var(--shadow-md);
-        border: 2px solid white;
         z-index: 20;
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.05);
-        }
     }
 
     .badge {
@@ -382,13 +350,10 @@
         border-radius: var(--radius-full);
         font-size: 0.75rem;
         font-weight: 600;
-        letter-spacing: 0.3px;
         display: inline-flex;
         align-items: center;
         gap: 6px;
         box-shadow: var(--shadow-sm);
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .badge i {
@@ -399,26 +364,8 @@
         background: linear-gradient(145deg, #28a745, #20c997) !important;
     }
 
-    .badge.bg-warning {
-        background: linear-gradient(145deg, #ffc107, #fd7e14) !important;
-        color: #212529;
-    }
-
-    .badge.bg-info {
-        background: linear-gradient(145deg, #17a2b8, #0dcaf0) !important;
-    }
-
-    .badge.bg-primary {
-        background: linear-gradient(145deg, #0d6efd, #0b5ed7) !important;
-    }
-
     .badge.bg-secondary {
         background: linear-gradient(145deg, #6c757d, #5a6268) !important;
-    }
-
-    .card:hover .badge {
-        transform: scale(1.05);
-        box-shadow: var(--shadow-lg);
     }
 
     /* ===== CARD BODY ===== */
@@ -431,7 +378,6 @@
         font-weight: 700;
         color: #1a1a1a;
         margin-bottom: 0.75rem;
-        transition: color 0.3s ease;
     }
 
     .card:hover .card-title {
@@ -445,7 +391,6 @@
         margin-bottom: 1rem;
     }
 
-    /* ===== BORDER TOP ===== */
     .border-top {
         border-top: 2px solid rgba(220, 20, 60, 0.1) !important;
         padding-top: 1rem !important;
@@ -465,6 +410,7 @@
         display: inline-flex;
         align-items: center;
         gap: 5px;
+        text-decoration: none;
     }
 
     .btn-outline-primary:hover {
@@ -473,14 +419,6 @@
         border-color: transparent;
         transform: translateY(-2px);
         box-shadow: var(--shadow-lg);
-    }
-
-    .btn-outline-primary i {
-        transition: transform 0.3s ease;
-    }
-
-    .btn-outline-primary:hover i {
-        transform: scale(1.2);
     }
 
     .btn-outline-danger {
@@ -495,31 +433,19 @@
         display: inline-flex;
         align-items: center;
         gap: 5px;
+        border: none;
+        cursor: pointer;
     }
 
     .btn-outline-danger:hover {
         background: linear-gradient(145deg, #dc3545, #c82333);
         color: white;
-        border-color: transparent;
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
     }
 
-    .btn-outline-danger i {
-        transition: transform 0.3s ease;
-    }
-
-    .btn-outline-danger:hover i {
-        transform: scale(1.2);
-    }
-
-    /* ===== DATE STYLES ===== */
-    .text-muted small {
-        font-size: 0.8rem;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: #666;
+    .d-inline {
+        display: inline-block;
     }
 
     .text-muted small i {
@@ -533,40 +459,6 @@
         border-radius: var(--radius-xl);
         padding: 4rem 2rem;
         text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .alert-info::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, var(--red-200) 0%, transparent 70%);
-        border-radius: 50%;
-        opacity: 0.3;
-        animation: float 10s ease-in-out infinite;
-    }
-
-    .alert-info::after {
-        content: '';
-        position: absolute;
-        bottom: -50%;
-        left: -20%;
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, var(--red-100) 0%, transparent 70%);
-        border-radius: 50%;
-        opacity: 0.3;
-        animation: float 15s ease-in-out infinite reverse;
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translate(0, 0) rotate(0deg); }
-        33% { transform: translate(30px, -30px) rotate(5deg); }
-        66% { transform: translate(-20px, 20px) rotate(-5deg); }
     }
 
     .alert-info i {
@@ -575,8 +467,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 1rem;
-        position: relative;
-        z-index: 2;
     }
 
     .alert-info h5 {
@@ -584,18 +474,13 @@
         font-weight: 700;
         color: var(--red-700);
         margin-bottom: 0.5rem;
-        position: relative;
-        z-index: 2;
     }
 
     .alert-info p {
         color: #666;
         font-size: 1rem;
-        position: relative;
-        z-index: 2;
     }
 
-    /* ===== ROW & COLUMN SPACING ===== */
     .row {
         margin: -0.75rem;
     }
@@ -604,12 +489,6 @@
         padding: 0.75rem;
     }
 
-    /* ===== HOVER EFFECTS ===== */
-    .card {
-        cursor: pointer;
-    }
-
-    /* ===== RESPONSIVE DESIGN ===== */
     @media (max-width: 768px) {
         .content-card {
             padding: 1rem;
@@ -633,39 +512,6 @@
         .card-img-top {
             height: 200px;
         }
-
-        .alert-info {
-            padding: 2rem 1rem;
-        }
-
-        .alert-info i {
-            font-size: 3rem;
-        }
-
-        .alert-info h5 {
-            font-size: 1.2rem;
-        }
-    }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes shimmer {
-        0% {
-            background-position: -1000px 0;
-        }
-        100% {
-            background-position: 1000px 0;
-        }
-    }
-
-    /* Loading state for images */
-    .card-img-top img {
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 1000px 100%;
-        animation: shimmer 2s infinite;
-    }
-
-    .card-img-top img[src] {
-        animation: none;
     }
 </style>
 @endsection
@@ -695,18 +541,6 @@
     <div class="alert-danger alert-dismissible fade show" role="alert">
         <i class="fas fa-exclamation-circle me-2"></i>
         {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
-    @if($errors->any())
-    <div class="alert-danger alert-dismissible fade show" role="alert">
-        <i class="fas fa-exclamation-circle me-2"></i>
-        <ul class="mb-0 mt-2">
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
@@ -756,16 +590,10 @@
                                     'event' => 'info',
                                     'interior' => 'primary'
                                 ];
-                                $categoryIcons = [
-                                    'food' => 'utensils',
-                                    'facility' => 'building',
-                                    'event' => 'calendar-alt',
-                                    'interior' => 'couch'
-                                ];
                             @endphp
                             
                             <span class="badge bg-{{ $categoryColors[$item->category] ?? 'secondary' }} me-2">
-                                <i class="fas fa-{{ $categoryIcons[$item->category] ?? 'image' }}"></i>
+                                <i class="fas fa-tag"></i>
                                 {{ $categoryLabels[$item->category] ?? ucfirst($item->category) }}
                             </span>
                             
@@ -786,11 +614,17 @@
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 
-                                <button type="button" class="btn-outline-danger delete-btn" 
-                                        data-id="{{ $item->id }}"
-                                        data-caption="{{ $item->caption ?? 'foto ini' }}">
-                                    <i class="fas fa-trash"></i> Hapus
-                                </button>
+                                <!-- FORM DELETE LANGSUNG DENGAN KONFIRMASI JAVASCRIPT BIASA -->
+                                <form action="{{ route('admin.gallery.destroy', $item->id) }}" 
+                                      method="POST" 
+                                      class="d-inline"
+                                      onsubmit="return confirmDelete('{{ $item->caption ?? 'foto ini' }}')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-outline-danger">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -808,77 +642,24 @@
         @endif
     </div>
 </div>
-
-<!-- Hidden form for delete -->
-<form id="delete-form" action="" method="POST" style="display: none;">
-    @csrf
-    @method('DELETE')
-</form>
 @endsection
 
 @section('scripts')
-<!-- Include SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-    $(document).ready(function() {
-        // Handle delete button click
-        $('.delete-btn').on('click', function() {
-            const id = $(this).data('id');
-            const caption = $(this).data('caption');
-            
-            Swal.fire({
-                title: 'Hapus Foto?',
-                html: `
-                    <div style="text-align: center; padding: 20px;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Anda akan menghapus foto:</p>
-                        <strong style="color: #DC143C; font-size: 1.3rem; font-weight: 700;">"${caption}"</strong>
-                        <p style="color: #dc3545; margin-top: 20px; font-size: 0.95rem;">
-                            <i class="fas fa-info-circle"></i> Tindakan ini tidak dapat dibatalkan!
-                        </p>
-                    </div>
-                `,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#DC143C',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: '<i class="fas fa-trash me-2"></i>Ya, Hapus!',
-                cancelButtonText: '<i class="fas fa-times me-2"></i>Batal',
-                reverseButtons: true,
-                background: 'white',
-                backdrop: 'rgba(220, 20, 60, 0.1)',
-                showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const form = $('#delete-form');
-                    form.attr('action', `{{ url('admin/gallery') }}/${id}`);
-                    form.submit();
-                }
-            });
-        });
+    // Fungsi konfirmasi delete sederhana
+    function confirmDelete(caption) {
+        return confirm('Apakah Anda yakin ingin menghapus foto "' + caption + '"? Tindakan ini tidak dapat dibatalkan.');
+    }
 
-        // Auto-hide alerts after 5 seconds
-        setTimeout(function() {
-            $('.alert-success, .alert-danger').fadeOut(500, function() {
-                $(this).remove();
-            });
-        }, 5000);
-    });
-
-    // Add animation to cards on hover
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    // Auto-hide alerts after 5 seconds
+    setTimeout(function() {
+        document.querySelectorAll('.alert-success, .alert-danger').forEach(function(alert) {
+            alert.style.transition = 'opacity 0.5s ease';
+            alert.style.opacity = '0';
+            setTimeout(function() {
+                if (alert && alert.remove) alert.remove();
+            }, 500);
         });
-    });
+    }, 5000);
 </script>
-
-<!-- Include Animate.css for animations -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 @endsection

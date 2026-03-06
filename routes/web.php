@@ -160,12 +160,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     });
 
    // Gallery routes - konsisten dengan menu
-Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('gallery.index');
-Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('gallery.create');
-Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('gallery.store');
-Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('gallery.edit');
-Route::post('/gallery/{id}/update', [AdminController::class, 'galleryUpdate'])->name('gallery.update'); // URL dengan /update
-Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('gallery.destroy');
+    Route::get('/gallery', [AdminController::class, 'galleryIndex'])->name('gallery.index');
+    Route::get('/gallery/create', [AdminController::class, 'galleryCreate'])->name('gallery.create');
+    Route::post('/gallery', [AdminController::class, 'galleryStore'])->name('gallery.store');
+    Route::get('/gallery/{id}/edit', [AdminController::class, 'galleryEdit'])->name('gallery.edit');
+    Route::put('/gallery/{id}', [AdminController::class, 'galleryUpdate'])->name('gallery.update');
+    Route::delete('/gallery/{id}', [AdminController::class, 'galleryDestroy'])->name('gallery.destroy');
 
     // ===== RESERVATIONS MANAGEMENT =====
     Route::get('/reservations', [AdminController::class, 'reservationsIndex'])->name('reservations.index');

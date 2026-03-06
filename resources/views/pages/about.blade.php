@@ -5,6 +5,99 @@
 
 @php
     $content = $page->content ?? [];
+    
+    // Ambil history paragraphs dari database
+    $historyParagraphs = [];
+    for ($i = 1; $i <= 10; $i++) {
+        if (isset($content['history_description_' . $i])) {
+            $historyParagraphs[] = $content['history_description_' . $i];
+        }
+    }
+    
+    // Jika tidak ada data history, gunakan default sesuai gambar
+    if (empty($historyParagraphs)) {
+        $historyParagraphs = [
+            'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.',
+            'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah <strong class="text-gradient-red">Bebek Joss Gandos</strong> — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.',
+            'Nama <strong class="text-gradient-red">\'Joss Gandos\'</strong> dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.',
+            'Berdiri pada <strong class="text-gradient-red">28 Oktober 2017</strong>, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.'
+        ];
+    }
+    
+    // Ambil timeline dari database
+    $timeline = $content['timeline'] ?? [
+        ['year' => '2017', 'title' => 'Awal Berdiri', 'items' => [
+            'Didirikan oleh CEO Dr. Siswanto',
+            'Menu khas Banyuwangi (Bebek & Rujak Soto)',
+            'Nama awal: "Bebek Joss Gandos"',
+            'Fasilitas: Karaoke VIP, Wedding, Live Music',
+            'Tim awal: 15 orang'
+        ]],
+        ['year' => '2018-19', 'title' => 'Merintis & Inovasi', 'items' => [
+            'Masa perjuangan mendapatkan kepercayaan customer',
+            'Mengembangkan variasi menu',
+            'Menjadi pionir kuliner di Jemursari'
+        ]],
+        ['year' => '2020', 'title' => 'Bertahan di Pandemi', 'items' => [
+            'Tutup sementara 3 bulan & SDM terbatas',
+            'Beradaptasi dengan jual sembako & pesan antar',
+            'Bukti kekuatan dan solidaritas tim'
+        ]],
+        ['year' => '2021', 'title' => 'Bangkit & Menu Baru', 'items' => [
+            'Renovasi area VIP & Outdoor',
+            'Peluncuran Gulai Kepala Ikan Salmon',
+            'Aneka menu nusantara autentik'
+        ]],
+        ['year' => '2022', 'title' => 'Semakin Dipercaya', 'items' => [
+            'Peningkatan pesat customer event & gathering',
+            'Fasilitas Karaoke VIP menjadi daya tarik utama'
+        ]],
+        ['year' => '2023', 'title' => 'Ekspansi & Menu Ikonik', 'items' => [
+            'Renovasi besar: 6 VIP Room',
+            'Gulai Kepala Ikan Salmon menjadi ikon',
+            'Tanpa santan, kaya rempah'
+        ]],
+        ['year' => '2024', 'title' => 'Cabang Baru', 'items' => [
+            'Peningkatan layanan pesan antar & reservasi',
+            'Agustus 2024: Cabang baru di Ketintang'
+        ]],
+        ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => [
+            '8 tahun perjalanan penuh perjuangan',
+            'Siap melangkah lebih jauh'
+        ]],
+    ];
+    
+    // Ambil missions dari database
+    $missions = $content['missions'] ?? [
+        ['title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.'],
+        ['title' => 'Pelayanan Prima', 'description' => 'Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.'],
+        ['title' => 'Suasana Nyaman', 'description' => 'Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.'],
+        ['title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.'],
+        ['title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi di setiap area.'],
+        ['title' => 'Kontribusi Sosial', 'description' => 'Memberikan kontribusi positif bagi lingkungan sekitar.'],
+    ];
+    
+    // Ambil team members dari database
+    $teamMembers = $content['team_members'] ?? [
+        ['name' => 'Ahmad Santoso', 'position' => 'Head Chef', 'image' => 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => '15 tahun pengalaman kuliner, spesialis masakan tradisional'],
+        ['name' => 'Sari Dewi', 'position' => 'Restaurant Manager', 'image' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Ahli dalam manajemen restoran dan pelayanan pelanggan'],
+        ['name' => 'Budi Hartono', 'position' => 'F&B Director', 'image' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'description' => 'Pengembangan menu dan kontrol kualitas bahan'],
+    ];
+    
+    // Ambil founder data dari database
+    $founderDescription = $content['founder_description'] ?? 'Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage (F&B) di luar latar belakang IT.';
+    $founderStory1 = $content['founder_story_1'] ?? 'Berawal dari rintisan sederhana bernama <strong>"Bebek Joss Gandos"</strong>, beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.';
+    $founderStory2 = $content['founder_story_2'] ?? 'Di bawah kepemimpinan beliau dengan filosofi semangat <strong>"Joss, Mantap, dan Luar Biasa"</strong>, resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik <span class="text-primary">Gulai Kepala Ikan Salmon</span>. Dedikasi beliau adalah memastikan setiap tamu merasakan kehangatan pelayanan dan cita rasa yang tak terlupakan.';
+    
+    // Ambil vision dari database
+    $visionQuote = $content['vision_quote'] ?? 'Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.';
+    
+    // Ambil CTA dari database
+    $ctaTitle = $content['cta_title'] ?? 'Rasakan Cita Rasa Luar Biasa';
+    $ctaDescription = $content['cta_description'] ?? 'Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan dengan hidangan autentik dan pelayanan terbaik dari keluarga Joss Gandos.';
+    
+    // Gabungkan founder story untuk bagian kedua
+    $founderStoryCombined = $founderStory2;
 @endphp
 
 @section('content')
@@ -129,23 +222,29 @@
                     </div>
                 </div>
                 
-                <!-- HISTORY CONTENT - SEMUA TEKS DISAMAKAN DENGAN PARAGRAF TERAKHIR -->
+                <!-- HISTORY CONTENT - LENGKAP SESUAI GAMBAR -->
                 <div class="history-content modern-text" data-aos="fade-up" data-aos-delay="400">
-                    <p class="history-paragraph history-paragraph-bold">
-                        Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.
-                    </p>
+                    @php
+                        // Pastikan kita menggunakan teks yang tepat sesuai gambar
+                        $displayParagraphs = [
+                            'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.',
+                            'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah <strong class="text-gradient-red">Bebek Joss Gandos</strong> — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.',
+                            'Nama <strong class="text-gradient-red">\'Joss Gandos\'</strong> dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.',
+                            'Berdiri pada <strong class="text-gradient-red">28 Oktober 2017</strong>, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.'
+                        ];
+                    @endphp
                     
-                    <p class="history-paragraph history-paragraph-bold">
-                        Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah <span class="text-gradient-red fw-bold">Bebek Joss Gandos</span> — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.
-                    </p>
-                    
-                    <p class="history-paragraph history-paragraph-bold">
-                        Nama <span class="text-gradient-red fw-bold">'Joss Gandos'</span> dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.
-                    </p>
-                    
-                    <p class="history-paragraph history-last">
-                        Berdiri pada <span class="fw-bold text-gradient-red">28 Oktober 2017</span>, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.
-                    </p>
+                    @foreach($displayParagraphs as $index => $paragraph)
+                        @if($loop->last)
+                            <p class="history-paragraph history-last">
+                                {!! $paragraph !!}
+                            </p>
+                        @else
+                            <p class="history-paragraph">
+                                {!! $paragraph !!}
+                            </p>
+                        @endif
+                    @endforeach
                 </div>
             </div>
             
@@ -164,108 +263,19 @@
                     </div>
                     
                     <div class="timeline-wrapper modern-timeline">
-                        <!-- 2017 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
-                            <div class="timeline-year-badge">2017</div>
+                        @foreach($timeline as $item)
+                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="{{ $loop->iteration * 100 }}">
+                            <div class="timeline-year-badge">{{ $item['year'] ?? '' }}</div>
                             <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Awal Berdiri</h5>
+                                <h5 class="timeline-year-title">{{ $item['title'] ?? '' }}</h5>
                                 <ul class="timeline-list">
-                                    <li>Didirikan oleh CEO Dr. Siswanto</li>
-                                    <li>Menu khas Banyuwangi (Bebek & Rujak Soto)</li>
-                                    <li>Nama awal: "Bebek Joss Gandos"</li>
-                                    <li>Fasilitas: Karaoke VIP, Wedding, Live Music</li>
-                                    <li>Tim awal: 15 orang</li>
+                                    @foreach($item['items'] as $listItem)
+                                        <li>{{ $listItem }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
-                        
-                        <!-- 2018-19 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
-                            <div class="timeline-year-badge">2018-2019</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Merintis & Inovasi</h5>
-                                <ul class="timeline-list">
-                                    <li>Masa perjuangan mendapatkan kepercayaan customer</li>
-                                    <li>Mengembangkan variasi menu</li>
-                                    <li>Menjadi pionir kuliner di Jemursari</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- 2020 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
-                            <div class="timeline-year-badge">2020</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Bertahan di Pandemi</h5>
-                                <ul class="timeline-list">
-                                    <li>Tutup sementara 3 bulan & SDM terbatas</li>
-                                    <li>Beradaptasi dengan jual sembako & pesan antar</li>
-                                    <li>Bukti kekuatan dan solidaritas tim</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- 2021 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
-                            <div class="timeline-year-badge">2021</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Bangkit & Menu Baru</h5>
-                                <ul class="timeline-list">
-                                    <li>Renovasi area VIP & Outdoor</li>
-                                    <li>Peluncuran Gulai Kepala Ikan Salmon</li>
-                                    <li>Aneka menu nusantara autentik</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- 2022 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="500">
-                            <div class="timeline-year-badge">2022</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Semakin Dipercaya</h5>
-                                <ul class="timeline-list">
-                                    <li>Peningkatan pesat customer event & gathering</li>
-                                    <li>Fasilitas Karaoke VIP menjadi daya tarik utama</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- 2023 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="600">
-                            <div class="timeline-year-badge">2023</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Ekspansi & Menu Ikonik</h5>
-                                <ul class="timeline-list">
-                                    <li>Renovasi besar: 6 VIP Room</li>
-                                    <li>Gulai Kepala Ikan Salmon menjadi ikon</li>
-                                    <li>Tanpa santan, kaya rempah</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- 2024 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="700">
-                            <div class="timeline-year-badge">2024</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Cabang Baru</h5>
-                                <ul class="timeline-list">
-                                    <li>Peningkatan layanan pesan antar & reservasi</li>
-                                    <li>Agustus 2024: Cabang baru di Ketintang</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- 2025 -->
-                        <div class="timeline-item" data-aos="fade-left" data-aos-delay="800">
-                            <div class="timeline-year-badge">2025</div>
-                            <div class="timeline-content-card">
-                                <h5 class="timeline-year-title">Sewindu Joss Gandos!</h5>
-                                <ul class="timeline-list">
-                                    <li>8 tahun perjalanan penuh perjuangan</li>
-                                    <li>Siap melangkah lebih jauh</li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -300,7 +310,7 @@
                             
                             <div class="visi-text">
                                 <p class="visi-full-text visi-bold-text">
-                                    Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.
+                                    {{ $visionQuote }}
                                 </p>
                             </div>
                         </div>
@@ -315,11 +325,7 @@
                             </div>
                             
                             <div class="misi-list">
-                                @php
-                                    $missions = $content['missions'] ?? [];
-                                @endphp
-                                
-                                @forelse($missions as $index => $mission)
+                                @foreach($missions as $index => $mission)
                                 <div class="misi-item misi-item-static">
                                     <div class="misi-number-static">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</div>
                                     <div class="misi-content">
@@ -327,51 +333,7 @@
                                         <p>{{ $mission['description'] ?? '' }}</p>
                                     </div>
                                 </div>
-                                @empty
-                                <!-- Default missions dengan teks yang lebih deskriptif -->
-                                <div class="misi-item misi-item-static">
-                                    <div class="misi-number-static">01</div>
-                                    <div class="misi-content">
-                                        <h4>Kualitas Premium</h4>
-                                        <p>Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.</p>
-                                    </div>
-                                </div>
-                                <div class="misi-item misi-item-static">
-                                    <div class="misi-number-static">02</div>
-                                    <div class="misi-content">
-                                        <h4>Pelayanan Prima</h4>
-                                        <p>Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.</p>
-                                    </div>
-                                </div>
-                                <div class="misi-item misi-item-static">
-                                    <div class="misi-number-static">03</div>
-                                    <div class="misi-content">
-                                        <h4>Suasana Nyaman</h4>
-                                        <p>Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.</p>
-                                    </div>
-                                </div>
-                                <div class="misi-item misi-item-static">
-                                    <div class="misi-number-static">04</div>
-                                    <div class="misi-content">
-                                        <h4>Inovasi Berkelanjutan</h4>
-                                        <p>Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.</p>
-                                    </div>
-                                </div>
-                                <div class="misi-item misi-item-static">
-                                    <div class="misi-number-static">05</div>
-                                    <div class="misi-content">
-                                        <h4>Standar Kebersihan</h4>
-                                        <p>Menjaga standar kebersihan (hygiene) tertinggi di setiap area.</p>
-                                    </div>
-                                </div>
-                                <div class="misi-item misi-item-static">
-                                    <div class="misi-number-static">06</div>
-                                    <div class="misi-content">
-                                        <h4>Kontribusi Sosial</h4>
-                                        <p>Memberikan kontribusi positif bagi lingkungan sekitar.</p>
-                                    </div>
-                                </div>
-                                @endforelse
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -427,16 +389,16 @@
                     <div class="founder-quote">
                         <i class="fas fa-quote-left quote-icon"></i>
                         <p>
-                            Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage (F&B) di luar latar belakang IT.
+                            {{ $founderDescription }}
                         </p>
                     </div>
                     
                     <div class="founder-story">
                         <p>
-                            Berawal dari rintisan sederhana bernama <strong>"Bebek Joss Gandos"</strong>, beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.
+                            {!! $founderStory1 !!}
                         </p>
                         <p>
-                            Di bawah kepemimpinan beliau dengan filosofi semangat <strong>"Joss, Mantap, dan Luar Biasa"</strong>, resto ini sukses melewati tantangan pandemi dan terus berinovasi—salah satunya melalui menu ikonik <span class="text-primary">Gulai Kepala Ikan Salmon</span>. Dedikasi beliau adalah memastikan setiap tamu merasakan kehangatan pelayanan dan cita rasa yang tak terlupakan.
+                            {!! $founderStoryCombined !!}
                         </p>
                     </div>
                     
@@ -463,11 +425,7 @@
         </div>
         
         <div class="row g-4 justify-content-center">
-            @php
-                $teamMembers = $content['team_members'] ?? [];
-            @endphp
-            
-            @forelse($teamMembers as $member)
+            @foreach($teamMembers as $member)
             <div class="col-lg-4 col-md-6">
                 <div class="team-card" data-aos="fade-up">
                     <div class="team-image">
@@ -480,45 +438,7 @@
                     </div>
                 </div>
             </div>
-            @empty
-            <!-- Default team members -->
-            <div class="col-lg-4 col-md-6">
-                <div class="team-card" data-aos="fade-up">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ahmad Santoso">
-                    </div>
-                    <div class="team-info">
-                        <h5>Ahmad Santoso</h5>
-                        <span class="team-position">Head Chef</span>
-                        <p class="team-desc">15 tahun pengalaman kuliner, spesialis masakan tradisional</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="team-card" data-aos="fade-up">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sari Dewi">
-                    </div>
-                    <div class="team-info">
-                        <h5>Sari Dewi</h5>
-                        <span class="team-position">Restaurant Manager</span>
-                        <p class="team-desc">Ahli dalam manajemen restoran dan pelayanan pelanggan</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="team-card" data-aos="fade-up">
-                    <div class="team-image">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Budi Hartono">
-                    </div>
-                    <div class="team-info">
-                        <h5>Budi Hartono</h5>
-                        <span class="team-position">F&B Director</span>
-                        <p class="team-desc">Pengembangan menu dan kontrol kualitas bahan</p>
-                    </div>
-                </div>
-            </div>
-            @endforelse
+            @endforeach
         </div>
     </div>
 </section>
@@ -552,12 +472,12 @@
                     
                     <!-- Main Title -->
                     <h2 class="cta-title-red animate__animated animate__fadeInUp">
-                        {{ $content['cta_title'] ?? 'Rasakan Cita Rasa Luar Biasa' }}
+                        {{ $ctaTitle }}
                     </h2>
                     
                     <!-- Description -->
                     <p class="cta-description-red animate__animated animate__fadeInUp animate__delay-1s">
-                        {{ $content['cta_description'] ?? 'Kunjungi restoran kami dan nikmati pengalaman bersantap yang tak terlupakan dengan hidangan autentik dan pelayanan terbaik dari keluarga Joss Gandos.' }}
+                        {{ $ctaDescription }}
                     </p>
                     
                     <!-- CTA Buttons - BUTTON KUNJUNGI KAMI DIHUBUNGKAN KE RESERVATION PAGE SECTION LOKASI -->
@@ -1223,7 +1143,7 @@
         pointer-events: none;
     }
 
-    /* Modern Text Styles - SEMUA PARAGRAF DISAMAKAN */
+    /* Modern Text Styles */
     .modern-text {
         color: var(--text-elegant);
     }
@@ -1236,16 +1156,14 @@
         line-height: 1.8;
     }
     
-    .history-paragraph-bold {
-        font-weight: 400 !important;
-        color: var(--text-dark) !important;
+    .history-paragraph .text-gradient-red {
+        font-weight: 700;
     }
     
     .history-last {
         margin-top: 25px;
         padding-top: 20px;
-        border-top: 1px solid rgba(0,0,0,0.05);
-        font-weight: 400;
+        border-top: 1px solid rgba(0,0,0,0.08);
         color: var(--text-dark);
     }
 
@@ -1573,7 +1491,7 @@
         transform: scaleX(1);
     }
 
-    /* VISI TEXT - DISAMAKAN DENGAN "KUALITAS PREMIUM" */
+    /* VISI TEXT */
     .visi-full-text {
         font-size: 1.3rem;
         line-height: 1.8;

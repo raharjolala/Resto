@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
-    /**
+ 
+  /**
      * Display the about page
      */
     public function indexAbout()
     {
-        $page = Page::findBySlug('about');
+        // Ambil data dari database
+        $page = Page::where('slug', 'about')->first();
         
+        // Jika tidak ada data di database, buat default
         if (!$page) {
             // Create default about page if not exists
             $page = Page::create([
@@ -24,10 +27,11 @@ class PageController extends Controller
                 'meta_description' => 'Kenali lebih dekat Resto Joss Gandos',
                 'content' => [
                     'hero_subtitle' => 'Delapan tahun silam, dari semangat untuk mengembangkan usaha di luar dunia IT, lahirlah Bebek Joss Gandos — dengan satu menu andalan yang terus menginspirasi.',
-                    'hero_image' => 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'hero_image' => 'https://lh3.googleusercontent.com/p/AF1QipPeNAHLmZKVY7MohcUXoRkYk8UReqJKN78t9BgI=s1360-w1360-h1020-rw',
                     'history_description_1' => 'Perjalanan Joss Gandos Resto & Café dimulai delapan tahun silam, dari semangat untuk mengembangkan usaha di bidang lain di luar dunia IT.',
                     'history_description_2' => 'Dengan keyakinan untuk menciptakan tempat makan yang berbeda, lahirlah Bebek Joss Gandos — sebuah rumah makan sederhana yang hanya mengandalkan satu menu andalan, yaitu bebek goreng khas dengan cita rasa mantap.',
                     'history_description_3' => 'Nama Joss Gandos dipilih dengan harapan agar restoran ini selalu menghadirkan makanan dan minuman yang joss — mantap, lezat, dan luar biasa — bagi setiap tamu yang datang.',
+                    'history_description_4' => 'Berdiri pada 28 Oktober 2017, kami menjadi salah satu resto pionir di kawasan Jalan Jemursari, jauh sebelum banyak resto lain bermunculan di sepanjang jalan ini.',
                     'vision_quote' => 'Menjadi restoran pilihan utama di Surabaya yang dikenal dengan cita rasa autentik, pelayanan ramah, serta suasana nyaman untuk seluruh keluarga.',
                     'founder_description' => 'Didirikan oleh Dr. Siswanto pada 28 Oktober 2017, Resto Joss Gandos lahir dari semangat beliau untuk mengembangkan sayap ke dunia Food & Beverage (F&B) di luar latar belakang IT.',
                     'founder_story_1' => 'Berawal dari rintisan sederhana bernama "Bebek Joss Gandos", beliau membawa resto ini tumbuh menjadi pionir kuliner di kawasan Jemursari.',
@@ -46,25 +50,17 @@ class PageController extends Controller
                         ['year' => '2022', 'title' => 'Semakin Dipercaya', 'items' => ['Peningkatan pesat customer event & gathering', 'Fasilitas Karaoke VIP menjadi daya tarik utama']],
                         ['year' => '2023', 'title' => 'Ekspansi & Menu Ikonik', 'items' => ['Renovasi besar: 6 VIP Room', 'Gulai Kepala Ikan Salmon menjadi ikon', 'Tanpa santan, kaya rempah']],
                         ['year' => '2024', 'title' => 'Cabang Baru', 'items' => ['Peningkatan layanan pesan antar & reservasi', 'Agustus 2024: Cabang baru di Ketintang']],
-                        ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh', 'Pengalaman yang Joss, Mantap, Luar Biasa!']],
-                    ],
-                    
-                    // Default vision pillars
-                    'vision_pillars' => [
-                        ['icon' => 'fas fa-utensils', 'title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas dengan bahan segar'],
-                        ['icon' => 'fas fa-heart', 'title' => 'Pelayanan Ramah', 'description' => 'Memberikan pengalaman terbaik bagi pelanggan'],
-                        ['icon' => 'fas fa-leaf', 'title' => 'Inovasi', 'description' => 'Terus berinovasi dalam menu dan layanan'],
-                        ['icon' => 'fas fa-users', 'title' => 'Kebersamaan', 'description' => 'Menciptakan suasana nyaman untuk keluarga'],
+                        ['year' => '2025', 'title' => 'Sewindu Joss Gandos!', 'items' => ['8 tahun perjalanan penuh perjuangan', 'Siap melangkah lebih jauh']],
                     ],
                     
                     // Default missions
                     'missions' => [
-                        ['icon' => 'fas fa-leaf', 'title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar.'],
-                        ['icon' => 'fas fa-smile', 'title' => 'Pelayanan Prima', 'description' => 'Pelayanan cepat, ramah, dan profesional.'],
-                        ['icon' => 'fas fa-home', 'title' => 'Suasana Nyaman', 'description' => 'Suasana bersih, nyaman, dan bersahabat.'],
-                        ['icon' => 'fas fa-lightbulb', 'title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi menu dan layanan.'],
-                        ['icon' => 'fas fa-broom', 'title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi.'],
-                        ['icon' => 'fas fa-hand-holding-heart', 'title' => 'Kontribusi Sosial', 'description' => 'Kontribusi positif bagi lingkungan sekitar.'],
+                        ['title' => 'Kualitas Premium', 'description' => 'Menyajikan hidangan berkualitas tinggi dengan bahan segar pilihan.'],
+                        ['title' => 'Pelayanan Prima', 'description' => 'Memberikan pelayanan cepat, ramah, dan profesional kepada setiap tamu.'],
+                        ['title' => 'Suasana Nyaman', 'description' => 'Menciptakan suasana bersih, nyaman, dan bersahabat untuk seluruh keluarga.'],
+                        ['title' => 'Inovasi Berkelanjutan', 'description' => 'Terus berinovasi dalam menu dan layanan untuk kepuasan pelanggan.'],
+                        ['title' => 'Standar Kebersihan', 'description' => 'Menjaga standar kebersihan (hygiene) tertinggi di setiap area.'],
+                        ['title' => 'Kontribusi Sosial', 'description' => 'Memberikan kontribusi positif bagi lingkungan sekitar.'],
                     ],
                     
                     // Default team members
@@ -77,6 +73,7 @@ class PageController extends Controller
             ]);
         }
         
+        // Kirim data ke view
         return view('pages.about', compact('page'));
     }
     
@@ -402,136 +399,170 @@ class PageController extends Controller
         
         return view('admin.pages.about', compact('page'));
     }
-    
-    /**
-     * Update the about page - FULLY FIXED VERSION
-     */
-    public function updateAbout(Request $request)
-    {
-        try {
-            // Validasi dasar
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'meta_title' => 'nullable|string|max:255',
-                'meta_description' => 'nullable|string',
-            ]);
+ /**
+ * Update the about page - FULLY FIXED VERSION
+ */
+public function updateAbout(Request $request)
+{
+    try {
+        // Validasi dasar
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
             
-            // Prepare content array
-            $content = [];
+            // Hero Section
+            'hero_subtitle' => 'nullable|string',
+            'hero_image' => 'nullable|url',
             
-            // Ambil semua field text biasa dari request (bukan array)
-            $textFields = [
-                'hero_subtitle', 'hero_image', 'history_description_1', 'history_description_2', 
-                'history_description_3', 'vision_quote', 'founder_description', 'founder_story_1',
-                'founder_story_2', 'founder_commitment', 'founder_image', 'cta_title', 'cta_description'
-            ];
+            // History Section - menggunakan array
+            'history_paragraphs' => 'nullable|array',
+            'history_paragraphs.*' => 'string',
             
-            foreach ($textFields as $field) {
-                if ($request->has($field)) {
-                    $content[$field] = $request->$field;
-                }
+            // Founder Section
+            'founder_description' => 'nullable|string',
+            'founder_story' => 'nullable|string',
+            'founder_philosophy' => 'nullable|string',
+            'founder_commitment' => 'nullable|string',
+            'founder_image' => 'nullable|url',
+            
+            // Vision
+            'vision_quote' => 'nullable|string',
+            
+            // CTA
+            'cta_title' => 'nullable|string',
+            'cta_description' => 'nullable|string',
+            
+            // Timeline
+            'timeline' => 'nullable|array',
+            'timeline.*.year' => 'required_with:timeline|string',
+            'timeline.*.title' => 'required_with:timeline|string',
+            'timeline.*.items' => 'required_with:timeline|string',
+            
+            // Missions
+            'missions' => 'nullable|array',
+            'missions.*.title' => 'required_with:missions|string',
+            'missions.*.description' => 'required_with:missions|string',
+            
+            // Team Members
+            'team_members' => 'nullable|array',
+            'team_members.*.name' => 'required_with:team_members|string',
+            'team_members.*.position' => 'required_with:team_members|string',
+            'team_members.*.image' => 'required_with:team_members|url',
+            'team_members.*.description' => 'required_with:team_members|string',
+        ]);
+
+        // Prepare content array
+        $content = [];
+
+        // ===== HERO SECTION =====
+        $content['hero_subtitle'] = $request->hero_subtitle;
+        $content['hero_image'] = $request->hero_image;
+
+        // ===== HISTORY SECTION - Konversi array ke individual fields =====
+        if ($request->has('history_paragraphs') && is_array($request->history_paragraphs)) {
+            foreach ($request->history_paragraphs as $index => $paragraph) {
+                $content['history_description_' . ($index + 1)] = $paragraph;
             }
-            
-            // Handle timeline data
-            if ($request->has('timeline') && is_array($request->timeline)) {
-                $timeline = [];
-                foreach ($request->timeline as $item) {
-                    if (isset($item['year']) && isset($item['title']) && isset($item['items'])) {
-                        // Convert items textarea to array (pisahkan per baris)
-                        $items = explode("\n", trim($item['items']));
-                        $items = array_map('trim', $items);
-                        $items = array_filter($items, function($value) {
-                            return !empty($value);
-                        });
-                        
-                        $timeline[] = [
-                            'year' => $item['year'],
-                            'title' => $item['title'],
-                            'items' => array_values($items) // Reset index array
-                        ];
-                    }
-                }
-                $content['timeline'] = $timeline;
-            }
-            
-            // Handle vision pillars
-            if ($request->has('vision_pillars') && is_array($request->vision_pillars)) {
-                $visionPillars = [];
-                foreach ($request->vision_pillars as $pillar) {
-                    if (!empty($pillar['icon']) && !empty($pillar['title']) && !empty($pillar['description'])) {
-                        $visionPillars[] = [
-                            'icon' => $pillar['icon'],
-                            'title' => $pillar['title'],
-                            'description' => $pillar['description']
-                        ];
-                    }
-                }
-                $content['vision_pillars'] = $visionPillars;
-            }
-            
-            // Handle missions
-            if ($request->has('missions') && is_array($request->missions)) {
-                $missions = [];
-                foreach ($request->missions as $mission) {
-                    if (!empty($mission['icon']) && !empty($mission['title']) && !empty($mission['description'])) {
-                        $missions[] = [
-                            'icon' => $mission['icon'],
-                            'title' => $mission['title'],
-                            'description' => $mission['description']
-                        ];
-                    }
-                }
-                $content['missions'] = $missions;
-            }
-            
-            // Handle team members
-            if ($request->has('team_members') && is_array($request->team_members)) {
-                $teamMembers = [];
-                foreach ($request->team_members as $member) {
-                    if (!empty($member['name']) && !empty($member['position']) && !empty($member['image']) && !empty($member['description'])) {
-                        $teamMembers[] = [
-                            'name' => $member['name'],
-                            'position' => $member['position'],
-                            'image' => $member['image'],
-                            'description' => $member['description']
-                        ];
-                    }
-                }
-                $content['team_members'] = $teamMembers;
-            }
-            
-            // Handle image upload jika ada
-            if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('pages', 'public');
-                $content['image'] = basename($path);
-            }
-            
-            // Update atau buat page
-            $page = Page::updateOrCreate(
-                ['slug' => 'about'],
-                [
-                    'title' => $request->title,
-                    'meta_title' => $request->meta_title,
-                    'meta_description' => $request->meta_description,
-                    'content' => $content
-                ]
-            );
-            
-            return redirect()
-                ->route('admin.pages.about.edit')
-                ->with('success', 'Halaman about berhasil diperbarui!');
-                
-        } catch (\Exception $e) {
-            Log::error('Error updating about page: ' . $e->getMessage());
-            Log::error($e->getTraceAsString());
-            
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
+
+        // ===== FOUNDER SECTION =====
+        $content['founder_description'] = $request->founder_description;
+        $content['founder_story_1'] = $request->founder_story; // Sesuaikan dengan nama di view
+        $content['founder_story_2'] = $request->founder_philosophy; // Philosophy jadi story 2
+        $content['founder_commitment'] = $request->founder_commitment;
+        $content['founder_image'] = $request->founder_image;
+
+        // ===== VISION =====
+        $content['vision_quote'] = $request->vision_quote;
+
+        // ===== CTA =====
+        $content['cta_title'] = $request->cta_title;
+        $content['cta_description'] = $request->cta_description;
+
+        // ===== TIMELINE =====
+        if ($request->has('timeline') && is_array($request->timeline)) {
+            $timeline = [];
+            foreach ($request->timeline as $item) {
+                if (isset($item['year']) && isset($item['title']) && isset($item['items'])) {
+                    // Convert items textarea to array
+                    $items = explode("\n", trim($item['items']));
+                    $items = array_map('trim', $items);
+                    $items = array_filter($items);
+                    
+                    $timeline[] = [
+                        'year' => $item['year'],
+                        'title' => $item['title'],
+                        'items' => array_values($items)
+                    ];
+                }
+            }
+            $content['timeline'] = $timeline;
+        }
+
+        // ===== MISSIONS =====
+        if ($request->has('missions') && is_array($request->missions)) {
+            $missions = [];
+            foreach ($request->missions as $mission) {
+                if (!empty($mission['title']) && !empty($mission['description'])) {
+                    $missions[] = [
+                        'title' => $mission['title'],
+                        'description' => $mission['description']
+                    ];
+                }
+            }
+            $content['missions'] = $missions;
+        }
+
+        // ===== TEAM MEMBERS =====
+        if ($request->has('team_members') && is_array($request->team_members)) {
+            $teamMembers = [];
+            foreach ($request->team_members as $member) {
+                if (!empty($member['name']) && !empty($member['position']) && !empty($member['image']) && !empty($member['description'])) {
+                    $teamMembers[] = [
+                        'name' => $member['name'],
+                        'position' => $member['position'],
+                        'image' => $member['image'],
+                        'description' => $member['description']
+                    ];
+                }
+            }
+            $content['team_members'] = $teamMembers;
+        }
+
+        // Handle image upload jika ada
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('pages', 'public');
+            $content['image'] = basename($path);
+        }
+
+        // Update atau buat page
+        $page = Page::updateOrCreate(
+            ['slug' => 'about'],
+            [
+                'title' => $request->title,
+                'meta_title' => $request->meta_title,
+                'meta_description' => $request->meta_description,
+                'content' => $content
+            ]
+        );
+
+        Log::info('About page updated successfully', ['id' => $page->id]);
+
+        return redirect()
+            ->route('admin.pages.about.edit')
+            ->with('success', 'Halaman about berhasil diperbarui!');
+            
+    } catch (\Exception $e) {
+        Log::error('Error updating about page: ' . $e->getMessage());
+        Log::error($e->getTraceAsString());
+        
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
-    
+}
     /**
      * Show the form for editing the contact page
      */

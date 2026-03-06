@@ -630,7 +630,7 @@
                     <div class="logo-image">
                         <img src="{{ asset('img/logojossgandos.png') }}" 
                              alt="JOSS GANDOS Logo" 
-                             onerror="this.onerror=null; this.src='https://www.restojossgandos.com/public/img/logojossgandos.png';">
+                             onerror="this.onerror=null; this.src='https://image2url.com/r2/default/images/1772765435835-d20680f1-36f4-4949-b468-4c8bb54bc6e9.png';">
                     </div>
                     <h1 class="brand-name">JOSS GANDOS</h1>
                     <p class="brand-tagline">Restaurant & Café</p>
@@ -722,19 +722,6 @@
                                 <i class="fas fa-eye"></i>
                             </button>
                         </div>
-                    </div>
-                    
-                    <div class="remember-forgot">
-                        <div class="checkbox-container">
-                            <input type="checkbox" 
-                                   id="remember" 
-                                   name="remember"
-                                   {{ old('remember') ? 'checked' : '' }}>
-                            <label for="remember">Keep me signed in</label>
-                        </div>
-                        <a href="#" class="forgot-link">
-                            <i class="fas fa-question-circle me-1"></i> Forgot Password?
-                        </a>
                     </div>
                     
                     <button type="submit" class="btn-login">

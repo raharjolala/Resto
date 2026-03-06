@@ -61,7 +61,7 @@
                 <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
                     <div class="hero-image-container hero-image-extra-large">
                         <div class="hero-image-frame hero-frame-premium">
-                            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerZjpeOCYMCcB1QNHewmwQPBT7ZOwP--PNdrYNOch7OqGDh_OnrZol7Pf6q1sXQb2QT9rxPbUj5YXUs2IXNFVFXN3Dp8Edw-AZq8n-sPIpz63kOtqpu5TzZN67vRwagPDztBxl9GA=s1360-w1360-h1020-rw"
                                  alt="Reservasi Resto Joss Gandos"
                                  class="hero-image img-fluid">
                             

@@ -15,7 +15,7 @@ class GalleryController extends Controller
     {
         try {
             // Ambil semua data gallery dari database
-            $galleryItems = Gallery::getActiveItems();
+             $galleryItems = Gallery::getActiveItems();
             
             Log::info('GalleryController@index - Total items from DB: ' . $galleryItems->count());
             

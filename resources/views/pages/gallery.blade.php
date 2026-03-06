@@ -86,7 +86,7 @@
                 <div class="hero-image-wrapper animate__animated animate__fadeInRight animate__delay-0s">
                     <div class="hero-image-container hero-image-extra-large">
                         <div class="hero-image-frame hero-frame-premium">
-                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwep6rJYnQKwaLTyXXQlPNaN2buR7611PcGRb-jfgrUlOOrfTCHNOWUExjFGQ8pXDH5AH9fmd5oc04zpGwafXoRTMtbXWUTU1L6NtcRLEjIVIduLreJO6OnaT19NHp5qL3xDxm7Qy=s1360-w1360-h1020-rw"
                                  alt="Galeri Resto Joss Gandos"
                                  class="hero-image img-fluid">
                             
