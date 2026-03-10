@@ -439,6 +439,56 @@
         transform: scale(1.05);
     }
 
+    /* Category Icon Styling - Only for non-main course categories */
+    .category-icon {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-red);
+        font-size: 1.2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 2;
+        transition: all 0.4s ease;
+        border: 2px solid transparent;
+    }
+
+    /* Icon hover effect */
+    .menu-card:hover .category-icon {
+        transform: scale(1.1) rotate(5deg);
+        background: var(--primary-red);
+        color: white;
+        border-color: var(--accent-gold);
+        box-shadow: 0 6px 16px rgba(220, 20, 60, 0.4);
+    }
+
+    /* Icon colors for different categories */
+    .category-icon.appetizer {
+        background: linear-gradient(135deg, #4ECDC4, #45B7AA);
+        color: white;
+    }
+    
+    .category-icon.dessert {
+        background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+        color: white;
+    }
+    
+    .category-icon.drink {
+        background: linear-gradient(135deg, #87CEEB, #00BFFF);
+        color: white;
+    }
+
+    /* Hide icon for main course */
+    .category-icon.main-course {
+        display: none;
+    }
+
     .card-content {
         padding: 20px;
         transition: all 0.4s ease;
@@ -457,6 +507,7 @@
         align-items: flex-start;
         margin-bottom: 12px;
         transition: all 0.3s ease;
+        padding-left: 0;
     }
 
     .card-title {
@@ -600,6 +651,11 @@
         .carousel-arrow.next {
             right: 20px;
         }
+        .category-icon {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+        }
     }
 
     @media (max-width: 768px) {
@@ -648,6 +704,11 @@
             width: 40px;
             height: 40px;
             font-size: 1rem;
+        }
+        .category-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 0.9rem;
         }
     }
 
@@ -701,6 +762,11 @@
         .carousel-arrow.next {
             right: 10px;
         }
+        .category-icon {
+            width: 30px;
+            height: 30px;
+            font-size: 0.8rem;
+        }
     }
 
     @media (max-width: 400px) {
@@ -728,6 +794,11 @@
             width: 30px;
             height: 30px;
             font-size: 0.9rem;
+        }
+        .category-icon {
+            width: 28px;
+            height: 28px;
+            font-size: 0.7rem;
         }
     }
 </style>
@@ -795,7 +866,23 @@
                 </button>
                 @foreach($categories as $category)
                 <button class="filter-btn" data-category="{{ $category->id }}">
-                    <i class="fas fa-utensils"></i> {{ $category->name }}
+                    @php
+                        $iconClass = '';
+                        $categoryName = strtolower($category->name);
+                        
+                        if(str_contains($categoryName, 'main') || str_contains($categoryName, 'makanan utama')) {
+                            $iconClass = 'fa-utensils';
+                        } elseif(str_contains($categoryName, 'appetizer') || str_contains($categoryName, 'pembuka')) {
+                            $iconClass = 'fa-leaf';
+                        } elseif(str_contains($categoryName, 'dessert') || str_contains($categoryName, 'makanan penutup')) {
+                            $iconClass = 'fa-cake-candles';
+                        } elseif(str_contains($categoryName, 'drink') || str_contains($categoryName, 'minuman')) {
+                            $iconClass = 'fa-mug-saucer';
+                        } else {
+                            $iconClass = 'fa-utensils';
+                        }
+                    @endphp
+                    <i class="fas {{ $iconClass }}"></i> {{ $category->name }}
                 </button>
                 @endforeach
             </div>
@@ -809,6 +896,34 @@
                             <img src="{{ $item->image_url }}" 
                                  alt="{{ $item->name }}"
                                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
+                            
+                            <!-- Category Icon - Only for non-main course categories -->
+                            @php
+                                $categoryName = strtolower($category->name);
+                                $iconClass = 'fa-utensils';
+                                $categoryType = '';
+                                
+                                if(str_contains($categoryName, 'appetizer') || str_contains($categoryName, 'pembuka')) {
+                                    $iconClass = 'fa-leaf';
+                                    $categoryType = 'appetizer';
+                                } elseif(str_contains($categoryName, 'dessert') || str_contains($categoryName, 'makanan penutup')) {
+                                    $iconClass = 'fa-cake-candles';
+                                    $categoryType = 'dessert';
+                                } elseif(str_contains($categoryName, 'drink') || str_contains($categoryName, 'minuman')) {
+                                    $iconClass = 'fa-mug-saucer';
+                                    $categoryType = 'drink';
+                                } elseif(str_contains($categoryName, 'main') || str_contains($categoryName, 'makanan utama')) {
+                                    // Main course - no icon
+                                    $categoryType = 'main-course';
+                                }
+                            @endphp
+                            
+                            @if($categoryType != 'main-course')
+                            <div class="category-icon {{ $categoryType }}">
+                                <i class="fas {{ $iconClass }}"></i>
+                            </div>
+                            @endif
+                            
                             @if($item->is_featured)
                             <div class="card-badge">Favorit</div>
                             @endif

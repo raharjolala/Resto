@@ -5,106 +5,727 @@
 
 @section('styles')
 <style>
-    /* Red Gradient Theme - Consistent with Dashboard */
+    /* ===== PREMIUM AESTHETIC RED THEME - CONSISTENT WITH MENU PAGE ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+    
     :root {
-        --red-50: #fff1f0;
-        --red-100: #ffe5e3;
-        --red-200: #ffc9c5;
-        --red-300: #ff9d95;
-        --red-400: #ff6b6b;
-        --red-500: #f44336;
-        --red-600: #e53935;
-        --red-700: #d32f2f;
-        --red-800: #c62828;
-        --red-900: #b71c1c;
+        /* Premium Red Palette */
+        --red-50: #FFF5F5;
+        --red-100: #FFE3E3;
+        --red-200: #FFC9C9;
+        --red-300: #FFA8A8;
+        --red-400: #FF8787;
+        --red-500: #DC143C;
+        --red-600: #B22234;
+        --red-700: #8B0000;
+        --red-800: #5C0000;
+        --red-900: #2E0000;
         
-        --gradient-sunset: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-        --gradient-crimson: linear-gradient(135deg, #c62828, #8e1537);
-        --gradient-coral: linear-gradient(135deg, #ff7e5f, #feb47b);
-        --gradient-rose: linear-gradient(135deg, #e53935, #b71c1c);
-        --gradient-burgundy: linear-gradient(135deg, #8e0000, #c62828);
-        --gradient-scarlet: linear-gradient(135deg, #ff5252, #f44336);
+        /* Neutral Colors */
+        --gray-50: #F8F9FA;
+        --gray-100: #F1F3F5;
+        --gray-200: #E9ECEF;
+        --gray-300: #DEE2E6;
+        --gray-400: #CED4DA;
+        --gray-500: #ADB5BD;
+        --gray-600: #6C757D;
+        --gray-700: #495057;
+        --gray-800: #343A40;
+        --gray-900: #212529;
         
-        --shadow-sm: 0 4px 6px -1px rgba(198, 40, 40, 0.1), 0 2px 4px -1px rgba(198, 40, 40, 0.06);
-        --shadow-md: 0 10px 15px -3px rgba(198, 40, 40, 0.15), 0 4px 6px -2px rgba(198, 40, 40, 0.1);
-        --shadow-lg: 0 20px 25px -5px rgba(198, 40, 40, 0.2), 0 10px 10px -5px rgba(198, 40, 40, 0.1);
-        --shadow-xl: 0 25px 50px -12px rgba(198, 40, 40, 0.25);
+        /* Gradients Premium */
+        --gradient-primary: linear-gradient(135deg, #DC143C 0%, #B22234 50%, #8B0000 100%);
+        --gradient-soft: linear-gradient(135deg, #FFF5F5 0%, #FFE3E3 100%);
+        --gradient-glass: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(139, 0, 0, 0.02) 100%);
         
-        --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        /* Shadows */
+        --shadow-sm: 0 2px 8px rgba(220, 20, 60, 0.08);
+        --shadow-md: 0 4px 20px rgba(220, 20, 60, 0.12);
+        --shadow-lg: 0 8px 30px rgba(220, 20, 60, 0.16);
+        
+        /* Border Radius */
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-2xl: 32px;
+        --radius-full: 9999px;
+        
+        /* Fonts */
+        --font-sans: 'Inter', sans-serif;
+        --font-serif: 'Playfair Display', serif;
     }
 
-    /* Main Container */
-    .content-card {
-        background: linear-gradient(145deg, #fff9f9 0%, #fff1f0 100%);
-        border-radius: 32px;
-        padding: 30px;
-        box-shadow: var(--shadow-md);
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        background: var(--gray-50);
+    }
+
+    /* ===== MAIN CONTAINER ===== */
+    .promo-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* ===== HEADER CARD ===== */
+    .header-card {
+        background: white;
+        border-radius: var(--radius-2xl);
+        box-shadow: var(--shadow-lg);
+        margin-bottom: 2rem;
         position: relative;
         overflow: hidden;
+        border: 1px solid rgba(220, 20, 60, 0.1);
+        animation: slideDown 0.5s ease;
     }
 
-    .content-card::before {
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .header-card::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, transparent, var(--red-400), var(--red-600), var(--red-800), transparent);
-        opacity: 0.5;
+        background: var(--gradient-primary);
+        z-index: 10;
     }
 
-    /* Card Header */
-    .card-header {
-        background: linear-gradient(145deg, #ffffff, #fff5f5);
-        border-radius: 24px !important;
-        padding: 20px 24px;
-        margin-bottom: 24px;
-        border: 1px solid rgba(198, 40, 40, 0.1);
+    .header-content {
+        padding: 2rem 2.5rem;
+        background: linear-gradient(135deg, rgba(255, 245, 245, 0.8) 0%, white 100%);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .header-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .header-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-soft);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: var(--red-500);
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(220, 20, 60, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .header-icon:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .header-text h1 {
+        font-family: var(--font-serif);
+        font-size: 2.2rem;
+        font-weight: 700;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.25rem;
+    }
+
+    .header-text p {
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .header-text p i {
+        color: var(--red-500);
+        font-size: 0.8rem;
+    }
+
+    /* ===== PREMIUM BUTTON ===== */
+    .btn-premium {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: var(--radius-full);
+        font-weight: 600;
+        font-size: 1rem;
+        letter-spacing: 0.3px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-premium::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-premium:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: var(--shadow-lg);
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-premium:hover::before {
+        left: 100%;
+    }
+
+    .btn-premium i {
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-premium:hover i {
+        transform: scale(1.2) rotate(90deg);
+    }
+
+    /* ===== STATS CARD ===== */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
         box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(220, 20, 60, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        animation: fadeIn 0.5s ease;
+        animation-fill-mode: both;
+    }
+
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+    .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--red-300);
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-soft);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--red-500);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon {
+        transform: scale(1.1);
+        background: var(--gradient-primary);
+        color: white;
+    }
+
+    .stat-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-info p {
+        color: var(--gray-600);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* ===== MAIN CARD ===== */
+    .main-card {
+        background: white;
+        border-radius: var(--radius-2xl);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        border: 1px solid rgba(220, 20, 60, 0.1);
+        animation: slideUp 0.5s ease 0.2s both;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card-header {
+        padding: 1.5rem 2rem;
+        background: var(--gradient-glass);
+        border-bottom: 1px solid rgba(220, 20, 60, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .card-header h2 {
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: #1a202c;
-        margin: 0;
-        font-family: var(--font-sans);
-        position: relative;
-        display: inline-block;
-    }
-
-    .card-header h2::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 60px;
-        height: 3px;
-        background: var(--gradient-crimson);
-        border-radius: 2px;
-    }
-
-    /* Admin Button */
-    .btn-admin {
-        background: var(--gradient-crimson);
-        color: white;
-        border: none;
-        padding: 12px 28px;
-        border-radius: 50px;
+        font-size: 1.3rem;
         font-weight: 600;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+        color: var(--gray-800);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .card-header h2 i {
+        color: var(--red-500);
+        font-size: 1.2rem;
+    }
+
+    .card-header .badge {
+        background: var(--gradient-soft);
+        color: var(--red-600);
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-full);
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid rgba(220, 20, 60, 0.2);
+    }
+
+    /* ===== TABLE STYLES ===== */
+    .table-wrapper {
+        padding: 2rem;
+        overflow-x: auto;
+    }
+
+    .promo-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 12px;
+    }
+
+    .promo-table thead th {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--gray-600);
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 2px solid var(--gray-200);
+    }
+
+    .promo-table tbody tr {
+        background: white;
+        border-radius: var(--radius-lg);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        border: 1px solid transparent;
+        animation: slideRow 0.3s ease;
+        animation-fill-mode: both;
+    }
+
+    @keyframes slideRow {
+        from {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Animation delays for rows */
+    .promo-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+    .promo-table tbody tr:nth-child(2) { animation-delay: 0.10s; }
+    .promo-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+    .promo-table tbody tr:nth-child(4) { animation-delay: 0.20s; }
+    .promo-table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+    .promo-table tbody tr:nth-child(6) { animation-delay: 0.30s; }
+    .promo-table tbody tr:nth-child(7) { animation-delay: 0.35s; }
+    .promo-table tbody tr:nth-child(8) { animation-delay: 0.40s; }
+    .promo-table tbody tr:nth-child(9) { animation-delay: 0.45s; }
+    .promo-table tbody tr:nth-child(10) { animation-delay: 0.50s; }
+    .promo-table tbody tr:nth-child(11) { animation-delay: 0.55s; }
+    .promo-table tbody tr:nth-child(12) { animation-delay: 0.60s; }
+    .promo-table tbody tr:nth-child(13) { animation-delay: 0.65s; }
+    .promo-table tbody tr:nth-child(14) { animation-delay: 0.70s; }
+    .promo-table tbody tr:nth-child(15) { animation-delay: 0.75s; }
+    .promo-table tbody tr:nth-child(16) { animation-delay: 0.80s; }
+    .promo-table tbody tr:nth-child(17) { animation-delay: 0.85s; }
+    .promo-table tbody tr:nth-child(18) { animation-delay: 0.90s; }
+    .promo-table tbody tr:nth-child(19) { animation-delay: 0.95s; }
+    .promo-table tbody tr:nth-child(20) { animation-delay: 1.00s; }
+
+    .promo-table tbody tr:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(220, 20, 60, 0.2);
+        background: linear-gradient(135deg, white, var(--red-50));
+    }
+
+    .promo-table tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        color: var(--gray-800);
+        border: none;
+    }
+
+    .promo-table tbody td:first-child {
+        border-top-left-radius: var(--radius-lg);
+        border-bottom-left-radius: var(--radius-lg);
+    }
+
+    .promo-table tbody td:last-child {
+        border-top-right-radius: var(--radius-lg);
+        border-bottom-right-radius: var(--radius-lg);
+    }
+
+    /* ===== NUMBER BADGE ===== */
+    .number-badge {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        position: relative;
-        overflow: hidden;
-        letter-spacing: 0.02em;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: var(--gradient-soft);
+        border-radius: var(--radius-full);
+        color: var(--red-600);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: 2px solid white;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
     }
 
-    .btn-admin::before {
+    .promo-table tbody tr:hover .number-badge {
+        background: var(--gradient-primary);
+        color: white;
+        transform: scale(1.1);
+    }
+
+    /* ===== IMAGE STYLES ===== */
+    .promo-image {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: var(--radius-lg);
+        border: 3px solid white;
+        box-shadow: var(--shadow-md);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .promo-table tbody tr:hover .promo-image {
+        transform: scale(1.1) rotate(2deg);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--red-500);
+    }
+
+    .promo-image-placeholder {
+        width: 80px;
+        height: 60px;
+        background: var(--gradient-soft);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--red-500);
+        border: 2px dashed var(--red-300);
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .promo-table tbody tr:hover .promo-image-placeholder {
+        border-color: var(--red-500);
+        color: var(--red-700);
+        transform: scale(1.05);
+        background: white;
+    }
+
+    /* ===== PROMO INFO ===== */
+    .promo-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .promo-title {
+        font-weight: 700;
+        color: var(--gray-900);
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+        font-family: var(--font-serif);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .promo-table tbody tr:hover .promo-title {
+        color: var(--red-600);
+    }
+
+    .promo-description {
+        font-size: 0.8rem;
+        color: var(--gray-600);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1.4;
+    }
+
+    .promo-description i {
+        color: var(--red-400);
+        font-size: 0.7rem;
+    }
+
+    /* ===== BADGES ===== */
+    .badge-promo {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: var(--gradient-soft);
+        color: var(--red-700);
+        border-radius: var(--radius-full);
+        font-size: 0.75rem;
+        font-weight: 600;
+        border: 1px solid var(--red-200);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .badge-promo i {
+        color: var(--red-500);
+        font-size: 0.7rem;
+    }
+
+    .promo-table tbody tr:hover .badge-promo {
+        background: var(--gradient-primary);
+        color: white;
+        border-color: transparent;
+    }
+
+    .promo-table tbody tr:hover .badge-promo i {
+        color: white;
+    }
+
+    /* Status Badges */
+    .badge-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .badge-status.active {
+        background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+        color: #2E7D32;
+        border: 1px solid #A5D6A7;
+    }
+
+    .badge-status.upcoming {
+        background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+        color: #1976D2;
+        border: 1px solid #90CAF9;
+    }
+
+    .badge-status.expired {
+        background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+        color: #C62828;
+        border: 1px solid #EF9A9A;
+    }
+
+    .badge-status.inactive {
+        background: linear-gradient(135deg, #F5F5F5, #EEEEEE);
+        color: #616161;
+        border: 1px solid #BDBDBD;
+    }
+
+    .badge-sort {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, #C62828, #8B0000);
+        color: white;
+        border-radius: var(--radius-full);
+        font-size: 0.8rem;
+        font-weight: 700;
+        box-shadow: var(--shadow-sm);
+        border: 2px solid white;
+    }
+
+    .promo-table tbody tr:hover .badge-sort {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* ===== PRICE TAG ===== */
+    .price-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .old-price {
+        font-size: 0.75rem;
+        color: var(--gray-500);
+        text-decoration: line-through;
+    }
+
+    .current-price {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--red-600);
+        background: linear-gradient(135deg, var(--red-50), white);
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        display: inline-block;
+        border: 1px solid var(--red-200);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .promo-table tbody tr:hover .current-price {
+        background: var(--gradient-primary);
+        color: white;
+        border-color: transparent;
+        transform: scale(1.05);
+    }
+
+    .discount-badge {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        padding: 2px 6px;
+        border-radius: var(--radius-full);
+        font-size: 0.65rem;
+        font-weight: 600;
+        margin-left: 4px;
+    }
+
+    /* ===== DATE INFO ===== */
+    .date-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .date-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        color: var(--gray-700);
+    }
+
+    .date-item i {
+        color: var(--red-500);
+        font-size: 0.75rem;
+        width: 16px;
+    }
+
+    /* ===== ACTION BUTTONS ===== */
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+    }
+
+    .promo-table tbody tr:hover .action-buttons {
+        opacity: 1;
+    }
+
+    .btn-action {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-md);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+    }
+
+    .btn-action::before {
         content: '';
         position: absolute;
         top: 50%;
@@ -112,36 +733,130 @@
         width: 0;
         height: 0;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.5);
         transform: translate(-50%, -50%);
         transition: width 0.6s, height 0.6s;
     }
 
-    .btn-admin:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(198, 40, 40, 0.4);
-        color: white;
-    }
-
-    .btn-admin:hover::before {
+    .btn-action:hover::before {
         width: 300px;
         height: 300px;
     }
 
-    .btn-admin i {
-        font-size: 1.1rem;
+    .btn-action i {
+        font-size: 1rem;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s ease;
     }
 
-    /* Alerts */
-    .alert {
-        padding: 16px 20px;
-        margin-bottom: 24px;
-        border-radius: 16px;
-        animation: slideIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-        border: none;
+    .btn-action:hover {
+        transform: translateY(-3px) scale(1.1);
+    }
+
+    .btn-action:hover i {
+        transform: scale(1.2);
+    }
+
+    .btn-action.edit {
+        background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+        color: #1976D2;
+        border: 1px solid #90CAF9;
+    }
+
+    .btn-action.edit:hover {
+        background: linear-gradient(135deg, #1976D2, #0D47A1);
+        color: white;
+    }
+
+    .btn-action.delete {
+        background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+        color: #C62828;
+        border: 1px solid #EF9A9A;
+    }
+
+    .btn-action.delete:hover {
+        background: linear-gradient(135deg, #C62828, #8B0000);
+        color: white;
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+        text-align: center;
+        padding: 5rem 2rem;
+        background: linear-gradient(135deg, var(--red-50), white);
+        border-radius: var(--radius-2xl);
         position: relative;
         overflow: hidden;
-        font-weight: 500;
+    }
+
+    .empty-state::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--red-200) 0%, transparent 70%);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: float 15s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        33% { transform: translate(20px, -20px) rotate(5deg); }
+        66% { transform: translate(-10px, 10px) rotate(-5deg); }
+    }
+
+    .empty-state i {
+        font-size: 5rem;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .empty-state h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .empty-state p {
+        color: var(--gray-600);
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* ===== ALERTS ===== */
+    .alert {
+        padding: 1rem 1.5rem;
+        border-radius: var(--radius-lg);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        animation: slideAlert 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    @keyframes slideAlert {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     .alert::before {
@@ -151,746 +866,473 @@
         left: 0;
         width: 4px;
         height: 100%;
-    }
-
-    .alert-success {
-        background: linear-gradient(145deg, #f0fff4, #e6fffa);
-        color: #22543d;
-    }
-
-    .alert-success::before {
-        background: linear-gradient(135deg, #48bb78, #38a169);
-    }
-
-    .alert-danger {
-        background: linear-gradient(145deg, #fff5f5, #fee);
-        color: #742a2a;
-    }
-
-    .alert-danger::before {
-        background: linear-gradient(135deg, #f56565, #c53030);
+        background: currentColor;
     }
 
     .alert i {
         font-size: 1.2rem;
     }
 
-    .btn-close {
-        filter: brightness(0.5);
-        transition: all 0.2s ease;
+    .alert-success {
+        background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+        color: #2E7D32;
+        border: 1px solid #A5D6A7;
     }
 
-    .btn-close:hover {
-        filter: brightness(0.8);
-        transform: scale(1.1);
+    .alert-danger {
+        background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+        color: #C62828;
+        border: 1px solid #EF9A9A;
     }
 
-    @keyframes slideIn {
-        from {
-            transform: translateY(-20px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    /* Table Container */
-    .table-responsive {
-        background: white;
-        border-radius: 24px;
-        padding: 4px;
-        box-shadow: var(--shadow-sm);
-        border: 1px solid rgba(198, 40, 40, 0.1);
-        overflow: hidden;
-    }
-
-    /* Modern Table */
-    #promotions-table {
-        margin: 0;
-        border-collapse: separate;
-        border-spacing: 0;
-        width: 100%;
-    }
-
-    #promotions-table thead {
-        background: var(--gradient-crimson);
-    }
-
-    #promotions-table thead th {
-        color: white;
-        font-weight: 600;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        padding: 18px 16px;
-        border: none;
-        white-space: nowrap;
-    }
-
-    #promotions-table thead th:first-child {
-        border-top-left-radius: 20px;
-    }
-
-    #promotions-table thead th:last-child {
-        border-top-right-radius: 20px;
-    }
-
-    #promotions-table tbody tr {
-        transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(198, 40, 40, 0.08);
-    }
-
-    #promotions-table tbody tr:last-child {
-        border-bottom: none;
-    }
-
-    #promotions-table tbody tr:hover {
-        background: linear-gradient(90deg, rgba(198, 40, 40, 0.04), transparent);
-        transform: translateX(4px);
-        box-shadow: 0 2px 8px rgba(198, 40, 40, 0.05);
-    }
-
-    #promotions-table tbody td {
-        padding: 20px 16px;
-        vertical-align: middle;
-        color: #2d3748;
-        font-size: 0.95rem;
-        border: none;
-    }
-
-    /* Product Image */
-    #promotions-table td img {
-        width: 80px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        border: 2px solid white;
-    }
-
-    #promotions-table tbody tr:hover td img {
-        transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(198, 40, 40, 0.2);
-    }
-
-    /* Price Styling */
-    #promotions-table td .text-muted.text-decoration-line-through {
-        font-size: 0.8rem;
-        opacity: 0.7;
-    }
-
-    #promotions-table td .text-danger.fw-bold {
-        font-size: 1.1rem;
-        background: linear-gradient(135deg, #e53935, #c62828);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    #promotions-table td .badge.bg-success {
-        background: linear-gradient(135deg, #48bb78, #38a169) !important;
-        padding: 4px 8px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.7rem;
-        box-shadow: 0 2px 4px rgba(72, 187, 120, 0.3);
-    }
-
-    /* Badge Text */
-    #promotions-table td .badge.bg-warning {
-        background: linear-gradient(135deg, #ffb74d, #ff9800) !important;
-        color: white !important;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.75rem;
-        box-shadow: 0 2px 4px rgba(255, 152, 0, 0.3);
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-    }
-
-    /* Date Display */
-    #promotions-table td small {
-        font-size: 0.85rem;
-        color: #4a5568;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    #promotions-table td small i {
-        color: var(--red-600);
-        width: 16px;
-        font-size: 0.9rem;
-    }
-
-    /* Status Badges */
-    #promotions-table td .badge {
-        padding: 8px 14px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    #promotions-table td .badge.bg-success {
-        background: linear-gradient(135deg, #48bb78, #38a169) !important;
-    }
-
-    #promotions-table td .badge.bg-info {
-        background: linear-gradient(135deg, #4299e1, #3182ce) !important;
-    }
-
-    #promotions-table td .badge.bg-secondary {
-        background: linear-gradient(135deg, #a0aec0, #718096) !important;
-    }
-
-    #promotions-table td .badge.bg-danger {
-        background: linear-gradient(135deg, #f56565, #c53030) !important;
-    }
-
-    /* Sort Order Badge */
-    #promotions-table td .badge.bg-secondary:last-child {
-        background: linear-gradient(135deg, #c62828, #b71c1c) !important;
-        min-width: 32px;
-        text-align: center;
-    }
-
-    /* Action Buttons */
-    #promotions-table td .d-flex {
-        gap: 8px;
-    }
-
-    #promotions-table td .btn-sm {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    #promotions-table td .btn-sm i {
-        font-size: 0.9rem;
-    }
-
-    #promotions-table td .btn-primary {
-        background: linear-gradient(135deg, #4299e1, #3182ce);
-        color: white;
-    }
-
-    #promotions-table td .btn-primary:hover {
-        background: linear-gradient(135deg, #3182ce, #2c5282);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
-    }
-
-    #promotions-table td .btn-danger {
-        background: linear-gradient(135deg, #f56565, #c53030);
-        color: white;
-    }
-
-    #promotions-table td .btn-danger:hover {
-        background: linear-gradient(135deg, #c53030, #9b2c2c);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
-    }
-
-    /* Empty State */
-    #promotions-table td[colspan="9"] {
-        padding: 60px 20px !important;
-    }
-
-    #promotions-table .text-muted {
-        color: #4a5568 !important;
-    }
-
-    #promotions-table .text-muted i {
-        color: var(--red-400);
-        opacity: 0.5;
-        font-size: 4rem;
-        margin-bottom: 20px;
-    }
-
-    #promotions-table .text-muted h5 {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 12px;
-        font-family: var(--font-sans);
-    }
-
-    #promotions-table .text-muted p {
-        color: #718096;
-        font-size: 1rem;
-        margin-bottom: 24px;
-    }
-
-    #promotions-table .text-muted .btn-admin {
-        display: inline-flex;
-        padding: 12px 28px;
-        font-size: 0.95rem;
-    }
-
-    /* DataTables Customization */
-    .dataTables_wrapper {
-        padding: 20px;
-    }
-
-    .dataTables_length select {
-        border: 2px solid rgba(198, 40, 40, 0.1);
-        border-radius: 12px;
-        padding: 6px 12px;
-        margin: 0 8px;
-        color: #2d3748;
-        font-weight: 500;
-    }
-
-    .dataTables_filter input {
-        border: 2px solid rgba(198, 40, 40, 0.1);
-        border-radius: 30px;
-        padding: 8px 16px 8px 40px;
-        margin-left: 8px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c62828' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: 12px center;
-        transition: all 0.3s ease;
-    }
-
-    .dataTables_filter input:focus {
-        outline: none;
-        border-color: var(--red-600);
-        box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.1);
-    }
-
-    .dataTables_info {
-        color: #4a5568;
-        font-size: 0.9rem;
-        padding: 12px 0;
-    }
-
-    .dataTables_paginate {
-        padding: 12px 0;
-    }
-
-    .dataTables_paginate .paginate_button {
-        border-radius: 12px !important;
-        margin: 0 4px;
-        padding: 8px 16px !important;
-        color: #4a5568 !important;
-        border: 1px solid rgba(198, 40, 40, 0.1) !important;
-        background: white !important;
-        transition: all 0.3s ease;
-    }
-
-    .dataTables_paginate .paginate_button:hover {
-        background: linear-gradient(135deg, #fff5f5, #ffe5e3) !important;
-        border-color: var(--red-600) !important;
-        color: var(--red-800) !important;
-        transform: translateY(-2px);
-    }
-
-    .dataTables_paginate .paginate_button.current {
-        background: var(--gradient-crimson) !important;
-        color: white !important;
-        border: none !important;
-        box-shadow: 0 4px 10px rgba(198, 40, 40, 0.3);
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-        .content-card {
-            padding: 20px;
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+        .promo-container {
+            padding: 1rem;
         }
 
-        .card-header {
+        .header-content {
             flex-direction: column;
-            gap: 16px;
-            text-align: center;
+            align-items: start;
+            gap: 1.5rem;
+            padding: 1.5rem;
         }
 
-        .card-header h2::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .btn-admin {
+        .btn-premium {
             width: 100%;
             justify-content: center;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .table-wrapper {
+            padding: 1rem;
+        }
+
+        .promo-image, .promo-image-placeholder {
+            width: 60px;
+            height: 45px;
+        }
+
+        .promo-title {
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            gap: 4px;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
         }
     }
 
     @media (max-width: 768px) {
-        .content-card {
-            padding: 15px;
+        .promo-table thead {
+            display: none;
         }
 
-        .card-header h2 {
+        .promo-table tbody tr {
+            display: block;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+
+        .promo-table tbody td {
+            display: block;
+            text-align: left;
+            padding: 0.5rem;
+            border: none;
+        }
+
+        .promo-table tbody td:before {
+            content: attr(data-label);
+            float: left;
+            font-weight: 600;
+            color: var(--red-600);
+            width: 100px;
+            font-size: 0.8rem;
+        }
+
+        .promo-table tbody td:first-child {
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .promo-table tbody td:last-child {
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        .action-buttons {
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+        }
+
+        .header-icon {
+            width: 50px;
+            height: 50px;
             font-size: 1.5rem;
         }
-
-        #promotions-table thead th {
-            font-size: 0.8rem;
-            padding: 12px 8px;
-        }
-
-        #promotions-table tbody td {
-            padding: 15px 8px;
-            font-size: 0.85rem;
-        }
-
-        #promotions-table td .btn-sm {
-            padding: 6px 10px;
-        }
     }
 
-    /* Tooltip */
-    .tooltip {
-        font-family: var(--font-sans);
-    }
-
-    .tooltip-inner {
-        background: var(--gradient-crimson);
-        border-radius: 12px;
-        padding: 8px 16px;
-        font-weight: 500;
-        box-shadow: var(--shadow-md);
-    }
-
-    /* SweetAlert2 Customization */
-    .swal2-popup {
-        border-radius: 28px !important;
-        padding: 30px !important;
-        font-family: var(--font-sans) !important;
-    }
-
-    .swal2-title {
-        font-size: 1.6rem !important;
-        font-weight: 700 !important;
-        color: #1a202c !important;
-    }
-
-    .swal2-html-container {
-        font-size: 1rem !important;
-        color: #4a5568 !important;
-    }
-
-    .swal2-html-container strong {
-        color: var(--red-800);
-    }
-
-    .swal2-confirm {
-        background: linear-gradient(135deg, #f56565, #c53030) !important;
-        border-radius: 50px !important;
-        padding: 12px 32px !important;
-        font-weight: 600 !important;
-        letter-spacing: 0.02em !important;
-        box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3) !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .swal2-confirm:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(245, 101, 101, 0.4) !important;
-    }
-
-    .swal2-cancel {
-        background: linear-gradient(135deg, #a0aec0, #718096) !important;
-        border-radius: 50px !important;
-        padding: 12px 32px !important;
-        font-weight: 600 !important;
-        letter-spacing: 0.02em !important;
-        box-shadow: 0 4px 12px rgba(113, 128, 150, 0.3) !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .swal2-cancel:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(113, 128, 150, 0.4) !important;
-    }
-
-    /* Custom Scrollbar */
+    /* ===== CUSTOM SCROLLBAR ===== */
     ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
 
     ::-webkit-scrollbar-track {
-        background: #ffefef;
-        border-radius: 4px;
+        background: var(--gray-100);
+        border-radius: var(--radius-full);
     }
 
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #c62828, #b71c1c);
-        border-radius: 4px;
-        border: 2px solid #ffefef;
+        background: var(--gradient-primary);
+        border-radius: var(--radius-full);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #b71c1c, #8e1537);
+        background: var(--red-600);
     }
 </style>
 @endsection
 
 @section('content')
-<!-- Your existing content remains exactly the same -->
-<div class="content-card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h2>Daftar Promosi</h2>
-        <a href="{{ route('admin.promotions.create') }}" class="btn btn-admin">
-            <i class="fas fa-plus"></i> Tambah Promosi Baru
-        </a>
+<div class="promo-container">
+    <!-- Header Card -->
+    <div class="header-card">
+        <div class="header-content">
+            <div class="header-title">
+                <div class="header-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div class="header-text">
+                    <h1>Kelola Promosi</h1>
+                    <p>
+                        <i class="fas fa-home"></i>
+                        Dashboard / <span style="color: var(--red-500); font-weight: 600;">Promotion Management</span>
+                    </p>
+                </div>
+            </div>
+            <a href="{{ route('admin.promotions.create') }}" class="btn-premium">
+                <i class="fas fa-plus-circle"></i>
+                Tambah Promosi Baru
+            </a>
+        </div>
     </div>
-    
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
 
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa-exclamation-circle me-2"></i> {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-tags"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ $promotions->count() }}</h3>
+                <p>Total Promosi</p>
+            </div>
         </div>
-    @endif
-    
-    <div class="table-responsive">
-        <table class="table table-hover" id="promotions-table">
-            <thead>
-                <tr>
-                    <th width="5%">No</th>
-                    <th width="10%">Gambar</th>
-                    <th width="20%">Judul Promosi</th>
-                    <th width="15%">Harga</th>
-                    <th width="10%">Badge</th>
-                    <th width="15%">Periode</th>
-                    <th width="10%">Status</th>
-                    <th width="5%">Urutan</th>
-                    <th width="10%">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($promotions as $index => $promo)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>
-                        <img src="{{ $promo->image_url }}" 
-                             alt="{{ $promo->title }}" 
-                             style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;"
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/80x60?text=No+Image';">
-                    </td>
-                    <td>
-                        <strong>{{ $promo->title }}</strong>
-                        <small class="d-block text-muted">{{ Str::limit($promo->description, 50) }}</small>
-                    </td>
-                    <td>
-                        @if($promo->old_price && $promo->old_price > 0)
-                            <span class="text-muted text-decoration-line-through small">Rp {{ number_format($promo->old_price, 0, ',', '.') }}</span><br>
-                            <span class="text-danger fw-bold">Rp {{ number_format($promo->current_price, 0, ',', '.') }}</span>
-                            @php
-                                $discount = round((($promo->old_price - $promo->current_price) / $promo->old_price) * 100);
-                            @endphp
-                            <span class="badge bg-success ms-1">{{ $discount > 0 ? '-' . $discount . '%' : '' }}</span>
-                        @else
-                            <span class="fw-bold">Rp {{ number_format($promo->current_price, 0, ',', '.') }}</span>
-                        @endif
-                    </td>
-                    <td>
-                        <span class="badge bg-warning text-dark">{{ $promo->badge_text }}</span>
-                    </td>
-                    <td>
-                        <small>
-                            <i class="far fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($promo->start_date)->format('d/m/Y') }}<br>
-                            <i class="far fa-calendar-check"></i> {{ \Carbon\Carbon::parse($promo->end_date)->format('d/m/Y') }}
-                        </small>
-                    </td>
-                    <td>
-                        @php
-                            $now = \Carbon\Carbon::now();
-                            $start = \Carbon\Carbon::parse($promo->start_date);
-                            $end = \Carbon\Carbon::parse($promo->end_date);
-                        @endphp
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-info">
+                @php
+                    $now = \Carbon\Carbon::now();
+                    $activeCount = $promotions->filter(function($promo) use ($now) {
+                        return $promo->is_active && 
+                               \Carbon\Carbon::parse($promo->start_date) <= $now && 
+                               \Carbon\Carbon::parse($promo->end_date) >= $now;
+                    })->count();
+                @endphp
+                <h3>{{ $activeCount }}</h3>
+                <p>Promosi Aktif</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="stat-info">
+                @php
+                    $upcomingCount = $promotions->filter(function($promo) use ($now) {
+                        return $promo->is_active && 
+                               \Carbon\Carbon::parse($promo->start_date) > $now;
+                    })->count();
+                @endphp
+                <h3>{{ $upcomingCount }}</h3>
+                <p>Akan Datang</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-info">
+                @php
+                    $featuredCount = $promotions->where('is_active', true)->where('badge_text', '!=', '')->count();
+                @endphp
+                <h3>{{ $featuredCount }}</h3>
+                <p>Promosi Unggulan</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="main-card">
+        <div class="card-header">
+            <h2>
+                <i class="fas fa-list"></i>
+                Daftar Promosi
+            </h2>
+            <span class="badge">{{ $promotions->count() }} items</span>
+        </div>
+
+        <div class="table-wrapper">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <table class="promo-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px">No</th>
+                        <th style="width: 100px">Gambar</th>
+                        <th>Informasi Promosi</th>
+                        <th style="width: 150px">Harga</th>
+                        <th style="width: 100px">Badge</th>
+                        <th style="width: 180px">Periode</th>
+                        <th style="width: 100px">Status</th>
+                        <th style="width: 60px">Urutan</th>
+                        <th style="width: 100px">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($promotions as $index => $promo)
+                    @php
+                        $now = \Carbon\Carbon::now();
+                        $start = \Carbon\Carbon::parse($promo->start_date);
+                        $end = \Carbon\Carbon::parse($promo->end_date);
                         
-                        @if($promo->is_active)
-                            @if($start <= $now && $end >= $now)
-                                <span class="badge bg-success">Aktif</span>
-                            @elseif($start > $now)
-                                <span class="badge bg-info text-white">Akan Datang</span>
+                        if($promo->is_active) {
+                            if($start <= $now && $end >= $now) {
+                                $statusClass = 'active';
+                                $statusText = 'Aktif';
+                                $statusIcon = 'fa-check-circle';
+                            } elseif($start > $now) {
+                                $statusClass = 'upcoming';
+                                $statusText = 'Akan Datang';
+                                $statusIcon = 'fa-clock';
+                            } else {
+                                $statusClass = 'expired';
+                                $statusText = 'Kadaluarsa';
+                                $statusIcon = 'fa-exclamation-circle';
+                            }
+                        } else {
+                            $statusClass = 'inactive';
+                            $statusText = 'Nonaktif';
+                            $statusIcon = 'fa-ban';
+                        }
+                        
+                        $discount = 0;
+                        if($promo->old_price && $promo->old_price > 0) {
+                            $discount = round((($promo->old_price - $promo->current_price) / $promo->old_price) * 100);
+                        }
+                    @endphp
+                    <tr id="promo-row-{{ $promo->id }}">
+                        <td data-label="No">
+                            <span class="number-badge">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        </td>
+                        <td data-label="Gambar">
+                            @if($promo->image_url)
+                                <img src="{{ $promo->image_url }}" 
+                                     alt="{{ $promo->title }}" 
+                                     class="promo-image"
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';">
                             @else
-                                <span class="badge bg-secondary">Kadaluarsa</span>
+                                <div class="promo-image-placeholder">
+                                    <i class="fas fa-tags"></i>
+                                </div>
                             @endif
-                        @else
-                            <span class="badge bg-danger">Nonaktif</span>
-                        @endif
-                    </td>
-                    <td>
-                        <span class="badge bg-secondary">{{ $promo->sort_order ?: '-' }}</span>
-                    </td>
-                    <td>
-                        <!-- Aksi buttons - Pastikan ini muncul dengan benar -->
-                        <div class="d-flex gap-2">
-                            <a href="{{ route('admin.promotions.edit', $promo->id) }}" 
-                               class="btn btn-sm btn-primary" 
-                               title="Edit Promosi"
-                               style="background-color: #0d6efd; border-color: #0d6efd; padding: 5px 10px;">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            
-                            <!-- Form Delete Terpisah untuk Masing-masing Promosi -->
-                            <form id="delete-form-{{ $promo->id }}" 
-                                  action="{{ route('admin.promotions.destroy', $promo->id) }}" 
-                                  method="POST" 
-                                  style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" 
-                                        class="btn btn-sm btn-danger" 
-                                        onclick="confirmDelete({{ $promo->id }}, '{{ addslashes($promo->title) }}')"
-                                        title="Hapus Promosi"
-                                        style="background-color: #dc3545; border-color: #dc3545; padding: 5px 10px;">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="9" class="text-center py-5">
-                        <div class="text-muted">
-                            <i class="fas fa-tags fa-4x mb-3" style="opacity: 0.5;"></i>
-                            <h5>Belum ada promosi yang ditambahkan</h5>
-                            <p class="mb-3">Klik tombol "Tambah Promosi Baru" untuk membuat promosi pertama Anda.</p>
-                            <a href="{{ route('admin.promotions.create') }}" class="btn btn-admin">
-                                <i class="fas fa-plus"></i> Tambah Promosi
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
+                        </td>
+                        <td data-label="Informasi Promosi">
+                            <div class="promo-info">
+                                <div class="promo-title">
+                                    {{ $promo->title }}
+                                </div>
+                                @if($promo->description)
+                                    <div class="promo-description">
+                                        <i class="fas fa-align-left"></i>
+                                        {{ Str::limit($promo->description, 50) }}
+                                    </div>
+                                @endif
+                            </div>
+                        </td>
+                        <td data-label="Harga">
+                            <div class="price-container">
+                                @if($promo->old_price && $promo->old_price > 0)
+                                    <span class="old-price">Rp {{ number_format($promo->old_price, 0, ',', '.') }}</span>
+                                    <span class="current-price">
+                                        Rp {{ number_format($promo->current_price, 0, ',', '.') }}
+                                        @if($discount > 0)
+                                            <span class="discount-badge">-{{ $discount }}%</span>
+                                        @endif
+                                    </span>
+                                @else
+                                    <span class="current-price">Rp {{ number_format($promo->current_price, 0, ',', '.') }}</span>
+                                @endif
+                            </div>
+                        </td>
+                        <td data-label="Badge">
+                            @if($promo->badge_text)
+                                <span class="badge-promo">
+                                    <i class="fas fa-fire"></i>
+                                    {{ $promo->badge_text }}
+                                </span>
+                            @else
+                                <span class="badge-promo" style="opacity: 0.5;">
+                                    <i class="fas fa-tag"></i>
+                                    No Badge
+                                </span>
+                            @endif
+                        </td>
+                        <td data-label="Periode">
+                            <div class="date-info">
+                                <span class="date-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    {{ $start->format('d/m/Y') }}
+                                </span>
+                                <span class="date-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    {{ $end->format('d/m/Y') }}
+                                </span>
+                            </div>
+                        </td>
+                        <td data-label="Status">
+                            <span class="badge-status {{ $statusClass }}">
+                                <i class="fas {{ $statusIcon }}"></i>
+                                {{ $statusText }}
+                            </span>
+                        </td>
+                        <td data-label="Urutan">
+                            <span class="badge-sort">
+                                {{ $promo->sort_order ?? $index + 1 }}
+                            </span>
+                        </td>
+                        <td data-label="Aksi">
+                            <div class="action-buttons">
+                                <a href="{{ route('admin.promotions.edit', $promo->id) }}" 
+                                   class="btn-action edit"
+                                   title="Edit Promosi">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                
+                                <!-- FORM DELETE DENGAN SUBMIT LANGSUNG DAN KONFIRMASI -->
+                                <form action="{{ route('admin.promotions.destroy', $promo->id) }}" 
+                                      method="POST" 
+                                      style="display: inline-block;"
+                                      onsubmit="return confirmDelete(event, '{{ $promo->title }}', this)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" 
+                                            class="btn-action delete"
+                                            title="Hapus Promosi">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="9">
+                            <div class="empty-state">
+                                <i class="fas fa-tags"></i>
+                                <h3>Belum Ada Promosi</h3>
+                                <p>Mulai tambahkan promosi pertama Anda untuk menarik lebih banyak pelanggan.</p>
+                                <a href="{{ route('admin.promotions.create') }}" class="btn-premium">
+                                    <i class="fas fa-plus-circle"></i> Tambah Promosi Pertama
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+@endsection
 
-<!-- Your existing scripts remain exactly the same -->
-<!-- Include SweetAlert2 dari CDN jika belum ada -->
+@section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-// Fungsi confirm delete yang ditingkatkan
-function confirmDelete(id, title) {
-    // Pastikan SweetAlert2 tersedia
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: 'Konfirmasi Hapus',
-            html: `Apakah Anda yakin ingin menghapus promosi <strong>"${title}"</strong>?<br><br>
-                   <span style="color: #dc3545; font-weight: 500;">Data yang sudah dihapus tidak dapat dikembalikan!</span>`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc3545',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Batal',
-            reverseButtons: true,
-            focusCancel: true,
-            showLoaderOnConfirm: true,
-            allowOutsideClick: false,
-            preConfirm: () => {
-                // Submit form dengan ID yang sesuai
-                const form = document.getElementById('delete-form-' + id);
-                if (form) {
-                    form.submit();
-                } else {
-                    Swal.showValidationMessage('Form tidak ditemukan');
-                }
-            }
+// Auto-hide alerts after 3 seconds with fade effect
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        document.querySelectorAll('.alert').forEach(function(alert) {
+            alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            alert.style.opacity = '0';
+            alert.style.transform = 'translateX(-20px)';
+            setTimeout(function() {
+                alert.style.display = 'none';
+            }, 500);
         });
-    } else {
-        // Fallback ke confirm native
-        if (confirm('Apakah Anda yakin ingin menghapus promosi "' + title + '"? Data yang sudah dihapus tidak dapat dikembalikan!')) {
-            document.getElementById('delete-form-' + id).submit();
+    }, 3000);
+});
+
+// SweetAlert2 confirmation for delete
+function confirmDelete(event, title, form) {
+    event.preventDefault();
+    
+    Swal.fire({
+        title: 'Konfirmasi Hapus',
+        html: `Apakah Anda yakin ingin menghapus promosi <strong>"${title}"</strong>?<br><br>
+               <span style="color: #dc3545; font-weight: 500;">Data yang sudah dihapus tidak dapat dikembalikan!</span>`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Ya, Hapus!',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        focusCancel: true,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: () => {
+            form.submit();
         }
-    }
+    });
+    
+    return false;
 }
 
-// Debugging: Cek apakah route tersedia
-console.log('Delete route pattern: {{ route('admin.promotions.destroy', 1) }}');
-
-$(document).ready(function() {
-    // Initialize tooltips
-    if (typeof $.fn.tooltip !== 'undefined') {
-        $('[title]').tooltip();
-    }
-    
-    // Auto-hide alerts after 5 seconds
-    setTimeout(function() {
-        $('.alert').fadeOut('slow', function() {
-            $(this).remove();
-        });
-    }, 5000);
-    
-    // Simple table sorting without DataTable jika DataTable bermasalah
-    if (typeof $.fn.DataTable !== 'undefined') {
-        try {
-            if ($('#promotions-table').length && !$.fn.DataTable.isDataTable('#promotions-table')) {
-                $('#promotions-table').DataTable({
-                    "language": {
-                        "search": "Cari:",
-                        "lengthMenu": "Tampilkan _MENU_ data",
-                        "zeroRecords": "Data tidak ditemukan",
-                        "info": "Menampilkan _START_-_END_ dari _TOTAL_ data",
-                        "infoEmpty": "Tidak ada data",
-                        "infoFiltered": "(disaring dari _MAX_ total data)",
-                        "paginate": {
-                            "first": "Pertama",
-                            "last": "Terakhir",
-                            "next": "›",
-                            "previous": "‹"
-                        }
-                    },
-                    "order": [[7, 'asc']],
-                    "pageLength": 10,
-                    "columnDefs": [
-                        { "orderable": false, "targets": [1, 8] }
-                    ]
-                });
-            }
-        } catch (e) {
-            console.error('DataTable error:', e);
-        }
-    }
+// Add animation on page load
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
 });
-</script>
-
-<!-- If you want to keep your existing inline styles, you can remove them as they're now in the styles section -->
-<!-- But leaving them won't break anything as the new CSS will override them -->
-
-<!-- Fallback script -->
-<script>
-// Fallback function jika SweetAlert gagal load
-window.onerror = function(msg, url, line) {
-    if (msg.includes('Swal is not defined')) {
-        window.confirmDelete = function(id, title) {
-            if (confirm('Apakah Anda yakin ingin menghapus promosi "' + title + '"?')) {
-                document.getElementById('delete-form-' + id).submit();
-            }
-        };
-    }
-};
 </script>
 @endsection
